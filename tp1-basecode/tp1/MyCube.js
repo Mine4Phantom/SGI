@@ -20,12 +20,6 @@ export class MyCube extends CGFobject {
     }
     display() {
 
-        /* the following example illustrates composition
-           with geometric transformations: 3 instances of a 
-           face geometry - a quad - are created and placed
-           in the appropriate places to form one of the top corners
-           of the cube */
-
         // quad facing +ZZ
         this.scene.pushMatrix();
         this.scene.translate(0, 0, 0.5);

@@ -32,7 +32,7 @@ export class MyScene extends CGFscene {
         
         //Variables connected to MyInterface
         this.displayAxis = true;
-        this.displayNormals = true;
+        this.displayNormals = false;
 
         this.updateNormalViz();
 
@@ -40,26 +40,26 @@ export class MyScene extends CGFscene {
     initLights() {
         this.setGlobalAmbientLight(0.2, 0.2, 0.2, 1.0);
 
-        this.lights[0].setPosition(2.0, 2.0, -1.0, 1.0);
+        this.lights[0].setPosition(5.0, 10, 5.0, 1.0);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
         this.lights[0].enable();
         this.lights[0].setVisible(false);
         this.lights[0].update();
 
-        this.lights[1].setPosition(0.0, -1.0, 2.0, 1.0);
+        this.lights[1].setPosition(-5.0, 10.0, -5.0, 1.0);
         this.lights[1].setDiffuse(0.5, 0.5, 0.5, 1.0);
-        this.lights[1].setSpecular(0.5, 0.5, 0.0, 1.0);
+        this.lights[1].setSpecular(0.5, 0.5, 0.5, 1.0);
         this.lights[1].enable();
         this.lights[1].setVisible(false);
         this.lights[1].update();
-
+        /*
         this.lights[2].setPosition(3, 3, 3, 1.0);
-        this.lights[2].setDiffuse(0.5, 0.5, 0.5, 1.0);
-        this.lights[2].setSpecular(0.5, 0.5, 0.0, 1.0);
+        this.lights[2].setDiffuse(0.1, 0.1, 0.1, 1.0);
+        this.lights[2].setSpecular(0.1, 0.1, 0.1, 1.0);
         this.lights[2].enable();
         this.lights[2].setVisible(false);
-        this.lights[2].update();
+        this.lights[2].update();*/
         
     }
     initCameras() {

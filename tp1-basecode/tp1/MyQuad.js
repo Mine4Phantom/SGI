@@ -35,11 +35,4 @@ export class MyQuad extends CGFobject {
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }
-/*
-    display() {
-        this.appearance.apply();
-        this.scene.pushMatrix();
-        this.scene.popMatrix();
-    }
-    */
 }

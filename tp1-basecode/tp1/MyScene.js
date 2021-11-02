@@ -1,6 +1,8 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance } from "../lib/CGF.js";
 import { MyCube } from "./MyCube.js";
 import { MyQuad } from "./MyQuad.js";
+import { MyRoom } from "./MyRoom.js";
+import { MyTable } from "./MyTable.js";
 
 /**
 * MyScene
@@ -26,7 +28,7 @@ export class MyScene extends CGFscene {
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
-        this.plane = new MyCube(this);
+        this.plane = new MyRoom(this);
         
         //Variables connected to MyInterface
         this.displayAxis = true;
@@ -51,9 +53,17 @@ export class MyScene extends CGFscene {
         this.lights[1].enable();
         this.lights[1].setVisible(false);
         this.lights[1].update();
+
+        this.lights[2].setPosition(3, 3, 3, 1.0);
+        this.lights[2].setDiffuse(0.5, 0.5, 0.5, 1.0);
+        this.lights[2].setSpecular(0.5, 0.5, 0.0, 1.0);
+        this.lights[2].enable();
+        this.lights[2].setVisible(false);
+        this.lights[2].update();
+        
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(10, 10, 10), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(30, 30, 30), vec3.fromValues(0, 0, 0));
     }
 
     updateCustomMaterial() {
@@ -94,6 +104,7 @@ export class MyScene extends CGFscene {
 
         this.lights[0].update();
         this.lights[1].update();
+        this.lights[2].update();
 
         // Draw axis
         if (this.displayAxis)

@@ -1,4 +1,4 @@
-import {CGFobject} from '../lib/CGF.js';
+import {CGFobject, CGFappearance} from '../lib/CGF.js';
 import { MyQuad } from './MyQuad.js';
 
 /**
@@ -10,7 +10,13 @@ export class MyCube extends CGFobject {
     constructor(scene) {
         super(scene);
 
-        this.face=new MyQuad(scene);
+        this.appearance = new CGFappearance(this.scene);
+        this.appearance.setAmbient(0.3, 0.3, 0.3, 1);
+        this.appearance.setDiffuse(1, 1, 1, 1);
+        this.appearance.setSpecular(0, 0, 0, 1);
+        this.appearance.setShininess(10);
+
+        this.face=new MyQuad(scene, this.appearance);
     }
     display() {
 

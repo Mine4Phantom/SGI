@@ -21,25 +21,43 @@ export class MyComplexWall extends CGFobject {
            with geometric transformations: 3 instances of a 
            face geometry - a Cube - are created and placed
            in the appropriate places to form one of the top corners
-           of the cube */
+           of the cube */  
 
-        /*
-        // -Z Door Window Wall
+        this.appearance.apply();
+        // Top square 1
         this.scene.pushMatrix();
-        this.scene.translate(0, 5, -10)
-        this.scene.scale(20, 10, 1);
+        this.scene.translate(-8.5, 0, 0)
+        this.scene.scale(3, 3, 1);
         this.plane.display();
         this.scene.popMatrix();
         
-*/      
-
-        this.appearance.apply();
-        // Top square
+        // Top square 2
         this.scene.pushMatrix();
-        this.scene.scale(20, 3, 1);
+        this.scene.translate(-4.75, 0, 0)
+        this.scene.scale(4.5, 3, 1);
         this.plane.display();
         this.scene.popMatrix();
 
+        // Top square 3
+        this.scene.pushMatrix();
+        this.scene.scale(5, 3, 1);
+        this.plane.display();
+        this.scene.popMatrix();
+
+        // Top square 4
+        this.scene.pushMatrix();
+        this.scene.translate(4.75, 0, 0)
+        this.scene.scale(4.5, 3, 1);
+        this.plane.display();
+        this.scene.popMatrix();
+
+        // Top square 5
+        this.scene.pushMatrix();
+        this.scene.translate(8.5, 0, 0)
+        this.scene.scale(3, 3, 1);
+        this.plane.display();
+        this.scene.popMatrix();
+        
         // Left rectangle
         this.scene.pushMatrix();
         this.scene.translate(-8.5, -5, 0)

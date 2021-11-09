@@ -3,6 +3,9 @@ import { MyTable } from './MyTable.js';
 import { MyComplexWall } from './MyComplexWall.js';
 import { MyChair } from './MyChair.js';
 import { MyWall } from './MyWall.js';
+import { MyPyramid } from './MyPyramid.js';
+import { MyCube } from './MyCube.js';
+import { MyLamp } from './MyLamp.js';
 
 /**
 * MyCube
@@ -15,41 +18,55 @@ export class MyRoom extends CGFobject {
 
         //Isto deve dar para reduzir que está feio
 
-        this.tableappearance = new CGFappearance(this.scene);
-        this.tableappearance.setAmbient(0.3, 0.3, 0.3, 1);
-        this.tableappearance.setDiffuse(0.66, 0.33, 0, 1);
-        this.tableappearance.setSpecular(0, 0, 0, 1);
-        this.tableappearance.setShininess(120);
+        this.tableAppearance = new CGFappearance(this.scene);
+        this.tableAppearance.setAmbient(0.3, 0.3, 0.3, 1);
+        this.tableAppearance.setDiffuse(0.66, 0.33, 0, 1);
+        this.tableAppearance.setSpecular(0, 0, 0, 1);
+        this.tableAppearance.setShininess(120);
 
-        this.chairappearance = new CGFappearance(this.scene);
-        this.chairappearance.setAmbient(0.3, 0.3, 0.3, 1);
-        this.chairappearance.setDiffuse(0, 0, 1, 1);
-        this.chairappearance.setSpecular(0, 0, 0, 1);
-        this.chairappearance.setShininess(120);
+        this.chairAppearance = new CGFappearance(this.scene);
+        this.chairAppearance.setAmbient(0.3, 0.3, 0.3, 1);
+        this.chairAppearance.setDiffuse(0.2, 0.2, 1, 1);
+        this.chairAppearance.setSpecular(0, 0, 0, 1);
+        this.chairAppearance.setShininess(120);
 
-        this.wallappearance = new CGFappearance(this.scene);
-        this.wallappearance.setAmbient(0.3, 0.3, 0.3, 1);
-        this.wallappearance.setDiffuse(0.95, 0.95, 0.8, 1);
-        this.wallappearance.setSpecular(0.95, 0.95, 0.8, 1);
-        this.wallappearance.setShininess(60);
+        this.chairAppearance2 = new CGFappearance(this.scene);
+        this.chairAppearance2.setAmbient(0.3, 0.3, 0.3, 1);
+        this.chairAppearance2.setDiffuse(1, 0, 0, 1);
+        this.chairAppearance2.setSpecular(1, 0, 0, 1);
+        this.chairAppearance2.setShininess(120);
 
-        this.complexwallappearance = new CGFappearance(this.scene);
-        this.complexwallappearance.setAmbient(0.3, 0.3, 0.3, 1);
-        this.complexwallappearance.setDiffuse(0.95, 0.95, 0.8, 1);
-        this.complexwallappearance.setSpecular(0.95, 0.95, 0.8, 1);
-        this.complexwallappearance.setShininess(120);
+        this.wallAppearance = new CGFappearance(this.scene);
+        this.wallAppearance.setAmbient(0.3, 0.3, 0.3, 1);
+        this.wallAppearance.setDiffuse(0.95, 0.95, 0.8, 1);
+        this.wallAppearance.setSpecular(0.95, 0.95, 0.8, 1);
+        this.wallAppearance.setShininess(60);
 
-        this.floorappearance = new CGFappearance(this.scene);
-        this.floorappearance.setAmbient(0.3, 0.3, 0.3, 1);
-        this.floorappearance.setDiffuse(0.5, 0.5, 0.5, 1);
-        this.floorappearance.setSpecular(0.5, 0.5, 0.5, 1);
-        this.floorappearance.setShininess(50);
+        this.complexwallAppearance = new CGFappearance(this.scene);
+        this.complexwallAppearance.setAmbient(0.3, 0.3, 0.3, 1);
+        this.complexwallAppearance.setDiffuse(0.95, 0.95, 0.8, 1);
+        this.complexwallAppearance.setSpecular(0.95, 0.95, 0.8, 1);
+        this.complexwallAppearance.setShininess(120);
 
-        this.plane= new MyWall(scene, this.wallappearance);
-        this.table= new MyTable(scene, this.tableappearance);
-        this.complexWall = new MyComplexWall(scene, this.complexwallappearance);
-        this.chair = new MyChair(scene, this.chairappearance);
-        this.floor = new MyWall(scene, this.floorappearance);
+        this.floorAppearance = new CGFappearance(this.scene);
+        this.floorAppearance.setAmbient(0.3, 0.3, 0.3, 1);
+        this.floorAppearance.setDiffuse(0.5, 0.5, 0.5, 1);
+        this.floorAppearance.setSpecular(0.5, 0.5, 0.5, 1);
+        this.floorAppearance.setShininess(50);
+
+        this.lampAppearance = new CGFappearance(this.scene);
+        this.lampAppearance.setAmbient(0.3, 0.3, 0.3, 1);
+        this.lampAppearance.setDiffuse(0.83, 0.69, 0.216, 1);
+        this.lampAppearance.setSpecular(0.83, 0.69, 0.216, 1);
+        this.lampAppearance.setShininess(300);
+
+        this.plane= new MyWall(scene, this.wallAppearance);
+        this.table= new MyTable(scene, this.tableAppearance);
+        this.complexWall = new MyComplexWall(scene, this.complexwallAppearance);
+        this.chair1 = new MyChair(scene, this.chairAppearance);
+        this.chair2 = new MyChair(scene, this.chairAppearance2);
+        this.floor = new MyWall(scene, this.floorAppearance);
+        this.lamp = new MyLamp(scene, this.lampAppearance);
 
 
     }
@@ -107,7 +124,6 @@ export class MyRoom extends CGFobject {
         this.plane.display();
         this.scene.popMatrix();
 
-
         // Complex wall
         this.scene.pushMatrix();
         this.scene.translate(0, 8.5, -10)
@@ -117,15 +133,24 @@ export class MyRoom extends CGFobject {
         // Chair 1
         this.scene.pushMatrix();
         this.scene.translate(-5, 0, 7);
-        this.chair.display();
+        this.chair1.display();
         this.scene.popMatrix();
 
         // Chair 2
         this.scene.pushMatrix();
         this.scene.translate(8, 0, 8);
         this.scene.rotate(Math.PI/4, 0, 1, 0);
-        this.chair.display();
+        this.chair2.display();
         this.scene.popMatrix();
+
+        // Lamp
+        this.scene.pushMatrix();
+        this.scene.translate(-6.5, 3.65, 4.5);
+        this.scene.rotate(Math.PI/4, 0, 1, 0);
+        this.lamp.display();
+        this.scene.popMatrix();
+
+        
 
         /* NOTE: WHEN PERFORMING THE ENTIRE CUBE IT IS EXPECTED 
         THAT ALL CUBE FACES ARE FACED OUTWARDS! */ 

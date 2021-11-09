@@ -1,4 +1,4 @@
-import { CGFscene, CGFcamera, CGFaxis, CGFappearance } from "../lib/CGF.js";
+import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFlight } from "../lib/CGF.js";
 import { MyCube } from "./MyCube.js";
 import { MyQuad } from "./MyQuad.js";
 import { MyRoom } from "./MyRoom.js";
@@ -41,8 +41,8 @@ export class MyScene extends CGFscene {
         this.setGlobalAmbientLight(0.2, 0.2, 0.2, 1.0);
 
         this.lights[0].setPosition(5.0, 10, 5.0, 1.0);
-        this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
-        this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
+        this.lights[0].setDiffuse(0.5, 0.5, 0.5, 1.0);
+        this.lights[0].setSpecular(0.5, 0.5, 0.5, 1.0);
         this.lights[0].enable();
         this.lights[0].setVisible(false);
         this.lights[0].update();
@@ -50,16 +50,19 @@ export class MyScene extends CGFscene {
         this.lights[1].setPosition(-5.0, 10.0, -5.0, 1.0);
         this.lights[1].setDiffuse(0.5, 0.5, 0.5, 1.0);
         this.lights[1].setSpecular(0.5, 0.5, 0.5, 1.0);
+        this.lights[1].setAmbient(0.1, 0.1, 0.1, 1);
         this.lights[1].enable();
         this.lights[1].setVisible(false);
         this.lights[1].update();
-        /*
-        this.lights[2].setPosition(3, 3, 3, 1.0);
-        this.lights[2].setDiffuse(0.1, 0.1, 0.1, 1.0);
-        this.lights[2].setSpecular(0.1, 0.1, 0.1, 1.0);
+        
+        this.lights[2].setPosition(-6.5, 5.6, 4.5, 1.0);
+        this.lights[2].setDiffuse(5, 0, 0, 1.0);
+        this.lights[2].setSpecular(5, 0, 0, 1.0);
+        this.lights[2].setAmbient(0,0,0,1);
+        this.lights[2].setLinearAttenuation(1);
         this.lights[2].enable();
         this.lights[2].setVisible(false);
-        this.lights[2].update();*/
+        this.lights[2].update();
         
     }
     initCameras() {

@@ -4,8 +4,8 @@
 
 | Name             | Number    |
 | ---------------- | --------- | 
-| Jane Doe         | 201...... | 
-| John Doe         | 201...... |
+| Miguel Neves     | 201608657 | 
+| Pedro Coelho     | 201806802 |
 
 
 ## Project Notes

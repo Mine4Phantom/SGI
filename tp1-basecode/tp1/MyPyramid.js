@@ -26,10 +26,10 @@ export class MyPyramid extends CGFobject {
             // even if they are shared with others, as the normals 
             // in each face will be different
 
-            var sa=Math.sin(ang);
-            var saa=Math.sin(ang+alphaAng);
-            var ca=Math.cos(ang);
-            var caa=Math.cos(ang+alphaAng);
+            var sa=Math.sin(ang)/Math.sqrt(2);
+            var saa=Math.sin(ang+alphaAng)/Math.sqrt(2);
+            var ca=Math.cos(ang)/Math.sqrt(2);
+            var caa=Math.cos(ang+alphaAng)/Math.sqrt(2);
 
             this.vertices.push(0,1,0);
             this.vertices.push(ca, 0, -sa);

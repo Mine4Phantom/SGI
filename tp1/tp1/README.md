@@ -28,31 +28,31 @@ We think that we managed to do every required task with success as seen by the s
 
 ### 2 - Scene from diferent angles
 
-![Scene 1](tp1/screenshots/scene.png)
+![Scene 1](tp1/tp1/screenshots/scene.png)
 
-![Scene 2](tp1/screenshots/scene2.png)
+![Scene 2](tp1/tp1/screenshots/scene2.png)
 
 ### 3 - Objects
 
-![Objects](tp1/screenshots/objects.png)
+![Objects](tp1/tp1/screenshots/objects.png)
 
 ### 4 - Lights and different combinations of them
 
 Only Light 1 Turned On
 
-![Light 1](tp1/screenshots/light1.png)
+![Light 1](tp1/tp1/screenshots/light1.png)
 
 Only Light 2 Turned On
 
-![Light 2](tp1/screenshots/light2.png)
+![Light 2](tp1/tp1/screenshots/light2.png)
 
 Only Light 3 Turned On
 
-![Light 3](tp1/screenshots/light3.png)
+![Light 3](tp1/tp1/screenshots/light3.png)
 
 Only Lights 1 and 3 Turned On
 
-![Lights 1 & 3](tp1/screenshots/light13.png)
+![Lights 1 & 3](tp1/tp1/screenshots/light13.png)
 
 
 

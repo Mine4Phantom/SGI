@@ -16,8 +16,34 @@
 
 ### 1 - Overall View
 (brief description)
-![Screenshots 1](tp1/screenshots/img1.png)
+
+Scene from diferent angles
+
+![Screenshots 1](tp1/screenshots/scene.png)
+
+![Screenshots 1](tp1/screenshots/scene2.png)
 
 ### 2 - ....
-(add other screenshots here)
+
+Objects in scene (table, chair, lamp)
+
+![Screenshots 1](tp1/screenshots/objects.png)
+
+Only Light 1 Turned On
+
+![Screenshots 1](tp1/screenshots/light1.png)
+
+Only Light 2 Turned On
+
+![Screenshots 1](tp1/screenshots/light2.png)
+
+Only Light 3 Turned On
+
+![Screenshots 1](tp1/screenshots/light3.png)
+
+Only Lights 1 and 3 Turned On
+
+![Screenshots 1](tp1/screenshots/light13.png)
+
+
 

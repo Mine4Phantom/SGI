@@ -1,6 +1,9 @@
 import { CGFXMLreader } from '../lib/CGF.js';
-import { MyRectangle } from './MyRectangle.js';
-import { MyTriangle } from './MyTriangle.js';
+import { MyRectangle } from '../primitives/MyRectangle.js';
+import { MyTriangle } from '../primitives/MyTriangle.js';
+import { MyCylinder } from '../primitives/MyCylinder.js';
+import { MySphere } from '../primitives/MySphere.js';
+
 var DEGREE_TO_RAD = Math.PI / 180;
 
 // Order of the groups in the XML document.
@@ -600,6 +603,60 @@ export class MySceneGraph {
 
                 this.primitives[primitiveId] = tri;
             }
+            if (primitiveType == 'cylinder') {
+
+                // height
+                var height = this.reader.getFloat(grandChildren[0], 'height');
+                if (!(height != null && !isNaN(height)))
+                    return "unable to parse height of the primitive coordinates for ID = " + primitiveId;
+
+                // topRadius
+                var topRadius = this.reader.getFloat(grandChildren[0], 'topRadius');
+                if (!(topRadius != null && !isNaN(topRadius)))
+                    return "unable to parse topRadius of the primitive coordinates for ID = " + primitiveId;
+
+                // bottomRadius
+                var bottomRadius = this.reader.getFloat(grandChildren[0], 'bottomRadius');
+                if (!(bottomRadius != null && !isNaN(bottomRadius)))
+                    return "unable to parse bottomRadius of the primitive coordinates for ID = " + primitiveId;
+
+                // stacks
+                var stacks = this.reader.getFloat(grandChildren[0], 'stacks');
+                if (!(stacks != null && !isNaN(stacks)))
+                    return "unable to parse stacks of the primitive coordinates for ID = " + primitiveId;
+
+                // slices
+                var slices = this.reader.getFloat(grandChildren[0], 'slices');
+                if (!(slices != null && !isNaN(slices)))
+                    return "unable to parse slices of the primitive coordinates for ID = " + primitiveId;
+
+
+                var cylinder = new MyCylinder(this.scene, height, topRadius, bottomRadius, stacks, slices);
+
+                this.primitives[primitiveId] = cylinder;
+            }
+            if (primitiveType == 'sphere') {
+
+                // radius
+                var radius = this.reader.getFloat(grandChildren[0], 'radius');
+                if (!(radius != null && !isNaN(radius)))
+                    return "unable to parse height of the primitive coordinates for ID = " + primitiveId;
+
+                // slices
+                var slices = this.reader.getFloat(grandChildren[0], 'slices');
+                if (!(slices != null && !isNaN(slices)))
+                    return "unable to parse slices of the primitive coordinates for ID = " + primitiveId;
+
+                // stacks
+                var stacks = this.reader.getFloat(grandChildren[0], 'stacks');
+                if (!(stacks != null && !isNaN(stacks)))
+                    return "unable to parse stacks of the primitive coordinates for ID = " + primitiveId;
+
+
+                var sphere = new MySphere(this.scene, radius, slices, stacks);
+
+                this.primitives[primitiveId] = sphere;
+            }
             else {
                 console.warn("To do: Parse other primitives.");
             }
@@ -646,13 +703,20 @@ export class MySceneGraph {
                 nodeNames.push(grandChildren[j].nodeName);
             }
 
-            var transformationIndex = nodeNames.indexOf("transformation");
+            var transformationIndex = nodeNames.indexOf("");
             var materialsIndex = nodeNames.indexOf("materials");
             var textureIndex = nodeNames.indexOf("texture");
             var childrenIndex = nodeNames.indexOf("children");
 
+            if (children[i].nodeName == "cube") {
+
+
+            } else if (children[i].nodeName == "cube_face1" || children[i].nodeName == "cube_face2" || children[i].nodeName == "cube_face3" || children[i].nodeName == "cube_face4" || children[i].nodeName == "cube_face5" || children[i].nodeName == "cube_face6"){
+                
+            }
+
             this.onXMLMinorError("To do: Parse components.");
-            // Transformations
+            // Transformations TODO All
 
             // Materials
 
@@ -782,6 +846,8 @@ export class MySceneGraph {
 
         //To test the parsing/creation of the primitives, call the display function directly
         //this.primitives['demoRectangle'].display();
-        this.primitives['demoTriangle'].display();
+        //this.primitives['demoTriangle'].display();
+        //this.primitives['demoCylinder'].display();
+        this.primitives['sphere'].display();
     }
 }

@@ -44,15 +44,109 @@
     </transformations>
 
     <primitives>
-        <primitive id="demoRectangle">
+        <primitive id="rectangle">
             <rectangle x1="-0.5" y1="-1" x2="0.5" y2="1" />
         </primitive>
-        <primitive id="demoTriangle">
+        <primitive id="triangle">
             <triangle x1="-0.5" y1="-0.5" x2="0.5" y2="-0.5" x3="0" y3="0.5"/>
+        </primitive>
+        <primitive id="cylinder">
+            <cylinder height="5" topRadius="1" bottomRadius="1" stacks="10" slices="50"/>
+        </primitive>
+        <primitive id="sphere">
+            <sphere radius="3" slices="50" stacks="50"/>
         </primitive>
     </primitives>
 
     <components>
+
+        <!-- CUBE -->
+        <component id="cube">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="demoTexture"/>
+            <children>
+                <componentref id="cube_face1"/>
+                <componentref id="cube_face2"/>
+                <componentref id="cube_face3"/>
+                <componentref id="cube_face4"/>
+                <componentref id="cube_face5"/>
+                <componentref id="cube_face6"/>
+            </children>
+        </component>
+
+        <!-- CUBE FACES -->
+        <component id="cube_face1">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <children>
+                <primitiveref id="rectangle"/>
+            </children>
+        </component>
+
+        <component id="cube_face2">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <children>
+                <primitiveref id="rectangle"/>
+            </children>
+        </component>
+
+        <component id="cube_face3">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <children>
+                <primitiveref id="rectangle"/>
+            </children>
+        </component>
+
+        <component id="cube_face4">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <children>
+                <primitiveref id="rectangle"/>
+            </children>
+        </component>
+
+        <component id="cube_face5">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <children>
+                <primitiveref id="rectangle"/>
+            </children>
+        </component>
+
+        <component id="cube_face6">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <children>
+                <primitiveref id="rectangle"/>
+            </children>
+        </component>
+
+
+
         <component id="demoRoot">
             <transformation>
                 <translate x="0" y="0" z="1" />
@@ -65,6 +159,8 @@
             <children>
                 <primitiveref id="demoRectangle" />
                 <primitiveref id="demoTriangle" />
+                <primitiveref id="demoCylinder" />
+                <primitiveref id="demoSphere" />
             </children>
         </component>
     </components>

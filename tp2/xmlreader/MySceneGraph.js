@@ -3,6 +3,8 @@ import { MyRectangle } from '../primitives/MyRectangle.js';
 import { MyTriangle } from '../primitives/MyTriangle.js';
 import { MyCylinder } from '../primitives/MyCylinder.js';
 import { MySphere } from '../primitives/MySphere.js';
+import { MyComponentNode } from 'MyComponentNode.js';
+import { MyPrimitiveNode } from 'MyPrimitiveNode.js';
 
 var DEGREE_TO_RAD = Math.PI / 180;
 
@@ -706,14 +708,37 @@ export class MySceneGraph {
             var transformationIndex = nodeNames.indexOf("");
             var materialsIndex = nodeNames.indexOf("materials");
             var textureIndex = nodeNames.indexOf("texture");
-            var childrenIndex = nodeNames.indexOf("children");
+            var childrenIndex = nodeNames.indexOf("children"); // transf, material, texture, children
 
-            if (children[i].nodeName == "cube") {
+            // Create current node and then add info to it
+            this.components[componentID] = new MyComponentNode(this,componentID);
+
+            // Material ID
+            if (materialsIndex == -1)
+                return "material must be defined (node ID = " + componentID + ")";
+            var materialID = this.reader.getString(nodeSpecs[materialsIndex], 'id');
+            if (materialID == null )
+                return "unable to parse material ID (node ID = " + componentID + ")";
+            if (materialID != "null" && this.materials[materialID] == null )
+                return "ID does not correspond to a valid material (node ID = " + componentID + ")";
+
+            this.nodes[nodeID].textureID = textureID;
+
+			// Texture ID
+			if (textureIndex == -1)
+				return "texture must be defined (node ID = " + componentID + ")";
+			var textureID = this.reader.getString(nodeSpecs[textureIndex], 'id');
+			if (textureID == null )
+				return "unable to parse texture ID (node ID = " + componentID + ")";
+			if (textureID != "null" && textureID != "clear" && this.textures[textureID] == null )
+				return "ID does not correspond to a valid texture (node ID = " + componentID + ")";
+
+            this.components[componentID].materialID = materialID;
 
 
-            } else if (children[i].nodeName == "cube_face1" || children[i].nodeName == "cube_face2" || children[i].nodeName == "cube_face3" || children[i].nodeName == "cube_face4" || children[i].nodeName == "cube_face5" || children[i].nodeName == "cube_face6"){
-                
-            }
+            
+
+            
 
             this.onXMLMinorError("To do: Parse components.");
             // Transformations TODO All

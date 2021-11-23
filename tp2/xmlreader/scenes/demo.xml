@@ -45,7 +45,7 @@
 
     <primitives>
         <primitive id="rectangle">
-            <rectangle x1="-0.5" y1="-1" x2="0.5" y2="1" />
+            <rectangle x1="-0.5" y1="-0.5" x2="0.5" y2="0.5" />
         </primitive>
         <primitive id="triangle">
             <triangle x1="-0.5" y1="-0.5" x2="0.5" y2="-0.5" x3="0" y3="0.5"/>
@@ -54,13 +54,627 @@
             <cylinder height="5" topRadius="1" bottomRadius="1" stacks="10" slices="50"/>
         </primitive>
         <primitive id="sphere">
-            <sphere radius="3" slices="50" stacks="50"/>
+            <sphere radius="1" slices="50" stacks="50"/>
         </primitive>
     </primitives>
 
     <components>
 
-        <!-- CUBE -->
+        <!-- Television Desk -->
+        <component id="television_desk">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="television_desk_material" />
+            </materials>
+            <texture id="television_desk_texture"/>
+            <children>
+                <componentref id="television_desk_body"/>
+                <componentref id="television_desk_leg1"/>
+                <componentref id="television_desk_leg2"/>
+                <componentref id="television_desk_leg3"/>
+                <componentref id="television_desk_leg4"/>
+                <componentref id="television"/>
+                
+            </children>
+        </component>
+
+        <!-- Television Desk Body -->
+        <component id="television_desk_body">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="television_desk_material" />
+            </materials>
+            <texture id="television_desk_texture"/>
+            <children>
+                <componentref id="television_desk_body_top"/> <!-- Will have a shelf with books -->
+                <componentref id="television_desk_body_bottom"/>
+                <componentref id="television_desk_body_left"/>
+                <componentref id="television_desk_body_right"/>
+                <componentref id="television_desk_body_book1"/>
+                <componentref id="television_desk_body_book2"/>
+                <componentref id="television_desk_body_book3"/>
+                <componentref id="television_desk_body_book4"/>
+                
+            </children>
+        </component>
+
+
+        <!-- Television Desk Body Book -->
+        <component id="television_desk_body_book1">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="book_material" />
+            </materials>
+            <texture id="book_texture"/>
+            <children>
+                <componentref id="book"/>
+            </children>
+        </component>
+        
+        <component id="television_desk_body_book2">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="book_material" />
+            </materials>
+            <texture id="book_texture"/>
+            <children>
+                <componentref id="book"/>
+            </children>
+        </component>
+        
+        <component id="television_desk_body_book3">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="book_material" />
+            </materials>
+            <texture id="book_texture"/>
+            <children>
+                <componentref id="book"/>
+            </children>
+        </component>
+        
+        <component id="television_desk_body_book4">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="book_material" />
+            </materials>
+            <texture id="book_texture"/>
+            <children>
+                <componentref id="book"/>
+            </children>
+        </component>
+
+        <!-- Book -->
+        <component id="book">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="book_material" />
+            </materials>
+            <texture id="book_texture"/>
+            <children>
+                <componentref id="book_body_cover"/>
+                <componentref id="book_pages"/>
+            </children>
+        </component>
+
+        <!-- Book Body Cover -->
+        <component id="book">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="book_material" />
+            </materials>
+            <texture id="book_texture"/>
+            <children>
+                <componentref id="book_back_cover"/>
+                <componentref id="book_front_cover"/>
+                <componentref id="book_middle_cover"/>
+                <componentref id="book_pages"/>
+            </children>
+        </component>
+
+        <!-- Book Front Cover -->
+        <component id="book">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="book_material" />
+            </materials>
+            <texture id="book_texture"/>
+            <children>
+                <componentref id="book_back_cover"/>
+                <componentref id="book_front_cover"/>
+                <componentref id="book_middle_cover"/>
+                <componentref id="book_pages"/>
+            </children>
+        </component>
+
+        <!-- To Do book -->
+
+        <!-- Television Desk Leg -->
+        <component id="television_desk_leg1">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="television_desk_material" />
+            </materials>
+            <texture id="television_desk_texture"/>
+            <children>
+                <componentref id="cube"/>
+                
+            </children>
+        </component>
+
+        <component id="television_desk_leg2">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="television_desk_material" />
+            </materials>
+            <texture id="television_desk_texture"/>
+            <children>
+                <componentref id="cube"/>
+                
+            </children>
+        </component>
+
+        <component id="television_desk_leg3">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="television_desk_material" />
+            </materials>
+            <texture id="television_desk_texture"/>
+            <children>
+                <componentref id="cube"/>
+                
+            </children>
+        </component>
+
+        <component id="television_desk_leg4">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="television_desk_material" />
+            </materials>
+            <texture id="television_desk_texture"/>
+            <children>
+                <componentref id="cube"/>
+                
+            </children>
+        </component>
+
+        <!-- Television -->
+        <component id="television">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="television_material" />
+            </materials>
+            <texture id="television_texture"/>
+            <children>
+                <componentref id="television_screen"/>
+                <componentref id="television_leg"/>
+                <componentref id="television_base"/>
+            </children>
+        </component>
+
+        <!-- Television Screen -->
+        <component id="television_screen">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="television_material" />
+            </materials>
+            <texture id="television_texture"/>
+            <children>
+                <componentref id="cube"/> <!-- Border -->
+                <componentref id="cube"/> <!-- Screen -->
+            </children>
+        </component>
+
+        <!-- Television Leg -->
+        <component id="television_leg">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="television_material" />
+            </materials>
+            <texture id="television_texture"/>
+            <children>
+                <componentref id="cube"/>
+            </children>
+        </component>
+        
+        <!-- Television Base -->
+        <component id="television_base">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="television_material" />
+            </materials>
+            <texture id="television_texture"/>
+            <children>
+                <componentref id="cube"/>
+            </children>
+        </component>
+
+        <!-- Couch -->
+        <component id="couch">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="couch_material" />
+            </materials>
+            <texture id="couch_texture"/>
+            <children>
+                <componentref id="couch_corpse"/>
+                <componentref id="couch_pillows"/>
+                <componentref id="couch_leg1"/>
+                <componentref id="couch_leg2"/>
+                <componentref id="couch_leg3"/>
+                <componentref id="couch_leg4"/>
+            </children>
+        </component>
+
+        <!-- Couch Corpse -->
+        <component id="couch_corpse">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="couch_material" />
+            </materials>
+            <texture id="couch_texture"/>
+            <children>
+                <componentref id="couch_back"/>
+                <componentref id="couch_bottom"/>
+                <componentref id="couch_side1"/>
+                <componentref id="couch_side2"/>
+            </children>
+        </component>
+
+        <!-- Couch Back -->
+        <component id="couch_back">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="couch_material" />
+            </materials>
+            <texture id="couch_texture"/>
+            <children>
+                <componentref id="cube"/>
+            </children>
+        </component>
+
+        <!-- Couch Bottom -->
+        <component id="couch_bottom">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="couch_material" />
+            </materials>
+            <texture id="couch_texture"/>
+            <children>
+                <componentref id="cube"/>
+            </children>
+        </component>
+
+        <!-- Couch Side -->
+        <component id="couch_side1">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="couch_material" />
+            </materials>
+            <texture id="couch_texture"/>
+            <children>
+                <componentref id="cube"/>
+                <componentref id="cylinder"/> 
+            </children>
+        </component>
+
+        <component id="couch_side2">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="couch_material" />
+            </materials>
+            <texture id="couch_texture"/>
+            <children>
+                <componentref id="cube"/>
+                <componentref id="cylinder"/>
+            </children>
+        </component>
+
+        <!-- Couch Pillows -->
+        <component id="couch_pillows">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="couch_material" />
+            </materials>
+            <texture id="couch_texture"/>
+            <children>
+                <componentref id="couch_top_pillow1"/>
+                <componentref id="couch_top_pillow2"/>
+                <componentref id="couch_back_pillow1"/>
+                <componentref id="couch_back_pillow2"/>
+            </children>
+        </component>
+
+        <!-- Couch Leg -->
+        <component id="couch_leg1">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="couch_material" />
+            </materials>
+            <children>
+                <componentref id="cube"/>
+            </children>
+        </component>
+
+        <component id="couch_leg2">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="couch_material" />
+            </materials>
+            <children>
+                <componentref id="cube"/>
+            </children>
+        </component>
+
+        <component id="couch_leg3">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="couch_material" />
+            </materials>
+            <children>
+                <componentref id="cube"/>
+            </children>
+        </component>
+
+        <component id="couch_leg4">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="couch_material" />
+            </materials>
+            <children>
+                <componentref id="cube"/>
+            </children>
+        </component>
+
+        <!-- Chair -->
+        <component id="chair">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="chair_material" />
+            </materials>
+            <texture id="demoTexture"/>
+            <children>
+                <componentref id="chair_leg1"/>
+                <componentref id="chair_leg2"/>
+                <componentref id="chair_leg3"/>
+                <componentref id="chair_leg4"/>
+                <componentref id="chair_top"/>
+                <componentref id="chair_back"/>
+                <componentref id="chair_left_back"/>
+                <componentref id="chair_right_back"/>
+            </children>
+        </component>
+
+        <!-- Chair Leg -->
+        <component id="chair_leg1">
+            <transformation>
+                <translate x="0.7" y="1" z="0.7" />
+                <scale x="0.15" y="2" z="0.15"/>
+            </transformation>
+            <materials>
+                <material id="chair_material" />
+            </materials>
+            <children>
+                <componentref id="cube"/>
+            </children>
+        </component>
+
+        <!-- Chair Leg -->
+        <component id="chair_leg2">
+            <transformation>
+                <translate x="0.7" y="1" z="-0.7" />
+                <scale x="0.15" y="2" z="0.15"/>
+            </transformation>
+            <materials>
+                <material id="chair_material" />
+            </materials>
+            <children>
+                <componentref id="cube"/>
+            </children>
+        </component>
+
+        <!-- Chair Leg -->
+        <component id="chair_leg3">
+            <transformation>
+                <translate x="-0.7" y="1" z="-0.7" />
+                <scale x="0.15" y="2" z="0.15"/>
+            </transformation>
+            <materials>
+                <material id="chair_material" />
+            </materials>
+            <children>
+                <componentref id="cube"/>
+            </children>
+        </component>
+
+        <!-- Chair Leg -->
+        <component id="chair_leg4">
+            <transformation>
+                <translate x="-0.7" y="1" z="0.7" />
+                <scale x="0.15" y="2" z="0.15"/>
+            </transformation>
+            <materials>
+                <material id="chair_material" />
+            </materials>
+            <children>
+                <componentref id="cube"/>
+            </children>
+        </component>
+
+        <!-- Chair Top -->
+        <component id="chair_top">
+            <transformation>
+                <translate x="0" y="2" z="0" />
+                <scale x="1.55" y="0.15" z="1.55"/>
+            </transformation>
+            <materials>
+                <material id="chair_material" />
+            </materials>
+            <children>
+                <componentref id="cube"/>
+            </children>
+        </component>
+
+        <!-- Chair Back -->
+        <component id="chair_back">
+            <transformation>
+                <translate x="0" y="3.5" z="0.7" />
+                <rotate axis="x" angle="90"/>
+                <scale x="1.55" y="0.15" z="1"/>
+            </transformation>
+            <materials>
+                <material id="chair_material" />
+            </materials>
+            <children>
+                <componentref id="cube"/>
+            </children>
+        </component>
+
+        <!-- Chair Left Back -->
+        <component id="chair_left_back">
+            <transformation>
+                <translate x="0.7" y="3" z="0.7" />
+                <scale x="0.15" y="2" z="0.15"/>
+            </transformation>
+            <materials>
+                <material id="chair_material" />
+            </materials>
+            <children>
+                <componentref id="cube"/>
+            </children>
+        </component>
+
+        <!-- Chair Right Back -->
+        <component id="chair_right_back">
+            <transformation>
+                <translate x="-0.7" y="3" z="0.7" />
+                <scale x="0.15" y="2" z="0.15"/>
+            </transformation>
+            <materials>
+                <material id="chair_material" />
+            </materials>
+            <children>
+                <componentref id="cube"/>
+            </children>
+        </component>
+
+        <!-- Table -->
+        <component id="table">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="demoTexture"/>
+            <children>
+                <componentref id="table_leg1"/>
+                <componentref id="table_leg2"/>
+                <componentref id="table_leg3"/>
+                <componentref id="table_leg4"/>
+                <componentref id="table_top"/>
+            </children>
+        </component>
+
+        <!-- Table Leg -->
+        <component id="table_leg1">
+            <transformation>
+                <translate x="2.35" y="1.75" z="1.35" />
+                <scale x="0.3" y="3.5" z="0.3"/>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <children>
+                <componentref id="cube"/>
+            </children>
+        </component>
+        
+        <!-- Table Leg -->
+        <component id="table_leg2">
+            <transformation>
+                <translate x="2.35" y="1.75" z="-1.35" />
+                <scale x="0.3" y="3.5" z="0.3"/>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <children>
+                <componentref id="cube"/>
+            </children>
+        </component>
+
+        <!-- Table Leg -->
+        <component id="table_leg3">
+            <transformation>
+                <translate x="-2.35" y="1.75" z="-1.35" />
+                <scale x="0.3" y="3.5" z="0.3"/>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <children>
+                <componentref id="cube"/>
+            </children>
+        </component>
+
+        <!-- Table Leg -->
+        <component id="table_leg4">
+            <transformation>
+                <translate x="-2.35" y="1.75" z="1.35" />
+                <scale x="0.3" y="3.5" z="0.3"/>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <children>
+                <componentref id="cube"/>
+            </children>
+        </component>
+
+        <!-- Table Top -->
+        <component id="table_top">
+            <transformation>
+                <translate x="0" y="3.5" z="0" />
+                <scale x="5" y="0.3" z="3"/>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <children>
+                <componentref id="cube"/>
+            </children>
+        </component>
+        
+        <!-- Cube -->
         <component id="cube">
             <transformation>
             </transformation>
@@ -78,9 +692,12 @@
             </children>
         </component>
 
-        <!-- CUBE FACES -->
+        
+
+        <!-- Cube Faces -->
         <component id="cube_face1">
             <transformation>
+                <translate x="0" y="0" z="0.5" />
             </transformation>
             <materials>
                 <material id="demoMaterial" />
@@ -92,6 +709,8 @@
 
         <component id="cube_face2">
             <transformation>
+                <translate x="-0.5" y="0" z="0" />
+                <rotate axis="y" angle="-90" />
             </transformation>
             <materials>
                 <material id="demoMaterial" />
@@ -103,6 +722,8 @@
 
         <component id="cube_face3">
             <transformation>
+                <translate x="0" y="0.5" z="0" />
+                <rotate axis="x" angle="-90" />
             </transformation>
             <materials>
                 <material id="demoMaterial" />
@@ -114,6 +735,8 @@
 
         <component id="cube_face4">
             <transformation>
+                <translate x="0" y="0" z="-0.5" />
+                <rotate axis="x" angle="180" />
             </transformation>
             <materials>
                 <material id="demoMaterial" />
@@ -125,6 +748,8 @@
 
         <component id="cube_face5">
             <transformation>
+                <translate x="0.5" y="0" z="0" />
+                <rotate axis="y" angle="90" />
             </transformation>
             <materials>
                 <material id="demoMaterial" />
@@ -136,6 +761,8 @@
 
         <component id="cube_face6">
             <transformation>
+                <translate x="0" y="-0.5" z="0" />
+                <rotate axis="x" angle="90" />
             </transformation>
             <materials>
                 <material id="demoMaterial" />

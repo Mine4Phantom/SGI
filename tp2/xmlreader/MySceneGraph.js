@@ -937,13 +937,16 @@ export class MySceneGraph {
 			// Transformation ID
 			if (transformationIndex == -1)
 				return "transformation must be defined (node ID = " + componentID + ")";
-			var transformationID = this.reader.getString(grandChildren[transformationIndex], 'id');
-			if (transformationID == null )
-				return "unable to parse transformation ID (node ID = " + componentID + ")";
-			if (transformationID != "null" && transformationID != "clear" && this.transformations[transformationID] == null )
-				return "ID does not correspond to a valid transformation (node ID = " + componentID + ")";
+            var transformationsList = grandChildren[materialsIndex].children // each material
+            for (var j = 0; j < transformationsList.length; j++){
+                var transformationID = this.reader.getString(transformationsList[j], 'id');
+                if (transformationID == null )
+                    return "unable to parse transformation ID (node ID = " + componentID + ")";
+                if (transformationID != "null" && transformationID != "clear" && this.transformations[transformationID] == null )
+                    return "ID does not correspond to a valid transformation (node ID = " + componentID + ")";
+                this.components[componentID].transformMatrix = this.transformations[transformationID]; // To Do Append instead of substitute since now it only takes into account the last one
+            }
 
-            this.components[componentID].transformMatrix = this.transformations[transformationID];;
             
 
             // Children ID

@@ -21,14 +21,18 @@ export class MyComponentNode extends CGFobject {
 		// IDs of child nodes.
 		this.primitives = [];
 
-		// The material ID.
-		this.materialID = null ;
+		// IDs of materials.
+		this.materials= [] ;
 
 		// The texture ID.
 		this.textureID = null ;
 
 		this.transformMatrix = mat4.create();
 		mat4.identity(this.transformMatrix);
+	}
+
+	addMaterial(nodeID) {
+		this.materials.push(nodeID);
 	}
 
 	/**
@@ -61,7 +65,7 @@ export class MyComponentNode extends CGFobject {
 		this.scene.multMatrix(this.transformMatrix);
 
 		var newTextureID = this.textureID;
-		var newMaterialID = this.materialID;
+		var newMaterialID = this.materials[0]; // To Do Change with input of key 'M'
 
 		if(newMaterialID == "null")
 			newMaterialID = currMaterialID;

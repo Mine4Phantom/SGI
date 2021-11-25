@@ -867,6 +867,7 @@ export class MySceneGraph {
 
         var grandChildren = [];
         var grandgrandChildren = [];
+        var materials = [];
         var nodeNames = [];
 
         // Any number of components.
@@ -906,14 +907,20 @@ export class MySceneGraph {
             // Material ID
             if (materialsIndex == -1)
                 return "material must be defined (node ID = " + componentID + ")";
-            var materialID = this.reader.getString(grandChildren[materialsIndex], 'id');
-            if (materialID == null )
-                return "unable to parse material ID (node ID = " + componentID + ")";
-            if (materialID != "null" && this.materials[materialID] == null )
-                return "ID does not correspond to a valid material (node ID = " + componentID + ")";
-
-            this.components[componentID].textureID = textureID;
-
+            materials = grandChildren[materialsIndex].children // each material
+            var sizeMaterials = 0;
+            for (var j = 0; j < materials.length; j++){
+                var materialID = this.reader.getString(materials[j], 'id');
+                if (materialID == null )
+                    return "unable to parse material ID (node ID = " + componentID + ")";
+                if (materialID != "null" && this.materials[materialID] == null )
+                    return "ID does not correspond to a valid material (node ID = " + componentID + ")";
+                this.components[componentID].addMaterial(materialID);
+                sizeMaterials++;
+            }
+            if (sizeMaterials == 0)
+                return "at least one material must be defined for each intermediate node";  
+                
 
 			// Texture ID
 			if (textureIndex == -1)
@@ -924,7 +931,7 @@ export class MySceneGraph {
 			if (textureID != "null" && textureID != "clear" && this.textures[textureID] == null )
 				return "ID does not correspond to a valid texture (node ID = " + componentID + ")";
 
-            this.components[componentID].materialID = materialID;
+            this.components[componentID].textureID = textureID;
 
 
 			// Transformation ID

@@ -67,7 +67,7 @@
             <triangle x1="-0.5" y1="-0.5" x2="0.5" y2="-0.5" x3="0" y3="0.5"/>
         </primitive>
         <primitive id="cylinder">
-            <cylinder height="5" topRadius="1" bottomRadius="1" stacks="10" slices="50"/>
+            <cylinder height="5" topRadius="5" bottomRadius="5" stacks="10" slices="50"/>
         </primitive>
         <primitive id="sphere">
             <sphere radius="1" slices="50" stacks="50"/>
@@ -88,8 +88,24 @@
             </materials>
             <texture id="demoTexture"/>
             <children>
-                <primitiveref id="demoRectangle" />
+                <primitiveref id="rectangle" />
+                <componentref id="demoComponent2" />
             </children>
         </component>
+
+        <component id="demoComponent2">
+            <transformation>
+                <transformationref id="demoTransform" />
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+                <material id="demoMaterial2" />
+            </materials>
+            <texture id="demoTexture"/>
+            <children>
+                <primitiveref id="cylinder" />
+            </children>
+        </component>
+
     </components>
 </lxs>

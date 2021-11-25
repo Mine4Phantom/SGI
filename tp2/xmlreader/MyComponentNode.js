@@ -79,7 +79,7 @@ export class MyComponentNode extends CGFobject {
 		this.displayPrimitives(newTextureID,newMaterialID);
 
 		for(var j=0;j < this.children.length; j++){
-			this.graph.nodes[this.children[j]].display(newTextureID,newMaterialID);
+			this.graph.components[this.children[j]].display(newTextureID,newMaterialID);
 		}
 
 		this.scene.popMatrix();

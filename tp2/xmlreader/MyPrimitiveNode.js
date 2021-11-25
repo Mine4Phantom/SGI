@@ -36,7 +36,7 @@
       * @param  {[Material]} currMaterialID father material
       */
      display(currTextureID, currMaterialID) {
-        this.scene.primitives[this.nodeID].display(currTextureID,currMaterialID)
+        this.graph.primitives[this.nodeID].display(currTextureID,currMaterialID)
      }
  
  }

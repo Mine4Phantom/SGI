@@ -3,8 +3,8 @@ import { MyRectangle } from '../primitives/MyRectangle.js';
 import { MyTriangle } from '../primitives/MyTriangle.js';
 import { MyCylinder } from '../primitives/MyCylinder.js';
 import { MySphere } from '../primitives/MySphere.js';
-import { MyComponentNode } from 'MyComponentNode.js';
-import { MyPrimitiveNode } from 'MyPrimitiveNode.js';
+import { MyComponentNode } from './MyComponentNode.js';
+import { MyPrimitiveNode } from './MyPrimitiveNode.js';
 
 var DEGREE_TO_RAD = Math.PI / 180;
 
@@ -492,11 +492,11 @@ export class MySceneGraph {
                         transfMatrix = mat4.scale(transfMatrix, transfMatrix, coordinates);
                         break;
                     case 'rotate':
-                        var axis = this.reader.getFloat(node, 'axis');
-                        if (!(axis != null && !isNaN(axis)))
+                        var axis = this.reader.getItem(grandChildren[j], 'axis', ['x', 'y', 'z']);
+                        if (axis == null)
                             return "unable to parse axis of the " + "rotate transformation for ID " + transformationID;
 
-                        var angle = this.reader.getFloat(node, 'angle');
+                        var angle = this.reader.getFloat(grandChildren[j], 'angle');
                         if (!(angle != null && !isNaN(angle)))
                             return "unable to parse angle of the " + "rotate transformation for ID " + transformationID;
 
@@ -671,10 +671,10 @@ export class MySceneGraph {
                 this.primitives[primitiveId] = sphere;
             }
             else {
-                console.warn("To do: Parse other primitives.");
+                console.warn("Unkown Primitive.");
             }
         }
-        //this.nodes.append(this.primitives) // Add to nodes primitives
+
         this.log("Parsed primitives");
         return null;
     }
@@ -804,16 +804,6 @@ export class MySceneGraph {
 			if (sizeChildren == 0)
 				return "at least one descendant must be defined for each intermediate node";
 
-            //this.nodes.append(this.components) // Add to nodes components
-
-            //this.onXMLMinorError("To do: Parse components.");
-            // Transformations TODO All
-
-            // Materials
-
-            // Texture
-
-            // Children
         }
     }
 

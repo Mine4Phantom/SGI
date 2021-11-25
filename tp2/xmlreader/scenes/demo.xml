@@ -21,13 +21,13 @@
             <specular r="1.0" g="1.0" b="1.0" a="1.0" />
         </omni>
 
-        <spot id="light_tall_lamp" enabled="tt" angle="ff" exponent="ff">
-            <location x="ff" y="ff" z="ff" w="ff" />
-            <target x="ff" y="ff" z="ff" />
-            <ambient r="ff" g="ff" b="ff" a="ff" />
-            <diffuse r="ff" g="ff" b="ff" a="ff" />
-            <specular r="ff" g="ff" b="ff" a="ff" />
-            <attenuation constant="ff" linear="ff" quadratic="ff" />
+        <spot id="light_tall_lamp" enabled="1" angle="120" exponent="1"> <!-- TO DO -->
+            <location x="10" y="5" z="5" w="1" />
+            <target x="1" y="1" z="1" />
+            <ambient r="0" g="0" b="0" a="1.0" />
+            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+            <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+            <attenuation constant="1" linear="1" quadratic="1" />
         </spot>
     </lights>
 

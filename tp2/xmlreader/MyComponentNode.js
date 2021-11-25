@@ -1,15 +1,16 @@
 
 
 /**
- * MyGraphNode class, representing an intermediate node in the scene graph.
+ * MyComponentNode class, representing an intermediate node in the scene graph.
  * @constructor
  **/
 
-import { CGFobject } from "./lib/CGF";
+import { CGFobject } from "../lib/CGF.js";
 
 
 export class MyComponentNode extends CGFobject {
 	constructor(graph, nodeID) {
+		super(graph.scene);
 		this.graph = graph;
 		this.scene = graph.scene;
 		this.nodeID = nodeID;
@@ -18,7 +19,7 @@ export class MyComponentNode extends CGFobject {
 		this.children = [];
 
 		// IDs of child nodes.
-		this.leaves = [];
+		this.primitives = [];
 
 		// The material ID.
 		this.materialID = null ;
@@ -40,8 +41,8 @@ export class MyComponentNode extends CGFobject {
 	/**
 	 * Adds a primitive to this node's primitives array.
 	 */
-	addPrimitive(leaf) {
-		this.leaves.push(leaf);
+	addPrimitive(primitive) {
+		this.primitives.push(primitive);
 	}
 
 	/**
@@ -71,7 +72,7 @@ export class MyComponentNode extends CGFobject {
 			}
 		}
 
-		this.displayLeaves(newTextureID,newMaterialID);
+		this.displayPrimitives(newTextureID,newMaterialID);
 
 		for(var j=0;j < this.children.length; j++){
 			this.graph.nodes[this.children[j]].display(newTextureID,newMaterialID);
@@ -80,7 +81,7 @@ export class MyComponentNode extends CGFobject {
 		this.scene.popMatrix();
 	}
 
-	displayLeaves(newTextureID, newMaterialID) {
+	displayPrimitives(newTextureID, newMaterialID) {
 
 		if(newMaterialID != null && newMaterialID != "null")
 			this.graph.materials[newMaterialID].apply();
@@ -88,11 +89,11 @@ export class MyComponentNode extends CGFobject {
 		if(newTextureID != "clear" && newTextureID != null)
 			this.graph.textures[newTextureID][0].bind();
 
-		for(var i=0;i < this.leaves.length;i++){
+		for(var i=0;i < this.primitives.length;i++){
 			if(newTextureID != "clear" && newTextureID != null){
-				this.leaves[i].updateTexCoords(this.graph.textures[newTextureID][1],this.graph.textures[newTextureID][2]);
+				this.primitives[i].updateTexCoords(this.graph.textures[newTextureID][1],this.graph.textures[newTextureID][2]);
 			}
-			this.leaves[i].display();
+			this.primitives[i].display();
 		}
 	}
 

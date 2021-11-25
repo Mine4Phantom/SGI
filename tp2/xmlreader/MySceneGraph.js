@@ -485,11 +485,22 @@ export class MySceneGraph {
                         transfMatrix = mat4.translate(transfMatrix, transfMatrix, coordinates);
                         break;
                     case 'scale':                        
-                        this.onXMLMinorError("To do: Parse scale transformations.");
+                        var coordinates = this.parseCoordinates3D(grandChildren[j], "scale transformation for ID " + transformationID);
+                        if (!Array.isArray(coordinates))
+                            return coordinates;
+
+                        transfMatrix = mat4.scale(transfMatrix, transfMatrix, coordinates);
                         break;
                     case 'rotate':
-                        // angle
-                        this.onXMLMinorError("To do: Parse rotate transformations.");
+                        var axis = this.reader.getFloat(node, 'axis');
+                        if (!(axis != null && !isNaN(axis)))
+                            return "unable to parse axis of the " + "rotate transformation for ID " + transformationID;
+
+                        var angle = this.reader.getFloat(node, 'angle');
+                        if (!(angle != null && !isNaN(angle)))
+                            return "unable to parse angle of the " + "rotate transformation for ID " + transformationID;
+
+                        transfMatrix = mat4.rotate(transfMatrix, transfMatrix, angle * DEGREE_TO_RAD, this.axisCoords[axis]);
                         break;
                 }
             }
@@ -663,7 +674,7 @@ export class MySceneGraph {
                 console.warn("To do: Parse other primitives.");
             }
         }
-
+        //this.nodes.append(this.primitives) // Add to nodes primitives
         this.log("Parsed primitives");
         return null;
     }
@@ -705,29 +716,32 @@ export class MySceneGraph {
                 nodeNames.push(grandChildren[j].nodeName);
             }
 
-            var transformationIndex = nodeNames.indexOf("");
+            var transformationIndex = nodeNames.indexOf("transformation");
             var materialsIndex = nodeNames.indexOf("materials");
             var textureIndex = nodeNames.indexOf("texture");
             var childrenIndex = nodeNames.indexOf("children"); // transf, material, texture, children
 
+
             // Create current node and then add info to it
             this.components[componentID] = new MyComponentNode(this,componentID);
+
 
             // Material ID
             if (materialsIndex == -1)
                 return "material must be defined (node ID = " + componentID + ")";
-            var materialID = this.reader.getString(nodeSpecs[materialsIndex], 'id');
+            var materialID = this.reader.getString(grandChildren[materialsIndex], 'id');
             if (materialID == null )
                 return "unable to parse material ID (node ID = " + componentID + ")";
             if (materialID != "null" && this.materials[materialID] == null )
                 return "ID does not correspond to a valid material (node ID = " + componentID + ")";
 
-            this.nodes[nodeID].textureID = textureID;
+            this.components[componentID].textureID = textureID;
+
 
 			// Texture ID
 			if (textureIndex == -1)
 				return "texture must be defined (node ID = " + componentID + ")";
-			var textureID = this.reader.getString(nodeSpecs[textureIndex], 'id');
+			var textureID = this.reader.getString(grandChildren[textureIndex], 'id');
 			if (textureID == null )
 				return "unable to parse texture ID (node ID = " + componentID + ")";
 			if (textureID != "null" && textureID != "clear" && this.textures[textureID] == null )
@@ -736,11 +750,63 @@ export class MySceneGraph {
             this.components[componentID].materialID = materialID;
 
 
+			// Transformation ID
+			if (transformationIndex == -1)
+				return "transformation must be defined (node ID = " + componentID + ")";
+			var transformationID = this.reader.getString(grandChildren[transformationIndex], 'id');
+			if (transformationID == null )
+				return "unable to parse transformation ID (node ID = " + componentID + ")";
+			if (transformationID != "null" && transformationID != "clear" && this.transformations[transformationID] == null )
+				return "ID does not correspond to a valid transformation (node ID = " + componentID + ")";
+
+            this.components[componentID].transformMatrix = this.transformations[transformationID];;
             
 
-            
+            // Children ID
+			if (childrenIndex == -1)
+				return "children must be defined (node ID = " + componentID + ")";
+            grandgrandChildren = grandChildren[childrenIndex].children // componentrefs and primitiverefs
 
-            this.onXMLMinorError("To do: Parse components.");
+			var sizeChildren = 0;
+			for (var j = 0; j < grandgrandChildren.length; j++) {
+				if (grandgrandChildren[j].nodeName == "componentref")
+				{
+					var curId = this.reader.getString(grandgrandChildren[j], 'id');
+					console.log("   componentref: "+curId);
+
+					if (curId == null )
+						this.onXMLMinorError("unable to parse child id");
+					else if (curId == nodeID)
+						return "a node may not be a child of its own";
+					else {
+						this.components[componentID].addChild(curId);
+						sizeChildren++;
+					}
+				}
+				else if (grandgrandChildren[j].nodeName == "primitiveref")
+                {
+                    var curId = this.reader.getString(grandgrandChildren[j], 'id');
+                    console.log("   primitiveref: "+curId);
+
+                    if (curId == null )
+                        this.onXMLMinorError("unable to parse child id");
+                    else if (curId == nodeID)
+                        return "a node especially a primitive may not be a child of its own";
+                    else {
+                        this.components[componentID].addPrimitive(new MyPrimitiveNode(this,curId));
+                        sizeChildren++;
+                    }
+                }
+                else
+                    this.onXMLMinorError("unknown tag <" + grandgrandChildren[j].nodeName + ">");
+
+			}
+			if (sizeChildren == 0)
+				return "at least one descendant must be defined for each intermediate node";
+
+            //this.nodes.append(this.components) // Add to nodes components
+
+            //this.onXMLMinorError("To do: Parse components.");
             // Transformations TODO All
 
             // Materials

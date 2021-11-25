@@ -615,7 +615,7 @@ export class MySceneGraph {
         // Generates a default material.
         this.generateDefaultMaterial();
 
-        //this.log("Parsed materials");
+        this.log("Parsed materials");
         return null;
     }
 
@@ -937,7 +937,7 @@ export class MySceneGraph {
 			// Transformation ID
 			if (transformationIndex == -1)
 				return "transformation must be defined (node ID = " + componentID + ")";
-            var transformationsList = grandChildren[materialsIndex].children // each material
+            var transformationsList = grandChildren[transformationIndex].children // each material
             for (var j = 0; j < transformationsList.length; j++){
                 var transformationID = this.reader.getString(transformationsList[j], 'id');
                 if (transformationID == null )
@@ -959,7 +959,7 @@ export class MySceneGraph {
 				if (grandgrandChildren[j].nodeName == "componentref")
 				{
 					var curId = this.reader.getString(grandgrandChildren[j], 'id');
-					console.log("   componentref: "+curId);
+					//console.log("   componentref: "+curId);
 
 					if (curId == null )
 						this.onXMLMinorError("unable to parse child id");
@@ -973,7 +973,7 @@ export class MySceneGraph {
 				else if (grandgrandChildren[j].nodeName == "primitiveref")
                 {
                     var curId = this.reader.getString(grandgrandChildren[j], 'id');
-                    console.log("   primitiveref: "+curId);
+                    //console.log("   primitiveref: "+curId);
 
                     if (curId == null )
                         this.onXMLMinorError("unable to parse child id");

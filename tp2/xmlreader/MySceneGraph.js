@@ -1,5 +1,6 @@
 import { CGFXMLreader } from '../lib/CGF.js';
 import { CGFtexture } from '../lib/CGF.js';
+import { CGFappearance } from '../lib/CGF.js';
 import { MyRectangle } from '../primitives/MyRectangle.js';
 import { MyTriangle } from '../primitives/MyTriangle.js';
 import { MyCylinder } from '../primitives/MyCylinder.js';
@@ -73,6 +74,34 @@ export class MySceneGraph {
 
         // As the graph loaded ok, signal the scene so that any additional initialization depending on the graph can take place
         this.scene.onGraphLoaded();
+    }
+
+    generateRandomString(length){
+        // Generates an array of random integer ASCII codes of the specified length
+        // and returns a string of the specified length.
+        var numbers = [];
+        for (var i = 0; i < length; i++)
+            numbers.push(Math.floor(Math.random() * 256));          // Random ASCII code.
+
+        return String.fromCharCode.apply(null, numbers);
+    }
+
+    generateDefaultMaterial(){
+        var materialDefault = new CGFappearance(this.scene);
+        materialDefault.setShininess(1);
+        materialDefault.setSpecular(0, 0, 0, 1);
+        materialDefault.setDiffuse(0.5, 0.5, 0.5, 1);
+        materialDefault.setAmbient(0, 0, 0, 1);
+        materialDefault.setEmission(0, 0, 0, 1);
+    
+        // Generates random material ID not currently in use.
+        this.defaultMaterialID = null;
+        do this.defaultMaterialID = this.generateRandomString(5);
+        while (this.materials[this.defaultMaterialID] != null);
+    
+        this.materials[this.defaultMaterialID] = materialDefault;
+
+        return;
     }
 
     /**
@@ -454,6 +483,7 @@ export class MySceneGraph {
 
         var grandChildren = [];
         var nodeNames = [];
+        var oneMaterialDefined = false;
 
         // Any number of materials.
         for (var i = 0; i < children.length; i++) {
@@ -470,11 +500,120 @@ export class MySceneGraph {
 
             // Checks for repeated IDs.
             if (this.materials[materialID] != null)
-                return "ID must be unique for each light (conflict: ID = " + materialID + ")";
+                return "ID must be unique for each material (conflict: ID = " + materialID + ")";
+
+            // Shininess
+            var shininess = this.reader.getFloat(children[i], 'shininess');
+            if (shininess == null)
+                return "Shininess must be defined for each material (conflict: ID = " + materialID + ")";
+
+            var materialDetails = children[i].children;
+    
+            for (var j = 0; j < materialDetails.length; j++)
+                nodeNames.push(materialDetails[j].nodeName);
+
+
+            // Specular component.
+            var specularIndex = nodeNames.indexOf("specular");
+            if (specularIndex == -1)
+                return "no specular component defined for material with ID = " + materialID;
+            var specularComponent = [];
+            var r = this.reader.getFloat(materialDetails[specularIndex], 'r');
+            var g = this.reader.getFloat(materialDetails[specularIndex], 'g');
+            var b = this.reader.getFloat(materialDetails[specularIndex], 'b');
+            var a = this.reader.getFloat(materialDetails[specularIndex], 'a');
+            if (r == null || g == null || b == null || a == null)
+                return "unable to parse rgba component of specular reflection for material with ID = " + materialID;
+            else if (isNaN(r) || isNaN(g) || isNaN(b) || isNaN(a))
+                return "specular rgba is a non numeric value on the materials block";
+            else if (r < 0 || r > 1 || g < 0 || g > 1 || b < 0 || b > 1 || a < 0)
+                return "specular rgba must be a value between 0 and 1 on the materials block"
+            specularComponent.push(r);
+            specularComponent.push(g);
+            specularComponent.push(b);
+            specularComponent.push(a);
+
+            // Diffuse component.
+            var diffuseIndex = nodeNames.indexOf("diffuse");
+            if (diffuseIndex == -1)
+                return "no diffuse component defined for material with ID = " + materialID;
+            var diffuseComponent = [];
+            r = this.reader.getFloat(materialDetails[diffuseIndex], 'r');
+            g = this.reader.getFloat(materialDetails[diffuseIndex], 'g');
+            b = this.reader.getFloat(materialDetails[diffuseIndex], 'b');
+            a = this.reader.getFloat(materialDetails[diffuseIndex], 'a');
+            if (r == null || g == null || b == null || a == null)
+                return "unable to parse rgba component of diffuse reflection for material with ID = " + materialID;
+            else if (isNaN(r) || isNaN(g) || isNaN(b) || isNaN(a))
+                return "diffuse rgba is a non numeric value on the materials block";
+            else if (r < 0 || r > 1 || g < 0 || g > 1 || b < 0 || b > 1 || a < 0)
+                return "diffuse rgba must be a value between 0 and 1 on the materials block"
+            diffuseComponent.push(r);
+            diffuseComponent.push(g);
+            diffuseComponent.push(b);
+            diffuseComponent.push(a);
+
+            // Ambient component.
+            var ambientIndex = nodeNames.indexOf("ambient");
+            if (ambientIndex == -1)
+                return "no ambient component defined for material with ID = " + materialID;
+            var ambientComponent = [];
+            r = this.reader.getFloat(materialDetails[ambientIndex], 'r');
+            g = this.reader.getFloat(materialDetails[ambientIndex], 'g');
+            b = this.reader.getFloat(materialDetails[ambientIndex], 'b');
+            a = this.reader.getFloat(materialDetails[ambientIndex], 'a');
+            if (r == null || g == null || b == null || a == null)
+                return "unable to parse rgba component of ambient reflection for material with ID = " + materialID;
+            else if (isNaN(r) || isNaN(g) || isNaN(b) || isNaN(a))
+                return "ambient rgba is a non numeric value on the materials block";
+            else if (r < 0 || r > 1 || g < 0 || g > 1 || b < 0 || b > 1 || a < 0)
+                return "ambient rgba must be a value between 0 and 1 on the materials block"
+            ambientComponent.push(r);
+            ambientComponent.push(g);
+            ambientComponent.push(b);
+            ambientComponent.push(a);
+
+            // Emission component.
+            var emissionIndex = nodeNames.indexOf("emission");
+            if (emissionIndex == -1)
+                return "no emission component defined for material with ID = " + materialID;
+            var emissionComponent = [];
+            r = this.reader.getFloat(materialDetails[emissionIndex], 'r');
+            g = this.reader.getFloat(materialDetails[emissionIndex], 'g');
+            b = this.reader.getFloat(materialDetails[emissionIndex], 'b');
+            a = this.reader.getFloat(materialDetails[emissionIndex], 'a');
+            if (r == null || g == null || b == null || a == null)
+                return "unable to parse rgba component of emission for material with ID = " + materialID;
+            else if (isNaN(r) || isNaN(g) || isNaN(b) || isNaN(a))
+                return "emission rgba is a non numeric value on the materials block";
+            else if (r < 0 || r > 1 || g < 0 || g > 1 || b < 0 || b > 1 || a < 0)
+                return "emission rgba must be a value between 0 and 1 on the materials block"
+            emissionComponent.push(r);
+            emissionComponent.push(g);
+            emissionComponent.push(b);
+            emissionComponent.push(a);
+
+            // Creates material with the specified characteristics.
+            var newMaterial = new CGFappearance(this.scene);
+            newMaterial.setShininess(shininess);
+            newMaterial.setAmbient(ambientComponent[0], ambientComponent[1], ambientComponent[2], ambientComponent[3]);
+            newMaterial.setDiffuse(diffuseComponent[0], diffuseComponent[1], diffuseComponent[2], diffuseComponent[3]);
+            newMaterial.setSpecular(specularComponent[0], specularComponent[1], specularComponent[2], specularComponent[3]);
+            newMaterial.setEmission(emissionComponent[0], emissionComponent[1], emissionComponent[2], emissionComponent[3]);
+            this.materials[materialID] = newMaterial;
+            oneMaterialDefined = true;
 
             //Continue here
-            this.onXMLMinorError("To do: Parse materials.");
+            //this.onXMLMinorError("To do: Parse materials.");
         }
+
+
+
+        if (!oneMaterialDefined)
+		    return "at least one material must be defined on the MATERIALS block";
+
+        // Generates a default material.
+        this.generateDefaultMaterial();
 
         //this.log("Parsed materials");
         return null;

@@ -963,7 +963,7 @@ export class MySceneGraph {
 
 					if (curId == null )
 						this.onXMLMinorError("unable to parse child id");
-					else if (curId == nodeID)
+					else if (curId == componentID)
 						return "a node may not be a child of its own";
 					else {
 						this.components[componentID].addChild(curId);
@@ -977,7 +977,7 @@ export class MySceneGraph {
 
                     if (curId == null )
                         this.onXMLMinorError("unable to parse child id");
-                    else if (curId == nodeID)
+                    else if (curId == componentID)
                         return "a node especially a primitive may not be a child of its own";
                     else {
                         this.components[componentID].addPrimitive(new MyPrimitiveNode(this,curId));

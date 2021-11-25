@@ -32,7 +32,7 @@
     </lights>
 
     <textures>
-        <texture id="demoTexture" file="scenes/images/vidral.jpg" />
+        <texture id="demoTexture" file="vidral.jpg" />
     </textures>
 
     <materials>

@@ -1,4 +1,5 @@
 import { CGFXMLreader } from '../lib/CGF.js';
+import { CGFtexture } from '../lib/CGF.js';
 import { MyRectangle } from '../primitives/MyRectangle.js';
 import { MyTriangle } from '../primitives/MyTriangle.js';
 import { MyCylinder } from '../primitives/MyCylinder.js';
@@ -401,7 +402,44 @@ export class MySceneGraph {
     parseTextures(texturesNode) {
 
         //For each texture in textures block, check ID and file URL
-        this.onXMLMinorError("To do: Parse textures.");
+
+        this.textures = [];
+
+        var eachTexture = texturesNode.children;
+        // Each texture.
+    
+        var oneTextureDefined = false;
+    
+        for (var i = 0; i < eachTexture.length; i++) {
+            var nodeName = eachTexture[i].nodeName;
+            if (nodeName == "texture") {
+                // Retrieves texture ID.
+                var textureID = this.reader.getString(eachTexture[i], 'id');
+                if (textureID == null )
+                    return "failed to parse texture ID";
+                // Checks if ID is valid.
+                if (this.textures[textureID] != null )
+                    return "texture ID must be unique (conflict with ID = " + textureID + ")";
+    
+                var filepath = this.reader.getString(eachTexture[i], 'file'); ;
+                if (filepath == null )
+                    return "unable to parse texture file path for ID = " + textureID;
+                
+                var texture = new CGFtexture(this.scene,"./scenes/images/" + filepath);
+    
+                this.textures[textureID] = texture;
+                oneTextureDefined = true;
+            }
+            else
+                this.onXMLMinorError("unknown tag name <" + nodeName + ">");
+        }
+    
+        if (!oneTextureDefined)
+            return "at least one texture must be defined in the textures block";
+    
+        console.log("Parsed textures");
+
+        //this.onXMLMinorError("To do: Parse textures.");
         return null;
     }
 

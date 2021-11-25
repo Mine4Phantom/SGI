@@ -24,9 +24,6 @@
  
 
 
-    updateTexCoords(amplif_factor_s, amplif_factor_t) {
-        this.scene.primitives[this.nodeID].updateTexCoords(amplif_factor_s,amplif_factor_t);
-    } 
  
      /**
       * This function applies the transformation the respective node and all of its children.

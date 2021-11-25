@@ -87,12 +87,9 @@ export class MyComponentNode extends CGFobject {
 			this.graph.materials[newMaterialID].apply();
 
 		if(newTextureID != "clear" && newTextureID != null)
-			this.graph.textures[newTextureID][0].bind();
+			this.graph.textures[newTextureID].bind();
 
 		for(var i=0;i < this.primitives.length;i++){
-			if(newTextureID != "clear" && newTextureID != null){
-				this.primitives[i].updateTexCoords(this.graph.textures[newTextureID][1],this.graph.textures[newTextureID][2]);
-			}
 			this.primitives[i].display();
 		}
 	}

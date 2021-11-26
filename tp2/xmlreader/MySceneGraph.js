@@ -1115,6 +1115,6 @@ export class MySceneGraph {
         //this.primitives['demoRectangle'].display();
         //this.primitives['demoTriangle'].display();
         //this.primitives['demoCylinder'].display();
-        this.components['demoRoot'].display();
+        this.components['root'].display();
     }
 }

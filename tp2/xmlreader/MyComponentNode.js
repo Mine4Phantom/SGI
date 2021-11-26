@@ -78,7 +78,7 @@ export class MyComponentNode extends CGFobject {
 
 		this.displayPrimitives(newTextureID,newMaterialID);
 
-		for(var j=0;j < this.children.length; j++){
+		for(var j=0; j < this.children.length; j++){
 			this.graph.components[this.children[j]].display(newTextureID,newMaterialID);
 		}
 

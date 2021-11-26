@@ -756,7 +756,7 @@ export class MySceneGraph {
                 this.primitives[primitiveId] = rect;
             }
 
-            if (primitiveType == 'triangle') {
+            else if (primitiveType == 'triangle') {
 
                 // x1
                 var x1 = this.reader.getFloat(grandChildren[0], 'x1');
@@ -793,7 +793,7 @@ export class MySceneGraph {
 
                 this.primitives[primitiveId] = tri;
             }
-            if (primitiveType == 'cylinder') {
+            else if (primitiveType == 'cylinder') {
 
                 // height
                 var height = this.reader.getFloat(grandChildren[0], 'height');
@@ -825,7 +825,7 @@ export class MySceneGraph {
 
                 this.primitives[primitiveId] = cylinder;
             }
-            if (primitiveType == 'sphere') {
+            else if (primitiveType == 'sphere') {
 
                 // radius
                 var radius = this.reader.getFloat(grandChildren[0], 'radius');
@@ -990,7 +990,6 @@ export class MySceneGraph {
 			}
 			if (sizeChildren == 0)
 				return "at least one descendant must be defined for each intermediate node";
-
         }
     }
 

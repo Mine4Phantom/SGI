@@ -33,6 +33,8 @@
 
     <textures>
         <texture id="demoTexture" file="vidral.jpg" />
+        <texture id="demoTexture2" file="rocks.jpg" />
+        <texture id="demoTexture3" file="leaves.jpg" />
     </textures>
 
     <materials>
@@ -45,17 +47,33 @@
 
         <material id="demoMaterial2" shininess="10">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
-            <ambient r="1.0" g="0.0" b="0.0" a="1.0" />
-            <diffuse r="0.6" g="0.0" b="0.0" a="1.0" />
-            <specular r="0.6" g="0.0" b="0.0" a="1.0" />
+            <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
+            <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
+            <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+        </material>
+
+        <material id="demoMaterial3" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.0" g="1.0" b="0.0" a="1.0" />
+            <diffuse r="0.0" g="0.6" b="0.0" a="1.0" />
+            <specular r="0.0" g="0.6" b="0.0" a="1.0" />
         </material>
     </materials>
 
     <transformations>
         <transformation id="demoTransform">
-            <scale x="5" y="1" z="5" />
+            <scale x="1" y="1" z="1.3" />
+            <!-- <rotate axis="x" angle="-45" />
+            <rotate axis="z" angle="-45" /> -->
+        </transformation>
+        <transformation id="demoTransform2">
+            <translate x="5" y="1" z="5" />
+            <!-- <scale x="5" y="1" z="5" />
             <rotate axis="x" angle="-45" />
-            <rotate axis="z" angle="-45" />
+            <rotate axis="z" angle="-45" /> -->
+        </transformation>
+        <transformation id="demoTransform3">
+            <translate x="2" y="2" z="1" />
         </transformation>
     </transformations>
 
@@ -67,7 +85,7 @@
             <triangle x1="-0.5" y1="-0.5" x2="0.5" y2="-0.5" x3="0" y3="0.5"/>
         </primitive>
         <primitive id="cylinder">
-            <cylinder height="5" topRadius="5" bottomRadius="5" stacks="10" slices="50"/>
+            <cylinder height="3" topRadius="1" bottomRadius="1" stacks="10" slices="50"/>
         </primitive>
         <primitive id="sphere">
             <sphere radius="1" slices="50" stacks="50"/>
@@ -84,26 +102,38 @@
             </transformation>
             <materials>
                 <material id="demoMaterial" />
-                <material id="demoMaterial2" />
             </materials>
             <texture id="demoTexture"/>
             <children>
                 <primitiveref id="rectangle" />
                 <componentref id="demoComponent2" />
+                <componentref id="demoComponent3" />
             </children>
         </component>
 
         <component id="demoComponent2">
             <transformation>
-                <transformationref id="demoTransform" />
+                <transformationref id="demoTransform2" />
             </transformation>
             <materials>
-                <material id="demoMaterial" />
                 <material id="demoMaterial2" />
             </materials>
-            <texture id="demoTexture"/>
+            <texture id="demoTexture2"/>
             <children>
                 <primitiveref id="cylinder" />
+            </children>
+        </component>
+
+        <component id="demoComponent3">
+            <transformation>
+                <transformationref id="demoTransform3" />
+            </transformation>
+            <materials>
+                <material id="demoMaterial3" />
+            </materials>
+            <texture id="demoTexture3"/>
+            <children>
+                <primitiveref id="sphere" />
             </children>
         </component>
 

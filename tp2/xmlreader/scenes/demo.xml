@@ -32,7 +32,13 @@
     </lights>
 
     <textures>
-        <texture id="demoTexture" file="scenes/images/vidral.jpg" />
+        <texture id="tall_lamp_texture" file="vidral.jpg" />
+        <texture id="tall_lamp_abajur_texture" file="vidral.jpg" />
+        <texture id="television_desk_texture" file="vidral.jpg" />
+        <texture id="book_texture" file="vidral.jpg" />
+        <texture id="television_texture" file="vidral.jpg" />
+        <texture id="couch_texture" file="vidral.jpg" />
+        <texture id="demoTexture" file="vidral.jpg" />
     </textures>
 
     <materials>
@@ -42,6 +48,56 @@
             <diffuse r="0.6" g="0.0" b="0.0" a="1.0" />
             <specular r="0.6" g="0.0" b="0.0" a="1.0" />
         </material>
+
+        <material id="tall_lamp_material" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
+            <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
+            <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+        </material>
+
+        <material id="tall_lamp_abajur_material" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
+            <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
+            <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+        </material>
+
+        <material id="television_desk_material" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
+            <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
+            <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+        </material>
+
+        <material id="book_material" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
+            <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
+            <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+        </material>
+
+        <material id="television_material" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
+            <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
+            <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+        </material>
+
+        <material id="couch_material" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
+            <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
+            <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+        </material>
+
+        <material id="chair_material" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
+            <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
+            <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+        </material>
+
     </materials>
 
     <transformations>
@@ -49,6 +105,238 @@
             <scale x="5" y="1" z="5" />
             <rotate axis="x" angle="-45" />
             <rotate axis="z" angle="-45" />
+        </transformation>
+        <transformation id="tall_lamp">
+            <translate x="-10" y="0" z="-7" />
+        </transformation>
+        <transformation id="tall_lamp_body">
+            <translate x="0" y="0.5" z="0" />
+        </transformation>
+        <transformation id="tall_lamp_base">
+            <translate x="0" y="0.5" z="0" />
+            <scale x="1" y="0.5" z="1" />
+        </transformation>
+        <transformation id="tall_lamp_vertical_pole">
+            <translate x="0" y="3" z="0" />
+            <scale x="1" y="6" z="1" />
+        </transformation>
+        <transformation id="tall_lamp_junction">
+            <translate x="0" y="7" z="0" />
+            <scale x="1" y="1" z="1" />
+        </transformation>
+        <transformation id="tall_lamp_horizontal_pole">
+            <translate x="1" y="3" z="0" />
+            <rotate axis="x" angle="-90" />
+            <scale x="5" y="1" z="1" />
+        </transformation>
+        <transformation id="tall_lamp_abajur">
+            <translate x="0" y="7" z="0" />
+            <scale x="3" y="3" z="3" />
+        </transformation>
+        <transformation id="television_desk">
+            <translate x="7" y="0" z="-7" />
+            <rotate axis="y" angle="-45" />
+        </transformation>
+        <transformation id="television_desk_body">
+            <translate x="0" y="3" z="0" />
+            <rotate axis="x" angle="-45" />
+            <scale x="5" y="1" z="5" />
+        </transformation>
+        <!-- Isto vai ter de ser feito a olhar para o display-->
+        <transformation id="television_desk_body_book1">
+            <translate x="4" y="0" z="4" />
+            <rotate axis="x" angle="-45" />
+            <scale x="1" y="1" z="1" />
+        </transformation>
+        <transformation id="television_desk_body_book2">
+            <translate x="4" y="0" z="4" />
+            <rotate axis="x" angle="-45" />
+            <scale x="1" y="1" z="1" />
+        </transformation>
+        <transformation id="television_desk_body_book3">
+            <translate x="4" y="0" z="4" />
+            <rotate axis="x" angle="-45" />
+            <scale x="1" y="1" z="1" />
+        </transformation>
+        <transformation id="television_desk_body_book4">
+            <translate x="4" y="0" z="4" />
+            <rotate axis="x" angle="-45" />
+            <scale x="1" y="1" z="1" />
+        </transformation>
+        <transformation id="book">
+            <translate x="4" y="0" z="4" />
+            <rotate axis="x" angle="-45" />
+            <scale x="1" y="1" z="1" />
+        </transformation>
+        <transformation id="book_cover">
+            <translate x="4" y="0" z="4" />
+            <rotate axis="x" angle="-45" />
+            <scale x="1" y="1" z="1" />
+        </transformation>
+        <transformation id="book_front_cover">
+            <translate x="4" y="0" z="4" />
+            <rotate axis="x" angle="-45" />
+            <scale x="1" y="1" z="1" />
+        </transformation>
+        <transformation id="book_back_cover">
+            <translate x="4" y="0" z="4" />
+            <rotate axis="x" angle="-45" />
+            <scale x="1" y="1" z="1" />
+        </transformation>
+        <transformation id="book_middle_cover">
+            <translate x="4" y="0" z="4" />
+            <rotate axis="x" angle="-45" />
+            <scale x="1" y="1" z="1" />
+        </transformation>
+        <transformation id="book_pages">
+            <translate x="4" y="0" z="4" />
+            <rotate axis="x" angle="-45" />
+            <scale x="5" y="1" z="5" />
+        </transformation>
+        <transformation id="television_desk_leg1">
+            <translate x="2" y="2" z="2" />
+            <scale x="1" y="4" z="1" />
+        </transformation>
+        <transformation id="television_desk_leg2">
+            <translate x="2" y="2" z="-2" />
+            <scale x="1" y="4" z="1" />
+        </transformation>
+        <transformation id="television_desk_leg3">
+            <translate x="-2" y="2" z="2" />
+            <scale x="1" y="4" z="1" />
+        </transformation>
+        <transformation id="television_desk_leg4">
+            <translate x="-2" y="2" z="-2" />
+            <scale x="1" y="4" z="1" />
+        </transformation>
+        <transformation id="television">
+            <translate x="7" y="4" z="-7" />
+            <rotate axis="y" angle="-45" />
+            <scale x="1" y="1" z="1" />
+        </transformation>
+        <transformation id="television_screen">
+            <scale x="0.5" y="2" z="2" />
+        </transformation>
+        <transformation id="television_leg">
+            <scale x="0.1" y="0.5" z="0.1" />
+        </transformation>
+        <transformation id="television_base">
+            <scale x="1" y="0.2" z="1" />
+        </transformation>
+        <transformation id="couch">
+            <translate x="-7" y="0" z="7" />
+            <rotate axis="y" angle="45" />
+        </transformation>
+        <transformation id="couch_corpse">
+            <translate x="0" y="0" z="0" />
+        </transformation>
+        <transformation id="couch_back">
+            <translate x="-1" y="0" z="1" />
+            <scale x="5" y="3" z="1" />
+        </transformation>
+        <transformation id="couch_bottom">
+            <rotate axis="x" angle="-45" />
+            <scale x="5" y="1" z="3" />
+        </transformation>
+        <transformation id="couch_side1_bot">
+            <translate x="-1.5" y="0" z="0.5" />
+            <rotate axis="y" angle="-90" />
+            <scale x="2" y="1" z="2" />
+        </transformation>
+        <transformation id="couch_side1_top">
+            <translate x="-1.5" y="2" z="0.5" />
+            <rotate axis="y" angle="-90" />
+            <scale x="2" y="1" z="2" />
+        </transformation>
+        <transformation id="couch_side2_bot">
+            <translate x="-0.5" y="0" z="1.5" />
+            <rotate axis="y" angle="90" />
+            <scale x="2" y="1" z="2" />
+        </transformation>
+        <transformation id="couch_side2_top">
+            <translate x="-0.5" y="2" z="1.5" />
+            <rotate axis="y" angle="90" />
+            <scale x="2" y="1" z="2" />
+        </transformation>
+        <transformation id="couch_pillows">
+            <translate x="0" y="0" z="0" />
+        </transformation>
+        <transformation id="couch_leg1">
+            <translate x="2" y="0" z="2" />
+            <scale x="1" y="0.2" z="1" />
+        </transformation>
+        <transformation id="couch_leg2">
+            <translate x="2" y="0" z="-2" />
+            <scale x="1" y="0.2" z="1" />
+        </transformation>
+        <transformation id="couch_leg3">
+            <translate x="-2" y="0" z="2" />
+            <scale x="1" y="0.2" z="1" />
+        </transformation>
+        <transformation id="couch_leg4">
+            <translate x="-2" y="0" z="-2" />
+            <scale x="1" y="0.2" z="1" />
+        </transformation>
+        <transformation id="chair">
+            <translate x="1" y="0" z="1" />
+            <rotate axis="x" angle="-45" />
+        </transformation>
+        <transformation id="chair_leg1">
+            <translate x="1" y="0" z="-1" />
+            <scale x="0.3" y="2" z="0.3" />
+        </transformation>
+        <transformation id="chair_leg2">
+            <translate x="-1" y="0" z="1" />
+            <scale x="0.3" y="2" z="0.3" />
+        </transformation>
+        <transformation id="chair_leg3">
+            <translate x="-1" y="0" z="-1" />
+            <scale x="0.3" y="2" z="0.3" />
+        </transformation>
+        <transformation id="chair_leg4">
+            <translate x="1" y="0" z="1" />
+            <scale x="0.3" y="2" z="0.3" />
+        </transformation>
+        <transformation id="chair_top">
+            <translate x="1" y="4" z="1" />
+            <scale x="1" y="1" z="1" />
+        </transformation>
+        <transformation id="chair_back">
+            <translate x="0" y="3.5" z="1" />
+            <rotate axis="x" angle="-90" />
+            <scale x="1.55" y="0.15" z="1" />
+        </transformation>
+        <transformation id="chair_left_back">
+            <translate x="1" y="3" z="1" />
+            <scale x="0.2" y="2" z="0.2" />
+        </transformation>
+        <transformation id="chair_right_back">
+            <translate x="-1" y="3" z="1" />
+            <scale x="0.2" y="2" z="0.2" />
+        </transformation>
+        <transformation id="table">
+            <translate x="-5" y="0" z="-5" />
+            <scale x="5" y="1" z="5" />
+        </transformation>
+        <transformation id="table_leg1">
+            <translate x="2" y="0" z="2" />
+            <scale x="0.3" y="3" z="0.3" />
+        </transformation>
+        <transformation id="table_leg2">
+            <translate x="2" y="0" z="-2" />
+            <scale x="0.3" y="3" z="0.3" />
+        </transformation>
+        <transformation id="table_leg3">
+            <translate x="-2" y="0" z="2" />
+            <scale x="0.3" y="3" z="0.3" />
+        </transformation>
+        <transformation id="table_leg4">
+            <translate x="-2" y="0" z="-2" />
+            <scale x="0.3" y="3" z="0.3" />
+        </transformation>
+        <transformation id="table_top">
+            <translate x="0" y="2" z="0" />
+            <scale x="4" y="1" z="4" />
         </transformation>
     </transformations>
 
@@ -68,26 +356,6 @@
     </primitives>
 
     <components>
-
-        <!-- Television Desk -->
-        <component id="television_desk">
-            <transformation>
-            </transformation>
-            <materials>
-                <material id="television_desk_material" />
-            </materials>
-            <texture id="television_desk_texture"/>
-            <children>
-                <componentref id="television_desk_body"/>
-                <componentref id="television_desk_leg1"/>
-                <componentref id="television_desk_leg2"/>
-                <componentref id="television_desk_leg3"/>
-                <componentref id="television_desk_leg4"/>
-                <componentref id="television"/>
-                
-            </children>
-        </component>
-
         <!-- Tall Lamp -->
         <component id="tall_lamp">
             <transformation>
@@ -103,7 +371,7 @@
         </component>
 
         <!-- Tall Lamp Body -->
-        <component id="tall_lamp">
+        <component id="tall_lamp_body">
             <transformation>
             </transformation>
             <materials>
@@ -145,7 +413,7 @@
         </component>
 
         <!-- Tall Lamp Junction -->
-        <component id="tall_lamp_vertical_pole">
+        <component id="tall_lamp_junction">
             <transformation>
             </transformation>
             <materials>
@@ -199,7 +467,6 @@
                 <componentref id="television_desk_leg3"/>
                 <componentref id="television_desk_leg4"/>
                 <componentref id="television"/>
-                
             </children>
         </component>
 
@@ -524,8 +791,8 @@
             </children>
         </component>
 
-        <!-- Couch Side -->
-        <component id="couch_side1">
+        <!-- Couch Side1 Bot-->
+        <component id="couch_side1_bot">
             <transformation>
             </transformation>
             <materials>
@@ -534,11 +801,24 @@
             <texture id="couch_texture"/>
             <children>
                 <componentref id="cube"/>
+            </children>
+        </component>
+
+        <!-- Couch Side1 Top-->
+        <component id="couch_side1_top">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="couch_material" />
+            </materials>
+            <texture id="couch_texture"/>
+            <children>
                 <componentref id="cylinder"/> 
             </children>
         </component>
 
-        <component id="couch_side2">
+        <!-- Couch Side2 Bot-->
+        <component id="couch_side2_bot">
             <transformation>
             </transformation>
             <materials>
@@ -547,7 +827,19 @@
             <texture id="couch_texture"/>
             <children>
                 <componentref id="cube"/>
-                <componentref id="cylinder"/>
+            </children>
+        </component>
+
+        <!-- Couch Side2 Top-->
+        <component id="couch_side2_top">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="couch_material" />
+            </materials>
+            <texture id="couch_texture"/>
+            <children>
+                <componentref id="cylinder"/> 
             </children>
         </component>
 
@@ -574,6 +866,7 @@
             <materials>
                 <material id="couch_material" />
             </materials>
+            <texture id="couch_texture"/>
             <children>
                 <componentref id="cube"/>
             </children>
@@ -585,6 +878,7 @@
             <materials>
                 <material id="couch_material" />
             </materials>
+            <texture id="couch_texture"/>
             <children>
                 <componentref id="cube"/>
             </children>
@@ -596,6 +890,7 @@
             <materials>
                 <material id="couch_material" />
             </materials>
+            <texture id="couch_texture"/>
             <children>
                 <componentref id="cube"/>
             </children>
@@ -607,6 +902,7 @@
             <materials>
                 <material id="couch_material" />
             </materials>
+            <texture id="couch_texture"/>
             <children>
                 <componentref id="cube"/>
             </children>
@@ -635,12 +931,12 @@
         <!-- Chair Leg -->
         <component id="chair_leg1">
             <transformation>
-                <translate x="0.7" y="1" z="0.7" />
-                <scale x="0.15" y="2" z="0.15"/>
+                <transformationref id="chair_leg1">
             </transformation>
             <materials>
                 <material id="chair_material" />
             </materials>
+            <texture id="demoTexture"/>
             <children>
                 <componentref id="cube"/>
             </children>
@@ -655,6 +951,7 @@
             <materials>
                 <material id="chair_material" />
             </materials>
+            <texture id="demoTexture"/>
             <children>
                 <componentref id="cube"/>
             </children>
@@ -669,6 +966,7 @@
             <materials>
                 <material id="chair_material" />
             </materials>
+            <texture id="demoTexture"/>
             <children>
                 <componentref id="cube"/>
             </children>
@@ -683,6 +981,7 @@
             <materials>
                 <material id="chair_material" />
             </materials>
+            <texture id="demoTexture"/>
             <children>
                 <componentref id="cube"/>
             </children>
@@ -697,6 +996,7 @@
             <materials>
                 <material id="chair_material" />
             </materials>
+            <texture id="demoTexture"/>
             <children>
                 <componentref id="cube"/>
             </children>
@@ -712,6 +1012,7 @@
             <materials>
                 <material id="chair_material" />
             </materials>
+            <texture id="demoTexture"/>
             <children>
                 <componentref id="cube"/>
             </children>
@@ -726,6 +1027,7 @@
             <materials>
                 <material id="chair_material" />
             </materials>
+            <texture id="demoTexture"/>
             <children>
                 <componentref id="cube"/>
             </children>
@@ -740,6 +1042,7 @@
             <materials>
                 <material id="chair_material" />
             </materials>
+            <texture id="demoTexture"/>
             <children>
                 <componentref id="cube"/>
             </children>
@@ -771,6 +1074,7 @@
             <materials>
                 <material id="demoMaterial" />
             </materials>
+            <texture id="demoTexture"/>
             <children>
                 <componentref id="cube"/>
             </children>
@@ -785,6 +1089,7 @@
             <materials>
                 <material id="demoMaterial" />
             </materials>
+            <texture id="demoTexture"/>
             <children>
                 <componentref id="cube"/>
             </children>
@@ -799,6 +1104,7 @@
             <materials>
                 <material id="demoMaterial" />
             </materials>
+            <texture id="demoTexture"/>
             <children>
                 <componentref id="cube"/>
             </children>
@@ -813,6 +1119,7 @@
             <materials>
                 <material id="demoMaterial" />
             </materials>
+            <texture id="demoTexture"/>
             <children>
                 <componentref id="cube"/>
             </children>
@@ -827,6 +1134,7 @@
             <materials>
                 <material id="demoMaterial" />
             </materials>
+            <texture id="demoTexture"/>
             <children>
                 <componentref id="cube"/>
             </children>
@@ -860,6 +1168,7 @@
             <materials>
                 <material id="demoMaterial" />
             </materials>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="rectangle"/>
             </children>
@@ -873,6 +1182,7 @@
             <materials>
                 <material id="demoMaterial" />
             </materials>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="rectangle"/>
             </children>
@@ -886,6 +1196,7 @@
             <materials>
                 <material id="demoMaterial" />
             </materials>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="rectangle"/>
             </children>
@@ -899,6 +1210,7 @@
             <materials>
                 <material id="demoMaterial" />
             </materials>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="rectangle"/>
             </children>
@@ -912,6 +1224,7 @@
             <materials>
                 <material id="demoMaterial" />
             </materials>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="rectangle"/>
             </children>
@@ -925,6 +1238,7 @@
             <materials>
                 <material id="demoMaterial" />
             </materials>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="rectangle"/>
             </children>

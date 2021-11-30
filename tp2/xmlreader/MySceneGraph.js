@@ -466,7 +466,7 @@ export class MySceneGraph {
         if (!oneTextureDefined)
             return "at least one texture must be defined in the textures block";
     
-        console.log("Parsed textures");
+        this.log("Parsed textures");
 
         //this.onXMLMinorError("To do: Parse textures.");
         return null;
@@ -991,6 +991,7 @@ export class MySceneGraph {
 			if (sizeChildren == 0)
 				return "at least one descendant must be defined for each intermediate node";
         }
+        this.log("Parsed components");
     }
 
 

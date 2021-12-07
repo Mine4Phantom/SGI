@@ -69,7 +69,7 @@ export class MyComponentNode extends CGFobject {
 		var newTextureID = this.textureID;
 		var newMaterialID = this.materials[0]; // To Do Change with input of key 'M'
 
-		if(newMaterialID == "null")
+		if(newMaterialID == "null" || newMaterialID == "inherit")
 			newMaterialID = currMaterialID;
 
 		if(newTextureID == "null" || newTextureID == "inherit"){

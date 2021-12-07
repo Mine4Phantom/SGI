@@ -1085,7 +1085,7 @@
                 <transformationref id="chair_leg1"/>
             </transformation>
             <materials>
-                <material id="chair_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1099,7 +1099,7 @@
                 <transformationref id="chair_leg2"/>
             </transformation>
             <materials>
-                <material id="chair_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1113,7 +1113,7 @@
                 <transformationref id="chair_leg3"/>
             </transformation>
             <materials>
-                <material id="chair_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1127,7 +1127,7 @@
                 <transformationref id="chair_leg4"/>
             </transformation>
             <materials>
-                <material id="chair_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1141,7 +1141,7 @@
                 <transformationref id="chair_top"/>
             </transformation>
             <materials>
-                <material id="chair_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1155,7 +1155,7 @@
                 <transformationref id="chair_back"/>
             </transformation>
             <materials>
-                <material id="chair_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1169,7 +1169,7 @@
                 <transformationref id="chair_left_back"/>
             </transformation>
             <materials>
-                <material id="chair_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1183,7 +1183,7 @@
                 <transformationref id="chair_right_back"/>
             </transformation>
             <materials>
-                <material id="chair_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1215,7 +1215,7 @@
                 <transformationref id="table_leg1"/>
             </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1229,7 +1229,7 @@
                 <transformationref id="table_leg2"/>
             </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1243,7 +1243,7 @@
                 <transformationref id="table_leg3"/>
             </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1257,7 +1257,7 @@
                 <transformationref id="table_leg4"/>
             </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1271,7 +1271,7 @@
                 <transformationref id="table_top"/>
             </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1284,7 +1284,7 @@
             <transformation>
             </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1305,7 +1305,7 @@
                 <transformationref id="cube_face1"/>
             </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1318,7 +1318,7 @@
                 <transformationref id="cube_face2"/>
             </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1331,7 +1331,7 @@
                 <transformationref id="cube_face3"/>
             </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1344,7 +1344,7 @@
                 <transformationref id="cube_face4"/>
             </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1357,7 +1357,7 @@
                 <transformationref id="cube_face5"/>
             </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1370,7 +1370,7 @@
                 <transformationref id="cube_face6"/>
             </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>

@@ -911,10 +911,12 @@ export class MySceneGraph {
             var sizeMaterials = 0;
             for (var j = 0; j < materials.length; j++){
                 var materialID = this.reader.getString(materials[j], 'id');
-                if (materialID == null )
-                    return "unable to parse material ID (node ID = " + componentID + ")";
-                if (materialID != "null" && this.materials[materialID] == null )
-                    return "ID does not correspond to a valid material (node ID = " + componentID + ")";
+                if(materialID != "inherit"){
+                    if (materialID == null )
+                        return "unable to parse material ID (node ID = " + componentID + ")";
+                    if (materialID != "null" && this.materials[materialID] == null )
+                        return "ID does not correspond to a valid material (node ID = " + componentID + ")";
+                }
                 this.components[componentID].addMaterial(materialID);
                 sizeMaterials++;
             }

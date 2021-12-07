@@ -67,7 +67,11 @@ export class MyComponentNode extends CGFobject {
 		this.scene.multMatrix(this.transformMatrix);
 
 		var newTextureID = this.textureID;
-		var newMaterialID = this.materials[0]; // To Do Change with input of key 'M'
+		var newMaterialID;
+		if(this.graph.currentMaterialIndex<this.materials.length)
+			newMaterialID = this.materials[this.graph.currentMaterialIndex]; // To Do Change with input of key 'M'
+		else
+			newMaterialID = this.materials[0];
 
 		if(newMaterialID == "null" || newMaterialID == "inherit")
 			newMaterialID = currMaterialID;
@@ -79,9 +83,9 @@ export class MyComponentNode extends CGFobject {
 		}
 
 		this.displayPrimitives(newTextureID,newMaterialID);
-
 		
 		for(var j=0; j < this.children.length; j++){
+			
 			this.graph.components[this.children[j]].display(newTextureID,newMaterialID);
 		}
 

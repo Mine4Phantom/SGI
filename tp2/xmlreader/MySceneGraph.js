@@ -38,6 +38,7 @@ export class MySceneGraph {
         this.nodes = [];
 
         this.idRoot = null;                    // The id of the root element.
+        this.currentMaterialIndex = 0;          // Changed with M/m Key
 
         this.axisCoords = [];
         this.axisCoords['x'] = [1, 0, 0];
@@ -468,7 +469,6 @@ export class MySceneGraph {
     
         this.log("Parsed textures");
 
-        //this.onXMLMinorError("To do: Parse textures.");
         return null;
     }
 
@@ -603,8 +603,6 @@ export class MySceneGraph {
             this.materials[materialID] = newMaterial;
             oneMaterialDefined = true;
 
-            //Continue here
-            //this.onXMLMinorError("To do: Parse materials.");
         }
 
 
@@ -929,7 +927,7 @@ export class MySceneGraph {
 				return "texture must be defined (node ID = " + componentID + ")";
 			var textureID = this.reader.getString(grandChildren[textureIndex], 'id');
             if(textureID != "inherit"){
-                if (textureID == null ) //To Do deal with id = null or inherit or none
+                if (textureID == null ) //To Do  none
 				    return "unable to parse texture ID (node ID = " + componentID + ")";
 			    if (textureID != "null" && textureID != "clear" && this.textures[textureID] == null )
 				    return "ID does not correspond to a valid texture (node ID = " + componentID + ")";
@@ -1119,6 +1117,14 @@ export class MySceneGraph {
         console.log("   " + message);
     }
 
+    checkKeys() {
+        if (this.gui.isKeyPressed("KeyM")) {
+            console.log("M Pressed")
+            this.currentMaterialIndex +=1;
+        }
+    }
+
+
     /**
      * Displays the scene, processing each node, starting in the root node.
      */
@@ -1129,6 +1135,7 @@ export class MySceneGraph {
         //this.primitives['demoRectangle'].display();
         //this.primitives['demoTriangle'].display();
         //this.primitives['demoCylinder'].display();
+        //this.checkKeys();
         this.components['root'].display();
     }
 }

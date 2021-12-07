@@ -926,12 +926,21 @@ export class MySceneGraph {
 			if (textureIndex == -1)
 				return "texture must be defined (node ID = " + componentID + ")";
 			var textureID = this.reader.getString(grandChildren[textureIndex], 'id');
-			if (textureID == null )
+			if (textureID == null ) //To Do deal with id = null
 				return "unable to parse texture ID (node ID = " + componentID + ")";
 			if (textureID != "null" && textureID != "clear" && this.textures[textureID] == null )
 				return "ID does not correspond to a valid texture (node ID = " + componentID + ")";
 
+			var textureS = this.reader.getString(grandChildren[textureIndex], 'id');
+			if (textureS == null ) //To Do deal with id = null
+				return "unable to parse texture length_s (node ID = " + componentID + ")";
+			var textureT = this.reader.getString(grandChildren[textureIndex], 'id');
+			if (textureT == null ) //To Do deal with id = null
+				return "unable to parse texture length_t (node ID = " + componentID + ")";
+
             this.components[componentID].textureID = textureID;
+            this.components[componentID].textureS = textureS;
+            this.components[componentID].textureT = textureT;
 
 
 			// Transformation ID

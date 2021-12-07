@@ -38,5 +38,11 @@
      display(currTextureID, currMaterialID) {
         this.graph.primitives[this.nodeID].display(currTextureID,currMaterialID)
      }
+
+
+     updateTexCoords(factor_s, factor_t) {
+        //if(this.nodeID == "rectangle" || this.nodeID == "triangle")
+          //  this.graph.primitives[this.nodeID].updateTexCoords(factor_s,factor_t);
+   }
  
  }

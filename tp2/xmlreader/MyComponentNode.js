@@ -26,6 +26,8 @@ export class MyComponentNode extends CGFobject {
 
 		// The texture ID.
 		this.textureID = null ;
+		this.textureS = null;
+		this.textureT = null;
 
 		this.transformMatrix = mat4.create();
 		mat4.identity(this.transformMatrix);
@@ -95,6 +97,10 @@ export class MyComponentNode extends CGFobject {
 			this.graph.textures[newTextureID].bind();
 
 		for(var i=0;i < this.primitives.length;i++){
+			if(newTextureID != "clear" && newTextureID != null){
+				this.primitives[i].updateTexCoords(this.textureS,this.textureT);
+			}
+
 			this.primitives[i].display();
 		}
 	}

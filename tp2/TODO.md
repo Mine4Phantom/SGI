@@ -16,7 +16,7 @@
 
 * Sempre que id="inherit" ou id="none", os parametros length_s e length_t não devem incluir-se na instrucao.
 
-* Change material on 'M' Key
+* Change material on 'M' Key -> Miguel
 
 * Transformations inside components
 

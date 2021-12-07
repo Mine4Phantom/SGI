@@ -72,8 +72,8 @@ export class MyComponentNode extends CGFobject {
 		if(newMaterialID == "null")
 			newMaterialID = currMaterialID;
 
-		if(newTextureID == "null"){
-			if(currTextureID != "null"){
+		if(newTextureID == "null" || newTextureID == "inherit"){
+			if(currTextureID != "null" && currTextureID != "none"){
 				newTextureID = currTextureID;
 			}
 		}

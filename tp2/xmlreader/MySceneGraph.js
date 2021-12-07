@@ -926,10 +926,12 @@ export class MySceneGraph {
 			if (textureIndex == -1)
 				return "texture must be defined (node ID = " + componentID + ")";
 			var textureID = this.reader.getString(grandChildren[textureIndex], 'id');
-			if (textureID == null ) //To Do deal with id = null
-				return "unable to parse texture ID (node ID = " + componentID + ")";
-			if (textureID != "null" && textureID != "clear" && this.textures[textureID] == null )
-				return "ID does not correspond to a valid texture (node ID = " + componentID + ")";
+            if(textureID != "inherit"){
+                if (textureID == null ) //To Do deal with id = null or inherit or none
+				    return "unable to parse texture ID (node ID = " + componentID + ")";
+			    if (textureID != "null" && textureID != "clear" && this.textures[textureID] == null )
+				    return "ID does not correspond to a valid texture (node ID = " + componentID + ")";
+            }
 
 			var textureS = this.reader.getString(grandChildren[textureIndex], 'id');
 			if (textureS == null ) //To Do deal with id = null

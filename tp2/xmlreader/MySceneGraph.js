@@ -951,13 +951,46 @@ export class MySceneGraph {
 				return "transformation must be defined (node ID = " + componentID + ")";
             var transformationsList = grandChildren[transformationIndex].children // each material
             for (var j = 0; j < transformationsList.length; j++){
-                var transformationID = this.reader.getString(transformationsList[j], 'id');
-                if (transformationID == null )
-                    return "unable to parse transformation ID (node ID = " + componentID + ")";
-                if (transformationID != "null" && transformationID != "clear" && this.transformations[transformationID] == null )
-                    return "ID does not correspond to a valid transformation (node ID = " + componentID + ")";
-                this.components[componentID].transformMatrix = this.transformations[transformationID]; // To Do Append instead of substitute since now it only takes into account the last one
+                switch (transformationsList[j].nodeName) {
+                    case 'transformationref':
+                        var transformationID = this.reader.getString(transformationsList[j], 'id');
+                        if (transformationID == null )
+                            return "unable to parse transformation ID (node ID = " + componentID + ")";
+                        if (transformationID != "null" && transformationID != "clear" && this.transformations[transformationID] == null )
+                            return "ID does not correspond to a valid transformation (node ID = " + componentID + ")";
+                        mat4.multiply(this.components[componentID].transformMatrix, this.components[componentID].transformMatrix, this.transformations[transformationID]);
+                        break;
+
+                    case 'translate':
+                        var coordinates = this.parseCoordinates3D(transformationsList[j], "translate transformation for ID " + transformationID);
+                        if (!Array.isArray(coordinates))
+                            return coordinates;
+
+                        mat4.translate(this.components[componentID].transformMatrix, this.components[componentID].transformMatrix, coordinates);
+                        break;
+                    case 'scale':                        
+                        var coordinates = this.parseCoordinates3D(transformationsList[j], "scale transformation for ID " + transformationID);
+                        if (!Array.isArray(coordinates))
+                            return coordinates;
+
+                        mat4.scale(this.components[componentID].transformMatrix, this.components[componentID].transformMatrix, coordinates);
+                        break;
+                    case 'rotate':
+                        var axis = this.reader.getItem(transformationsList[j], 'axis', ['x', 'y', 'z']);
+                        if (axis == null)
+                            return "unable to parse axis of the " + "rotate transformation for ID " + transformationID;
+
+                        var angle = this.reader.getFloat(transformationsList[j], 'angle');
+                        if (!(angle != null && !isNaN(angle)))
+                            return "unable to parse angle of the " + "rotate transformation for ID " + transformationID;
+
+                        mat4.rotate(this.components[componentID].transformMatrix, this.components[componentID].transformMatrix, angle * DEGREE_TO_RAD, this.axisCoords[axis]);
+                        break;
+                }
+
             }
+
+
 
             
 

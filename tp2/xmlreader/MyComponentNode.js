@@ -71,14 +71,12 @@ export class MyComponentNode extends CGFobject {
 
 		newMaterialID = this.materials[this.graph.currentMaterialIndex % this.materials.length]; // loop the material
 
-		if(newMaterialID == "null" || newMaterialID == "inherit")
+		if(newMaterialID == "inherit")
 			newMaterialID = currMaterialID;
 
-		if(newTextureID == "null" || newTextureID == "inherit"){
-			if(currTextureID != "null" && currTextureID != "none"){
-				newTextureID = currTextureID;
-			}
-		}
+		if(newTextureID == "inherit")
+			newTextureID = currTextureID;
+		
 
 		this.displayPrimitives(newTextureID,newMaterialID);
 		
@@ -92,14 +90,15 @@ export class MyComponentNode extends CGFobject {
 
 	displayPrimitives(newTextureID, newMaterialID) {
 
-		if(newMaterialID != null && newMaterialID != "null")
-			this.graph.materials[newMaterialID].apply();
+		this.graph.materials[newMaterialID].apply();
 
-		if(newTextureID != "clear" && newTextureID != null)
+		if(newTextureID != "none")
 			this.graph.textures[newTextureID].bind();
+		else
+			this.graph.textures["demoTexture"].unbind();
 
 		for(var i=0;i < this.primitives.length;i++){
-			if(newTextureID != "clear" && newTextureID != null){
+			if(newTextureID != "none" && newTextureID != null){
 				this.primitives[i].updateTexCoords(this.textureS,this.textureT);
 			}
 

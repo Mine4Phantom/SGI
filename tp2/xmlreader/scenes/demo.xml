@@ -571,6 +571,9 @@
             </transformation>
             <materials>
                 <material id="tall_lamp_material" />
+              
+                <material id="demoMaterialBlue" />
+                <material id="demoMaterialGreen" />
             </materials>
             <texture id="tall_lamp_texture"/>
             <children>
@@ -585,7 +588,7 @@
                 <transformationref id="tall_lamp_body"/>
             </transformation>
             <materials>
-                <material id="tall_lamp_material" />
+                <material id="inherit" />
             </materials>
             <texture id="tall_lamp_texture"/>
             <children>
@@ -602,10 +605,11 @@
                 <transformationref id="tall_lamp_base"/>
             </transformation>
             <materials>
-                <material id="tall_lamp_material" />
+               <!-- <material id="inherit" />-->
+               <material id="demoMaterialGreen" />
                 <material id="demoMaterial" />
                 <material id="demoMaterialBlue" />
-                <material id="demoMaterialGreen" />
+             
                 
             </materials>
             <texture id="tall_lamp_texture"/>
@@ -620,7 +624,7 @@
                 <transformationref id="tall_lamp_vertical_pole"/>
             </transformation>
             <materials>
-                <material id="tall_lamp_material" />
+                <material id="inherit" />
             </materials>
             <texture id="tall_lamp_texture"/>
             <children>
@@ -634,7 +638,7 @@
                 <transformationref id="tall_lamp_junction"/>
             </transformation>
             <materials>
-                <material id="tall_lamp_material" />
+                <material id="inherit" />
             </materials>
             <texture id="tall_lamp_texture"/>
             <children>
@@ -648,7 +652,7 @@
                 <transformationref id="tall_lamp_horizontal_pole"/>
             </transformation>
             <materials>
-                <material id="tall_lamp_material" />
+                <material id="inherit" />
             </materials>
             <texture id="tall_lamp_texture"/>
             <children>
@@ -662,7 +666,7 @@
                 <transformationref id="tall_lamp_abajur"/>
             </transformation>
             <materials>
-                <material id="tall_lamp_abajur_material" />
+                <material id="inherit" />
             </materials>
             <texture id="tall_lamp_abajur_texture"/>
             <children>

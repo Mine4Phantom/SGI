@@ -30,6 +30,7 @@ export class XMLscene extends CGFscene {
         this.initCameras();
 
         this.enableTextures(true);
+        this.setUpdatePeriod(3);
 
         this.gl.clearDepth(100.0);
         this.gl.enable(this.gl.DEPTH_TEST);
@@ -104,6 +105,10 @@ export class XMLscene extends CGFscene {
         this.initLights();
         
         this.sceneInited = true;
+    }
+
+    update(t){
+        this.graph.checkKeys();
     }
 
     /**

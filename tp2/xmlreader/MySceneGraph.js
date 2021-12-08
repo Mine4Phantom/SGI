@@ -1118,12 +1118,11 @@ export class MySceneGraph {
     }
 
     checkKeys() {
-        if (this.gui.isKeyPressed("KeyM")) {
+        if (this.scene.gui.isKeyPressed("KeyM")) {
             console.log("M Pressed")
             this.currentMaterialIndex +=1;
         }
     }
-
 
     /**
      * Displays the scene, processing each node, starting in the root node.
@@ -1134,8 +1133,7 @@ export class MySceneGraph {
         //To test the parsing/creation of the primitives, call the display function directly
         //this.primitives['demoRectangle'].display();
         //this.primitives['demoTriangle'].display();
-        //this.primitives['demoCylinder'].display();
-        //this.checkKeys();
+        //this.primitives['demoCylinder'].display();    
         this.components['root'].display();
     }
 }

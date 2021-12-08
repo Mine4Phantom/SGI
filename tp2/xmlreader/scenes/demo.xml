@@ -40,7 +40,7 @@
         <texture id="chair_texture" file="bank.jpg" />
         <texture id="television_texture" file="vidral.jpg" />
         <texture id="couch_texture" file="vidral.jpg" />
-        <texture id="demoTexture" file="rocks.jpg" />
+        <texture id="demoTexture" file="rocks.jpg" /> <!-- Do not delete, needed for 'none' texture -->
         <texture id="demoTexture2" file="leaves.jpg" />
     </textures>
 
@@ -450,7 +450,7 @@
             <materials>
                 <material id="demoMaterial" />
             </materials>
-            <texture id="demoTexture"/>
+            <texture id="demoTexture" length_s="1" length_t="2"/>
             <children>
                 <componentref id="tall_lamp" />-->
                 <!--<componentref id="television_desk" />-->
@@ -469,7 +469,7 @@
             <materials>
                 <material id="tall_lamp_material" />
             </materials>
-            <texture id="tall_lamp_texture"/>
+            <texture id="tall_lamp_texture" length_s="1" length_t="2"/>
             <children>
                 <componentref id="floor"/>
                 <componentref id="ceiling"/>
@@ -488,7 +488,7 @@
             <materials>
                 <material id="tall_lamp_material" />
             </materials>
-            <texture id="tall_lamp_texture"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="rectangle"/>
             </children>
@@ -502,7 +502,7 @@
             <materials>
                 <material id="tall_lamp_material" />
             </materials>
-            <texture id="tall_lamp_texture"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id= "rectangle"/>
             </children>
@@ -516,7 +516,7 @@
             <materials>
                 <material id="tall_lamp_material" />
             </materials>
-            <texture id="tall_lamp_texture"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id= "rectangle"/>
             </children>
@@ -530,7 +530,7 @@
             <materials>
                 <material id="tall_lamp_material" />
             </materials>
-            <texture id="tall_lamp_texture"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id= "rectangle"/>
             </children>
@@ -544,7 +544,7 @@
             <materials>
                 <material id="tall_lamp_material" />
             </materials>
-            <texture id="tall_lamp_texture"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id= "rectangle"/>
             </children>
@@ -558,7 +558,7 @@
             <materials>
                 <material id="tall_lamp_material" />
             </materials>
-            <texture id="tall_lamp_texture"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id= "rectangle"/>
             </children>
@@ -575,7 +575,7 @@
                 <material id="demoMaterialBlue" />
                 <material id="demoMaterialGreen" />
             </materials>
-            <texture id="tall_lamp_texture"/>
+            <texture id="tall_lamp_texture" length_s="1" length_t="2"/>
             <children>
                 <componentref id="tall_lamp_body"/>
                 <componentref id="tall_lamp_abajur"/>
@@ -590,7 +590,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="tall_lamp_texture"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="tall_lamp_base"/>
                 <componentref id="tall_lamp_vertical_pole"/>
@@ -605,14 +605,13 @@
                 <transformationref id="tall_lamp_base"/>
             </transformation>
             <materials>
-               <!-- <material id="inherit" />-->
-               <material id="demoMaterialGreen" />
+                <material id="inherit" />
+                <material id="demoMaterialGreen" />
                 <material id="demoMaterial" />
                 <material id="demoMaterialBlue" />
-             
-                
+    
             </materials>
-            <texture id="tall_lamp_texture"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="cylinder"/> <!-- Almost flat cylinder as base -->
             </children>
@@ -626,7 +625,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="tall_lamp_texture"/>
+            <texture id="none"/>
             <children>
                 <primitiveref id="cylinder"/>
             </children>
@@ -640,7 +639,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="tall_lamp_texture"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="sphere"/>
             </children>
@@ -654,7 +653,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="tall_lamp_texture"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="cylinder"/>
             </children>
@@ -668,7 +667,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="tall_lamp_abajur_texture"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="cylinder"/>
             </children>
@@ -682,7 +681,7 @@
             <materials>
                 <material id="television_desk_material" />
             </materials>
-            <texture id="television_desk_texture"/>
+            <texture id="television_desk_texture" length_s="1" length_t="2"/>
             <children>
                 <componentref id="television_desk_body"/>
                 <componentref id="television_desk_leg1"/>
@@ -699,9 +698,9 @@
                 <transformationref id="television_desk_body"/>
             </transformation>
             <materials>
-                <material id="television_desk_material" />
+                <material id="inherit" />
             </materials>
-            <texture id="television_desk_texture"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="television_desk_body_top"/> <!-- Will have a shelf with books -->
                 <componentref id="television_desk_body_bottom"/>
@@ -722,9 +721,9 @@
                 <transformationref id="television_desk_body_top"/>
             </transformation>
             <materials>
-                <material id="television_desk_material" />
+                <material id="inherit" />
             </materials>
-            <texture id="television_desk_texture"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="book"/>
             </children>
@@ -736,9 +735,9 @@
                 <transformationref id="television_desk_body_bottom"/>
             </transformation>
             <materials>
-                <material id="television_desk_material" />
+                <material id="inherit" />
             </materials>
-            <texture id="television_desk_texture"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="cube"/>
             </children>
@@ -749,9 +748,9 @@
                 <transformationref id="television_desk_body_left"/>
             </transformation>
             <materials>
-                <material id="television_desk_material" />
+                <material id="inherit" />
             </materials>
-            <texture id="television_desk_texture"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="cube"/>
             </children>
@@ -762,9 +761,9 @@
                 <transformationref id="television_desk_body_right"/>
             </transformation>
             <materials>
-                <material id="television_desk_material" />
+                <material id="inherit" />
             </materials>
-            <texture id="television_desk_texture"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="cube"/>
             </children>
@@ -776,9 +775,9 @@
                 <transformationref id="television_desk_body_book1"/>
             </transformation>
             <materials>
-                <material id="book_material" />
+                <material id="inherit" />
             </materials>
-            <texture id="book_texture"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="cube"/>
             </children>
@@ -789,9 +788,9 @@
                 <transformationref id="television_desk_body_book2"/>
             </transformation>
             <materials>
-                <material id="book_material" />
+                <material id="inherit" />
             </materials>
-            <texture id="book_texture"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="book"/>
             </children>
@@ -802,9 +801,9 @@
                 <transformationref id="television_desk_body_book3"/>
             </transformation>
             <materials>
-                <material id="book_material" />
+                <material id="inherit" />
             </materials>
-            <texture id="book_texture"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="book"/>
             </children>
@@ -815,9 +814,9 @@
                 <transformationref id="television_desk_body_book4"/>
             </transformation>
             <materials>
-                <material id="book_material" />
+                <material id="inherit" />
             </materials>
-            <texture id="book_texture"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="book"/>
             </children>
@@ -831,7 +830,7 @@
             <materials>
                 <material id="book_material" />
             </materials>
-            <texture id="book_texture"/>
+            <texture id="book_texture" length_s="1" length_t="2"/>
             <children>
                 <componentref id="book_cover"/>
                 <componentref id="book_pages"/>
@@ -844,7 +843,7 @@
                 <transformationref id="book_cover"/>
             </transformation>
             <materials>
-                <material id="book_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -860,7 +859,7 @@
                 <transformationref id="book_front_cover"/>
             </transformation>
             <materials>
-                <material id="book_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -874,7 +873,7 @@
                 <transformationref id="book_back_cover"/>
             </transformation>
             <materials>
-                <material id="book_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -888,7 +887,7 @@
                 <transformationref id="book_middle_cover"/>
             </transformation>
             <materials>
-                <material id="book_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -902,7 +901,7 @@
                 <transformationref id="book_pages"/>
             </transformation>
             <materials>
-                <material id="book_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -917,7 +916,7 @@
                 <transformationref id="television_desk_leg1"/>
             </transformation>
             <materials>
-                <material id="television_desk_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -931,7 +930,7 @@
                 <transformationref id="television_desk_leg2"/>
             </transformation>
             <materials>
-                <material id="television_desk_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -945,7 +944,7 @@
                 <transformationref id="television_desk_leg3"/>
             </transformation>
             <materials>
-                <material id="television_desk_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -959,7 +958,7 @@
                 <transformationref id="television_desk_leg4"/>
             </transformation>
             <materials>
-                <material id="television_desk_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -976,7 +975,7 @@
             <materials>
                 <material id="television_material" />
             </materials>
-            <texture id="television_texture"/>
+            <texture id="television_texture" length_s="1" length_t="2"/>
             <children>
                 <componentref id="television_screen"/>
                 <componentref id="television_leg"/>
@@ -990,7 +989,7 @@
                 <transformationref id="television_screen"/>
             </transformation>
             <materials>
-                <material id="television_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1005,7 +1004,7 @@
                 <transformationref id="television_leg"/>
             </transformation>
             <materials>
-                <material id="television_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1019,7 +1018,7 @@
                 <transformationref id="television_base"/>
             </transformation>
             <materials>
-                <material id="television_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1035,7 +1034,7 @@
             <materials>
                 <material id="couch_material" />
             </materials>
-            <texture id="couch_texture"/>
+            <texture id="couch_texture" length_s="1" length_t="2"/>
             <children>
                 <componentref id="couch_corpse"/>
                 <componentref id="couch_pillows"/>
@@ -1052,7 +1051,7 @@
                 <transformationref id="couch_corpse"/>
             </transformation>
             <materials>
-                <material id="couch_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1069,7 +1068,7 @@
                 <transformationref id="couch_back"/>
             </transformation>
             <materials>
-                <material id="couch_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1083,7 +1082,7 @@
                 <transformationref id="couch_bottom"/>
             </transformation>
             <materials>
-                <material id="couch_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1097,7 +1096,7 @@
                 <transformationref id="couch_side1_bot"/>
             </transformation>
             <materials>
-                <material id="couch_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1111,7 +1110,7 @@
                 <transformationref id="couch_side1_top"/>
             </transformation>
             <materials>
-                <material id="couch_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1125,7 +1124,7 @@
                 <transformationref id="couch_side2_bot"/>
             </transformation>
             <materials>
-                <material id="couch_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1139,7 +1138,7 @@
                 <transformationref id="couch_side2_top"/>
             </transformation>
             <materials>
-                <material id="couch_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1153,7 +1152,7 @@
                 <transformationref id="couch_pillows"/>
             </transformation>
             <materials>
-                <material id="couch_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1170,7 +1169,7 @@
                 <transformationref id="couch_leg1"/>
             </transformation>
             <materials>
-                <material id="couch_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1183,7 +1182,7 @@
                 <transformationref id="couch_leg2"/>
             </transformation>
             <materials>
-                <material id="couch_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1196,7 +1195,7 @@
                 <transformationref id="couch_leg3"/>
             </transformation>
             <materials>
-                <material id="couch_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1209,7 +1208,7 @@
                 <transformationref id="couch_leg4"/>
             </transformation>
             <materials>
-                <material id="couch_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1225,7 +1224,7 @@
             <materials>
                 <material id="chair_material" />
             </materials>
-            <texture id="chair_texture"/>
+            <texture id="chair_texture" length_s="1" length_t="2"/>
             <children>
                 <componentref id="chair_leg1"/>
                 <componentref id="chair_leg2"/>
@@ -1358,7 +1357,7 @@
             <materials>
                 <material id="demoMaterial" />
             </materials>
-            <texture id="table_texture"/>
+            <texture id="table_texture" length_s="1" length_t="2"/>
             <children>
                 <componentref id="table_leg1"/>
                 <componentref id="table_leg2"/>

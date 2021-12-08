@@ -266,6 +266,19 @@ export class MySceneGraph {
      * @param {view block element} viewsNode
      */
     parseView(viewsNode) {
+
+        var children = viewsNode.children;
+        this.perspective = [];
+        this.ortho = [];
+
+        var nodeNames = [];
+
+        for (var i = 0; i < children.length; i++)
+            nodeNames.push(children[i].nodeName);
+
+        var perspectiveIndex = nodeNames.indexOf("perspective");
+        var orthoIndex = nodeNames.indexOf("ortho");
+
         this.onXMLMinorError("To do: Parse views and create cameras.");
 
         return null;

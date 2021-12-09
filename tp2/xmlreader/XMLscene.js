@@ -46,6 +46,8 @@ export class XMLscene extends CGFscene {
      */
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(35, 35, 35), vec3.fromValues(0, 0, 0));
+
+        
     }
     /**
      * Initializes the scene lights with the values read from the XML file.
@@ -103,6 +105,17 @@ export class XMLscene extends CGFscene {
         this.setGlobalAmbientLight(this.graph.ambient[0], this.graph.ambient[1], this.graph.ambient[2], this.graph.ambient[3]);
 
         this.initLights();
+
+        //Set camera
+        var nodeNames = [];
+        for (var i = 0; i < this.graph.cameras.length; i++)
+            nodeNames.push(this.graph.cameras[i][0]);
+        var defaultIndex = nodeNames.indexOf(this.graph.defaultView);
+        this.camera = this.graph.cameras[defaultIndex][1]
+        console.log(this.graph.cameras)
+        console.log(this.graph.defaultView)
+        console.log(defaultIndex)
+        console.log(this.graph.cameras[defaultIndex][1])
         
         this.sceneInited = true;
     }

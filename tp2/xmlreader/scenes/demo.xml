@@ -119,7 +119,7 @@
 
     <transformations>
         <transformation id="tall_lamp">
-            <translate x="-4" y="0" z="-4" />
+            <translate x="-10" y="0.1" z="-6" />
         </transformation>
         <transformation id="tall_lamp_body">
             <translate x="0" y="0" z="0" />
@@ -148,94 +148,117 @@
             <scale x="0.3" y="0.3" z="0.3" />
         </transformation>
         <transformation id="television_desk">
-            <translate x="7" y="0" z="-7" />
-            <rotate axis="y" angle="-45" />
+            <translate x="12" y="0" z="0" />
+            <rotate axis="y" angle="-90" />
         </transformation>
         <transformation id="television_desk_body">
-            <translate x="0" y="3" z="0" />
-            <rotate axis="x" angle="-45" />
-            <scale x="5" y="1" z="5" />
+            <translate x="0" y="-0.2" z="0" />
+            <scale x="1" y="1" z="1" />
         </transformation>
         <!-- Isto vai ter de ser feito a olhar para o display-->
         <transformation id="television_desk_body_book1">
-            <translate x="4" y="0" z="4" />
-            <rotate axis="x" angle="-45" />
-            <scale x="1" y="1" z="1" />
+            <translate x="3" y="1.6" z="1" />
+            <rotate axis="y" angle="90" />
+            <scale x="1" y="1.1" z="1" />
         </transformation>
         <transformation id="television_desk_body_book2">
-            <translate x="4" y="0" z="4" />
-            <rotate axis="x" angle="-45" />
-            <scale x="1" y="1" z="1" />
+            <translate x="2.7" y="1.6" z="1" />
+            <rotate axis="z" angle="-3" />
+            <rotate axis="y" angle="90" />
+            <scale x="1" y="0.9" z="1" />
         </transformation>
         <transformation id="television_desk_body_book3">
-            <translate x="4" y="0" z="4" />
-            <rotate axis="x" angle="-45" />
+            <translate x="2.4" y="1.6" z="1" />
+            <rotate axis="z" angle="-6" />
+            <rotate axis="y" angle="90" />
             <scale x="1" y="1" z="1" />
         </transformation>
         <transformation id="television_desk_body_book4">
-            <translate x="4" y="0" z="4" />
-            <rotate axis="x" angle="-45" />
+            <translate x="2.1" y="1.6" z="1" />
+            <rotate axis="z" angle="-10" />
+            <rotate axis="y" angle="90" />
+            <scale x="1" y="1.1" z="1" />
+        </transformation>
+        <transformation id="television_desk_legs">
+            <translate x="0" y="0.35" z="0" />
             <scale x="1" y="1" z="1" />
+        </transformation>
+        <transformation id="television_desk_leg1">
+            <translate x="2.5" y="0" z="1.5" />
+            <scale x="0.3" y="0.7" z="0.3" />
+        </transformation>
+        <transformation id="television_desk_leg2">
+            <translate x="2.5" y="0" z="-1.5" />
+            <scale x="0.3" y="0.7" z="0.3" />
+        </transformation>
+        <transformation id="television_desk_leg3">
+            <translate x="-2.5" y="0" z="1.5" />
+            <scale x="0.3" y="0.7" z="0.3" />
+        </transformation>
+        <transformation id="television_desk_leg4">
+            <translate x="-2.5" y="0" z="-1.5" />
+            <scale x="0.3" y="0.7" z="0.3" />
+        </transformation>
+        <transformation id="television_desk_body_top">
+            <translate x="0" y="3" z="0" />
+            <scale x="7" y= "0.4" z= "4"/>
+        </transformation>
+        <transformation id="television_desk_body_bottom">
+            <translate x="0" y="1" z="0" />
+            <scale x="7" y= "0.4" z= "4"/>
+        </transformation>
+        <transformation id="television_desk_body_left">
+            <translate x="3.3" y="2" z="0" />
+            <rotate axis="y" angle="90" />
+            <scale x="4" y= "1.6" z= "0.4"/>
+        </transformation>
+        <transformation id="television_desk_body_right">
+            <translate x="-3.3" y="2" z="0" />
+            <rotate axis="y" angle="90" />
+            <scale x="4" y= "1.6" z= "0.4"/>
+        </transformation>
+        <transformation id="television_desk_body_back">
+            <translate x="0" y="2" z="-1.8" />
+            <scale x="6.6" y= "1.6" z= "0.4"/>
         </transformation>
         <transformation id="book">
-            <translate x="4" y="0" z="4" />
-            <rotate axis="x" angle="-45" />
-            <scale x="1" y="1" z="1" />
+            <translate x="0" y="0" z="0" />
+        </transformation>
+        <transformation id="book_pages">
+            <translate x="0" y="0" z="0" />
+            <scale x="0.6" y="0.8" z="0.2" />
         </transformation>
         <transformation id="book_cover">
-            <translate x="4" y="0" z="4" />
-            <rotate axis="x" angle="-45" />
+            <translate x="0" y="0" z="0" />
             <scale x="1" y="1" z="1" />
         </transformation>
         <transformation id="book_front_cover">
-            <translate x="4" y="0" z="4" />
-            <rotate axis="x" angle="-45" />
-            <scale x="1" y="1" z="1" />
+            <translate x="0.025" y="0" z="0.1" />
+            <scale x="0.65" y="0.8" z="0.01" />
         </transformation>
         <transformation id="book_back_cover">
-            <translate x="4" y="0" z="4" />
-            <rotate axis="x" angle="-45" />
-            <scale x="1" y="1" z="1" />
+            <translate x="0.025" y="0" z="-0.1" />
+            <scale x="0.65" y="0.8" z="0.01" />
         </transformation>
         <transformation id="book_middle_cover">
-            <translate x="4" y="0" z="4" />
-            <rotate axis="x" angle="-45" />
-            <scale x="1" y="1" z="1" />
-        </transformation>
-        <transformation id="book_pages">
-            <translate x="4" y="0" z="4" />
-            <rotate axis="x" angle="-45" />
-            <scale x="5" y="1" z="5" />
-        </transformation>
-        <transformation id="television_desk_leg1">
-            <translate x="2" y="2" z="2" />
-            <scale x="1" y="4" z="1" />
-        </transformation>
-        <transformation id="television_desk_leg2">
-            <translate x="2" y="2" z="-2" />
-            <scale x="1" y="4" z="1" />
-        </transformation>
-        <transformation id="television_desk_leg3">
-            <translate x="-2" y="2" z="2" />
-            <scale x="1" y="4" z="1" />
-        </transformation>
-        <transformation id="television_desk_leg4">
-            <translate x="-2" y="2" z="-2" />
-            <scale x="1" y="4" z="1" />
+            <translate x="-0.3" y="0" z="0" />
+            <scale x="0.01" y="0.8" z="0.2" />
         </transformation>
         <transformation id="television">
-            <translate x="7" y="4" z="-7" />
-            <rotate axis="y" angle="-45" />
+            <translate x="0" y="5" z="0" />
             <scale x="1" y="1" z="1" />
         </transformation>
         <transformation id="television_screen">
-            <scale x="0.5" y="2" z="2" />
+            <translate x="0" y="0" z="0" />
+            <scale x="5" y="3" z="0.1" />
         </transformation>
         <transformation id="television_leg">
-            <scale x="0.1" y="0.5" z="0.1" />
+            <translate x="0" y="-1" z="-0.1" />
+            <scale x="0.3" y="2" z="0.1" />
         </transformation>
         <transformation id="television_base">
-            <scale x="1" y="0.2" z="1" />
+            <translate x="0" y="-2" z="-0.1" />
+            <scale x="2" y="0.2" z="1" />
         </transformation>
         <transformation id="couch">
             <translate x="-7" y="0" z="7" />
@@ -293,7 +316,6 @@
         </transformation>
         <transformation id="chair">
             <translate x="1" y="0" z="1" />
-            <rotate axis="x" angle="-45" />
         </transformation>
         <transformation id="chair_leg1">
             <translate x="0.7" y="1" z="0.7" />
@@ -330,27 +352,27 @@
         </transformation>
         <transformation id="table">
             <translate x="-5" y="0" z="-5" />
-            <scale x="5" y="1" z="5" />
+            <scale x="1" y="1" z="1" />
         </transformation>
         <transformation id="table_leg1">
-            <translate x="2" y="0" z="2" />
-            <scale x="0.3" y="3" z="0.3" />
+            <translate x="2" y="0.75" z="2" />
+            <scale x="0.3" y="1.5" z="0.3" />
         </transformation>
         <transformation id="table_leg2">
-            <translate x="2" y="0" z="-2" />
-            <scale x="0.3" y="3" z="0.3" />
+            <translate x="2" y="0.75" z="-2" />
+            <scale x="0.3" y="1.5" z="0.3" />
         </transformation>
         <transformation id="table_leg3">
-            <translate x="-2" y="0" z="2" />
-            <scale x="0.3" y="3" z="0.3" />
+            <translate x="-2" y="0.75" z="2" />
+            <scale x="0.3" y="1.5" z="0.3" />
         </transformation>
         <transformation id="table_leg4">
-            <translate x="-2" y="0" z="-2" />
-            <scale x="0.3" y="3" z="0.3" />
+            <translate x="-2" y="0.75" z="-2" />
+            <scale x="0.3" y="1.5" z="0.3" />
         </transformation>
         <transformation id="table_top">
-            <translate x="0" y="2" z="0" />
-            <scale x="4" y="1" z="4" />
+            <translate x="0" y="1.6" z="0" />
+            <scale x="4.3" y="0.3" z="4.3" />
         </transformation>
         <transformation id="cube_face1">
             <translate x="0" y="0" z="0.5" />
@@ -375,22 +397,6 @@
             <translate x="0" y="-0.5" z="0" />
             <rotate axis="x" angle="90" />
         </transformation>
-        <transformation id="television_desk_body_top">
-            <translate x="0" y="-0.5" z="0" />
-            <rotate axis="x" angle="90" />
-        </transformation>
-        <transformation id="television_desk_body_bottom">
-            <translate x="0" y="0.5" z="0" />
-            <rotate axis="x" angle="90" />
-        </transformation>
-        <transformation id="television_desk_body_left">
-            <translate x="0" y="0.5" z="0" />
-            <rotate axis="x" angle="90" />
-        </transformation>
-        <transformation id="television_desk_body_right">
-            <translate x="0" y="0.5" z="0" />
-            <rotate axis="x" angle="90" />
-        </transformation>
         <transformation id="walls">
             <translate x="0" y="0" z="0" />
             <scale x="1" y= "1" z= "1"/>
@@ -406,24 +412,24 @@
             <scale x="30" y= "20" z= "1"/>
         </transformation>
         <transformation id="wall_west">
-            <translate x="-10" y="10" z="0" />
+            <translate x="-15" y="5" z="0" />
             <rotate axis="y" angle="90" />
-            <scale x="20" y= "20" z= "1"/>
+            <scale x="20" y= "10" z= "1"/>
         </transformation>
         <transformation id="wall_north">
-            <translate x="0" y="0" z="0" />
-            <rotate axis="x" angle="90" />
-            <scale x="30" y= "20" z= "1"/>
+            <translate x="0" y="5" z="-10" />
+            
+            <scale x="30" y= "10" z= "1"/>
         </transformation>
         <transformation id="wall_east">
-            <translate x="0" y="0" z="0" />
-            <rotate axis="x" angle="90" />
-            <scale x="20" y= "20" z= "1"/>
+            <translate x="15" y="5" z="0" />
+            <rotate axis="y" angle="-90" />
+            <scale x="20" y= "10" z= "1"/>
         </transformation>
         <transformation id="wall_south">
-            <translate x="0" y="0" z="0" />
-            <rotate axis="x" angle="90" />
-            <scale x="30" y= "20" z= "1"/>
+            <translate x="0" y="5" z="10" />
+            <rotate axis="y" angle="180" />
+            <scale x="30" y= "10" z= "1"/>
         </transformation>
     </transformations>
 
@@ -452,11 +458,11 @@
             </materials>
             <texture id="demoTexture" length_s="1" length_t="2"/>
             <children>
-                <componentref id="tall_lamp" />-->
-                <!--<componentref id="television_desk" />-->
+                <componentref id="tall_lamp" />
+                <componentref id="television_desk" />
                 <!--<componentref id="couch" />-->
-                <!--<componentref id="chair" /> -->
-                <!--<componentref id="table" />-->
+                <!--<componentref id="chair" />-->
+                <componentref id="table" />
                 <componentref id="walls" />
             </children>
         </component>
@@ -472,7 +478,7 @@
             <texture id="tall_lamp_texture" length_s="1" length_t="2"/>
             <children>
                 <componentref id="floor"/>
-                <componentref id="ceiling"/>
+                <!--<componentref id="ceiling"/>-->
                 <componentref id="wall_west"/>
                 <componentref id="wall_north"/>
                 <componentref id="wall_east"/>
@@ -488,7 +494,7 @@
             <materials>
                 <material id="tall_lamp_material" />
             </materials>
-            <texture id="inherit"/>
+            <texture id="none"/>
             <children>
                 <primitiveref id="rectangle"/>
             </children>
@@ -684,13 +690,27 @@
             <texture id="television_desk_texture" length_s="1" length_t="2"/>
             <children>
                 <componentref id="television_desk_body"/>
+                <componentref id="television_desk_legs"/>
+                <componentref id="television"/>
+            </children>
+        </component>
+
+        <component id="television_desk_legs">
+            <transformation>
+                <transformationref id="television_desk_legs"/>
+            </transformation>
+            <materials>
+                <material id="television_desk_material" />
+            </materials>
+            <texture id="television_desk_texture" length_s="1" length_t="2"/>
+            <children>
                 <componentref id="television_desk_leg1"/>
                 <componentref id="television_desk_leg2"/>
                 <componentref id="television_desk_leg3"/>
                 <componentref id="television_desk_leg4"/>
-                <componentref id="television"/>
             </children>
         </component>
+
 
         <!-- Television Desk Body -->
         <component id="television_desk_body">
@@ -706,6 +726,7 @@
                 <componentref id="television_desk_body_bottom"/>
                 <componentref id="television_desk_body_left"/>
                 <componentref id="television_desk_body_right"/>
+                <componentref id="television_desk_body_back"/>
                 <componentref id="television_desk_body_book1"/>
                 <componentref id="television_desk_body_book2"/>
                 <componentref id="television_desk_body_book3"/>
@@ -725,7 +746,7 @@
             </materials>
             <texture id="inherit"/>
             <children>
-                <componentref id="book"/>
+                <componentref id="cube"/>
             </children>
         </component>
 
@@ -769,6 +790,18 @@
             </children>
         </component>
 
+        <component id="television_desk_body_back">
+            <transformation>
+                <transformationref id="television_desk_body_back"/>
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="inherit"/>
+            <children>
+                <componentref id="cube"/>
+            </children>
+        </component>
         <!-- Television Desk Body Book -->
         <component id="television_desk_body_book1">
             <transformation>
@@ -779,7 +812,7 @@
             </materials>
             <texture id="inherit"/>
             <children>
-                <componentref id="cube"/>
+                <componentref id="book"/>
             </children>
         </component>
         
@@ -891,7 +924,7 @@
             </materials>
             <texture id="inherit"/>
             <children>
-                <primitiveref id="cylinder"/>
+                <componentref id="cube"/>
             </children>
         </component>
 
@@ -903,7 +936,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit"/>
+            <texture id="none"/>
             <children>
                 <componentref id="cube"/>
             </children>

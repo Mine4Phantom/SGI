@@ -1,15 +1,26 @@
 <lxs>
     <scene root="root" axis_length="5"/>
 
-    <views default="defaultCamera">
-        <perspective id="defaultCamera" near="0.1" far="500" angle="0.45">
-            <from x="10" y="10" z="10" />
+    <views default="defaultCamera2">
+        <perspective id="defaultCamera2" near="0.1" far="500" angle="45">
+            <from x="25" y="25" z="25" />
+            <to x="0" y="0" z="0" />
+        </perspective>
+        <perspective id="defaultCamera3" near="0.1" far="500" angle="40">
+            <from x="-10" y="10" z="10" />
             <to x="0" y="0" z="0" />
         </perspective>
 
-        <ortho id="defaultCamera2" near="0.1" far="500" left="5" right="5" top="5" bottom="5">
-            <from x="10" y="10" z="10" />
+        <ortho id="orthoSide" near="0.1" far="500" left="-50.0" right="50.0" top="30" bottom="-30">
+            <from x="30" y="5" z="0" />
             <to x="0" y="0" z="0" />
+            <up x="0" y="1" z="0" />
+        </ortho>
+
+        <ortho id="orthoFront" near="0.1" far="500" left="-35.0" right="35.0" top="40" bottom="-6">
+            <from x="0" y="5" z="30" />
+            <to x="0" y="0" z="0" />
+            <up x="0" y="0.1" z="-1" />
         </ortho>
 
     </views>

@@ -286,101 +286,113 @@ export class MySceneGraph {
             nodeNames.push(children[i].nodeName);
 
         var viewCnt = 0;
+        var isDefaultId = 0;
 
-        // Perspective
-        var perspectiveIndex = nodeNames.indexOf("perspective");
-        if (perspectiveIndex != -1){
-            viewCnt += 1;
-            var perspectiveID = this.reader.getString(children[perspectiveIndex], 'id');
-            var perspectiveNear = this.reader.getFloat(children[perspectiveIndex], 'near');
-            var perspectiveFar = this.reader.getFloat(children[perspectiveIndex], 'far');
-            var perspectiveAngle = this.reader.getFloat(children[perspectiveIndex], 'angle');
-            if(perspectiveID == null | perspectiveNear == null || perspectiveFar == null || perspectiveAngle == null)
-                return "Error parsing perspective values, id = [" + perspectiveID + "]";
+        for (var k = 0; k < children.length; k++){
 
-            var grandChildren = children[perspectiveIndex].children;
-            var nodeNamesGrandChildren = [];
+            // Perspective
+            var perspectiveIndex = k;
+            var orthoIndex = k;
 
-            for (var i = 0; i < grandChildren.length; i++)
-                nodeNamesGrandChildren.push(grandChildren[i].nodeName);
 
-            var fromIndex = nodeNamesGrandChildren.indexOf("from");
-            if (fromIndex == -1)
-                return "Error parsing perspective child \'from\', id = [" + perspectiveID + "]";
-            var fromX = this.reader.getFloat(grandChildren[fromIndex], 'x');
-            var fromY = this.reader.getFloat(grandChildren[fromIndex], 'y');
-            var fromZ = this.reader.getFloat(grandChildren[fromIndex], 'z');
-            if (fromX == null || fromY == null || fromZ == null)
-                return "Error parsing perspective child \'from\' values, id = [" + perspectiveID + "]";
+            if (children[perspectiveIndex].nodeName == "perspective"){
+                viewCnt += 1;
+                var perspectiveID = this.reader.getString(children[perspectiveIndex], 'id');
+                if (perspectiveID == viewDefault)
+                    isDefaultId = 1;
+                var perspectiveNear = this.reader.getFloat(children[perspectiveIndex], 'near');
+                var perspectiveFar = this.reader.getFloat(children[perspectiveIndex], 'far');
+                var perspectiveAngle = this.reader.getFloat(children[perspectiveIndex], 'angle');
+                if(perspectiveID == null | perspectiveNear == null || perspectiveFar == null || perspectiveAngle == null)
+                    return "Error parsing perspective values, id = [" + perspectiveID + "]";
 
-            var toIndex = nodeNamesGrandChildren.indexOf("to");
-            if (toIndex == -1)
-                return "Error parsing perspective child \'to\', id = [" + perspectiveID + "]";
-            var toX = this.reader.getFloat(grandChildren[toIndex], 'x');
-            var toY = this.reader.getFloat(grandChildren[toIndex], 'y');
-            var toZ = this.reader.getFloat(grandChildren[toIndex], 'z');
-            if (toX == null || toY == null || toZ == null)
-                return "Error parsing perspective child \'to\' values, id = [" + perspectiveID + "]";
+                var grandChildren = children[perspectiveIndex].children;
+                var nodeNamesGrandChildren = [];
 
-            this.cameras.push([perspectiveID,new CGFcamera(perspectiveAngle, perspectiveNear, perspectiveFar, vec3.fromValues(fromX, fromY, fromZ), vec3.fromValues(toX, toY, toZ))]);
-        }
+                for (var i = 0; i < grandChildren.length; i++)
+                    nodeNamesGrandChildren.push(grandChildren[i].nodeName);
 
-        // Ortho
-        var orthoIndex = nodeNames.indexOf("ortho");
-        if (orthoIndex != -1){
-            viewCnt += 1;
-            var orthoID = this.reader.getString(children[orthoIndex], 'id');
-            var orthoNear = this.reader.getFloat(children[orthoIndex], 'near');
-            var orthoFar = this.reader.getFloat(children[orthoIndex], 'far');
-            var orthoLeft = this.reader.getFloat(children[orthoIndex], 'left');
-            var orthoRight = this.reader.getFloat(children[orthoIndex], 'right');
-            var orthoTop = this.reader.getFloat(children[orthoIndex], 'top');
-            var orthoBottom = this.reader.getFloat(children[orthoIndex], 'bottom');
-            if(orthoID == null | orthoNear == null || orthoFar == null || orthoLeft == null || orthoRight == null || orthoTop == null || orthoBottom == null)
-                return "Error parsing ortho values, id = [" + orthoID + "]";
+                var fromIndex = nodeNamesGrandChildren.indexOf("from");
+                if (fromIndex == -1)
+                    return "Error parsing perspective child \'from\', id = [" + perspectiveID + "]";
+                var fromX = this.reader.getFloat(grandChildren[fromIndex], 'x');
+                var fromY = this.reader.getFloat(grandChildren[fromIndex], 'y');
+                var fromZ = this.reader.getFloat(grandChildren[fromIndex], 'z');
+                if (fromX == null || fromY == null || fromZ == null)
+                    return "Error parsing perspective child \'from\' values, id = [" + perspectiveID + "]";
 
-            var grandChildren = children[orthoIndex].children;
-            var nodeNamesGrandChildren = [];
+                var toIndex = nodeNamesGrandChildren.indexOf("to");
+                if (toIndex == -1)
+                    return "Error parsing perspective child \'to\', id = [" + perspectiveID + "]";
+                var toX = this.reader.getFloat(grandChildren[toIndex], 'x');
+                var toY = this.reader.getFloat(grandChildren[toIndex], 'y');
+                var toZ = this.reader.getFloat(grandChildren[toIndex], 'z');
+                if (toX == null || toY == null || toZ == null)
+                    return "Error parsing perspective child \'to\' values, id = [" + perspectiveID + "]";
 
-            for (var i = 0; i < grandChildren.length; i++)
-                nodeNamesGrandChildren.push(grandChildren[i].nodeName);
+                this.cameras.push([perspectiveID,new CGFcamera(perspectiveAngle * DEGREE_TO_RAD, perspectiveNear, perspectiveFar, vec3.fromValues(fromX, fromY, fromZ), vec3.fromValues(toX, toY, toZ))]);
+            }
+            // Ortho
+            else if (children[perspectiveIndex].nodeName == "ortho"){
+                viewCnt += 1;
+                var orthoID = this.reader.getString(children[orthoIndex], 'id');
+                if (orthoID == viewDefault)
+                    isDefaultId = 1;
+                var orthoNear = this.reader.getFloat(children[orthoIndex], 'near');
+                var orthoFar = this.reader.getFloat(children[orthoIndex], 'far');
+                var orthoLeft = this.reader.getFloat(children[orthoIndex], 'left');
+                var orthoRight = this.reader.getFloat(children[orthoIndex], 'right');
+                var orthoTop = this.reader.getFloat(children[orthoIndex], 'top');
+                var orthoBottom = this.reader.getFloat(children[orthoIndex], 'bottom');
+                if(orthoID == null | orthoNear == null || orthoFar == null || orthoLeft == null || orthoRight == null || orthoTop == null || orthoBottom == null)
+                    return "Error parsing ortho values, id = [" + orthoID + "]";
 
-            var fromIndex = nodeNamesGrandChildren.indexOf("from");
-            if (fromIndex == -1)
-                return "Error parsing ortho child \'from\', id = [" + orthoID + "]";
-            var fromX = this.reader.getFloat(grandChildren[fromIndex], 'x');
-            var fromY = this.reader.getFloat(grandChildren[fromIndex], 'y');
-            var fromZ = this.reader.getFloat(grandChildren[fromIndex], 'z');
-            if (fromX == null || fromY == null || fromZ == null)
-                return "Error parsing ortho child \'from\' values, id = [" + orthoID + "]";
+                var grandChildren = children[orthoIndex].children;
+                var nodeNamesGrandChildren = [];
 
-            var toIndex = nodeNamesGrandChildren.indexOf("to");
-            if (toIndex == -1)
-                return "Error parsing ortho child \'to\', id = [" + orthoID + "]";
-            var toX = this.reader.getFloat(grandChildren[toIndex], 'x');
-            var toY = this.reader.getFloat(grandChildren[toIndex], 'y');
-            var toZ = this.reader.getFloat(grandChildren[toIndex], 'z');
-            if (toX == null || toY == null || toZ == null)
-                return "Error parsing ortho child \'to\' values, id = [" + orthoID + "]";
+                for (var i = 0; i < grandChildren.length; i++)
+                    nodeNamesGrandChildren.push(grandChildren[i].nodeName);
 
-            var upIndex = nodeNamesGrandChildren.indexOf("up");
-            var upX;
-            var upY;
-            var upZ;
-            if (upIndex != -1){
-                var upX = this.reader.getFloat(grandChildren[upIndex], 'x');
-                var upY = this.reader.getFloat(grandChildren[upIndex], 'y');
-                var upZ = this.reader.getFloat(grandChildren[upIndex], 'z');
-                if (upX == null || upY == null || upZ == null)
-                    return "Error parsing ortho child \'up\' values, id = [" + orthoID + "]";
-            
-                this.cameras.push([orthoID,new CGFcameraOrtho(orthoLeft,orthoRight,orthoBottom,orthoTop,orthoNear,orthoFar,vec3.fromValues(fromX, fromY, fromZ),vec3.fromValues(toX, toY, toZ),vec3.fromValues(upX, upY, upZ))]);         
-            } else 
-                this.cameras.push([orthoID,new CGFcameraOrtho(orthoLeft,orthoRight,orthoBottom,orthoTop,orthoNear,orthoFar,vec3.fromValues(fromX, fromY, fromZ),vec3.fromValues(toX, toY, toZ),vec3.fromValues(0, 1, 0))]);
+                var fromIndex = nodeNamesGrandChildren.indexOf("from");
+                if (fromIndex == -1)
+                    return "Error parsing ortho child \'from\', id = [" + orthoID + "]";
+                var fromX = this.reader.getFloat(grandChildren[fromIndex], 'x');
+                var fromY = this.reader.getFloat(grandChildren[fromIndex], 'y');
+                var fromZ = this.reader.getFloat(grandChildren[fromIndex], 'z');
+                if (fromX == null || fromY == null || fromZ == null)
+                    return "Error parsing ortho child \'from\' values, id = [" + orthoID + "]";
+
+                var toIndex = nodeNamesGrandChildren.indexOf("to");
+                if (toIndex == -1)
+                    return "Error parsing ortho child \'to\', id = [" + orthoID + "]";
+                var toX = this.reader.getFloat(grandChildren[toIndex], 'x');
+                var toY = this.reader.getFloat(grandChildren[toIndex], 'y');
+                var toZ = this.reader.getFloat(grandChildren[toIndex], 'z');
+                if (toX == null || toY == null || toZ == null)
+                    return "Error parsing ortho child \'to\' values, id = [" + orthoID + "]";
+
+                var upIndex = nodeNamesGrandChildren.indexOf("up");
+                var upX;
+                var upY;
+                var upZ;
+                if (upIndex != -1){
+                    var upX = this.reader.getFloat(grandChildren[upIndex], 'x');
+                    var upY = this.reader.getFloat(grandChildren[upIndex], 'y');
+                    var upZ = this.reader.getFloat(grandChildren[upIndex], 'z');
+                    if (upX == null || upY == null || upZ == null)
+                        return "Error parsing ortho child \'up\' values, id = [" + orthoID + "]";
+                
+                    this.cameras.push([orthoID,new CGFcameraOrtho(orthoLeft,orthoRight,orthoBottom,orthoTop,orthoNear,orthoFar,vec3.fromValues(fromX, fromY, fromZ),vec3.fromValues(toX, toY, toZ),vec3.fromValues(upX, upY, upZ))]);         
+                } else {
+                    this.cameras.push([orthoID,new CGFcameraOrtho(orthoLeft,orthoRight,orthoBottom,orthoTop,orthoNear,orthoFar,vec3.fromValues(fromX, fromY, fromZ),vec3.fromValues(toX, toY, toZ),vec3.fromValues(0, 1, 0))]);
+                }
+            }
         }
 
         if (viewCnt == 0)
             return "Error, at least one view must exist";
+        if (isDefaultId == 0)
+            return "Error, default view must exist";
 
         return null;
     }

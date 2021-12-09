@@ -1,5 +1,5 @@
 import { CGFscene } from '../lib/CGF.js';
-import { CGFaxis,CGFcamera } from '../lib/CGF.js';
+import { CGFaxis,CGFcamera, CGFcameraOrtho } from '../lib/CGF.js';
 
 
 var DEGREE_TO_RAD = Math.PI / 180;
@@ -45,7 +45,8 @@ export class XMLscene extends CGFscene {
      * Initializes the scene cameras.
      */
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(35, 35, 35), vec3.fromValues(0, 0, 0));
+        //this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(35, 35, 35), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcameraOrtho(0,0,0,0, 0.1, 500, vec3.fromValues(35, 35, 35), vec3.fromValues(0, 0, 0), vec3.fromValues(0, 1, 0));
 
         
     }
@@ -111,12 +112,14 @@ export class XMLscene extends CGFscene {
         for (var i = 0; i < this.graph.cameras.length; i++)
             nodeNames.push(this.graph.cameras[i][0]);
         var defaultIndex = nodeNames.indexOf(this.graph.defaultView);
+
         this.camera = this.graph.cameras[defaultIndex][1]
+        this.interface.setActiveCamera(this.camera);
         console.log(this.graph.cameras)
         console.log(this.graph.defaultView)
         console.log(defaultIndex)
         console.log(this.graph.cameras[defaultIndex][1])
-        
+
         this.sceneInited = true;
     }
 

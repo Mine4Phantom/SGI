@@ -14,7 +14,7 @@
 
 * Deal with scale factor on textures in primitives
 
-* NURBS e Plane
+* NURBS e Plane -> Pedro
 
 
 # Done 

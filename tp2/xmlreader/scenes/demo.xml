@@ -1257,7 +1257,7 @@
             <materials>
                 <material id="couch_material" />
             </materials>
-            <texture id="couch_texture" length_s="1" length_t="2"/>
+            <texture id="couch_texture" length_s="0.5" length_t="0.5"/>
             <children>
                 <componentref id="couch_corpse"/>
                 <componentref id="couch_leg1"/>
@@ -1663,7 +1663,7 @@
             <materials>
                 <material id="demoMaterial" />
             </materials>
-            <texture id="table_texture" length_s="1" length_t="2"/>
+            <texture id="table_texture" length_s="0.5" length_t="0.5"/>
             <children>
                 <componentref id="table_leg1"/>
                 <componentref id="table_leg2"/>

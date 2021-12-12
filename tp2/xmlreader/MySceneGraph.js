@@ -1168,14 +1168,13 @@ export class MySceneGraph {
 				    return "unable to parse texture ID (node ID = " + componentID + ")";
 			    if (textureID != "null" && textureID != "clear" && this.textures[textureID] == null )
 				    return "ID does not correspond to a valid texture (node ID = " + componentID + ")";
-                var textureS = this.reader.getString(grandChildren[textureIndex], 'length_s');
+                var textureS = this.reader.getFloat(grandChildren[textureIndex], 'length_s');
                 if (textureS == null ) //To Do deal with id = null
                     return "unable to parse texture length_s (node ID = " + componentID + ")";
-                var textureT = this.reader.getString(grandChildren[textureIndex], 'length_t');
+                var textureT = this.reader.getFloat(grandChildren[textureIndex], 'length_t');
                 if (textureT == null ) //To Do deal with id = null
                     return "unable to parse texture length_t (node ID = " + componentID + ")";
-                this.components[componentID].textureS = textureS;
-                this.components[componentID].textureT = textureT;
+                this.components[componentID].addLenghtST(textureS, textureT);
             }
 
             this.components[componentID].textureID = textureID;

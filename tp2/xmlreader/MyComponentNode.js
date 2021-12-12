@@ -26,8 +26,11 @@ export class MyComponentNode extends CGFobject {
 
 		// The texture ID.
 		this.textureID = null ;
-		this.textureS = null;
-		this.textureT = null;
+		this.textureS = 1;
+		this.textureT = 1;
+
+		this.actualS = 1;
+		this.actualT = 1;
 
 		this.transformMatrix = mat4.create();
 		mat4.identity(this.transformMatrix);
@@ -35,6 +38,13 @@ export class MyComponentNode extends CGFobject {
 
 	addMaterial(nodeID) {
 		this.materials.push(nodeID);
+	}
+
+	addLenghtST(lenght_S, lenght_T){
+		this.textureS = lenght_S;
+		this.textureT = lenght_T;
+		this.actualS = lenght_S;
+		this.actualT = lenght_T;
 	}
 
 	/**
@@ -81,7 +91,7 @@ export class MyComponentNode extends CGFobject {
 		this.displayPrimitives(newTextureID,newMaterialID);
 		
 		for(var j=0; j < this.children.length; j++){
-			console.log(this.graph.components[this.children[j]])
+			
 			this.graph.components[this.children[j]].display(newTextureID,newMaterialID);
 		}
 
@@ -99,6 +109,8 @@ export class MyComponentNode extends CGFobject {
 
 		for(var i=0;i < this.primitives.length;i++){
 			if(newTextureID != "none" && newTextureID != null){
+				this.textureS = this.actualS;
+				this.textureT = this.actualT;
 				this.primitives[i].updateTexCoords(this.textureS,this.textureT);
 			}
 

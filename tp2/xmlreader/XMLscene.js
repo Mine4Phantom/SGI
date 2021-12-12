@@ -115,10 +115,6 @@ export class XMLscene extends CGFscene {
 
         this.camera = this.graph.cameras[defaultIndex][1]
         this.interface.setActiveCamera(this.camera);
-        console.log(this.graph.cameras)
-        console.log(this.graph.defaultView)
-        console.log(defaultIndex)
-        console.log(this.graph.cameras[defaultIndex][1])
 
         this.sceneInited = true;
     }

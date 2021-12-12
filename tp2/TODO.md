@@ -14,7 +14,7 @@
 
 * Deal with scale factor on textures in primitives
 
-* NURBS e Plane -> Pedro
+
 
 
 # Done 
@@ -30,3 +30,5 @@
 * Actual Transformations inside components -> Miguel
 
 * Views and create Cameras -> Miguel
+
+* NURBS e Plane -> Pedro

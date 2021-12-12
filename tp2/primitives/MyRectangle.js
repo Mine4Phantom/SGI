@@ -68,14 +68,26 @@ export class MyRectangle extends CGFobject {
 	 * @param {Array} coords - Array of texture coordinates
 	 */
 	updateTexCoords(factor_s, factor_t) {
+		let UminS = 0;
+		let UminT = 0;
 		let UmaxS=this.maxS/factor_s; // delta x
 		let UmaxT=this.maxT/factor_t; // delta y
+
+		//console.log("factor_s ", factor_s)
+		//console.log("factor_t ", factor_t)
+		//console.log("this.maxS ",this.maxS)
+		//console.log("this.maxT ",this.maxT)
+		//console.log("UmaxS ",UmaxS)
+		//console.log("UmaxT ",UmaxT)
+
+		//UmaxS = 1.5;
+		//UmaxT = 1.5;
 	
 		this.texCoords = [
-			0,UmaxT,
-			UmaxS,UmaxT,
-			0,0,
-			UmaxS,0
+			UminS, UmaxT,
+			UmaxS, UmaxT,
+			UminS, UminT,
+			UmaxS, UminT
 			];
 	
 		this.updateTexCoordsGLBuffers();

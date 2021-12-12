@@ -33,18 +33,19 @@
     <lights>
         <omni id="demoLight" enabled="1">
             <location x="0" y="20" z="0" w="1.0" />
-            <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+            <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
             <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
             <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+            <attenuation constant="0" linear="0.2" quadratic="0" />
         </omni>
 
-        <spot id="light_tall_lamp" enabled="0" angle="120" exponent="1"> <!-- TO DO -->
-            <location x="0" y="20" z="0" w="1" />
-            <target x="1" y="1" z="1" />
-            <ambient r="0.1" g="0.1" b="0.1" a="1.0" />
-            <diffuse r="0.1" g="0.1" b="0.1" a="1.0" />
-            <specular r="0.1" g="0.1" b="0.1" a="1.0" />
-            <attenuation constant="1" linear="1" quadratic="1" />
+        <spot id="light_tall_lamp" enabled="1" angle="120" exponent="1"> <!-- TO DO -->
+            <location x="1" y="20" z="1" w="1" />
+            <target x="-10" y="10" z="10" />
+            <ambient r="1" g="1" b="1" a="1.0" />
+            <diffuse r="1" g="1" b="1" a="1.0" />
+            <specular r="1" g="1" b="1" a="1.0" />
+            <attenuation constant="0" linear="0.2" quadratic="0" />
         </spot>
     </lights>
 

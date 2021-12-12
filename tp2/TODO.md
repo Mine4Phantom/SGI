@@ -12,7 +12,6 @@
 
 
 
-* Deal with scale factor on textures in primitives
 
 
 
@@ -31,4 +30,10 @@
 
 * Views and create Cameras -> Miguel
 
+* Deal with scale factor on textures in primitives -> Miguel
+
+* Fix parsing of lights -> Miguel
+
 * NURBS e Plane -> Pedro
+
+

@@ -10,7 +10,7 @@
 
 ## Parser
 
-* Views and create Cameras
+
 
 * Deal with scale factor on textures in primitives
 
@@ -28,3 +28,5 @@
 * Transformations serem aplicadas em sequencia em vez de ser apenas a ultima -> Miguel
 
 * Actual Transformations inside components -> Miguel
+
+* Views and create Cameras -> Miguel

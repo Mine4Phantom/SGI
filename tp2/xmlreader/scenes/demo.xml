@@ -41,18 +41,18 @@
         <spot id="lamp1" enabled="1" angle="180" exponent="1"> <!-- TO DO -->
             <location x="-5" y="20" z="0" w="1" />
             <target x="0" y="0" z="0" />
-            <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
-            <diffuse r="0.3" g="0.3" b="0.3" a="1.0" />
-            <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+            <ambient r="0.15" g="0.15" b="0.15" a="1.0" />
+            <diffuse r="0.8" g="0.8" b="0.8" a="1.0" />
+            <specular r="0.5" g="0.5" b="0.5" a="1.0" />
             <attenuation constant="1" linear="1" quadratic="1" />
         </spot>
 
         <spot id="lamp2" enabled="1" angle="180" exponent="1"> <!-- TO DO -->
             <location x="5" y="20" z="0" w="1" />
             <target x="0" y="0" z="0" />
-            <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
-            <diffuse r="0.3" g="0.3" b="0.3" a="1.0" />
-            <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+            <ambient r="0.15" g="0.15" b="0.15" a="1.0" />
+            <diffuse r="0.8" g="0.8" b="0.8" a="1.0" />
+            <specular r="0.5" g="0.5" b="0.5" a="1.0" />
             <attenuation constant="1" linear="1" quadratic="1" />
         </spot>
     </lights>
@@ -71,6 +71,7 @@
         <texture id="door_texture" file="door.jpg" />
         <texture id="table_texture" file="table_texture.jpg" />
         <texture id="rug_texture" file="rug.jpg" />
+        <texture id="window_texture" file="window.jpg" />
         <texture id="demoTexture" file="rocks.jpg" /> <!-- Do not delete, needed for 'none' texture -->
         <texture id="demoTexture2" file="leaves.jpg" />
     </textures>
@@ -121,14 +122,14 @@
         <material id="rug_material" shininess="1">
             <emission r="0.1" g="0.1" b="0.1" a="1.0" />
             <ambient r="0.3" g="0.3" b="0.3" a="1.0" />
-            <diffuse r="0.1" g="0.1" b="0.1" a="1.0" />
+            <diffuse r="0.2" g="0.2" b="0.2" a="1.0" />
             <specular r="0.1" g="0.1" b="0.1" a="1.0" />
         </material>
 
         <material id="floor_material" shininess="100">
             <emission r="0.2" g="0.2" b="0.2" a="1.0" />
             <ambient r="0.4" g="0.4" b="0.4" a="1.0" />
-            <diffuse r="0.3" g="0.3" b="0.3" a="1.0" />
+            <diffuse r="0.4" g="0.4" b="0.4" a="1.0" />
             <specular r="0.6" g="0.6" b="0.6" a="1.0" />
         </material>
 
@@ -137,6 +138,13 @@
             <ambient r="0.5" g="0.4" b="0.4" a="1.0" />
             <diffuse r="0.3" g="0.3" b="0.3" a="1.0" />
             <specular r="0.3" g="0.3" b="0.3" a="1.0" />
+        </material>
+
+        <material id="window_material" shininess="10">
+            <emission r="0" g="0" b="0" a="1.0" />
+            <ambient r="1" g="1" b="1" a="1.0" />
+            <diffuse r="0.3" g="0.3" b="0.3" a="1.0" />
+            <specular r="0.7" g="0.7" b="0.7" a="1.0" />
         </material>
 
         <material id="tall_lamp_material" shininess="10">
@@ -175,8 +183,8 @@
         </material>
 
         <material id="couch_material" shininess="5">
-            <emission r="0.2" g="0.2" b="0.2" a="1.0" />
-            <ambient r="0.3" g="0.3" b="0.3" a="1.0" />
+            <emission r="0" g="0" b="0" a="1.0" />
+            <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
             <diffuse r="0.3" g="0.3" b="0.3" a="1.0" />
             <specular r="0.1" g="0.1" b="0.1" a="1.0" />
         </material>
@@ -191,6 +199,20 @@
         <material id="door_material" shininess="10">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
             <ambient r="0.4" g="0.4" b="0.4" a="1.0" />
+            <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
+            <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+        </material>
+
+        <material id="shelf_support_material" shininess="1000">
+            <emission r="0.1" g="0.1" b="0.1" a="1.0" />
+            <ambient r="0.3" g="0.3" b="0.3" a="1.0" />
+            <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
+            <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+        </material>
+
+        <material id="ceiling_material" shininess="10">
+            <emission r="0.1" g="0.1" b="0.1" a="1.0" />
+            <ambient r="0.6" g="0.6" b="0.6" a="1.0" />
             <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
             <specular r="0.6" g="0.6" b="0.6" a="1.0" />
         </material>
@@ -496,7 +518,7 @@
             <scale x="30" y= "20" z= "1"/>
         </transformation>
         <transformation id="ceiling">
-            <translate x="0" y="20" z="0" />
+            <translate x="0" y="10" z="0" />
             <rotate axis="x" angle="90" />
             <scale x="30" y= "20" z= "1"/>
         </transformation>
@@ -531,6 +553,9 @@
         </primitive>
         <primitive id="cylinder">
             <cylinder height="1" topRadius="1" bottomRadius="1" stacks="10" slices="50"/>
+        </primitive>
+        <primitive id="cylinder2">
+            <cylinder2 height="1" topRadius="1" bottomRadius="1" stacks="10" slices="50"/>
         </primitive>
         <primitive id="circle">
             <circle radius="0.5" slices="50"/>
@@ -618,10 +643,201 @@
                 <componentref id="vase" />
                 <componentref id="door" />
                 <componentref id="rug" />
+                <componentref id="window" />
+                <componentref id="shelf" />
             </children>
         </component>
 
-        <!--Door -->
+        <!-- Shelf -->
+        <component id="shelf">
+            <transformation>
+                <translate x="-6.5" y="0.1" z="-9" />
+            </transformation>
+            <materials>
+                <material id="window_material" />
+            </materials>
+            <texture id="window_texture" length_s="1" length_t="2"/>
+            <children>
+                <componentref id="bot_shelf"/>
+                <componentref id="shelf_add1"/>
+                <componentref id="shelf_add2"/>
+                <componentref id="shelf_add3"/>
+                <componentref id="top_shelf"/>
+            </children>
+        </component>
+
+        <!-- Bot Shelf -->
+        <component id="bot_shelf">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="inherit"/>
+            <children>
+                <componentref id="horizontal_shelf"/>
+                <componentref id="vertical_shelf"/>
+                <componentref id="shelf_support"/>
+            </children>
+        </component>
+
+        <!-- Horizontal Shelf -->
+        <component id="horizontal_shelf">
+            <transformation>
+                <translate x="0" y="0.11" z="0" />
+                <scale x="4" y="0.2 " z="2" />
+            </transformation>
+            <materials>
+                <material id="black_material" />
+            </materials>
+            <texture id="window_texture" length_s="1" length_t="2"/>
+            <children>
+                <componentref id="cube"/>
+            </children>
+        </component>
+
+        <!-- Top Shelf -->
+        <component id="top_shelf">
+            <transformation>
+                <translate x="0" y="6.6" z="0" />
+                <scale x="4" y="0.2 " z="2" />
+            </transformation>
+            <materials>
+                <material id="black_material" />
+            </materials>
+            <texture id="window_texture" length_s="1" length_t="2"/>
+            <children>
+                <componentref id="cube"/>
+            </children>
+        </component>
+
+        <!-- Vertical Shelf -->
+        <component id="vertical_shelf">
+            <transformation>
+                <translate x="1.9" y="0.9" z="0" />
+                <scale x="0.2" y="1.5 " z="2" />
+            </transformation>
+            <materials>
+                <material id="black_material" />
+            </materials>
+            <texture id="window_texture" length_s="1" length_t="2"/>
+            <children>
+                <componentref id="cube"/>
+            </children>
+        </component>
+
+        <!-- Shelf supports -->
+        <component id="shelf_support">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="shelf_support_material" />
+            </materials>
+            <texture id="window_texture" length_s="1" length_t="2"/>
+            <children>
+                <componentref id="shelf_support1"/>
+                <componentref id="shelf_support2"/>
+            </children>
+        </component>
+
+        <!-- Shelf support 1 -->
+        <component id="shelf_support1">
+            <transformation>
+                <translate x="-1.4" y="1.65" z="0.4" />
+                <rotate axis="x" angle="90" />
+                <scale x="0.1" y="0.1" z="1.5" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="cylinder"/>
+            </children>
+        </component>
+
+        <!-- Shelf support 2 -->
+        <component id="shelf_support2">
+            <transformation>
+                <translate x="-1.4" y="1.65" z="-0.4" />
+                <rotate axis="x" angle="90" />
+                <scale x="0.1" y="0.1" z="1.5" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="cylinder"/>
+            </children>
+        </component>
+
+        <!-- Shelf 1 -->
+        <component id="shelf_add1">
+            <transformation>
+                <translate x="0" y="1.65" z="0" />
+                <rotate axis="y" angle="180" />
+            </transformation>
+            <materials>
+                <material id="window_material" />
+            </materials>
+            <texture id="window_texture" length_s="1" length_t="2"/>
+            <children>
+                <componentref id="horizontal_shelf"/>
+                <componentref id="vertical_shelf"/>
+                <componentref id="shelf_support"/>
+            </children>
+        </component>
+
+        <!-- Shelf 2 -->
+        <component id="shelf_add2">
+            <transformation>
+                <translate x="0" y="3.3" z="0" />
+            </transformation>
+            <materials>
+                <material id="window_material" />
+            </materials>
+            <texture id="window_texture" length_s="1" length_t="2"/>
+            <children>
+                <componentref id="horizontal_shelf"/>
+                <componentref id="vertical_shelf"/>
+                <componentref id="shelf_support"/>
+            </children>
+        </component>
+
+        <!-- Shelf 2 -->
+        <component id="shelf_add3">
+            <transformation>
+                <translate x="0" y="4.95" z="0" />
+                <rotate axis="y" angle="180" />
+            </transformation>
+            <materials>
+                <material id="window_material" />
+            </materials>
+            <texture id="window_texture" length_s="1" length_t="2"/>
+            <children>
+                <componentref id="horizontal_shelf"/>
+                <componentref id="vertical_shelf"/>
+                <componentref id="shelf_support"/>
+            </children>
+        </component>
+
+        <!-- Window -->
+        <component id="window">
+            <transformation>
+                <translate x="6" y="5" z="-9.9" />
+                <scale x="5" y="5" z="0.1" />
+            </transformation>
+            <materials>
+                <material id="window_material" />
+            </materials>
+            <texture id="window_texture" length_s="1" length_t="2"/>
+            <children>
+                <primitiveref id="rectangle"/>
+            </children>
+        </component>
+
+        <!-- Door -->
         <component id="door">
             <transformation>
                 <translate x="-10" y="3.5" z="9.9" />
@@ -637,7 +853,7 @@
             </children>
         </component>
 
-        <!--Door -->
+        <!-- Rug -->
         <component id="rug">
             <transformation>
                 <translate x="-7" y="0.1" z="0" />
@@ -752,7 +968,7 @@
             <texture id="walls_texture" length_s="1" length_t="2"/>
             <children>
                 <componentref id="floor"/>
-                <!--<componentref id="ceiling"/>-->
+                <componentref id="ceiling"/>
                 <componentref id="wall_west"/>
                 <componentref id="wall_north"/>
                 <componentref id="wall_east"/>
@@ -809,9 +1025,9 @@
                 <transformationref id="ceiling"/>
             </transformation>
             <materials>
-                <material id="tall_lamp_material" />
+                <material id="gray_material" />
             </materials>
-            <texture id="inherit"/>
+            <texture id="none"/>
             <children>
                 <primitiveref id= "rectangle"/>
             </children>

@@ -437,6 +437,26 @@ export class MySceneGraph {
         return null;
     }
 
+
+
+    parseAttenuationValues(node, msg){
+        var values = [];
+        var constant = this.reader.getFloat(node, 'constant');
+        if (!(constant != null && !isNaN(constant))) return "unable to parse constant "+msg;
+        if (constant > 1) constant = 1.0;
+
+        var linear = this.reader.getFloat(node, 'linear');
+        if (!(linear != null && !isNaN(linear))) return "unable to parse linear "+msg;
+        if (linear > 1) linear = 1.0;
+
+        var quadratic = this.reader.getFloat(node, 'quadratic');
+        if (!(quadratic != null && !isNaN(quadratic))) return "unable to parse quadratic "+msg;
+        if (quadratic > 1) quadratic = 1.0;
+
+        values.push(...[constant, linear, quadratic]);
+        return values;
+    }
+
     /**
      * Parses the <light> node.
      * @param {lights block element} lightsNode
@@ -464,8 +484,8 @@ export class MySceneGraph {
                 continue;
             }
             else {
-                attributeNames.push(...["location", "ambient", "diffuse", "specular"]);
-                attributeTypes.push(...["position", "color", "color", "color"]);
+                attributeNames.push(...["location", "ambient", "diffuse", "specular", "attenuation"]);
+                attributeTypes.push(...["position", "color", "color", "color", "attenuation"]);
             }
 
             // Get id of the current light.
@@ -503,6 +523,8 @@ export class MySceneGraph {
                 if (attributeIndex != -1) {
                     if (attributeTypes[j] == "position")
                         var aux = this.parseCoordinates4D(grandChildren[attributeIndex], "light position for ID" + lightId);
+                    else if (attributeTypes[j] == "attenuation")
+                        var aux = this.parseAttenuationValues(grandChildren[attributeIndex], "light attenuation for ID" + lightId);
                     else
                         var aux = this.parseColor(grandChildren[attributeIndex], attributeNames[j] + " illumination for ID" + lightId);
 

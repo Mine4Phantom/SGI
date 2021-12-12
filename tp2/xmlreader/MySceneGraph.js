@@ -392,7 +392,7 @@ export class MySceneGraph {
                 }
             }
         }
-
+        this.scene.views = this.cameras;
         if (viewCnt == 0)
             return "Error, at least one view must exist";
         if (isDefaultId == 0)

@@ -39,6 +39,9 @@ export class XMLscene extends CGFscene {
 
         this.axis = new CGFaxis(this);
         this.setUpdatePeriod(100);
+
+        //Variables connected to MyInterface
+        
     }
 
     /**
@@ -80,12 +83,12 @@ export class XMLscene extends CGFscene {
                     console.log(this.lights[i])
                 }
 
-                this.lights[i].setVisible(true);
+                this.lights[i].setVisible(false);
                 if (light[0])
                     this.lights[i].enable();
                 else
                     this.lights[i].disable();
-
+                
                 this.lights[i].update();
 
                 i++;
@@ -99,6 +102,8 @@ export class XMLscene extends CGFscene {
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     }
+    
+
     /** Handler called when the graph is finally loaded. 
      * As loading is asynchronous, this may be called already after the application has started the run loop
      */
@@ -149,8 +154,10 @@ export class XMLscene extends CGFscene {
 
         for (var i = 0; i < this.lights.length; i++) {
             this.lights[i].setVisible(true);
-            this.lights[i].enable();
+            this.lights[i].update();
         }
+
+
 
         if (this.sceneInited) {
             // Draw axis

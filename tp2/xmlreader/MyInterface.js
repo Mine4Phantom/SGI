@@ -28,13 +28,17 @@ export class MyInterface extends CGFinterface {
         //this.gui.add(this.scene, 'axis').name("Display axis");
         this.initKeys();
 
-        var f1 = this.gui.addFolder('Lights');
-        f1.add(this.scene.lights[0], 'enabled').name('Light 1');
-        f1.add(this.scene.lights[1], 'enabled').name('Light 2');
-        f1.add(this.scene.lights[2], 'enabled').name('Light 3');
+        var lightsFolder = this.gui.addFolder('Lights');
+        lightsFolder.add(this.scene.lights[0], 'enabled').name('Light 1');
+        lightsFolder.add(this.scene.lights[1], 'enabled').name('Light 2');
+        lightsFolder.add(this.scene.lights[2], 'enabled').name('Light 3');
+        lightsFolder.add(this.scene.lights[3], 'enabled').name('Lamp Light');
+        //lightsFolder.add(this.scene.views[0], 'enabled').name('Light 1');
+
 
         return true;
     }
+
 
     /**
      * initKeys

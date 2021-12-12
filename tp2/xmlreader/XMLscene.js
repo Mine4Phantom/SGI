@@ -80,7 +80,6 @@ export class XMLscene extends CGFscene {
                     this.lights[i].setSpotCutOff(light[7]);
                     this.lights[i].setSpotExponent(light[8]);
                     this.lights[i].setSpotDirection(light[9][0], light[9][1], light[9][2]);
-                    console.log(this.lights[i])
                 }
 
                 this.lights[i].setVisible(false);

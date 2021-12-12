@@ -9,6 +9,9 @@ import { MyCylinder } from '../primitives/MyCylinder.js';
 import { MySphere } from '../primitives/MySphere.js';
 import { MyComponentNode } from './MyComponentNode.js';
 import { MyPrimitiveNode } from './MyPrimitiveNode.js';
+import { MyPatch } from '../primitives/nurbs/MyPatch.js';
+import { MyPlane } from '../primitives/nurbs/MyPlane.js';
+import { MyCircle } from '../primitives/MyCircle.js';
 
 var DEGREE_TO_RAD = Math.PI / 180;
 
@@ -479,7 +482,7 @@ export class MySceneGraph {
             if (!(aux != null && !isNaN(aux) && (aux == true || aux == false)))
                 this.onXMLMinorError("unable to parse value component of the 'enable light' field for ID = " + lightId + "; assuming 'value = 1'");
 
-            enableLight = aux || 1;
+            enableLight = aux;
 
             //Add enabled boolean and type name to light info
             global.push(enableLight);
@@ -812,6 +815,79 @@ export class MySceneGraph {
         return null;
     }
 
+    parsePlane(primitiveId, planeNode) {
+
+        // npartsU
+        var npartsU = this.reader.getInteger(planeNode, 'npartsU');
+        if (!(npartsU != null && !isNaN(npartsU)))
+            return "unable to parse npartsU of the primitive parameters for ID = " + primitiveId;
+
+        // npartsV
+        var npartsV = this.reader.getInteger(planeNode, 'npartsV');
+        if (!(npartsV != null && !isNaN(npartsV)))
+            return "unable to parse npartsV of the primitive parameters for ID = " + primitiveId;
+
+
+        return new MyPlane(this.scene, npartsU, npartsV);
+
+    }
+
+    /**
+    * Method to parse a lxs-format patch node
+    * @param {String} primitiveId 
+    * @param {lxs patch node} patchNode 
+    */
+    parsePatch(primitiveId, patchNode) {
+
+        // npartsU
+        var npartsU = this.reader.getInteger(patchNode, 'npartsU');
+        if (!(npartsU != null && !isNaN(npartsU)))
+            return "unable to parse npartsU of the primitive parameters for ID = " + primitiveId;
+
+        // npartsV
+        var npartsV = this.reader.getInteger(patchNode, 'npartsV');
+        if (!(npartsV != null && !isNaN(npartsV)))
+            return "unable to parse npartsV of the primitive parameters for ID = " + primitiveId;
+
+        // npointsU
+        var npointsU = this.reader.getInteger(patchNode, 'npointsU');
+        if (!(npointsU != null && !isNaN(npointsU)))
+            return "unable to parse npointsU of the primitive parameters for ID = " + primitiveId;
+
+        // npointsV
+        var npointsV = this.reader.getInteger(patchNode, 'npointsV');
+        if (!(npointsV != null && !isNaN(npointsV)))
+            return "unable to parse npointsV of the primitive parameters for ID = " + primitiveId;
+
+        let children = patchNode.children;
+        let upoints = [];
+
+        // get control points
+
+        for(let u = 0; u < npointsU; u++){
+
+            let vpoints = [];
+
+            for(let v = 0; v < npointsV; v++){
+
+                let index = u * npointsV + v; 
+
+                if(children[index].nodeName != 'controlpoint')
+                    return "unknown tag <" + children[index].nodeName + "> for primtive with ID =  " + primitiveId;
+
+                var xx = this.reader.getFloat(children[index], 'xx');
+                var yy = this.reader.getFloat(children[index], 'yy');
+                var zz = this.reader.getFloat(children[index], 'zz');
+
+                vpoints.push([xx,yy,zz,1]);
+            }
+
+            upoints.push(vpoints);
+        }
+        return new MyPatch(this.scene,npartsU,npartsV,npointsU - 1,npointsV - 1,upoints);
+
+    }
+
     /**
      * Parses the <primitives> block.
      * @param {primitives block element} primitivesNode
@@ -845,9 +921,10 @@ export class MySceneGraph {
             // Validate the primitive type
             if (grandChildren.length != 1 ||
                 (grandChildren[0].nodeName != 'rectangle' && grandChildren[0].nodeName != 'triangle' &&
-                    grandChildren[0].nodeName != 'cylinder' && grandChildren[0].nodeName != 'sphere' &&
-                    grandChildren[0].nodeName != 'torus')) {
-                return "There must be exactly 1 primitive type (rectangle, triangle, cylinder, sphere or torus)"
+                    grandChildren[0].nodeName != 'cylinder' && grandChildren[0].nodeName != 'sphere' 
+                    && grandChildren[0].nodeName != 'plane' && grandChildren[0].nodeName != 'patch'
+                    && grandChildren[0].nodeName != 'circle')) {
+                return "There must be exactly 1 primitive type (rectangle, triangle, cylinder, sphere, plane, patch, circle)"
             }
 
             // Specifications for the current primitive.
@@ -971,6 +1048,40 @@ export class MySceneGraph {
 
                 this.primitives[primitiveId] = sphere;
             }
+            else if (primitiveType == 'circle') {
+
+                // radius
+                var radius = this.reader.getFloat(grandChildren[0], 'radius');
+                if (!(radius != null && !isNaN(radius)))
+                    return "unable to parse height of the primitive coordinates for ID = " + primitiveId;
+
+                // slices
+                var slices = this.reader.getFloat(grandChildren[0], 'slices');
+                if (!(slices != null && !isNaN(slices)))
+                    return "unable to parse slices of the primitive coordinates for ID = " + primitiveId;
+
+                var circle = new MyCircle(this.scene, radius, slices);
+
+                this.primitives[primitiveId] = circle;
+            }
+            else if (primitiveType == 'plane') {
+                var plane = this.parsePlane(primitiveId, grandChildren[0]);
+
+                if (typeof plane === 'string' || plane instanceof String)
+                    return plane;
+
+                this.primitives[primitiveId] = plane;
+
+            }
+            else if (primitiveType == 'patch') {
+                var patch = this.parsePatch(primitiveId, grandChildren[0]);
+
+                if (typeof patch === 'string' || patch instanceof String)
+                    return patch;
+
+                this.primitives[primitiveId] = patch;
+
+            }
             else {
                 console.warn("Unkown Primitive.");
             }
@@ -1023,7 +1134,7 @@ export class MySceneGraph {
             var textureIndex = nodeNames.indexOf("texture");
             var childrenIndex = nodeNames.indexOf("children"); // transf, material, texture, children
 
-
+            this.log(componentID)
             // Create current node and then add info to it
             this.components[componentID] = new MyComponentNode(this,componentID);
 

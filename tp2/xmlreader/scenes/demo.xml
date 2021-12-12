@@ -32,18 +32,18 @@
 
     <lights>
         <omni id="demoLight" enabled="1">
-            <location x="9.8" y="11.9" z="10" w="1.0" />
-            <ambient r="0" g="0" b="0" a="1.0" />
+            <location x="0" y="20" z="0" w="1.0" />
+            <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
             <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
             <specular r="1.0" g="1.0" b="1.0" a="1.0" />
         </omni>
 
-        <spot id="light_tall_lamp" enabled="1" angle="120" exponent="1"> <!-- TO DO -->
-            <location x="10" y="5" z="5" w="1" />
+        <spot id="light_tall_lamp" enabled="0" angle="120" exponent="1"> <!-- TO DO -->
+            <location x="0" y="20" z="0" w="1" />
             <target x="1" y="1" z="1" />
-            <ambient r="0" g="0" b="0" a="1.0" />
-            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
-            <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+            <ambient r="0.1" g="0.1" b="0.1" a="1.0" />
+            <diffuse r="0.1" g="0.1" b="0.1" a="1.0" />
+            <specular r="0.1" g="0.1" b="0.1" a="1.0" />
             <attenuation constant="1" linear="1" quadratic="1" />
         </spot>
     </lights>
@@ -52,6 +52,8 @@
         <texture id="tall_lamp_texture" file="vidral.jpg" />
         <texture id="tall_lamp_abajur_texture" file="vidral.jpg" />
         <texture id="television_desk_texture" file="trunk-image.jpg" />
+        <texture id="walls_texture" file="modern_bricks.jpg" />
+        <texture id="floor_texture" file="wood_floor.jpg" />
         <texture id="book_texture" file="vidral.jpg" />
         <texture id="table_texture" file="trunk-image.jpg" />
         <texture id="chair_texture" file="bank.jpg" />
@@ -81,6 +83,20 @@
             <ambient r="0.0" g="1.0" b="0.0" a="1.0" />
             <diffuse r="0.0" g="0.6" b="0.0" a="1.0" />
             <specular r="0.0" g="0.6" b="0.0" a="1.0" />
+        </material>
+
+        <material id="black_material" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.0" g="0.0" b="0.0" a="1.0" />
+            <diffuse r="0.0" g="0.0" b="0.0" a="1.0" />
+            <specular r="0.0" g="0.0" b="0.0" a="1.0" />
+        </material>
+
+        <material id="gray_material" shininess="100">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.4" g="0.4" b="0.4" a="1.0" />
+            <diffuse r="0.4" g="0.4" b="0.4" a="1.0" />
+            <specular r="0.4" g="0.4" b="0.4" a="1.0" />
         </material>
 
         <material id="tall_lamp_material" shininess="10">
@@ -269,7 +285,7 @@
             <translate x="0" y="0" z="0" />
             <scale x="5" y="3" z="0.1" />
         </transformation>
-        <transformation id="television_leg">
+        <transformation id="television_stand">
             <translate x="0" y="-1" z="-0.1" />
             <scale x="0.3" y="2" z="0.1" />
         </transformation>
@@ -278,58 +294,65 @@
             <scale x="2" y="0.2" z="1" />
         </transformation>
         <transformation id="couch">
-            <translate x="-7" y="0" z="7" />
-            <rotate axis="y" angle="45" />
+            <translate x="0" y="0" z="0" />
         </transformation>
         <transformation id="couch_corpse">
             <translate x="0" y="0" z="0" />
         </transformation>
         <transformation id="couch_back">
-            <translate x="-1" y="0" z="1" />
-            <scale x="5" y="3" z="1" />
+            <translate x="-1.5" y="2.65" z="0" />
+            <scale x="1" y="2" z="6" />
         </transformation>
         <transformation id="couch_bottom">
+            <translate x="0" y="0.9" z="0" />
+            <scale x="4" y="1.5" z="8" />
+        </transformation>
+        <transformation id="couch_side1">
+            <scale x="1" y="1" z="1" />
+        </transformation>
+        <transformation id="couch_side2">
             <rotate axis="x" angle="-45" />
-            <scale x="5" y="1" z="3" />
+            <scale x="1" y="1" z="1" />
         </transformation>
-        <transformation id="couch_side1_bot">
-            <translate x="-1.5" y="0" z="0.5" />
+        <transformation id="couch_side1_inside">
+            <translate x="5" y="3" z="5" />
             <rotate axis="y" angle="-90" />
-            <scale x="2" y="1" z="2" />
+            <scale x="0.1" y="0.15" z="1" />
         </transformation>
-        <transformation id="couch_side1_top">
-            <translate x="-1.5" y="2" z="0.5" />
+        <transformation id="couch_side1_outside">
+            <translate x="1" y="3" z="5" />
             <rotate axis="y" angle="-90" />
-            <scale x="2" y="1" z="2" />
+            <scale x="0.1" y="0.15" z="-1" />
         </transformation>
-        <transformation id="couch_side2_bot">
+        <transformation id="couch_side2_inside">
             <translate x="-0.5" y="0" z="1.5" />
             <rotate axis="y" angle="90" />
-            <scale x="2" y="1" z="2" />
+            <scale x="1" y="1" z="1" />
         </transformation>
-        <transformation id="couch_side2_top">
+        <transformation id="couch_side2_outside">
             <translate x="-0.5" y="2" z="1.5" />
             <rotate axis="y" angle="90" />
             <scale x="2" y="1" z="2" />
         </transformation>
-        <transformation id="couch_pillows">
-            <translate x="0" y="2" z="0" />
-        </transformation>
         <transformation id="couch_leg1">
-            <translate x="2" y="0" z="2" />
-            <scale x="1" y="0.2" z="1" />
+            <translate x="1.6" y="0.2" z="3" />
+            <rotate axis="x" angle="90" />
+            <scale x="0.2" y="0.2" z="0.2" />
         </transformation>
         <transformation id="couch_leg2">
-            <translate x="2" y="0" z="-2" />
-            <scale x="1" y="0.2" z="1" />
+            <translate x="1.6" y="0.2" z="-3" />
+            <rotate axis="x" angle="90" />
+            <scale x="0.2" y="0.2" z="0.2" />
         </transformation>
         <transformation id="couch_leg3">
-            <translate x="-2" y="0" z="2" />
-            <scale x="1" y="0.2" z="1" />
+            <translate x="-1.6" y="0.2" z="3" />
+            <rotate axis="x" angle="90" />
+            <scale x="0.2" y="0.2" z="0.2" />
         </transformation>
         <transformation id="couch_leg4">
-            <translate x="-2" y="0" z="-2" />
-            <scale x="1" y="0.2" z="1" />
+            <translate x="-1.6" y="0.2" z="-3" />
+            <rotate axis="x" angle="90" />
+            <scale x="0.2" y="0.2" z="0.2" />
         </transformation>
         <transformation id="chair">
             <translate x="1" y="0" z="1" />
@@ -435,7 +458,6 @@
         </transformation>
         <transformation id="wall_north">
             <translate x="0" y="5" z="-10" />
-            
             <scale x="30" y= "10" z= "1"/>
         </transformation>
         <transformation id="wall_east">
@@ -461,8 +483,70 @@
         <primitive id="cylinder">
             <cylinder height="1" topRadius="1" bottomRadius="1" stacks="10" slices="50"/>
         </primitive>
+        <primitive id="circle">
+            <circle radius="0.5" slices="50"/>
+        </primitive>
         <primitive id="sphere">
             <sphere radius="1" slices="50" stacks="50"/>
+        </primitive>
+        <primitive id="plane">
+            <plane npartsU="50" npartsV="50" />
+        </primitive>
+        <primitive id="jar">
+            <patch npointsU="4" npointsV="7" npartsU="50" npartsV="50">
+
+                <controlpoint xx="0.2" yy="1.0" zz="0" />
+                <controlpoint xx="0.3" yy="0.7" zz="0" />
+                <controlpoint xx="0.3" yy="0.45" zz="0" />
+                <controlpoint xx="0.3" yy="0.15" zz="0" />
+                <controlpoint xx="0.3" yy="-0.15" zz="0" />
+                <controlpoint xx="0.3" yy="-0.550" zz="0" />
+                <controlpoint xx="0.3" yy="-0.9" zz="0" />
+
+                <controlpoint xx="0.2" yy="1.0" zz="0.25" />
+                <controlpoint xx="0.2" yy="0.6" zz="0.35" />
+                <controlpoint xx="0.2" yy="0.25" zz="0.5" />
+                <controlpoint xx="0.2" yy="0.0" zz="1.15" />
+                <controlpoint xx="0.2" yy="-0.2" zz="0.5" />
+                <controlpoint xx="0.2" yy="-0.6" zz="-0.4" />
+                <controlpoint xx="0.3" yy="-0.9" zz="0.6" />
+
+                <controlpoint xx="-0.2" yy="1.0" zz="0.25" />
+                <controlpoint xx="-0.2" yy="0.6" zz="0.35" />
+                <controlpoint xx="-0.2" yy="0.25" zz="0.5" />
+                <controlpoint xx="-0.2" yy="0" zz="1.14" />
+                <controlpoint xx="-0.2" yy="-0.2" zz="0.5" />
+                <controlpoint xx="-0.2" yy="-0.6" zz="-0.4" />
+                <controlpoint xx="-0.3" yy="-0.9" zz="0.6" />
+
+                <controlpoint xx="-0.2" yy="1" zz="0" />
+                <controlpoint xx="-0.3" yy="0.7" zz="0" />
+                <controlpoint xx="-0.3" yy="0.45" zz="0" />
+                <controlpoint xx="-0.3" yy="0.15" zz="0" />
+                <controlpoint xx="-0.3" yy="-0.15" zz="0" />
+                <controlpoint xx="-0.3" yy="-0.550" zz="0" />
+                <controlpoint xx="-0.3" yy="-0.9" zz="0" />
+
+            </patch>
+        </primitive>
+        <primitive id="couch_side_curve">
+            <patch npointsU="2" npointsV="6" npartsU="50" npartsV="50">
+
+                <controlpoint xx="-9" yy="-4" zz="0" />
+                <controlpoint xx="-10" yy="10" zz="0" />
+                <controlpoint xx="-1.5" yy="8" zz="0" />
+                <controlpoint xx="5" yy="1" zz="0" />
+                <controlpoint xx="-7" yy="7.5" zz="0" />
+                <controlpoint xx="-4" yy="-4" zz="0" />
+
+                <controlpoint xx="-9" yy="-4" zz="4" />
+                <controlpoint xx="-10" yy="10" zz="4" />
+                <controlpoint xx="-1.5" yy="8" zz="4" />
+                <controlpoint xx="5" yy="1" zz="4" />
+                <controlpoint xx="-7" yy="7.5" zz="4" />
+                <controlpoint xx="-4" yy="-4" zz="4" />
+
+            </patch>
         </primitive>
     </primitives>
 
@@ -478,12 +562,100 @@
             <children>
                 <componentref id="tall_lamp" />
                 <componentref id="television_desk" />
-                <!--<componentref id="couch" />-->
+                <componentref id="couch" />
                 <!--<componentref id="chair" />-->
                 <componentref id="table" />
                 <componentref id="walls" />
+                <componentref id="jar" />
             </children>
         </component>
+
+        <!--Jar NURB component-->
+        <component id="jar">
+            <transformation>
+                <translate x="-10" y="3" z="7" />
+                <scale x="3" y="3" z="3"/>
+            </transformation>
+            <materials>
+                <material id="tall_lamp_material" />
+            </materials>
+            <texture id="tall_lamp_texture" length_s="1" length_t="2"/>
+            <children>
+                <componentref id="jar_inside"/>
+                <componentref id="jar_outside"/>
+                <componentref id="jar_bottom"/>
+            </children>
+        </component>
+
+        <component id="jar_inside">
+            <transformation>
+                <scale x="-1" y="1" z="1" />
+                <rotate axis="x" angle="180"/>
+            </transformation>
+            <materials>
+                <material id="tall_lamp_material" />
+            </materials>
+            <texture id="tall_lamp_texture" length_s="1" length_t="2"/>
+            <children>
+                <componentref id="jar_half1"/>
+                <componentref id="jar_half2"/>
+            </children>
+        </component>
+
+        <component id="jar_outside">
+            <transformation>
+                <rotate axis="x" angle="180"/>
+            </transformation>
+            <materials>
+                <material id="tall_lamp_material" />
+            </materials>
+            <texture id="tall_lamp_texture" length_s="1" length_t="2"/>
+            <children>
+                <componentref id="jar_half1"/>
+                <componentref id="jar_half2"/>
+            </children>
+        </component>
+        
+        <component id="jar_half1">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="tall_lamp_material" />
+            </materials>
+            <texture id="tall_lamp_texture" length_s="1" length_t="2"/>
+            <children>
+                <primitiveref id="jar"/>
+            </children>
+        </component>
+
+        <component id="jar_half2">
+            <transformation>
+                <rotate axis="y" angle="180"/>
+            </transformation>
+            <materials>
+                <material id="tall_lamp_material" />
+            </materials>
+            <texture id="tall_lamp_texture" length_s="1" length_t="2"/>
+            <children>
+                <primitiveref id="jar"/>
+            </children>
+        </component>
+
+        <component id="jar_bottom">
+            <transformation>
+                <translate x="0" y="-0.99" z="0" />
+                <rotate axis="x" angle="-90"/>
+                <scale x="0.4" y="0.4" z="0.4" />
+            </transformation>
+            <materials>
+                <material id="tall_lamp_material" />
+            </materials>
+            <texture id="tall_lamp_texture" length_s="1" length_t="2"/>
+            <children>
+                <primitiveref id="circle"/>
+            </children>
+        </component>
+
 
         <!-- Room Walls -->
         <component id="walls">
@@ -493,7 +665,7 @@
             <materials>
                 <material id="tall_lamp_material" />
             </materials>
-            <texture id="tall_lamp_texture" length_s="1" length_t="2"/>
+            <texture id="walls_texture" length_s="1" length_t="2"/>
             <children>
                 <componentref id="floor"/>
                 <!--<componentref id="ceiling"/>-->
@@ -512,7 +684,7 @@
             <materials>
                 <material id="tall_lamp_material" />
             </materials>
-            <texture id="none"/>
+            <texture id="floor_texture" length_s="1" length_t="2"/>
             <children>
                 <primitiveref id="rectangle"/>
             </children>
@@ -1024,12 +1196,12 @@
                 <transformationref id="television"/>
             </transformation>
             <materials>
-                <material id="television_material" />
+                <material id="black_material" />
             </materials>
-            <texture id="television_texture" length_s="1" length_t="2"/>
+            <texture id="none"/>
             <children>
                 <componentref id="television_screen"/>
-                <componentref id="television_leg"/>
+                <componentref id="television_stand"/>
                 <componentref id="television_base"/>
             </children>
         </component>
@@ -1050,12 +1222,12 @@
         </component>
 
         <!-- Television Leg -->
-        <component id="television_leg">
+        <component id="television_stand">
             <transformation>
-                <transformationref id="television_leg"/>
+                <transformationref id="television_stand"/>
             </transformation>
             <materials>
-                <material id="inherit" />
+                <material id="gray_material" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1069,7 +1241,7 @@
                 <transformationref id="television_base"/>
             </transformation>
             <materials>
-                <material id="inherit" />
+                <material id="gray_material" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1080,7 +1252,7 @@
         <!-- Couch -->
         <component id="couch">
             <transformation>
-                <transformationref id="couch"/>
+                <!--<transformationref id="couch"/>-->
             </transformation>
             <materials>
                 <material id="couch_material" />
@@ -1088,7 +1260,6 @@
             <texture id="couch_texture" length_s="1" length_t="2"/>
             <children>
                 <componentref id="couch_corpse"/>
-                <componentref id="couch_pillows"/>
                 <componentref id="couch_leg1"/>
                 <componentref id="couch_leg2"/>
                 <componentref id="couch_leg3"/>
@@ -1106,10 +1277,13 @@
             </materials>
             <texture id="inherit"/>
             <children>
-                <componentref id="couch_back"/>
                 <componentref id="couch_bottom"/>
+                <componentref id="couch_back"/>
                 <componentref id="couch_side1"/>
+                <!--
+                <componentref id="couch_pillows"/>
                 <componentref id="couch_side2"/>
+                -->
             </children>
         </component>
 
@@ -1141,38 +1315,68 @@
             </children>
         </component>
 
-        <!-- Couch Side1 Bot-->
-        <component id="couch_side1_bot">
+        <!-- Couch Side1-->
+        <component id="couch_side1">
             <transformation>
-                <transformationref id="couch_side1_bot"/>
+                <transformationref id="couch_side1"/>
             </transformation>
             <materials>
                 <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
-                <componentref id="cube"/>
+                <componentref id="couch_side1_inside"/>
+                <componentref id="couch_side1_outside"/>
+            </children>
+        </component>
+
+        <!-- Couch Side2-->
+        <component id="couch_side2">
+            <transformation>
+                <transformationref id="couch_side2"/>
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="inherit"/>
+            <children>
+                <componentref id="couch_side2_inside"/>
+                <componentref id="couch_side2_outside"/>
+            </children>
+        </component>
+
+        <!-- Couch Side1 Bot-->
+        <component id="couch_side1_inside">
+            <transformation>
+                <transformationref id="couch_side1_inside"/>
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="inherit"/>
+            <children>
+                <primitiveref id="couch_side_curve"/>
             </children>
         </component>
 
         <!-- Couch Side1 Top-->
-        <component id="couch_side1_top">
+        <component id="couch_side1_outside">
             <transformation>
-                <transformationref id="couch_side1_top"/>
+                <transformationref id="couch_side1_outside"/>
             </transformation>
             <materials>
                 <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
-                <primitiveref id="cylinder"/> 
+                <primitiveref id="couch_side_curve"/> 
             </children>
         </component>
 
         <!-- Couch Side2 Bot-->
-        <component id="couch_side2_bot">
+        <component id="couch_side2_inside">
             <transformation>
-                <transformationref id="couch_side2_bot"/>
+                <transformationref id="couch_side2_inside"/>
             </transformation>
             <materials>
                 <material id="inherit" />
@@ -1184,9 +1388,9 @@
         </component>
 
         <!-- Couch Side2 Top-->
-        <component id="couch_side2_top">
+        <component id="couch_side2_outside">
             <transformation>
-                <transformationref id="couch_side2_top"/>
+                <transformationref id="couch_side2_outside"/>
             </transformation>
             <materials>
                 <material id="inherit" />
@@ -1200,7 +1404,6 @@
         <!-- Couch Pillows -->
         <component id="couch_pillows">
             <transformation>
-                <transformationref id="couch_pillows"/>
             </transformation>
             <materials>
                 <material id="inherit" />
@@ -1214,6 +1417,58 @@
             </children>
         </component>
 
+        <!-- Couch Top Pillow 1 -->
+        <component id="couch_top_pillow1">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="inherit"/>
+            <children>
+                <componentref id="cube"/>
+            </children>
+        </component>
+
+         <!-- Couch Top Pillow 2 -->
+        <component id="couch_top_pillow2">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="inherit"/>
+            <children>
+                <componentref id="cube"/>
+            </children>
+        </component>
+
+        <!-- Couch Back Pillow 1 -->
+        <component id="couch_back_pillow1">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="inherit"/>
+            <children>
+                <componentref id="cube"/>
+            </children>
+        </component>
+
+        <!-- Couch Back Pillow 2 -->
+        <component id="couch_back_pillow2">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="inherit"/>
+            <children>
+                <componentref id="cube"/>
+            </children>
+        </component>
+
         <!-- Couch Leg -->
         <component id="couch_leg1">
             <transformation>
@@ -1224,7 +1479,7 @@
             </materials>
             <texture id="inherit"/>
             <children>
-                <componentref id="cube"/>
+                <primitiveref id="cylinder"/>
             </children>
         </component>
 
@@ -1237,7 +1492,7 @@
             </materials>
             <texture id="inherit"/>
             <children>
-                <componentref id="cube"/>
+                <primitiveref id="cylinder"/>
             </children>
         </component>
 
@@ -1250,7 +1505,7 @@
             </materials>
             <texture id="inherit"/>
             <children>
-                <componentref id="cube"/>
+                <primitiveref id="cylinder"/>
             </children>
         </component>
 
@@ -1263,7 +1518,7 @@
             </materials>
             <texture id="inherit"/>
             <children>
-                <componentref id="cube"/>
+                <primitiveref id="cylinder"/>
             </children>
         </component>
 

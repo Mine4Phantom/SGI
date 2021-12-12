@@ -31,19 +31,28 @@
     </ambient>
 
     <lights>
-        <omni id="demoLight" enabled="1">
+        <omni id="demoLight" enabled="0">
             <location x="0" y="20" z="0" w="1.0" />
             <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
             <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
             <specular r="1.0" g="1.0" b="1.0" a="1.0" />
         </omni>
 
-        <spot id="light_tall_lamp" enabled="0" angle="120" exponent="1"> <!-- TO DO -->
-            <location x="0" y="20" z="0" w="1" />
-            <target x="1" y="1" z="1" />
-            <ambient r="0.1" g="0.1" b="0.1" a="1.0" />
-            <diffuse r="0.1" g="0.1" b="0.1" a="1.0" />
-            <specular r="0.1" g="0.1" b="0.1" a="1.0" />
+        <spot id="lamp1" enabled="1" angle="180" exponent="1"> <!-- TO DO -->
+            <location x="-5" y="20" z="0" w="1" />
+            <target x="0" y="0" z="0" />
+            <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+            <diffuse r="0.3" g="0.3" b="0.3" a="1.0" />
+            <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+            <attenuation constant="1" linear="1" quadratic="1" />
+        </spot>
+
+        <spot id="lamp2" enabled="1" angle="180" exponent="1"> <!-- TO DO -->
+            <location x="5" y="20" z="0" w="1" />
+            <target x="0" y="0" z="0" />
+            <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+            <diffuse r="0.3" g="0.3" b="0.3" a="1.0" />
+            <specular r="0.6" g="0.6" b="0.6" a="1.0" />
             <attenuation constant="1" linear="1" quadratic="1" />
         </spot>
     </lights>
@@ -53,12 +62,15 @@
         <texture id="tall_lamp_abajur_texture" file="vidral.jpg" />
         <texture id="television_desk_texture" file="trunk-image.jpg" />
         <texture id="walls_texture" file="modern_bricks.jpg" />
+        <texture id="vase_texture" file="stripes_vase.jpg" />
         <texture id="floor_texture" file="wood_floor.jpg" />
         <texture id="book_texture" file="vidral.jpg" />
-        <texture id="table_texture" file="trunk-image.jpg" />
         <texture id="chair_texture" file="bank.jpg" />
         <texture id="television_texture" file="vidral.jpg" />
-        <texture id="couch_texture" file="vidral.jpg" />
+        <texture id="couch_texture" file="couch_fabric.jpg" />
+        <texture id="door_texture" file="door.jpg" />
+        <texture id="table_texture" file="table_texture.jpg" />
+        <texture id="rug_texture" file="rug.jpg" />
         <texture id="demoTexture" file="rocks.jpg" /> <!-- Do not delete, needed for 'none' texture -->
         <texture id="demoTexture2" file="leaves.jpg" />
     </textures>
@@ -94,9 +106,37 @@
 
         <material id="gray_material" shininess="100">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
-            <ambient r="0.4" g="0.4" b="0.4" a="1.0" />
+            <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
             <diffuse r="0.4" g="0.4" b="0.4" a="1.0" />
             <specular r="0.4" g="0.4" b="0.4" a="1.0" />
+        </material>
+
+        <material id="wall_material" shininess="100">
+            <emission r="0.2" g="0.2" b="0.2" a="1.0" />
+            <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+            <diffuse r="0.9" g="0.9" b="0.9" a="1.0" />
+            <specular r="0.1" g="0.1" b="0.1" a="1.0" />
+        </material>
+
+        <material id="rug_material" shininess="1">
+            <emission r="0.1" g="0.1" b="0.1" a="1.0" />
+            <ambient r="0.3" g="0.3" b="0.3" a="1.0" />
+            <diffuse r="0.1" g="0.1" b="0.1" a="1.0" />
+            <specular r="0.1" g="0.1" b="0.1" a="1.0" />
+        </material>
+
+        <material id="floor_material" shininess="100">
+            <emission r="0.2" g="0.2" b="0.2" a="1.0" />
+            <ambient r="0.4" g="0.4" b="0.4" a="1.0" />
+            <diffuse r="0.3" g="0.3" b="0.3" a="1.0" />
+            <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+        </material>
+
+        <material id="table_material" shininess="10">
+            <emission r="0.1" g="0" b="0" a="1.0" />
+            <ambient r="0.5" g="0.4" b="0.4" a="1.0" />
+            <diffuse r="0.3" g="0.3" b="0.3" a="1.0" />
+            <specular r="0.3" g="0.3" b="0.3" a="1.0" />
         </material>
 
         <material id="tall_lamp_material" shininess="10">
@@ -134,11 +174,11 @@
             <specular r="0.6" g="0.6" b="0.6" a="1.0" />
         </material>
 
-        <material id="couch_material" shininess="10">
-            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
-            <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
-            <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
-            <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+        <material id="couch_material" shininess="5">
+            <emission r="0.2" g="0.2" b="0.2" a="1.0" />
+            <ambient r="0.3" g="0.3" b="0.3" a="1.0" />
+            <diffuse r="0.3" g="0.3" b="0.3" a="1.0" />
+            <specular r="0.1" g="0.1" b="0.1" a="1.0" />
         </material>
 
         <material id="chair_material" shininess="10">
@@ -148,6 +188,12 @@
             <specular r="0.6" g="0.6" b="0.6" a="1.0" />
         </material>
 
+        <material id="door_material" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.4" g="0.4" b="0.4" a="1.0" />
+            <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
+            <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+        </material>
     </materials>
 
     <transformations>
@@ -294,24 +340,27 @@
             <scale x="2" y="0.2" z="1" />
         </transformation>
         <transformation id="couch">
-            <translate x="0" y="0" z="0" />
+            <translate x="2" y="0" z="0" />
         </transformation>
         <transformation id="couch_corpse">
             <translate x="0" y="0" z="0" />
         </transformation>
         <transformation id="couch_back">
             <translate x="-1.5" y="2.65" z="0" />
-            <scale x="1" y="2" z="6" />
+            <rotate axis="z" angle="5" />
+            <scale x="1" y="2" z="7" />
         </transformation>
         <transformation id="couch_bottom">
             <translate x="0" y="0.9" z="0" />
-            <scale x="4" y="1.5" z="8" />
+            <scale x="4" y="1.5" z="7.2" />
         </transformation>
         <transformation id="couch_side1">
+            <translate x="-3" y="-0.8" z="-1" />
             <scale x="1" y="1" z="1" />
         </transformation>
         <transformation id="couch_side2">
-            <rotate axis="x" angle="-45" />
+            <translate x="3" y="-0.8" z="-9" />
+            <rotate axis="y" angle="180" />
             <scale x="1" y="1" z="1" />
         </transformation>
         <transformation id="couch_side1_inside">
@@ -325,14 +374,14 @@
             <scale x="0.1" y="0.15" z="-1" />
         </transformation>
         <transformation id="couch_side2_inside">
-            <translate x="-0.5" y="0" z="1.5" />
-            <rotate axis="y" angle="90" />
-            <scale x="1" y="1" z="1" />
+            <translate x="5" y="3" z="-5" />
+            <rotate axis="y" angle="-90" />
+            <scale x="0.1" y="0.15" z="1" />
         </transformation>
         <transformation id="couch_side2_outside">
-            <translate x="-0.5" y="2" z="1.5" />
-            <rotate axis="y" angle="90" />
-            <scale x="2" y="1" z="2" />
+            <translate x="1" y="3" z="-5" />
+            <rotate axis="y" angle="-90" />
+            <scale x="0.1" y="0.15" z="-1" />
         </transformation>
         <transformation id="couch_leg1">
             <translate x="1.6" y="0.2" z="3" />
@@ -391,8 +440,8 @@
                 <scale x="0.15" y="2" z="0.15"/>
         </transformation>
         <transformation id="table">
-            <translate x="-5" y="0" z="-5" />
-            <scale x="1" y="1" z="1" />
+            <translate x="7" y="0" z="0" />
+            <scale x="0.7" y="0.8" z="1" />
         </transformation>
         <transformation id="table_leg1">
             <translate x="2" y="0.75" z="2" />
@@ -492,7 +541,7 @@
         <primitive id="plane">
             <plane npartsU="50" npartsV="50" />
         </primitive>
-        <primitive id="jar">
+        <primitive id="vase">
             <patch npointsU="4" npointsV="7" npartsU="50" npartsV="50">
 
                 <controlpoint xx="0.2" yy="1.0" zz="0" />
@@ -566,82 +615,117 @@
                 <!--<componentref id="chair" />-->
                 <componentref id="table" />
                 <componentref id="walls" />
-                <componentref id="jar" />
+                <componentref id="vase" />
+                <componentref id="door" />
+                <componentref id="rug" />
             </children>
         </component>
 
-        <!--Jar NURB component-->
-        <component id="jar">
+        <!--Door -->
+        <component id="door">
             <transformation>
-                <translate x="-10" y="3" z="7" />
-                <scale x="3" y="3" z="3"/>
+                <translate x="-10" y="3.5" z="9.9" />
+                <rotate axis="y" angle="180" />
+                <scale x="4" y="8" z="0.1" />
+            </transformation>
+            <materials>
+                <material id="door_material" />
+            </materials>
+            <texture id="door_texture" length_s="1" length_t="2"/>
+            <children>
+                <primitiveref id="rectangle"/>
+            </children>
+        </component>
+
+        <!--Door -->
+        <component id="rug">
+            <transformation>
+                <translate x="-7" y="0.1" z="0" />
+                <rotate axis="x" angle="-90" />
+                <scale x="7" y="10" z="1" />
+            </transformation>
+            <materials>
+                <material id="rug_material" />
+            </materials>
+            <texture id="rug_texture" length_s="1" length_t="2"/>
+            <children>
+                <primitiveref id="rectangle"/>
+            </children>
+        </component>
+
+        <!--vase NURB component-->
+        <component id="vase">
+            <transformation>
+                <translate x="12" y="2" z="-7" />
+                <rotate axis="y" angle="35" />
+                <scale x="2.2" y="2" z="2"/>
             </transformation>
             <materials>
                 <material id="tall_lamp_material" />
             </materials>
-            <texture id="tall_lamp_texture" length_s="1" length_t="2"/>
+            <texture id="vase_texture" length_s="1" length_t="2"/>
             <children>
-                <componentref id="jar_inside"/>
-                <componentref id="jar_outside"/>
-                <componentref id="jar_bottom"/>
+                <componentref id="vase_inside"/>
+                <componentref id="vase_outside"/>
+                <componentref id="vase_bottom"/>
             </children>
         </component>
 
-        <component id="jar_inside">
+        <component id="vase_inside">
             <transformation>
                 <scale x="-1" y="1" z="1" />
                 <rotate axis="x" angle="180"/>
             </transformation>
             <materials>
-                <material id="tall_lamp_material" />
+                <material id="inherit" />
             </materials>
-            <texture id="tall_lamp_texture" length_s="1" length_t="2"/>
+            <texture id="inherit"/>
             <children>
-                <componentref id="jar_half1"/>
-                <componentref id="jar_half2"/>
+                <componentref id="vase_half1"/>
+                <componentref id="vase_half2"/>
             </children>
         </component>
 
-        <component id="jar_outside">
+        <component id="vase_outside">
             <transformation>
                 <rotate axis="x" angle="180"/>
             </transformation>
             <materials>
                 <material id="tall_lamp_material" />
             </materials>
-            <texture id="tall_lamp_texture" length_s="1" length_t="2"/>
+            <texture id="inherit"/>
             <children>
-                <componentref id="jar_half1"/>
-                <componentref id="jar_half2"/>
+                <componentref id="vase_half1"/>
+                <componentref id="vase_half2"/>
             </children>
         </component>
         
-        <component id="jar_half1">
+        <component id="vase_half1">
             <transformation>
             </transformation>
             <materials>
                 <material id="tall_lamp_material" />
             </materials>
-            <texture id="tall_lamp_texture" length_s="1" length_t="2"/>
+            <texture id="inherit"/>
             <children>
-                <primitiveref id="jar"/>
+                <primitiveref id="vase"/>
             </children>
         </component>
 
-        <component id="jar_half2">
+        <component id="vase_half2">
             <transformation>
                 <rotate axis="y" angle="180"/>
             </transformation>
             <materials>
                 <material id="tall_lamp_material" />
             </materials>
-            <texture id="tall_lamp_texture" length_s="1" length_t="2"/>
+            <texture id="inherit"/>
             <children>
-                <primitiveref id="jar"/>
+                <primitiveref id="vase"/>
             </children>
         </component>
 
-        <component id="jar_bottom">
+        <component id="vase_bottom">
             <transformation>
                 <translate x="0" y="-0.99" z="0" />
                 <rotate axis="x" angle="-90"/>
@@ -650,7 +734,7 @@
             <materials>
                 <material id="tall_lamp_material" />
             </materials>
-            <texture id="tall_lamp_texture" length_s="1" length_t="2"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="circle"/>
             </children>
@@ -663,7 +747,7 @@
                 <transformationref id="walls"/>
             </transformation>
             <materials>
-                <material id="tall_lamp_material" />
+                <material id="wall_material" />
             </materials>
             <texture id="walls_texture" length_s="1" length_t="2"/>
             <children>
@@ -679,12 +763,41 @@
         <!-- Room Floor -->
         <component id="floor">
             <transformation>
+                
+            </transformation>
+            <materials>
+                <material id="floor_material" />
+            </materials>
+            <texture id="floor_texture" length_s="1" length_t="2"/>
+            <children>
+                <componentref id="floor_top"/>
+                <componentref id="floor_bot"/>
+            </children>
+        </component>
+
+        <component id="floor_top">
+            <transformation>
                 <transformationref id="floor"/>
             </transformation>
             <materials>
-                <material id="tall_lamp_material" />
+                <material id="inherit" />
             </materials>
-            <texture id="floor_texture" length_s="1" length_t="2"/>
+            <texture id="inherit"/>
+            <children>
+                <primitiveref id="rectangle"/>
+            </children>
+        </component>
+
+        <component id="floor_bot">
+            <transformation>
+                <translate x="0" y="0" z="0" />
+                <rotate axis="x" angle="90" />
+                <scale x="30" y= "20" z= "1"/>
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="rectangle"/>
             </children>
@@ -710,7 +823,7 @@
                 <transformationref id="wall_west"/>
             </transformation>
             <materials>
-                <material id="tall_lamp_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -724,7 +837,7 @@
                 <transformationref id="wall_north"/>
             </transformation>
             <materials>
-                <material id="tall_lamp_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -738,7 +851,7 @@
                 <transformationref id="wall_east"/>
             </transformation>
             <materials>
-                <material id="tall_lamp_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -752,7 +865,7 @@
                 <transformationref id="wall_south"/>
             </transformation>
             <materials>
-                <material id="tall_lamp_material" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1252,7 +1365,7 @@
         <!-- Couch -->
         <component id="couch">
             <transformation>
-                <!--<transformationref id="couch"/>-->
+                <transformationref id="couch"/>
             </transformation>
             <materials>
                 <material id="couch_material" />
@@ -1280,9 +1393,9 @@
                 <componentref id="couch_bottom"/>
                 <componentref id="couch_back"/>
                 <componentref id="couch_side1"/>
+                <componentref id="couch_side2"/>
                 <!--
                 <componentref id="couch_pillows"/>
-                <componentref id="couch_side2"/>
                 -->
             </children>
         </component>
@@ -1383,7 +1496,7 @@
             </materials>
             <texture id="inherit"/>
             <children>
-                <componentref id="cube"/>
+                <primitiveref id="couch_side_curve"/>
             </children>
         </component>
 
@@ -1397,7 +1510,7 @@
             </materials>
             <texture id="inherit"/>
             <children>
-                <primitiveref id="cylinder"/> 
+                <primitiveref id="couch_side_curve"/> 
             </children>
         </component>
 
@@ -1661,7 +1774,7 @@
                 <transformationref id="table"/>
             </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="table_material" />
             </materials>
             <texture id="table_texture" length_s="1" length_t="2"/>
             <children>

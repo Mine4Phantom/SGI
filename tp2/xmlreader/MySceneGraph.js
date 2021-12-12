@@ -262,7 +262,7 @@ export class MySceneGraph {
         if (axis_length == null)
             this.onXMLMinorError("no axis_length defined for scene; assuming 'length = 1'");
 
-        this.referenceLength = axis_length || 1;
+        this.referenceLength = axis_length;
 
         this.log("Parsed scene");
 

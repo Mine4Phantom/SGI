@@ -1,5 +1,5 @@
 <lxs>
-    <scene root="root" axis_length="5"/>
+    <scene root="root" axis_length="0"/>
 
     <views default="defaultCamera2">
         <perspective id="defaultCamera2" near="0.1" far="500" angle="45">
@@ -39,22 +39,31 @@
             <attenuation constant="0" linear="0.2" quadratic="0" />
         </omni>
 
-        <spot id="lamp1" enabled="1" angle="180" exponent="1">
+        <spot id="lamp1" enabled="true" angle="180" exponent="1">
             <location x="-5" y="20" z="0" w="1" />
-            <target x="0" y="0" z="0" />
+            <target x="-5" y="0" z="0" />
             <ambient r="0.15" g="0.15" b="0.15" a="1.0" />
             <diffuse r="0.8" g="0.8" b="0.8" a="1.0" />
             <specular r="0.5" g="0.5" b="0.5" a="1.0" />
-            <attenuation constant="1" linear="1" quadratic="1" />
+            <attenuation constant="0.2" linear="0.05" quadratic="0" />
         </spot>
 
-        <spot id="lamp2" enabled="1" angle="180" exponent="1">
+        <spot id="lamp2" enabled="true" angle="180" exponent="1">
             <location x="5" y="20" z="0" w="1" />
+            <target x="5" y="0" z="0" />
+            <ambient r="0.15" g="0.15" b="0.15" a="1.0" />
+            <diffuse r="0.8" g="0.8" b="0.8" a="1.0" />
+            <specular r="0.5" g="0.5" b="0.5" a="1.0" />
+            <attenuation constant="0.2" linear="0.03" quadratic="0" />
+        </spot>
+
+        <spot id="lamp3" enabled="true" angle="180" exponent="1">
+            <location x="0" y="20" z="0" w="1" />
             <target x="0" y="0" z="0" />
             <ambient r="0.15" g="0.15" b="0.15" a="1.0" />
             <diffuse r="0.8" g="0.8" b="0.8" a="1.0" />
             <specular r="0.5" g="0.5" b="0.5" a="1.0" />
-            <attenuation constant="1" linear="1" quadratic="1" />
+            <attenuation constant="0.2" linear="0.03" quadratic="0" />
         </spot>
     </lights>
 
@@ -187,7 +196,7 @@
         <material id="couch_material" shininess="5">
             <emission r="0" g="0" b="0" a="1.0" />
             <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
-            <diffuse r="0.3" g="0.3" b="0.3" a="1.0" />
+            <diffuse r="0.1" g="0.1" b="0.1" a="1.0" />
             <specular r="0.1" g="0.1" b="0.1" a="1.0" />
         </material>
 
@@ -218,11 +227,18 @@
             <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
             <specular r="0.6" g="0.6" b="0.6" a="1.0" />
         </material>
+
+        <material id="tall_lamp_ball_material" shininess="10">
+            <emission r="0.5" g="0.5" b="0.5" a="1.0" />
+            <ambient r="1" g="1" b="1" a="1" />
+            <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
+            <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+        </material>
     </materials>
 
     <transformations>
         <transformation id="tall_lamp">
-            <translate x="-10" y="0.1" z="-6" />
+            <translate x="12" y="0.1" z="7" />
         </transformation>
         <transformation id="tall_lamp_body">
             <translate x="0" y="0" z="0" />
@@ -238,7 +254,7 @@
             <scale x="0.1" y="0.1" z="3" />
         </transformation>
         <transformation id="tall_lamp_junction">
-            <translate x="0" y="4.5" z="0" />
+            <translate x="0" y="4.3" z="0" />
             <scale x="1" y="1" z="1" />
         </transformation>
         <transformation id="tall_lamp_horizontal_pole">
@@ -654,7 +670,8 @@
         <!-- Flag -->
         <component id="flags">
             <transformation>
-                <translate x="2" y="3" z="9.9" />
+                <translate x="-14.9" y="3" z="0" />
+                <rotate axis="y" angle="90" />
                 <scale x="0.9" y= "0.9" z= "0.9"/>
             </transformation>
             <materials>
@@ -1200,7 +1217,7 @@
                 <transformationref id="tall_lamp"/>
             </transformation>
             <materials>
-                <material id="tall_lamp_material" />
+                <material id="gray_material" />
               
                 <material id="demoMaterialBlue" />
                 <material id="demoMaterialGreen" />
@@ -1235,13 +1252,13 @@
                 <transformationref id="tall_lamp_base"/>
             </transformation>
             <materials>
-                <material id="inherit" />
+                <material id="shelf_support_material" />
                 <material id="demoMaterialGreen" />
                 <material id="demoMaterial" />
                 <material id="demoMaterialBlue" />
     
             </materials>
-            <texture id="inherit"/>
+            <texture id="none"/>
             <children>
                 <primitiveref id="cylinder"/> <!-- Almost flat cylinder as base -->
             </children>
@@ -1267,9 +1284,9 @@
                 <transformationref id="tall_lamp_junction"/>
             </transformation>
             <materials>
-                <material id="inherit" />
+                <material id="tall_lamp_ball_material" />
             </materials>
-            <texture id="inherit"/>
+            <texture id="none"/>
             <children>
                 <primitiveref id="sphere"/>
             </children>

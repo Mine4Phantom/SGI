@@ -25,7 +25,13 @@ export class MyInterface extends CGFinterface {
 
         // add a group of controls (and open/expand by defult)
 
+        //this.gui.add(this.scene, 'axis').name("Display axis");
         this.initKeys();
+
+        var f1 = this.gui.addFolder('Lights');
+        f1.add(this.scene.lights[0], 'enabled').name('Light 1');
+        f1.add(this.scene.lights[1], 'enabled').name('Light 2');
+        f1.add(this.scene.lights[2], 'enabled').name('Light 3');
 
         return true;
     }

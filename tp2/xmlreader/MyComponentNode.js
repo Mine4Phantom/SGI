@@ -29,8 +29,6 @@ export class MyComponentNode extends CGFobject {
 		this.textureS = 1;
 		this.textureT = 1;
 
-		this.actualS = 1;
-		this.actualT = 1;
 
 		this.transformMatrix = mat4.create();
 		mat4.identity(this.transformMatrix);
@@ -43,8 +41,7 @@ export class MyComponentNode extends CGFobject {
 	addLenghtST(lenght_S, lenght_T){
 		this.textureS = lenght_S;
 		this.textureT = lenght_T;
-		this.actualS = lenght_S;
-		this.actualT = lenght_T;
+
 	}
 
 	/**
@@ -71,34 +68,38 @@ export class MyComponentNode extends CGFobject {
 	 * @param  {[Texture]} currTextureID father texture
 	 * @param  {[Material]} currMaterialID father material
 	 */
-	display(currTextureID, currMaterialID) {
+	display(currTextureID, currMaterialID, currS, currT) {
 
 		this.scene.pushMatrix();
 		this.scene.multMatrix(this.transformMatrix);
 
 		var newTextureID = this.textureID;
 		var newMaterialID;
+		var newS = this.textureS;
+		var newT = this.textureT;
 
 		newMaterialID = this.materials[this.graph.currentMaterialIndex % this.materials.length]; // loop the material
 
 		if(newMaterialID == "inherit")
 			newMaterialID = currMaterialID;
 
-		if(newTextureID == "inherit")
+		if(newTextureID == "inherit"){
 			newTextureID = currTextureID;
-		
+			newS = currS;
+			newT = currT;
+		}
 
-		this.displayPrimitives(newTextureID,newMaterialID);
+		this.displayPrimitives(newTextureID,newMaterialID,newS,newT);
 		
 		for(var j=0; j < this.children.length; j++){
 			
-			this.graph.components[this.children[j]].display(newTextureID,newMaterialID);
+			this.graph.components[this.children[j]].display(newTextureID,newMaterialID, newS, newT);
 		}
 
 		this.scene.popMatrix();
 	}
 
-	displayPrimitives(newTextureID, newMaterialID) {
+	displayPrimitives(newTextureID, newMaterialID, newS, newT) {
 
 		this.graph.materials[newMaterialID].apply();
 
@@ -109,9 +110,12 @@ export class MyComponentNode extends CGFobject {
 
 		for(var i=0;i < this.primitives.length;i++){
 			if(newTextureID != "none" && newTextureID != null){
-				this.textureS = this.actualS;
-				this.textureT = this.actualT;
-				this.primitives[i].updateTexCoords(this.textureS,this.textureT);
+				//console.log(this.nodeID)
+				//console.log(newS)
+				//console.log(newT)
+				//exit()
+
+				this.primitives[i].updateTexCoords(newS,newT);
 			}
 
 			this.primitives[i].display();

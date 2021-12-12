@@ -41,7 +41,7 @@
 
 
      updateTexCoords(factor_s, factor_t) {
-        if(this.nodeID == "rectangle" ) // || this.nodeID == "triangle"
+        if(this.nodeID == "rectangle" || this.nodeID == "triangle")
            this.graph.primitives[this.nodeID].updateTexCoords(factor_s,factor_t);
    }
  

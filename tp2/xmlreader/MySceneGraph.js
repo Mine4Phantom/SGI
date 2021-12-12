@@ -945,7 +945,7 @@ export class MySceneGraph {
                 (grandChildren[0].nodeName != 'rectangle' && grandChildren[0].nodeName != 'triangle' &&
                     grandChildren[0].nodeName != 'cylinder' && grandChildren[0].nodeName != 'sphere' 
                     && grandChildren[0].nodeName != 'plane' && grandChildren[0].nodeName != 'patch'
-                    && grandChildren[0].nodeName != 'circle')) {
+                    && grandChildren[0].nodeName != 'circle' && grandChildren[0].nodeName != 'cylinder2')) {
                 return "There must be exactly 1 primitive type (rectangle, triangle, cylinder, sphere, plane, patch, circle)"
             }
 
@@ -1085,6 +1085,38 @@ export class MySceneGraph {
                 var circle = new MyCircle(this.scene, radius, slices);
 
                 this.primitives[primitiveId] = circle;
+            }
+            else if (primitiveType == 'cylinder2') {
+
+                // height
+                var height = this.reader.getFloat(grandChildren[0], 'height');
+                if (!(height != null && !isNaN(height)))
+                    return "unable to parse height of the primitive coordinates for ID = " + primitiveId;
+
+                // topRadius
+                var topRadius = this.reader.getFloat(grandChildren[0], 'topRadius');
+                if (!(topRadius != null && !isNaN(topRadius)))
+                    return "unable to parse topRadius of the primitive coordinates for ID = " + primitiveId;
+
+                // bottomRadius
+                var bottomRadius = this.reader.getFloat(grandChildren[0], 'bottomRadius');
+                if (!(bottomRadius != null && !isNaN(bottomRadius)))
+                    return "unable to parse bottomRadius of the primitive coordinates for ID = " + primitiveId;
+
+                // stacks
+                var stacks = this.reader.getFloat(grandChildren[0], 'stacks');
+                if (!(stacks != null && !isNaN(stacks)))
+                    return "unable to parse stacks of the primitive coordinates for ID = " + primitiveId;
+
+                // slices
+                var slices = this.reader.getFloat(grandChildren[0], 'slices');
+                if (!(slices != null && !isNaN(slices)))
+                    return "unable to parse slices of the primitive coordinates for ID = " + primitiveId;
+
+
+                var cylinder = new MyCylinder(this.scene, height, topRadius, bottomRadius, stacks, slices);
+
+                this.primitives[primitiveId] = cylinder;
             }
             else if (primitiveType == 'plane') {
                 var plane = this.parsePlane(primitiveId, grandChildren[0]);

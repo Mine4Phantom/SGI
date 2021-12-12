@@ -1,5 +1,4 @@
 import { CGFnurbsObject, CGFnurbsSurface, CGFobject } from "../../lib/CGF.js";
-import { MyPrimitiveNode } from "../../xmlreader/MyPrimitiveNode.js";
 
 /**
  * MyPatch represents a NURBS surface that is constructed from a given set of control points.

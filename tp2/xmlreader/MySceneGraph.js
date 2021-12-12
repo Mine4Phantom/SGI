@@ -1189,7 +1189,6 @@ export class MySceneGraph {
             var textureIndex = nodeNames.indexOf("texture");
             var childrenIndex = nodeNames.indexOf("children"); // transf, material, texture, children
 
-            this.log(componentID)
             // Create current node and then add info to it
             this.components[componentID] = new MyComponentNode(this,componentID);
 

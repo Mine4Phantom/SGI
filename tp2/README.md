@@ -23,20 +23,28 @@ Overall we believe we achieved all goals required and that we managed to produce
 ### 1 - Overall View
 
 * Scene 1
+
 ![scene](/uploads/6abee140aa7639da4552b32389e07eb6/scene.png)
 
 * Scene 2
+
 ![scene2](/uploads/2e40e85dbe283e40fe30691699a07d0f/scene2.png)
+
+* Scene 3
+
+![door](/uploads/f7bb09628f67f53eaef560072b6e4d0c/door.png)
 
 
 
 ### 2 - Specific objects
 * TV and Furniture
+
 ![tv](/uploads/51edeb7905d33c554c3e4310e4a7072e/tv.png)
 
 * Vase
+
 ![vase](/uploads/6e4fb68d88cde13bdf7f4d457dccda76/vase.png)
 
 * Lamp
-![lamp](/uploads/ce51841f907c420a2075f5dc03fe9872/lamp.png)
 
+![lamp](/uploads/ce51841f907c420a2075f5dc03fe9872/lamp.png)

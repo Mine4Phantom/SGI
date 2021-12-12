@@ -7,11 +7,12 @@ import { MyRectangle } from '../primitives/MyRectangle.js';
 import { MyTriangle } from '../primitives/MyTriangle.js';
 import { MyCylinder } from '../primitives/MyCylinder.js';
 import { MySphere } from '../primitives/MySphere.js';
+import { MyCircle } from '../primitives/MyCircle.js';
 import { MyComponentNode } from './MyComponentNode.js';
 import { MyPrimitiveNode } from './MyPrimitiveNode.js';
 import { MyPatch } from '../primitives/nurbs/MyPatch.js';
 import { MyPlane } from '../primitives/nurbs/MyPlane.js';
-import { MyCircle } from '../primitives/MyCircle.js';
+import { MyCylinder2 } from '../primitives/nurbs/MyCylinder2.js';
 
 var DEGREE_TO_RAD = Math.PI / 180;
 
@@ -1092,7 +1093,7 @@ export class MySceneGraph {
                     return "unable to parse slices of the primitive coordinates for ID = " + primitiveId;
 
 
-                var cylinder = new MyCylinder(this.scene, height, topRadius, bottomRadius, stacks, slices);
+                var cylinder = new MyCylinder2(this.scene, height, topRadius, bottomRadius, stacks, slices);
 
                 this.primitives[primitiveId] = cylinder;
             }

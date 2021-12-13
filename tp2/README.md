@@ -43,7 +43,7 @@ Overall we believe we achieved all goals required and that we managed to produce
 ### 2 - Specific objects
 * TV and Furniture
 
-![tv](/uploads/51edeb7905d33c554c3e4310e4a7072e/tv.png)
+![tv](/uploads/2a6e02c4bf0e0fc9c52c2beade2844f8/tv.png)
 
 * Vase
 

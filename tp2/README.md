@@ -34,6 +34,10 @@ Overall we believe we achieved all goals required and that we managed to produce
 
 ![door](/uploads/f7bb09628f67f53eaef560072b6e4d0c/door.png)
 
+* Scene 4 - Only lamp light
+
+![lamplight](/uploads/94c0bbec461033fba96d1ffcd1327385/lamplight.png)
+
 
 
 ### 2 - Specific objects

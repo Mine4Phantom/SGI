@@ -127,7 +127,23 @@ export class MySVGReader {
 
         for (let i = 0; i < path_info.length; i++) {
             // TODO
-            this.log(path_info[i]);
+            switch (path_info[i]) {
+                case 'M':
+                    break;
+                case 'm':
+                    break;
+                case 'c':
+                    break
+                case 'C':
+                    break;
+                case 'z':
+                    break
+                case 'L':
+                    break;
+                default:
+                    // COORDINATE 
+                    break
+            }
         }
     }
 

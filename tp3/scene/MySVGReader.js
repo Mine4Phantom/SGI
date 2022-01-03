@@ -22,10 +22,10 @@ export class MySVGReader {
         this.reader.open(filename, this);
     }
 
-     /*
-     * Callback to be executed after successful reading
-     */
-     onXMLReady() {
+    /*
+    * Callback to be executed after successful reading
+    */
+    onXMLReady() {
         this.log("SVG Loading finished.");
         var rootElement = this.reader.xmlDoc.documentElement;
 
@@ -40,13 +40,95 @@ export class MySVGReader {
         this.graph.loadedOk = true;
     }
 
-     /**
-     * Parses the SVG file relevant blocks.
-     * @param {SVG root element} root
-     */
+    /**
+    * Parses the SVG file relevant blocks.
+    * @param {SVG root element} root
+    */
     parseSVG(root) {
         if (root.nodeName != "svg")
             return "root tag <svg> missing";
+
+        let children = root.children;
+
+        let error;
+        for (let i = 0; i < children.length; i++)
+            if (children[i].nodeName === 'g')
+                if ((error = this.parseLayer(children[i])) != null)
+                    return error;
+
+        this.log('SVG all parsed');
+        return null;
+    }
+
+    /**
+     * Parses layer block
+     * @param {Layer node (<g>)} layerNode 
+     */
+    parseLayer(layerNode) {
+        let layerName = this.reader.getString(layerNode, 'inkscape:label')
+        if (layerName == null)
+            return "failed to parse layer name (inkscape:label attribute)";
+
+        let children = layerNode.children;
+
+        let error;
+        for (let i = 0; i < children.length; i++) {
+            switch (children[i].nodeName) {
+                case 'circle':
+                    if ((error = this.parseCircle(children[i], layerName)) != null)
+                        return error;
+                    break;
+                case 'path':
+                    if ((error = this.parsePath(children[i], layerName)) != null)
+                        return error;
+                    break;
+                default:
+            }
+        }
+        this.log('Parsed layer ' + layerName);
+        return null;
+    }
+
+    /**
+     * Parses circle tag
+     * @param {Circle node} circleNode 
+     */
+    parseCircle(circleNode, layerName) {
+        // id 
+        let id = this.reader.getString(circleNode, 'id')
+        if (id == null)
+            return "failed to parse attribute id in circle inside layer " + layerName;
+
+        // Circle center coordinates
+        let cx = this.reader.getFloat(circleNode, 'cx');
+        if (cx == null)
+            return "failed to parse attribute cx in circle with id = " + id + " inside layer " + layerName;
+        let cy = this.reader.getFloat(circleNode, 'cy');
+        if (cy == null)
+            return "failed to parse attribute cy in circle with id = " + id + " inside layer " + layerName;
+
+        // TODO:
+        // Do we need r attribute aswell?
+        // How to distinguish obstacles from power ups? (layer name?)
+    }
+
+    parsePath(pathNode, layerName) {
+        // id 
+        let id = this.reader.getString(pathNode, 'id');
+        if (id == null)
+            return "failed to parse attribute id in path inside layer " + layerName;
+
+        // d 
+        let d = this.reader.getString(pathNode, 'd');
+        if (d == null)
+            return "failed to parse attribute d in path with id = " + id + " inside layer " + layerName;
+
+        let path_info = d.split(' ');
+
+        for (let i = 0; i < path_info.length; i++) {
+            // TODO
+            this.log(path_info[i]);
+        }
     }
 
     /*
@@ -62,7 +144,7 @@ export class MySVGReader {
      * Callback to be executed on any message.
      * @param {string} message
      */
-     log(message) {
+    log(message) {
         console.log("   " + message);
     }
 

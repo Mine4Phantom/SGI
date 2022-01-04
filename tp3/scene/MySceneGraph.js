@@ -1453,6 +1453,7 @@ export class MySceneGraph {
     displayScene() {
         //To do: Create display loop for transversing the scene graph
 
-        this.components['root'].display();
+        this.components['f1'].display();
+        this.components['western'].display();
     }
 }

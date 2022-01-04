@@ -137,7 +137,7 @@ export class MySVGReader {
                 case 'C':
                     break;
                 case 'z':
-                    break
+                    break;
                 case 'L':
                     break;
                 default:

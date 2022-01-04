@@ -121,8 +121,8 @@ export class MySceneGraph {
      * @param {XML root element} rootElement
      */
     parseXMLFile(rootElement) {
-        if (rootElement.nodeName != "lxs")
-            return "root tag <lxs> missing";
+        if (rootElement.nodeName != "sxg")
+            return "root tag <sxg> missing";
 
         var nodes = rootElement.children;
 
@@ -859,9 +859,9 @@ export class MySceneGraph {
     }
 
     /**
-    * Method to parse a lxs-format patch node
+    * Method to parse a sxg-format patch node
     * @param {String} primitiveId 
-    * @param {lxs patch node} patchNode 
+    * @param {sxg patch node} patchNode 
     */
     parsePatch(primitiveId, patchNode) {
 

@@ -2,6 +2,7 @@ import { CGFapplication } from '../lib/CGF.js';
 import { XMLscene } from './XMLscene.js';
 import { MyInterface } from './MyInterface.js';
 import { MySceneGraph } from './MySceneGraph.js';
+import { MySVGReader } from './MySVGReader.js';
 
 function getUrlVars() {
     var vars = {};
@@ -33,8 +34,11 @@ function main() {
 
 	// create and load graph, and associate it to scene. 
 	// Check console for loading errors
-	var myGraph = new MySceneGraph(filename, 'TestTrackMap.svg', myScene);
+	var myGraph = new MySceneGraph(filename, myScene);
 	
+    // SVG parser for map info
+    let svgParser = new MySVGReader('TestTrackMap.svg', myScene);
+
 	// start
     app.run();
 }

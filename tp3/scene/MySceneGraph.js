@@ -13,7 +13,6 @@ import { MyPrimitiveNode } from './MyPrimitiveNode.js';
 import { MyPatch } from '../primitives/nurbs/MyPatch.js';
 import { MyPlane } from '../primitives/nurbs/MyPlane.js';
 import { MyCylinder2 } from '../primitives/nurbs/MyCylinder2.js';
-import { MySVGReader } from './MySVGReader.js';
 
 var DEGREE_TO_RAD = Math.PI / 180;
 
@@ -35,10 +34,8 @@ export class MySceneGraph {
     /**
      * @constructor
      */
-    constructor(sceneFilename, mapFilename, scene) {
+    constructor(sceneFilename, scene) {
         this.loadedOk = null;
-
-        this.mapFilename = mapFilename;
 
         // Establish bidirectional references between scene and graph.
         this.scene = scene;
@@ -82,8 +79,7 @@ export class MySceneGraph {
             return;
         }
 
-        let svgParser = new MySVGReader(this.mapFilename, this);
-
+        this.loadedOk = true;
         // As the graph loaded ok, signal the scene so that any additional initialization depending on the graph can take place
         this.scene.onGraphLoaded();
     }

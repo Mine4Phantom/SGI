@@ -8,8 +8,8 @@ export class MySVGReader {
     /**
      * @constructor
      */
-    constructor(filename, graph) {
-        this.graph = graph;
+    constructor(filename, scene) {
+        this.scene = scene;
 
         // File reading 
         this.reader = new CGFXMLreader();
@@ -36,8 +36,6 @@ export class MySVGReader {
             this.onXMLError(error);
             return;
         }
-
-        this.graph.loadedOk = true;
     }
 
     /**
@@ -108,7 +106,6 @@ export class MySVGReader {
             return "failed to parse attribute cy in circle with id = " + id + " inside layer " + layerName;
 
         // TODO:
-        // Do we need r attribute aswell?
         // How to distinguish obstacles from power ups? (layer name?)
     }
 

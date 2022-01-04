@@ -1,4 +1,6 @@
 import { CGFXMLreader } from '../lib/CGF.js';
+import { MyObstacle } from './svgelements/MyObstacle.js';
+import { MyPowerUp } from './svgelements/MyPowerUp.js';
 
 
 /**
@@ -13,6 +15,9 @@ export class MySVGReader {
 
         // File reading 
         this.reader = new CGFXMLreader();
+
+        this.powerUps = [];
+        this.obstacles = [];
 
         /*
          * Read the contents of the xml file, and refer to this class for loading and error handlers.
@@ -105,8 +110,15 @@ export class MySVGReader {
         if (cy == null)
             return "failed to parse attribute cy in circle with id = " + id + " inside layer " + layerName;
 
-        // TODO:
-        // How to distinguish obstacles from power ups? (layer name?)
+        // Create objects according to the layer name
+        switch (layerName) {
+            case "PowerUps":
+                this.powerUps.push(new MyPowerUp(this.scene, cx, cy));
+                break;
+            case "Obstacles":
+                this.obstacles.push(new MyObstacle(this.scene, cx, cy));
+                break;
+        }
     }
 
     parsePath(pathNode, layerName) {

@@ -1447,9 +1447,6 @@ export class MySceneGraph {
      * Displays the scene, processing each node, starting in the root node.
      */
     displayScene() {
-        //To do: Create display loop for transversing the scene graph
-
-        this.components['f1'].display();
-        this.components['western'].display();
+        this.components[this.idRoot].display();
     }
 }

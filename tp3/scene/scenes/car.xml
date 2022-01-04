@@ -216,9 +216,7 @@
             </materials>
             <texture id="demoTexture" length_s="1" length_t="1"/>
             <children>
-                <componentref id="f1" />
-                <componentref id="western" />
-                <componentref id="whatever" />
+                <componentref id="vehicle"/>
             </children>
         </component>
 

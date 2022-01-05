@@ -45,7 +45,7 @@ export class MySceneGraph {
 
         this.idRoot = null;                    // The id of the root element.
         this.currentMaterialIndex = 0;          // Changed with M/m Key
-        this.cameras = [];
+        this.cameras = {};
         this.defaultView = null;
 
         this.axisCoords = [];
@@ -333,7 +333,7 @@ export class MySceneGraph {
                 if (toX == null || toY == null || toZ == null)
                     return "Error parsing perspective child \'to\' values, id = [" + perspectiveID + "]";
 
-                this.cameras.push([perspectiveID, new CGFcamera(perspectiveAngle * DEGREE_TO_RAD, perspectiveNear, perspectiveFar, vec3.fromValues(fromX, fromY, fromZ), vec3.fromValues(toX, toY, toZ))]);
+                this.cameras[perspectiveID] = new CGFcamera(perspectiveAngle * DEGREE_TO_RAD, perspectiveNear, perspectiveFar, vec3.fromValues(fromX, fromY, fromZ), vec3.fromValues(toX, toY, toZ));
             }
             // Ortho
             else if (children[perspectiveIndex].nodeName == "ortho") {
@@ -385,13 +385,13 @@ export class MySceneGraph {
                     if (upX == null || upY == null || upZ == null)
                         return "Error parsing ortho child \'up\' values, id = [" + orthoID + "]";
 
-                    this.cameras.push([orthoID, new CGFcameraOrtho(orthoLeft, orthoRight, orthoBottom, orthoTop, orthoNear, orthoFar, vec3.fromValues(fromX, fromY, fromZ), vec3.fromValues(toX, toY, toZ), vec3.fromValues(upX, upY, upZ))]);
+                    this.cameras[orthoID] = new CGFcameraOrtho(orthoLeft, orthoRight, orthoBottom, orthoTop, orthoNear, orthoFar, vec3.fromValues(fromX, fromY, fromZ), vec3.fromValues(toX, toY, toZ), vec3.fromValues(upX, upY, upZ));
                 } else {
-                    this.cameras.push([orthoID, new CGFcameraOrtho(orthoLeft, orthoRight, orthoBottom, orthoTop, orthoNear, orthoFar, vec3.fromValues(fromX, fromY, fromZ), vec3.fromValues(toX, toY, toZ), vec3.fromValues(0, 1, 0))]);
+                    this.cameras[orthoID] = new CGFcameraOrtho(orthoLeft, orthoRight, orthoBottom, orthoTop, orthoNear, orthoFar, vec3.fromValues(fromX, fromY, fromZ), vec3.fromValues(toX, toY, toZ), vec3.fromValues(0, 1, 0));
                 }
             }
         }
-        this.scene.views = this.cameras;
+        
         if (viewCnt == 0)
             return "Error, at least one view must exist";
         if (isDefaultId == 0)

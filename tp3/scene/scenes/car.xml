@@ -1,0 +1,442 @@
+<sxg>
+    <scene root="root" axis_length="8"/>
+
+    <views default="defaultCamera2">
+        <perspective id="defaultCamera2" near="0.1" far="500" angle="45">
+            <from x="25" y="25" z="25" />
+            <to x="0" y="0" z="0" />
+        </perspective>
+        <perspective id="defaultCamera3" near="0.1" far="500" angle="40">
+            <from x="-10" y="10" z="10" />
+            <to x="0" y="0" z="0" />
+        </perspective>
+
+        <ortho id="orthoSide" near="0.1" far="500" left="-50.0" right="50.0" top="30" bottom="-30">
+            <from x="30" y="5" z="0" />
+            <to x="0" y="0" z="0" />
+            <up x="0" y="1" z="0" />
+        </ortho>
+
+        <ortho id="orthoFront" near="0.1" far="500" left="-35.0" right="35.0" top="40" bottom="-6">
+            <from x="0" y="5" z="30" />
+            <to x="0" y="0" z="0" />
+            <up x="0" y="0.1" z="-1" />
+        </ortho>
+
+    </views>
+
+    <ambient>
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+        <background r="0.38" g="0.66" b="0.77" a="1.0" />
+    </ambient>
+
+    <lights>
+        <spot id="lamp1" enabled="0" angle="180" exponent="1">
+            <location x="-5" y="10" z="0" w="1" />
+            <target x="-5" y="0" z="0" />
+            <ambient r="0.15" g="0.15" b="0.15" a="1.0" />
+            <diffuse r="0.8" g="0.8" b="0.8" a="1.0" />
+            <specular r="0.5" g="0.5" b="0.5" a="1.0" />
+            <attenuation constant="0.2" linear="0.05" quadratic="0" />
+        </spot>
+
+        <spot id="lamp2" enabled="1" angle="180" exponent="1">
+            <location x="5" y="10" z="0" w="1" />
+            <target x="5" y="0" z="0" />
+            <ambient r="0.15" g="0.15" b="0.15" a="1.0" />
+            <diffuse r="0.8" g="0.8" b="0.8" a="1.0" />
+            <specular r="0.5" g="0.5" b="0.5" a="1.0" />
+            <attenuation constant="0.2" linear="0.03" quadratic="0" />
+        </spot>
+
+        <spot id="lamp3" enabled="1" angle="180" exponent="1">
+            <location x="0" y="10" z="0" w="1" />
+            <target x="0" y="0" z="0" />
+            <ambient r="0.15" g="0.15" b="0.15" a="1.0" />
+            <diffuse r="0.8" g="0.8" b="0.8" a="1.0" />
+            <specular r="0.5" g="0.5" b="0.5" a="1.0" />
+            <attenuation constant="0.2" linear="0.03" quadratic="0" />
+        </spot>
+
+    </lights>
+
+    <textures>
+        <texture id="demoTexture" file="rocks.jpg" /> <!-- Do not delete, needed for 'none' texture -->
+    </textures>
+
+    <materials>
+        <material id="demoMaterial" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0" g="0.0" b="0.0" a="1.0" />
+            <diffuse r="0.6" g="0.0" b="0.0" a="1.0" />
+            <specular r="0.6" g="0.0" b="0.0" a="1.0" />
+        </material>
+
+        <material id="black_material" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.0" g="0.0" b="0.0" a="1.0" />
+            <diffuse r="0.0" g="0.0" b="0.0" a="1.0" />
+            <specular r="0.0" g="0.0" b="0.0" a="1.0" />
+        </material>
+
+        <material id="gray_material" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+            <diffuse r="0.1" g="0.1" b="0.1" a="1.0" />
+            <specular r="0.1" g="0.1" b="0.1" a="1.0" />
+        </material>
+    </materials>
+
+    <transformations>
+        <transformation id="cube_face1">
+            <translate x="0" y="0" z="0.5" />
+        </transformation>
+        <transformation id="cube_face2">
+            <translate x="-0.5" y="0" z="0" />
+            <rotate axis="y" angle="-90" />
+        </transformation>
+        <transformation id="cube_face3">
+            <translate x="0" y="0.5" z="0" />
+            <rotate axis="x" angle="-90" />
+        </transformation>
+        <transformation id="cube_face4">
+            <translate x="0" y="0" z="-0.5" />
+            <rotate axis="x" angle="180" />
+        </transformation>
+        <transformation id="cube_face5">
+            <translate x="0.5" y="0" z="0" />
+            <rotate axis="y" angle="90" />
+        </transformation>
+        <transformation id="cube_face6">
+            <translate x="0" y="-0.5" z="0" />
+            <rotate axis="x" angle="90" />
+        </transformation>
+    </transformations>
+
+    <primitives>
+        <primitive id="rectangle">
+            <rectangle x1="-0.5" y1="-0.5" x2="0.5" y2="0.5" />
+        </primitive>
+        <primitive id="triangle">
+            <triangle x1="-0.5" y1="-0.5" x2="0.5" y2="-0.5" x3="0" y3="0.5"/>
+        </primitive>
+        <primitive id="cylinder">
+            <cylinder height="1" topRadius="1" bottomRadius="1" stacks="10" slices="50"/>
+        </primitive>
+        <primitive id="cylinder2">
+            <cylinder2 height="1" topRadius="1" bottomRadius="1" stacks="10" slices="50"/>
+        </primitive>
+        <primitive id="circle">
+            <circle radius="0.5" slices="50"/>
+        </primitive>
+        <primitive id="sphere">
+            <sphere radius="1" slices="50" stacks="50"/>
+        </primitive>
+        <primitive id="plane">
+            <plane npartsU="50" npartsV="50" />
+        </primitive>
+        <primitive id="vase">
+            <patch npointsU="4" npointsV="7" npartsU="50" npartsV="50">
+
+                <controlpoint xx="0.2" yy="1.0" zz="0" />
+                <controlpoint xx="0.3" yy="0.7" zz="0" />
+                <controlpoint xx="0.3" yy="0.45" zz="0" />
+                <controlpoint xx="0.3" yy="0.15" zz="0" />
+                <controlpoint xx="0.3" yy="-0.15" zz="0" />
+                <controlpoint xx="0.3" yy="-0.550" zz="0" />
+                <controlpoint xx="0.3" yy="-0.9" zz="0" />
+
+                <controlpoint xx="0.2" yy="1.0" zz="0.25" />
+                <controlpoint xx="0.2" yy="0.6" zz="0.35" />
+                <controlpoint xx="0.2" yy="0.25" zz="0.5" />
+                <controlpoint xx="0.2" yy="0.0" zz="1.15" />
+                <controlpoint xx="0.2" yy="-0.2" zz="0.5" />
+                <controlpoint xx="0.2" yy="-0.6" zz="-0.4" />
+                <controlpoint xx="0.3" yy="-0.9" zz="0.6" />
+
+                <controlpoint xx="-0.2" yy="1.0" zz="0.25" />
+                <controlpoint xx="-0.2" yy="0.6" zz="0.35" />
+                <controlpoint xx="-0.2" yy="0.25" zz="0.5" />
+                <controlpoint xx="-0.2" yy="0" zz="1.14" />
+                <controlpoint xx="-0.2" yy="-0.2" zz="0.5" />
+                <controlpoint xx="-0.2" yy="-0.6" zz="-0.4" />
+                <controlpoint xx="-0.3" yy="-0.9" zz="0.6" />
+
+                <controlpoint xx="-0.2" yy="1" zz="0" />
+                <controlpoint xx="-0.3" yy="0.7" zz="0" />
+                <controlpoint xx="-0.3" yy="0.45" zz="0" />
+                <controlpoint xx="-0.3" yy="0.15" zz="0" />
+                <controlpoint xx="-0.3" yy="-0.15" zz="0" />
+                <controlpoint xx="-0.3" yy="-0.550" zz="0" />
+                <controlpoint xx="-0.3" yy="-0.9" zz="0" />
+
+            </patch>
+        </primitive>
+        <primitive id="couch_side_curve">
+            <patch npointsU="2" npointsV="6" npartsU="50" npartsV="50">
+
+                <controlpoint xx="-9" yy="-4" zz="0" />
+                <controlpoint xx="-10" yy="10" zz="0" />
+                <controlpoint xx="-1.5" yy="8" zz="0" />
+                <controlpoint xx="5" yy="1" zz="0" />
+                <controlpoint xx="-7" yy="7.5" zz="0" />
+                <controlpoint xx="-4" yy="-4" zz="0" />
+
+                <controlpoint xx="-9" yy="-4" zz="4" />
+                <controlpoint xx="-10" yy="10" zz="4" />
+                <controlpoint xx="-1.5" yy="8" zz="4" />
+                <controlpoint xx="5" yy="1" zz="4" />
+                <controlpoint xx="-7" yy="7.5" zz="4" />
+                <controlpoint xx="-4" yy="-4" zz="4" />
+
+            </patch>
+        </primitive>
+    </primitives>
+
+    <components>
+        <component id="powerup">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="demoTexture" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="f1" />
+                <componentref id="western" />
+                <componentref id="whatever" />
+            </children>
+        </component>
+
+        <component id="root">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="demoTexture" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="vehicle"/>
+            </children>
+        </component>
+
+        <component id="vehicle">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+                <material id="black_material" /> 
+            </materials>
+            <texture id="demoTexture" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="start_cube" />
+                <componentref id="floor" />
+                <componentref id="wheels" />
+            </children>
+        </component>
+
+
+        <!-- Floor -->
+        <component id="floor">
+            <transformation>
+                <scale x="10" y="10" z="10" />
+            </transformation>
+            <materials>
+                <material id="gray_material" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="plane" />
+            </children>
+        </component>
+
+        <!-- Wheels -->
+        <component id="wheels">
+            <transformation>
+                <translate x="0" y="1" z="-0.5" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <componentref id="wheel1"/>
+                <componentref id="wheel2"/>
+                <componentref id="wheel3"/>
+                <componentref id="wheel4"/>
+            </children>
+        </component>
+
+        <!-- Wheels -->
+        <component id="wheel1">
+            <transformation>
+                <translate x="5" y="0" z="2.5" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="cylinder"/>
+            </children>
+        </component>
+
+        <!-- Wheels -->
+        <component id="wheel2">
+            <transformation>
+                <translate x="5" y="0" z="-2.5" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="cylinder"/>
+            </children>
+        </component>
+
+        <!-- Wheels -->
+        <component id="wheel3">
+            <transformation>
+                <translate x="-5" y="0" z="2.5" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="cylinder"/>
+            </children>
+        </component>
+
+        <!-- Wheels -->
+        <component id="wheel4">
+            <transformation>
+                <translate x="-5" y="0" z="-2.5" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="cylinder"/>
+            </children>
+        </component>
+        
+
+        <!-- Cube -->
+        <component id="start_cube">
+            <transformation>
+                <translate x="0" y="2" z="0" />
+                <scale x="9" y="1" z="4" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <componentref id="cube"/>
+            </children>
+        </component>
+        
+        <!-- Cube -->
+        <component id="cube">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="inherit"/>
+            <children>
+                <componentref id="cube_face1"/>
+                <componentref id="cube_face2"/>
+                <componentref id="cube_face3"/>
+                <componentref id="cube_face4"/>
+                <componentref id="cube_face5"/>
+                <componentref id="cube_face6"/>
+            </children>
+        </component>
+
+        
+
+        <!-- Cube Faces -->
+        <component id="cube_face1">
+            <transformation>
+                <transformationref id="cube_face1"/>
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="inherit"/>
+            <children>
+                <primitiveref id="rectangle"/>
+            </children>
+        </component>
+
+        <component id="cube_face2">
+            <transformation>
+                <transformationref id="cube_face2"/>
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="inherit"/>
+            <children>
+                <primitiveref id="rectangle"/>
+            </children>
+        </component>
+
+        <component id="cube_face3">
+            <transformation>
+                <transformationref id="cube_face3"/>
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="inherit"/>
+            <children>
+                <primitiveref id="rectangle"/>
+            </children>
+        </component>
+
+        <component id="cube_face4">
+            <transformation>
+                <transformationref id="cube_face4"/>
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="inherit"/>
+            <children>
+                <primitiveref id="rectangle"/>
+            </children>
+        </component>
+
+        <component id="cube_face5">
+            <transformation>
+                <transformationref id="cube_face5"/>
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="inherit"/>
+            <children>
+                <primitiveref id="rectangle"/>
+            </children>
+        </component>
+
+        <component id="cube_face6">
+            <transformation>
+                <transformationref id="cube_face6"/>
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="inherit"/>
+            <children>
+                <primitiveref id="rectangle"/>
+            </children>
+        </component>
+
+    </components>
+</sxg>

@@ -1,4 +1,4 @@
-<lxs>
+<sxg>
     <scene root="root" axis_length="0"/>
 
     <views default="defaultCamera2">
@@ -2294,4 +2294,4 @@
         </component>
 
     </components>
-</lxs>
+</sxg>

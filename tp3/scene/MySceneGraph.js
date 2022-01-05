@@ -1437,12 +1437,6 @@ export class MySceneGraph {
         console.log("   " + message);
     }
 
-    checkKeys() {
-        if (this.scene.gui.isKeyPressed("KeyM")) {
-            this.currentMaterialIndex += 1;
-        }
-    }
-
     /**
      * Displays the scene, processing each node, starting in the root node.
      */

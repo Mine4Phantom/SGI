@@ -42,13 +42,16 @@ export class XMLscene extends CGFscene {
 
         // Dictionary containing bool values to check if light is on or not
         this.lightsOn = {};
+
+        // Auxiliary variables to delay successive key presses (for M key in particular)
+        this.lastUpdate = 0;
+        this.lastMPress = 0;
     }
 
     /**
      * Initializes the scene cameras.
      */
     initCameras() {
-        //this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(35, 35, 35), vec3.fromValues(0, 0, 0));
         this.camera = new CGFcameraOrtho(0, 0, 0, 0, 0.1, 500, vec3.fromValues(35, 35, 35), vec3.fromValues(0, 0, 0), vec3.fromValues(0, 1, 0));
 
 
@@ -132,12 +135,22 @@ export class XMLscene extends CGFscene {
     }
 
     update(t) {
-        this.graph.checkKeys();
+        this.lastUpdate = t;
+        this.checkKeys(t);
     }
 
     selectView(viewId) {
         this.camera = this.graph.cameras[viewId];
         this.interface.setActiveCamera(this.camera);
+    }
+
+    checkKeys(t) {
+        if (this.gui.isKeyPressed("KeyM")) {
+            if (this.lastUpdate - this.lastMPress > 200) {
+                this.lastMPress = t;
+                this.graph.currentMaterialIndex++;
+            }
+        }
     }
 
     /**

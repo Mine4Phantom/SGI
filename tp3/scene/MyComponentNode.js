@@ -91,9 +91,11 @@ export class MyComponentNode extends CGFobject {
 
 		this.displayPrimitives(newTextureID,newMaterialID,newS,newT);
 		
-		for(var j=0; j < this.children.length; j++){
-			
-			this.graph.components[this.children[j]].display(newTextureID,newMaterialID, newS, newT);
+		for(var j=0; j < this.children.length; j++){ // TODO Change this solution
+			if(this.graph.components[this.children[j]] != null)
+				this.graph.components[this.children[j]].display(newTextureID,newMaterialID, newS, newT);
+			else
+				this.graph.vehicle.components[this.children[j]].display(newTextureID,newMaterialID, newS, newT);
 		}
 
 		this.scene.popMatrix();

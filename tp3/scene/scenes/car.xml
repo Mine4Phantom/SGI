@@ -30,6 +30,7 @@
         <background r="0.38" g="0.66" b="0.77" a="1.0" />
     </ambient>
 
+
     <lights>
         <spot id="lamp1" enabled="0" angle="180" exponent="1">
             <location x="-5" y="10" z="0" w="1" />
@@ -194,19 +195,6 @@
     </primitives>
 
     <components>
-        <component id="powerup">
-            <transformation>
-            </transformation>
-            <materials>
-                <material id="demoMaterial" />
-            </materials>
-            <texture id="demoTexture" length_s="1" length_t="1"/>
-            <children>
-                <componentref id="f1" />
-                <componentref id="western" />
-                <componentref id="whatever" />
-            </children>
-        </component>
 
         <component id="root">
             <transformation>
@@ -216,26 +204,11 @@
             </materials>
             <texture id="demoTexture" length_s="1" length_t="1"/>
             <children>
-                <componentref id="vehicle"/>
-            </children>
-        </component>
-
-        <component id="vehicle">
-            <transformation>
-            </transformation>
-            <materials>
-                <material id="demoMaterial" />
-                <material id="black_material" /> 
-            </materials>
-            <texture id="demoTexture" length_s="1" length_t="1"/>
-            <children>
-                <componentref id="start_cube" />
                 <componentref id="floor" />
-                <componentref id="wheels" />
             </children>
         </component>
 
-
+       
         <!-- Floor -->
         <component id="floor">
             <transformation>
@@ -247,6 +220,25 @@
             <texture id="none"/>
             <children>
                 <primitiveref id="plane" />
+            </children>
+        </component>
+
+
+    </components>
+
+    <vehicle>
+        <!-- Car -->
+        <component id="car">
+            <transformation>
+                <translate x="0" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="demoTexture" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="wheels"/>
+                <componentref id="body"/>
             </children>
         </component>
 
@@ -325,7 +317,7 @@
         
 
         <!-- Cube -->
-        <component id="start_cube">
+        <component id="body">
             <transformation>
                 <translate x="0" y="2" z="0" />
                 <scale x="9" y="1" z="4" />
@@ -338,7 +330,7 @@
                 <componentref id="cube"/>
             </children>
         </component>
-        
+
         <!-- Cube -->
         <component id="cube">
             <transformation>
@@ -437,6 +429,7 @@
                 <primitiveref id="rectangle"/>
             </children>
         </component>
+        
 
-    </components>
+    </vehicle>
 </sxg>

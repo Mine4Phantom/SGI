@@ -46,6 +46,7 @@ export class XMLscene extends CGFscene {
         // Auxiliary variables to delay successive key presses (for M key in particular)
         this.lastUpdate = 0;
         this.lastMPress = 0;
+        this.speedFactor = 1;
     }
 
     /**
@@ -137,6 +138,7 @@ export class XMLscene extends CGFscene {
     update(t) {
         this.lastUpdate = t;
         this.checkKeys(t);
+        this.graph.vehicle.update(t);
     }
 
     selectView(viewId) {
@@ -150,6 +152,26 @@ export class XMLscene extends CGFscene {
                 this.lastMPress = t;
                 this.graph.currentMaterialIndex++;
             }
+        }
+        if (this.gui.isKeyPressed("KeyW")) {
+            this.graph.vehicle.accelerate(0.05 * this.speedFactor);            
+            
+        }
+        if (this.gui.isKeyPressed("KeyS")) {
+            this.graph.vehicle.accelerate(-0.05 * this.speedFactor);
+        }
+        /*
+        if (this.gui.isKeyPressed("KeyA")) {
+            this.graph.vehicle.turn(5);
+        }
+
+        if (this.gui.isKeyPressed("KeyD")) {
+            this.graph.vehicle.turn(-5);
+        }
+
+        */
+        if (this.gui.isKeyPressed("KeyR")) {
+            this.graph.vehicle.reset();
         }
     }
 
@@ -197,6 +219,7 @@ export class XMLscene extends CGFscene {
 
             // Displays the scene (MySceneGraph function).
             this.graph.displayScene();
+            //this.graph.vehicle.display();
         }
 
         this.popMatrix();

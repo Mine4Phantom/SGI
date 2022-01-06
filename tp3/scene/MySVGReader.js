@@ -1,6 +1,7 @@
 import { CGFXMLreader } from '../lib/CGF.js';
 import { MyObstacle } from './svgelements/MyObstacle.js';
 import { MyPowerUp } from './svgelements/MyPowerUp.js';
+import { MyRoute } from './svgelements/MyRoute.js';
 
 
 /**
@@ -18,6 +19,9 @@ export class MySVGReader {
 
         this.powerUps = [];
         this.obstacles = [];
+        this.track = null
+        this.start = null
+        this.routes = []
 
         /*
          * Read the contents of the xml file, and refer to this class for loading and error handlers.
@@ -132,29 +136,78 @@ export class MySVGReader {
         if (d == null)
             return "failed to parse attribute d in path with id = " + id + " inside layer " + layerName;
 
-        let path_info = d.split(' ');
+        let move_tos = []
+        let curves = []
+        let lines = []
+        let close_path = false
 
+        let path_info = d.split(' ');
         for (let i = 0; i < path_info.length; i++) {
             // TODO
             switch (path_info[i]) {
-                case 'M':
-                    break;
                 case 'm':
+                case 'M':
+                    i=this.getCoordsFromPath(move_tos,path_info,i)
                     break;
                 case 'c':
-                    break
                 case 'C':
+                    i=this.getCoordsFromPath(curves,path_info,i)
                     break;
+                case 'Z':
                 case 'z':
+                    close_path = true
                     break;
                 case 'L':
+                    i=this.getCoordsFromPath(lines,path_info,i)
                     break;
                 default:
-                    // COORDINATE 
-                    break
+                    return "failed to parse attribute d in path with id = " + id + " with value " + path_info[i] +  " inside layer " + layerName;
             }
         }
+
+        switch (layerName) {
+            case "Track":
+                this.track = (new MyRoute(this.scene, move_tos, curves, lines, close_path));
+                break;
+            case "Start":
+                this.start = (new MyRoute(this.scene, move_tos, curves, lines, close_path));
+                break;
+            case "Routes":
+                this.routes.push(new MyRoute(this.scene, move_tos, curves, lines, close_path));
+                break;
+        }
+
+        /* console.log(id)
+        console.log("M")
+        console.log(move_tos)
+        console.log("C")
+        console.log(curves)
+        console.log("L")
+        console.log(lines)
+        console.log("Z")
+        console.log(close_path) */
     }
+
+    getCoordsFromPath(arrayToSave,path_info,i){
+        for (i = i + 1; i < path_info.length; i++) {
+            let coords = path_info[i].split(",")
+            if(!(this.isNumeric(coords[0]) && this.isNumeric(coords[1])))
+            break;
+            else{
+                arrayToSave.push(coords)
+            }
+        }
+        i = i - 1
+        return i
+    }
+
+
+
+    isNumeric(str) {
+        if (typeof str != "string") return false // we only process strings!  
+        return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+               !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
+      }
 
     /*
      * Callback to be executed on any read error, showing an error on the console.

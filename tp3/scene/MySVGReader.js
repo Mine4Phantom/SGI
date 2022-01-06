@@ -161,7 +161,7 @@ export class MySVGReader {
                     break
             }
         }
-        console.log(id)
+        /* console.log(id)
         console.log("M")
         console.log(move_tos)
         console.log("C")
@@ -169,7 +169,7 @@ export class MySVGReader {
         console.log("L")
         console.log(lines)
         console.log("Z")
-        console.log(close_path)
+        console.log(close_path) */
     }
 
     getCoordsFromPath(arrayToSave,path_info,i){

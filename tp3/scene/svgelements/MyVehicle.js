@@ -1,9 +1,9 @@
 import { CGFobject } from "../../lib/CGF.js";
 
 export class MyVehicle extends CGFobject {
-    constructor(scene, components) {
+    constructor(scene, component) {
         super(scene);
-        this.components = components
+        this.component = component;
         this.body = 0
         this.x = 0;
         this.y = 0;
@@ -48,7 +48,7 @@ export class MyVehicle extends CGFobject {
 
       this.scene.pushMatrix();
       this.scene.translate(this.x, this.y, this.z);
-      this.components["car"].display();
+      this.component.display();
       this.scene.popMatrix();
     }
     

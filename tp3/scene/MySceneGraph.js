@@ -27,7 +27,6 @@ var MATERIALS_INDEX = 5;
 var TRANSFORMATIONS_INDEX = 6;
 var PRIMITIVES_INDEX = 7;
 var COMPONENTS_INDEX = 8;
-var VEHICLE_INDEX = 9;
 
 /**
  * MySceneGraph class, representing the scene graph.
@@ -240,18 +239,6 @@ export class MySceneGraph {
 
             //Parse components block
             if ((error = this.parseComponents(nodes[index])) != null)
-                return error;
-        }
-
-        // <vehicle>
-        if ((index = nodeNames.indexOf("vehicle")) == -1)
-            return "tag <vehicle> missing";
-        else {
-            if (index != VEHICLE_INDEX)
-                this.onXMLMinorError("tag <vehicle> out of order");
-
-            //Parse vehicles block
-            if ((error = this.parseVehicle(nodes[index])) != null)
                 return error;
         }
 
@@ -1207,6 +1194,9 @@ export class MySceneGraph {
             // Create current node and then add info to it
             this.components[componentID] = new MyComponentNode(this, componentID);
 
+            // Specific components for racing game
+            if (componentID == 'car') 
+                this.vehicle = new MyVehicle(this.scene, this.components[componentID])
 
             // Material ID
             if (materialsIndex == -1)
@@ -1294,10 +1284,6 @@ export class MySceneGraph {
 
             }
 
-
-
-
-
             // Children ID
             if (childrenIndex == -1)
                 return "children must be defined (node ID = " + componentID + ")";
@@ -1340,181 +1326,6 @@ export class MySceneGraph {
         }
         this.log("Parsed components");
     }
-
-    parseVehicle(vehicleNode){
-        var children = vehicleNode.children;
-
-        this.vehicle = [];
-
-        var grandChildren = [];
-        var grandgrandChildren = [];
-        var materials = [];
-        var nodeNames = [];
-
-        // Any number of components.
-        for (var i = 0; i < children.length; i++) {
-
-            if (children[i].nodeName != "component") {
-                this.onXMLMinorError("unknown tag <" + children[i].nodeName + ">");
-                continue;
-            }
-
-            // Get id of the current component.
-            var componentID = this.reader.getString(children[i], 'id');
-            if (componentID == null)
-                return "no ID defined for componentID";
-
-            // Checks for repeated IDs.
-            if (this.vehicle[componentID] != null)
-                return "ID must be unique for each component (conflict: ID = " + componentID + ")";
-
-            grandChildren = children[i].children;
-
-            nodeNames = [];
-            for (var j = 0; j < grandChildren.length; j++) {
-                nodeNames.push(grandChildren[j].nodeName);
-            }
-
-            var transformationIndex = nodeNames.indexOf("transformation");
-            var materialsIndex = nodeNames.indexOf("materials");
-            var textureIndex = nodeNames.indexOf("texture");
-            var childrenIndex = nodeNames.indexOf("children"); // transf, material, texture, children
-
-            
-            // Create current node and then add info to it
-            this.vehicle[componentID] = new MyComponentNode(this, componentID);
-
-
-            // Material ID
-            if (materialsIndex == -1)
-                return "material must be defined (node ID = " + componentID + ")";
-            materials = grandChildren[materialsIndex].children // each material
-            var sizeMaterials = 0;
-            for (var j = 0; j < materials.length; j++) {
-                var materialID = this.reader.getString(materials[j], 'id');
-                if (materialID != "inherit") {
-                    if (materialID == null)
-                        return "unable to parse material ID (node ID = " + componentID + ")";
-                    if (materialID != "null" && this.materials[materialID] == null)
-                        return "ID does not correspond to a valid material (node ID = " + componentID + ")";
-                }
-                this.vehicle[componentID].addMaterial(materialID);
-                sizeMaterials++;
-            }
-            if (sizeMaterials == 0)
-                return "at least one material must be defined for each intermediate node";
-
-
-            // Texture ID
-            if (textureIndex == -1)
-                return "texture must be defined (node ID = " + componentID + ")";
-            var textureID = this.reader.getString(grandChildren[textureIndex], 'id');
-            if (textureID != "inherit" && textureID != "none") {
-                if (textureID == null) //To Do  none
-                    return "unable to parse texture ID (node ID = " + componentID + ")";
-                if (textureID != "null" && textureID != "clear" && this.textures[textureID] == null)
-                    return "ID does not correspond to a valid texture (node ID = " + componentID + ")";
-                var textureS = this.reader.getFloat(grandChildren[textureIndex], 'length_s');
-                if (textureS == null) //To Do deal with id = null
-                    return "unable to parse texture length_s (node ID = " + componentID + ")";
-                var textureT = this.reader.getFloat(grandChildren[textureIndex], 'length_t');
-                if (textureT == null) //To Do deal with id = null
-                    return "unable to parse texture length_t (node ID = " + componentID + ")";
-                this.vehicle[componentID].addLenghtST(textureS, textureT);
-            }
-
-            this.vehicle[componentID].textureID = textureID;
-
-
-
-            // Transformation ID
-            if (transformationIndex == -1)
-                return "transformation must be defined (node ID = " + componentID + ")";
-            var transformationsList = grandChildren[transformationIndex].children // each material
-            for (var j = 0; j < transformationsList.length; j++) {
-                switch (transformationsList[j].nodeName) {
-                    case 'transformationref':
-                        var transformationID = this.reader.getString(transformationsList[j], 'id');
-                        if (transformationID == null)
-                            return "unable to parse transformation ID (node ID = " + componentID + ")";
-                        if (transformationID != "null" && transformationID != "clear" && this.transformations[transformationID] == null)
-                            return "ID does not correspond to a valid transformation (node ID = " + componentID + ")";
-                        mat4.multiply(this.vehicle[componentID].transformMatrix, this.vehicle[componentID].transformMatrix, this.transformations[transformationID]);
-                        break;
-
-                    case 'translate':
-                        var coordinates = this.parseCoordinates3D(transformationsList[j], "translate transformation for ID " + transformationID);
-                        if (!Array.isArray(coordinates))
-                            return coordinates;
-
-                        mat4.translate(this.vehicle[componentID].transformMatrix, this.vehicle[componentID].transformMatrix, coordinates);
-                        break;
-                    case 'scale':
-                        var coordinates = this.parseCoordinates3D(transformationsList[j], "scale transformation for ID " + transformationID);
-                        if (!Array.isArray(coordinates))
-                            return coordinates;
-
-                        mat4.scale(this.vehicle[componentID].transformMatrix, this.vehicle[componentID].transformMatrix, coordinates);
-                        break;
-                    case 'rotate':
-                        var axis = this.reader.getItem(transformationsList[j], 'axis', ['x', 'y', 'z']);
-                        if (axis == null)
-                            return "unable to parse axis of the " + "rotate transformation for ID " + transformationID;
-
-                        var angle = this.reader.getFloat(transformationsList[j], 'angle');
-                        if (!(angle != null && !isNaN(angle)))
-                            return "unable to parse angle of the " + "rotate transformation for ID " + transformationID;
-
-                        mat4.rotate(this.vehicle[componentID].transformMatrix, this.vehicle[componentID].transformMatrix, angle * DEGREE_TO_RAD, this.axisCoords[axis]);
-                        break;
-                }
-
-            }
-
-            // Children ID
-            if (childrenIndex == -1)
-                return "children must be defined (node ID = " + componentID + ")";
-            grandgrandChildren = grandChildren[childrenIndex].children // componentrefs and primitiverefs
-
-            var sizeChildren = 0;
-            for (var j = 0; j < grandgrandChildren.length; j++) {
-                if (grandgrandChildren[j].nodeName == "componentref") {
-                    var curId = this.reader.getString(grandgrandChildren[j], 'id');
-                    //console.log("   componentref: "+curId);
-
-                    if (curId == null)
-                        this.onXMLMinorError("unable to parse child id");
-                    else if (curId == componentID)
-                        return "a node may not be a child of its own";
-                    else {
-                        this.vehicle[componentID].addChild(curId);
-                        sizeChildren++;
-                    }
-                }
-                else if (grandgrandChildren[j].nodeName == "primitiveref") {
-                    var curId = this.reader.getString(grandgrandChildren[j], 'id');
-                    //console.log("   primitiveref: "+curId);
-
-                    if (curId == null)
-                        this.onXMLMinorError("unable to parse child id");
-                    else if (curId == componentID)
-                        return "a node especially a primitive may not be a child of its own";
-                    else {
-                        this.vehicle[componentID].addPrimitive(new MyPrimitiveNode(this, curId));
-                        sizeChildren++;
-                    }
-                }
-                else
-                    this.onXMLMinorError("unknown tag <" + grandgrandChildren[j].nodeName + ">");
-
-            }
-            if (sizeChildren == 0)
-                return "at least one descendant must be defined for each intermediate node";
-        }
-        this.vehicle = new MyVehicle(this.scene, this.vehicle)
-        this.log("Parsed vehicle");
-    }
-
 
     /**
      * Parse the coordinates from a node with ID = id
@@ -1631,7 +1442,7 @@ export class MySceneGraph {
      * Displays the scene, processing each node, starting in the root node.
      */
     displayScene() {
-        //console.log(this.vehicle)
+        console.log(this.vehicle)
         this.components[this.idRoot].display();
         this.vehicle.display();
     }

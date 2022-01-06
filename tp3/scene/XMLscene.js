@@ -161,7 +161,6 @@ export class XMLscene extends CGFscene {
         if (this.gui.isKeyPressed("KeyS")) {
             this.graph.vehicle.accelerate(-0.05 * this.speedFactor);
         }
-        /*
         if (this.gui.isKeyPressed("KeyA")) {
             this.graph.vehicle.turn(5);
         }
@@ -170,7 +169,6 @@ export class XMLscene extends CGFscene {
             this.graph.vehicle.turn(-5);
         }
 
-        */
         if (this.gui.isKeyPressed("KeyR")) {
             this.graph.vehicle.reset();
         }

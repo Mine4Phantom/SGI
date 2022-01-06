@@ -1,5 +1,5 @@
 <sxg>
-    <scene root="root" axis_length="8"/>
+    <scene root="root" axis_length="8" />
 
     <views default="defaultCamera2">
         <perspective id="defaultCamera2" near="0.1" far="500" angle="45">
@@ -119,19 +119,19 @@
             <rectangle x1="-0.5" y1="-0.5" x2="0.5" y2="0.5" />
         </primitive>
         <primitive id="triangle">
-            <triangle x1="-0.5" y1="-0.5" x2="0.5" y2="-0.5" x3="0" y3="0.5"/>
+            <triangle x1="-0.5" y1="-0.5" x2="0.5" y2="-0.5" x3="0" y3="0.5" />
         </primitive>
         <primitive id="cylinder">
-            <cylinder height="1" topRadius="1" bottomRadius="1" stacks="10" slices="50"/>
+            <cylinder height="1" topRadius="1" bottomRadius="1" stacks="10" slices="50" />
         </primitive>
         <primitive id="cylinder2">
-            <cylinder2 height="1" topRadius="1" bottomRadius="1" stacks="10" slices="50"/>
+            <cylinder2 height="1" topRadius="1" bottomRadius="1" stacks="10" slices="50" />
         </primitive>
         <primitive id="circle">
-            <circle radius="0.5" slices="50"/>
+            <circle radius="0.5" slices="50" />
         </primitive>
         <primitive id="sphere">
-            <sphere radius="1" slices="50" stacks="50"/>
+            <sphere radius="1" slices="50" stacks="50" />
         </primitive>
         <primitive id="plane">
             <plane npartsU="50" npartsV="50" />
@@ -197,18 +197,17 @@
     <components>
 
         <component id="root">
-            <transformation>
-            </transformation>
+            <transformation></transformation>
             <materials>
                 <material id="demoMaterial" />
             </materials>
-            <texture id="demoTexture" length_s="1" length_t="1"/>
+            <texture id="demoTexture" length_s="1" length_t="1" />
             <children>
                 <componentref id="floor" />
             </children>
         </component>
 
-       
+
         <!-- Floor -->
         <component id="floor">
             <transformation>
@@ -217,16 +216,12 @@
             <materials>
                 <material id="gray_material" />
             </materials>
-            <texture id="none"/>
+            <texture id="none" />
             <children>
                 <primitiveref id="plane" />
             </children>
         </component>
 
-
-    </components>
-
-    <vehicle>
         <!-- Car -->
         <component id="car">
             <transformation>
@@ -235,10 +230,10 @@
             <materials>
                 <material id="demoMaterial" />
             </materials>
-            <texture id="demoTexture" length_s="1" length_t="1"/>
+            <texture id="demoTexture" length_s="1" length_t="1" />
             <children>
-                <componentref id="wheels"/>
-                <componentref id="body"/>
+                <componentref id="wheels" />
+                <componentref id="body" />
             </children>
         </component>
 
@@ -250,12 +245,12 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="none"/>
+            <texture id="none" />
             <children>
-                <componentref id="wheel1"/>
-                <componentref id="wheel2"/>
-                <componentref id="wheel3"/>
-                <componentref id="wheel4"/>
+                <componentref id="wheel1" />
+                <componentref id="wheel2" />
+                <componentref id="wheel3" />
+                <componentref id="wheel4" />
             </children>
         </component>
 
@@ -267,9 +262,9 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="none"/>
+            <texture id="none" />
             <children>
-                <primitiveref id="cylinder"/>
+                <primitiveref id="cylinder" />
             </children>
         </component>
 
@@ -281,9 +276,9 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="none"/>
+            <texture id="none" />
             <children>
-                <primitiveref id="cylinder"/>
+                <primitiveref id="cylinder" />
             </children>
         </component>
 
@@ -295,9 +290,9 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="none"/>
+            <texture id="none" />
             <children>
-                <primitiveref id="cylinder"/>
+                <primitiveref id="cylinder" />
             </children>
         </component>
 
@@ -309,12 +304,12 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="none"/>
+            <texture id="none" />
             <children>
-                <primitiveref id="cylinder"/>
+                <primitiveref id="cylinder" />
             </children>
         </component>
-        
+
 
         <!-- Cube -->
         <component id="body">
@@ -325,111 +320,108 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="none"/>
+            <texture id="none" />
             <children>
-                <componentref id="cube"/>
+                <componentref id="cube" />
             </children>
         </component>
 
         <!-- Cube -->
         <component id="cube">
-            <transformation>
-            </transformation>
+            <transformation></transformation>
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit"/>
+            <texture id="inherit" />
             <children>
-                <componentref id="cube_face1"/>
-                <componentref id="cube_face2"/>
-                <componentref id="cube_face3"/>
-                <componentref id="cube_face4"/>
-                <componentref id="cube_face5"/>
-                <componentref id="cube_face6"/>
+                <componentref id="cube_face1" />
+                <componentref id="cube_face2" />
+                <componentref id="cube_face3" />
+                <componentref id="cube_face4" />
+                <componentref id="cube_face5" />
+                <componentref id="cube_face6" />
             </children>
         </component>
 
-        
 
         <!-- Cube Faces -->
         <component id="cube_face1">
             <transformation>
-                <transformationref id="cube_face1"/>
+                <transformationref id="cube_face1" />
             </transformation>
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit"/>
+            <texture id="inherit" />
             <children>
-                <primitiveref id="rectangle"/>
+                <primitiveref id="rectangle" />
             </children>
         </component>
 
         <component id="cube_face2">
             <transformation>
-                <transformationref id="cube_face2"/>
+                <transformationref id="cube_face2" />
             </transformation>
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit"/>
+            <texture id="inherit" />
             <children>
-                <primitiveref id="rectangle"/>
+                <primitiveref id="rectangle" />
             </children>
         </component>
 
         <component id="cube_face3">
             <transformation>
-                <transformationref id="cube_face3"/>
+                <transformationref id="cube_face3" />
             </transformation>
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit"/>
+            <texture id="inherit" />
             <children>
-                <primitiveref id="rectangle"/>
+                <primitiveref id="rectangle" />
             </children>
         </component>
 
         <component id="cube_face4">
             <transformation>
-                <transformationref id="cube_face4"/>
+                <transformationref id="cube_face4" />
             </transformation>
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit"/>
+            <texture id="inherit" />
             <children>
-                <primitiveref id="rectangle"/>
+                <primitiveref id="rectangle" />
             </children>
         </component>
 
         <component id="cube_face5">
             <transformation>
-                <transformationref id="cube_face5"/>
+                <transformationref id="cube_face5" />
             </transformation>
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit"/>
+            <texture id="inherit" />
             <children>
-                <primitiveref id="rectangle"/>
+                <primitiveref id="rectangle" />
             </children>
         </component>
 
         <component id="cube_face6">
             <transformation>
-                <transformationref id="cube_face6"/>
+                <transformationref id="cube_face6" />
             </transformation>
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit"/>
+            <texture id="inherit" />
             <children>
-                <primitiveref id="rectangle"/>
+                <primitiveref id="rectangle" />
             </children>
         </component>
-        
+    </components>
 
-    </vehicle>
 </sxg>

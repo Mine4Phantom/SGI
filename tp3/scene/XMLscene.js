@@ -138,7 +138,8 @@ export class XMLscene extends CGFscene {
     update(t) {
         this.lastUpdate = t;
         this.checkKeys(t);
-        this.graph.vehicle.update(t);
+        if (this.graph.vehicle != null)
+            this.graph.vehicle.update(t);
     }
 
     selectView(viewId) {

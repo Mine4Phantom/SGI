@@ -1,6 +1,7 @@
 import { CGFXMLreader } from '../lib/CGF.js';
 import { MyObstacle } from './svgelements/MyObstacle.js';
 import { MyPowerUp } from './svgelements/MyPowerUp.js';
+import { MyRoute } from './svgelements/MyRoute.js';
 
 
 /**
@@ -18,6 +19,9 @@ export class MySVGReader {
 
         this.powerUps = [];
         this.obstacles = [];
+        this.track = null
+        this.start = null
+        this.routes = []
 
         /*
          * Read the contents of the xml file, and refer to this class for loading and error handlers.
@@ -157,10 +161,22 @@ export class MySVGReader {
                     i=this.getCoordsFromPath(lines,path_info,i)
                     break;
                 default:
-                    // COORDINATE 
-                    break
+                    return "failed to parse attribute d in path with id = " + id + " with value " + path_info[i] +  " inside layer " + layerName;
             }
         }
+
+        switch (layerName) {
+            case "Track":
+                this.track = (new MyRoute(this.scene, move_tos, curves, lines, close_path));
+                break;
+            case "Start":
+                this.start = (new MyRoute(this.scene, move_tos, curves, lines, close_path));
+                break;
+            case "Routes":
+                this.routes.push(new MyRoute(this.scene, move_tos, curves, lines, close_path));
+                break;
+        }
+
         /* console.log(id)
         console.log("M")
         console.log(move_tos)

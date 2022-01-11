@@ -144,7 +144,7 @@ export class XMLscene extends CGFscene {
 
     selectView(viewId) {
         this.camera = this.graph.cameras[viewId];
-        this.interface.setActiveCamera(this.camera);
+        this.interface.setActiveCamera(this.ca5mera);
     }
 
     checkKeys(t) {

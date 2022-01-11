@@ -232,23 +232,35 @@
             </materials>
             <texture id="demoTexture" length_s="1" length_t="1" />
             <children>
-                <componentref id="wheels" />
+                <componentref id="front_wheels" />
+                <componentref id="back_wheels" />
                 <componentref id="body" />
             </children>
         </component>
 
-        <!-- Wheels -->
-        <component id="wheels">
+        <component id="back_wheels">
             <transformation>
                 <translate x="0" y="1" z="-0.5" />
             </transformation>
             <materials>
-                <material id="inherit" />
+                <material id="black_material" />
             </materials>
             <texture id="none" />
             <children>
                 <componentref id="wheel1" />
                 <componentref id="wheel2" />
+            </children>
+        </component>
+
+        <component id="front_wheels">
+            <transformation>
+                <translate x="0" y="1" z="-0.5" />
+            </transformation>
+            <materials>
+                <material id="black_material" />
+            </materials>
+            <texture id="none" />
+            <children>
                 <componentref id="wheel3" />
                 <componentref id="wheel4" />
             </children>
@@ -318,7 +330,7 @@
                 <scale x="9" y="1" z="4" />
             </transformation>
             <materials>
-                <material id="inherit" />
+                <material id="demoMaterial" />
             </materials>
             <texture id="none" />
             <children>

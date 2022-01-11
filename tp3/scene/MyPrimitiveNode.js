@@ -1,5 +1,3 @@
-
-
 /**
  * MyPrimitiveNode class, representing a primitive node in the scene graph.
  * @constructor

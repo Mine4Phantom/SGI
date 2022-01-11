@@ -322,12 +322,39 @@
             </children>
         </component>
 
-
-        <!-- Cube -->
+        <!-- Body -->
         <component id="body">
             <transformation>
                 <translate x="0" y="2" z="0" />
                 <scale x="9" y="1" z="4" />
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="none" />
+            <children>
+                <componentref id="cube" />
+            </children>
+        </component>
+
+        <!-- Power Up -->
+        <component id="power_up">
+            <transformation>
+                <scale x="1" y="1" z="1" />
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="none" />
+            <children>
+                <primitiveref id="sphere" />
+            </children>
+        </component>
+
+        <!-- Obstacle -->
+        <component id="obstacle">
+            <transformation>
+                <translate x="1" y="1" z="1" />
             </transformation>
             <materials>
                 <material id="demoMaterial" />

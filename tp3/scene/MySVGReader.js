@@ -176,16 +176,6 @@ export class MySVGReader {
                 this.routes.push(new MyRoute(this.scene, move_tos, curves, lines, close_path));
                 break;
         }
-
-        /* console.log(id)
-        console.log("M")
-        console.log(move_tos)
-        console.log("C")
-        console.log(curves)
-        console.log("L")
-        console.log(lines)
-        console.log("Z")
-        console.log(close_path) */
     }
 
     getCoordsFromPath(arrayToSave,path_info,i){

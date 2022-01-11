@@ -1,6 +1,8 @@
+import { CGFobject } from "../../lib/CGF.js";
 
-export class MyPowerUp {
+export class MyPowerUp extends CGFobject{
     constructor(scene, center_x, center_z) {
+        super(scene);
         this.scene = scene;
         this.center_x = center_x;
         this.center_z = center_z;

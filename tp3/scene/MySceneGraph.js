@@ -1195,8 +1195,10 @@ export class MySceneGraph {
             this.components[componentID] = new MyComponentNode(this, componentID);
 
             // Specific components for racing game
-            if (componentID == 'car') 
+            if (componentID == 'car')
                 this.vehicle = new MyVehicle(this.scene, this.components[componentID])
+
+
 
             // Material ID
             if (materialsIndex == -1)
@@ -1442,7 +1444,7 @@ export class MySceneGraph {
      * Displays the scene, processing each node, starting in the root node.
      */
     displayScene() {
-        console.log(this.vehicle)
+        //console.log(this.vehicle)
         this.components[this.idRoot].display();
         this.vehicle.display();
     }

@@ -1195,13 +1195,8 @@ export class MySceneGraph {
             this.components[componentID] = new MyComponentNode(this, componentID);
 
             // Specific components for racing game
-<<<<<<< HEAD
             if (componentID == 'car') 
                 this.vehicle = new MyVehicle(this.scene, this.components)
-=======
-            if (componentID == 'car')
-                this.vehicle = new MyVehicle(this.scene, this.components[componentID])
->>>>>>> c755e0c42b81c4c9c8ef69cd7d4f70d397f22d23
 
 
 

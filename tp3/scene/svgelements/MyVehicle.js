@@ -29,16 +29,16 @@ export class MyVehicle extends CGFobject {
 
     update(t){
 
-      this.wheels.update(t);
-
+      
       this.x -= this.speed * Math.cos(this.angleYY*Math.PI/180);
       this.z -= this.speed * Math.sin(this.angleYY*Math.PI/180);
-
+      this.wheels.update(t);
+      
     }
 
     accelerate(val){
-      this.wheels.accelerate(val);
       this.speed += val;
+      this.wheels.accelerate(val);
     }
 
     reset(){

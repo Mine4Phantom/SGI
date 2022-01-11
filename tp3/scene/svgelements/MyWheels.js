@@ -30,7 +30,7 @@ export class MyWheels extends CGFobject {
 
       this.x -= this.speed * Math.cos(this.angleYY*Math.PI/180);
       this.z -= this.speed * Math.sin(this.angleYY*Math.PI/180);
-      this.time += 0.1;
+      this.time += 0.1*this.speed;
 
     }
 
@@ -49,10 +49,10 @@ export class MyWheels extends CGFobject {
 
     display() {
       
-      //console.log(this.component)
+      console.log(this.time*this.speed);
       this.scene.pushMatrix();
-      this.scene.rotate(this.time*this.speed, 1, 0, 0);
       this.scene.translate(this.x, this.y, this.z);
+      this.scene.rotate(this.time, 1, 0, 0);
       this.component['front_wheels'].display();
       this.scene.popMatrix();
       

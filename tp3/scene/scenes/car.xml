@@ -280,9 +280,9 @@
                 <translate x="5" y="0" z="2.5" />
             </transformation>
             <materials>
-                <material id="inherit" />
+                <material id="wheel_material" />
             </materials>
-            <texture id="inherit" />
+            <texture id="wheelsTexture" length_s="1" length_t="1"/>
             <children>
                 <primitiveref id="cylinder" />
             </children>
@@ -294,9 +294,9 @@
                 <translate x="5" y="0" z="-2.5" />
             </transformation>
             <materials>
-                <material id="inherit" />
+                <material id="wheel_material" />
             </materials>
-            <texture id="inherit" />
+            <texture id="wheelsTexture" length_s="1" length_t="1"/>
             <children>
                 <primitiveref id="cylinder" />
             </children>
@@ -305,12 +305,12 @@
         <!-- Wheels -->
         <component id="wheel3">
             <transformation>
-                <translate x="-5" y="0" z="2.5" />
+                <translate x="-5" y="1" z="2" />
             </transformation>
             <materials>
-                <material id="inherit" />
+                <material id="wheel_material" />
             </materials>
-            <texture id="inherit" />
+            <texture id="wheelsTexture" length_s="1" length_t="1"/>
             <children>
                 <primitiveref id="cylinder" />
             </children>
@@ -319,12 +319,12 @@
         <!-- Wheels -->
         <component id="wheel4">
             <transformation>
-                <translate x="-5" y="0" z="-2.5" />
+                <translate x="-5" y="1" z="-3" />
             </transformation>
             <materials>
-                <material id="inherit" />
+                <material id="wheel_material" />
             </materials>
-            <texture id="inherit" />
+            <texture id="wheelsTexture" length_s="1" length_t="1"/>
             <children>
                 <primitiveref id="cylinder" />
             </children>

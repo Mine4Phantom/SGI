@@ -162,11 +162,11 @@ export class XMLscene extends CGFscene {
             this.graph.vehicle.accelerate(-0.05 * this.speedFactor);
         }
         if (this.gui.isKeyPressed("KeyA")) {
-            this.graph.vehicle.turn(5);
+            this.graph.vehicle.turn(0.3);
         }
 
         if (this.gui.isKeyPressed("KeyD")) {
-            this.graph.vehicle.turn(-5);
+            this.graph.vehicle.turn(-0.3);
         }
 
         if (this.gui.isKeyPressed("KeyR")) {

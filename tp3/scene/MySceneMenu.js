@@ -64,6 +64,11 @@ export class MySceneMenu extends CGFscene
 		this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(20, 20, 100), vec3.fromValues(0, 0, 0));
 	};
 
+    //Based on oolite-font image given. it is present in textures folder
+    writeOnScreen(Text){
+
+    }
+
 	display() 
 	{
 		// Clear image and depth buffer every time we update the scene
@@ -74,13 +79,6 @@ export class MySceneMenu extends CGFscene
 		// Initialize Model-View matrix as identity (no transformation
 		this.updateProjectionMatrix();
 		this.loadIdentity();
-
-		// An example of how to show something that is not affected by the camera (e.g. a HUP display)
-		// here showing the spritesheet
-		this.pushMatrix();
-			this.translate(-1,1.5,-10);
-			this.quad.display();
-		this.popMatrix();
 
 		// Apply transformations corresponding to the camera position relative to the origin
 		this.applyViewMatrix();
@@ -100,27 +98,56 @@ export class MySceneMenu extends CGFscene
 		// activate texture containing the font
 		this.appearance.apply();
 
+        // Rocket Kart -tots not a reference to Rocket League and Mario Kart
 		this.pushMatrix();
 			// 	Reset transf. matrix to draw independent of camera
 			this.loadIdentity();
 
 			// transform as needed to place on screen
-			this.translate(-1,0,-50);
+			this.translate(-5.4,4,-40);
 
 			// set character to display to be in the Nth column, Mth line (0-based)
 			// the shader will take care of computing the correct texture coordinates 
 			// of that character inside the font texture (check shaders/font.vert )
 			// Homework: This should be wrapped in a function/class for displaying a full string
 
-			this.activeShader.setUniformsValues({'charCoords': [3,5]});	// S
+			this.activeShader.setUniformsValues({'charCoords': [2,5]});	// R
 			this.quad.display();
 
 			this.translate(1,0,0);
-			this.activeShader.setUniformsValues({'charCoords': [7,4]});	// G
+			this.activeShader.setUniformsValues({'charCoords': [15,4]});	// O
 			this.quad.display();
 
 			this.translate(1,0,0);
-			this.activeShader.setUniformsValues({'charCoords': [9,4]}); // I
+			this.activeShader.setUniformsValues({'charCoords': [3,4]}); // C
+			this.quad.display();
+
+            this.translate(1,0,0);
+			this.activeShader.setUniformsValues({'charCoords': [11,4]}); // K
+			this.quad.display();
+
+            this.translate(1,0,0);
+			this.activeShader.setUniformsValues({'charCoords': [5,4]}); // E
+			this.quad.display();
+
+            this.translate(1,0,0);
+			this.activeShader.setUniformsValues({'charCoords': [4,5]}); // T
+			this.quad.display();
+
+            this.translate(1.9,0,0);
+			this.activeShader.setUniformsValues({'charCoords': [11,4]}); // K
+			this.quad.display();
+
+            this.translate(1,0,0);
+			this.activeShader.setUniformsValues({'charCoords': [1,4]}); // A
+			this.quad.display();
+
+            this.translate(1,0,0);
+			this.activeShader.setUniformsValues({'charCoords': [2,5]}); // R
+			this.quad.display();
+
+            this.translate(1,0,0);
+			this.activeShader.setUniformsValues({'charCoords': [4,5]}); // E
 			this.quad.display();
 
 		this.popMatrix();

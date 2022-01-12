@@ -53,16 +53,12 @@ export class MyVehicle extends CGFobject {
 
     display() {
       
-      //console.log(this.component)
       this.scene.pushMatrix();
       this.scene.translate(this.x, this.y, this.z);
       this.component['body'].display();
       this.scene.popMatrix();
 
-      this.scene.pushMatrix();
-      this.scene.translate(this.x, this.y, this.z);
-      this.component['back_wheels'].display();
-      this.scene.popMatrix();
+      
 
       this.wheels.display();
 

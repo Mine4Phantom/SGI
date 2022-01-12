@@ -63,6 +63,7 @@
 
     <textures>
         <texture id="demoTexture" file="rocks.jpg" /> <!-- Do not delete, needed for 'none' texture -->
+        <texture id="wheelsTexture" file="wheels.jpg" />
     </textures>
 
     <materials>
@@ -85,6 +86,13 @@
             <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
             <diffuse r="0.1" g="0.1" b="0.1" a="1.0" />
             <specular r="0.1" g="0.1" b="0.1" a="1.0" />
+        </material>
+
+        <material id="wheel_material" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.3" g="0.3" b="0.3" a="1.0" />
+            <diffuse r="0.3" g="0.3" b="0.3" a="1.0" />
+            <specular r="0.3" g="0.3" b="0.3" a="1.0" />
         </material>
     </materials>
 
@@ -243,9 +251,9 @@
                 <translate x="0" y="1" z="-0.5" />
             </transformation>
             <materials>
-                <material id="black_material" />
+                <material id="wheel_material" />
             </materials>
-            <texture id="none" />
+            <texture id="wheelsTexture" length_s="1" length_t="5"/>
             <children>
                 <componentref id="wheel1" />
                 <componentref id="wheel2" />
@@ -257,9 +265,9 @@
                 <translate x="0" y="1" z="-0.5" />
             </transformation>
             <materials>
-                <material id="black_material" />
+                <material id="wheel_material" />
             </materials>
-            <texture id="none" />
+            <texture id="wheelsTexture" length_s="1" length_t="1"/>
             <children>
                 <componentref id="wheel3" />
                 <componentref id="wheel4" />
@@ -274,7 +282,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="none" />
+            <texture id="inherit" />
             <children>
                 <primitiveref id="cylinder" />
             </children>
@@ -288,7 +296,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="none" />
+            <texture id="inherit" />
             <children>
                 <primitiveref id="cylinder" />
             </children>
@@ -302,7 +310,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="none" />
+            <texture id="inherit" />
             <children>
                 <primitiveref id="cylinder" />
             </children>
@@ -316,7 +324,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="none" />
+            <texture id="inherit" />
             <children>
                 <primitiveref id="cylinder" />
             </children>
@@ -331,7 +339,7 @@
             <materials>
                 <material id="demoMaterial" />
             </materials>
-            <texture id="none" />
+            <texture id="none"/>
             <children>
                 <componentref id="cube" />
             </children>

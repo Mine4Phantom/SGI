@@ -1,5 +1,5 @@
 import { CGFapplication } from '../lib/CGF.js';
-import { XMLscene } from './XMLscene.js';
+import { MySceneGame } from './MySceneGame.js';
 import { MyInterface } from './MyInterface.js';
 import { MySceneGraph } from './MySceneGraph.js';
 import { MySceneMenu } from './MySceneMenu.js';
@@ -26,7 +26,7 @@ function main() {
     var app = new CGFapplication(document.body);
     var myInterface = new MyInterface();
     var mySceneMenu = new MySceneMenu(myInterface);
-    var mySceneGame = new XMLscene(myInterface);
+    var mySceneGame = new MySceneGame(myInterface);
 
     app.init();
 

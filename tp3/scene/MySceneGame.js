@@ -5,9 +5,9 @@ import { CGFaxis, CGFcamera, CGFcameraOrtho } from '../lib/CGF.js';
 var DEGREE_TO_RAD = Math.PI / 180;
 
 /**
- * XMLscene class, representing the scene that is to be rendered.
+ * MySceneGame class, representing the scene that is to be rendered.
  */
-export class XMLscene extends CGFscene {
+export class MySceneGame extends CGFscene {
     /**
      * @constructor
      * @param {MyInterface} myinterface 

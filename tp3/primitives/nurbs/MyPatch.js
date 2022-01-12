@@ -7,7 +7,7 @@ export class MyPatch extends CGFobject {
 
     /**
      * Build a new NURBS surface
-     * @param {XMLScene} scene             
+     * @param {MySceneGame} scene             
      * @param {Number} nDivisionsU      Number of divisions in U axis
      * @param {Number} nDivisionsV      Number of divisions in V axis 
      * @param {Number} degreeU          Degree on U axis 

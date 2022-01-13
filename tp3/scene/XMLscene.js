@@ -155,18 +155,18 @@ export class XMLscene extends CGFscene {
             }
         }
         if (this.gui.isKeyPressed("KeyW")) {
-            this.graph.vehicle.accelerate(0.05 * this.speedFactor);            
+            this.graph.vehicle.accelerate(0.15 * this.speedFactor);            
             
         }
         if (this.gui.isKeyPressed("KeyS")) {
-            this.graph.vehicle.accelerate(-0.05 * this.speedFactor);
+            this.graph.vehicle.accelerate(-0.15 * this.speedFactor);
         }
         if (this.gui.isKeyPressed("KeyA")) {
-            this.graph.vehicle.turn(0.3);
+            this.graph.vehicle.turnWheels(0.3);
         }
 
         if (this.gui.isKeyPressed("KeyD")) {
-            this.graph.vehicle.turn(-0.3);
+            this.graph.vehicle.turnWheels(-0.3);
         }
 
         if (this.gui.isKeyPressed("KeyR")) {

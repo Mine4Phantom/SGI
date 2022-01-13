@@ -11,7 +11,6 @@ export class MyWheels extends CGFobject {
         this.direction = 0;
         this.wheel_angle = 0;
         this.speed = 0;
-        this.propellerAng = 0;
 
         this.time = 0;
 
@@ -28,22 +27,10 @@ export class MyWheels extends CGFobject {
 
     update(t){
 
-      this.x -= this.speed * Math.cos(this.direction*Math.PI/180);
-      this.z += this.speed * Math.sin(this.direction*Math.PI/180);
+      this.x -= this.speed * Math.cos(this.direction);
+      this.z += this.speed * Math.sin(this.direction);
       this.time += 0.5*this.speed;
 
-    }
-
-    turnWheel(val){
-      this.wheel_angle += val
-      if(this.wheel_angle >= Math.PI/6)
-        this.wheel_angle = Math.PI/6
-      else if(this.wheel_angle <= -Math.PI/6)
-        this.wheel_angle = -Math.PI/6
-    }
-
-    turn(val){
-      this.direction += val;
     }
 
     accelerate(val){
@@ -51,12 +38,15 @@ export class MyWheels extends CGFobject {
     }
 
     reset(){
-        this.x = 0;
-        this.y = 0;
-        this.z = 0;
-        this.speed = 0;
-        this.direction = 0;
-        this.time = 0;
+      this.body = 0
+      this.x = 0;
+      this.y = 0;
+      this.z = 0;
+      this.direction = 0;
+      this.wheel_angle = 0;
+      this.speed = 0;
+
+      this.time = 0;
       }
 
     display() {
@@ -78,7 +68,7 @@ export class MyWheels extends CGFobject {
       this.scene.popMatrix();
 
       this.scene.pushMatrix();
-      this.scene.translate(this.x+5, this.y+1, this.z); // Turn the wheels
+      this.scene.translate(this.x+5, this.y+1, this.z);
       this.scene.rotate(this.time, 0, 0, 1); // spins back wheels
       this.scene.translate(-5, -1, 0);
       this.component['back_wheels'].display();

@@ -131,14 +131,26 @@ export class MySceneMenu extends CGFscene
 
 		this.pushMatrix();
 			this.loadIdentity();
-			this.translate(-6,-4,-60);
-			this.writeOnScreen("Game")
+			this.translate(-9,-4,-60);
+			this.writeOnScreen("Start")
 		this.popMatrix();
 
 		this.pushMatrix();
 			this.loadIdentity();
-			this.translate(3,-4,-60);
+			this.translate(5,-4,-60);
 			this.writeOnScreen("Demo")
+		this.popMatrix();
+
+		this.pushMatrix();
+			this.loadIdentity();
+			this.translate(-9,-7,-60);
+			this.writeOnScreen("Difficulty")
+		this.popMatrix();
+
+		this.pushMatrix();
+			this.loadIdentity();
+			this.translate(5,-7,-60);
+			this.writeOnScreen("Track")
 		this.popMatrix();
 
 		// re-enable depth test 

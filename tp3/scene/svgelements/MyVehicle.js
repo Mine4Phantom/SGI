@@ -10,7 +10,6 @@ export class MyVehicle extends CGFobject {
         this.y = 0;
         this.z = 0;
         this.direction = 0;
-        this.wheel_angle = 0;
         this.speed = 0;
 
 
@@ -33,24 +32,28 @@ export class MyVehicle extends CGFobject {
       this.x -= this.speed * Math.cos(this.direction);
       this.z += this.speed * Math.sin(this.direction);
       this.wheels.update(t);
-      
+      this.wheels.wheel_angle = this.wheels.wheel_angle * 0.8
+      this.turn((this.wheels.wheel_angle)*0.2);
     }
 
     turn(val){
-      this.direction += val*this.speed*0.01;
-      this.wheels.direction += val*this.speed*0.01;
+      if(this.speed < 2){ // turns based on a cubic curve
+        this.direction += val*(-1/2*(this.speed-2)**2+2);
+        this.wheels.direction += val*(-1/2*(this.speed-2)**2+2);
+      }else{ // turns based on a parabolic curve
+        this.direction += val*((-1/10)*(this.speed-2)**2 + 2);
+        this.wheels.direction += val*((-1/10)*(this.speed-2)**2 + 2);
+      }
     }
 
     turnWheels(val){
-      this.wheel_angle += val
+      this.wheels.wheel_angle += val
 
-      if(this.wheel_angle >= Math.PI/5)
-        this.wheel_angle = Math.PI/5
-      else if(this.wheel_angle <= -Math.PI/5)
-        this.wheel_angle = -Math.PI/5
-
-      this.wheels.wheel_angle = this.wheel_angle;
-      this.turn(val*30);
+      if(this.wheels.wheel_angle >= Math.PI/4.5)
+        this.wheels.wheel_angle = Math.PI/4.5
+      else if(this.wheels.wheel_angle <= -Math.PI/4.5)
+        this.wheels.wheel_angle = -Math.PI/4.5
+      
     }
 
     accelerate(val){
@@ -65,7 +68,6 @@ export class MyVehicle extends CGFobject {
       this.y = 0;
       this.z = 0;
       this.direction = 0;
-      this.wheel_angle = 0;
       this.speed = 0;
 
       this.time = 0;

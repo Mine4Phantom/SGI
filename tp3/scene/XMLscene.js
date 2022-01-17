@@ -1,5 +1,6 @@
 import { CGFscene } from '../lib/CGF.js';
 import { CGFaxis, CGFcamera, CGFcameraOrtho } from '../lib/CGF.js';
+import { MyMap } from './MyMap.js';
 
 
 var DEGREE_TO_RAD = Math.PI / 180;
@@ -47,6 +48,11 @@ export class XMLscene extends CGFscene {
         this.lastUpdate = 0;
         this.lastMPress = 0;
         this.speedFactor = 1;
+
+        // MAP
+        var trackMapPath = "./SimpleMapTexture.png";
+        var terrainTexturePath = "./MapTexture.png";
+        this.map = new MyMap(this, trackMapPath, terrainTexturePath);
     }
 
     /**
@@ -217,7 +223,8 @@ export class XMLscene extends CGFscene {
             this.setDefaultAppearance();
 
             // Displays the scene (MySceneGraph function).
-            this.graph.displayScene();
+            // this.graph.displayScene();
+            this.map.display();
             //this.graph.vehicle.display();
         }
 

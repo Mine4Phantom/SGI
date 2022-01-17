@@ -223,9 +223,9 @@ export class MySceneGame extends CGFscene {
             this.setDefaultAppearance();
 
             // Displays the scene (MySceneGraph function).
-            // this.graph.displayScene();
+            //this.graph.displayScene();
             this.map.display();
-            //this.graph.vehicle.display();
+            this.graph.vehicle.display();
         }
 
         this.popMatrix();

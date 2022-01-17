@@ -81,6 +81,7 @@ export class MySVGReader {
         let error;
         for (let i = 0; i < children.length; i++) {
             switch (children[i].nodeName) {
+                case 'ellipse': // Circle and ellipses parsed equally in this case
                 case 'circle':
                     if ((error = this.parseCircle(children[i], layerName)) != null)
                         return error;

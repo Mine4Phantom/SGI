@@ -1,5 +1,6 @@
 import { CGFscene } from '../lib/CGF.js';
 import { CGFaxis, CGFcamera, CGFcameraOrtho } from '../lib/CGF.js';
+import { MyMap } from './MyMap.js';
 
 
 var DEGREE_TO_RAD = Math.PI / 180;
@@ -47,6 +48,11 @@ export class MySceneGame extends CGFscene {
         this.lastUpdate = 0;
         this.lastMPress = 0;
         this.speedFactor = 1;
+
+        // MAP
+        var trackMapPath = "./SimpleMapTexture.png";
+        var terrainTexturePath = "./MapTexture.png";
+        this.map = new MyMap(this, trackMapPath, terrainTexturePath);
     }
 
     /**
@@ -155,18 +161,18 @@ export class MySceneGame extends CGFscene {
             }
         }
         if (this.gui.isKeyPressed("KeyW")) {
-            this.graph.vehicle.accelerate(0.05 * this.speedFactor);            
+            this.graph.vehicle.accelerate(0.15 * this.speedFactor);            
             
         }
         if (this.gui.isKeyPressed("KeyS")) {
-            this.graph.vehicle.accelerate(-0.05 * this.speedFactor);
+            this.graph.vehicle.accelerate(-0.15 * this.speedFactor);
         }
         if (this.gui.isKeyPressed("KeyA")) {
-            this.graph.vehicle.turn(5);
+            this.graph.vehicle.turnWheels(0.3);
         }
 
         if (this.gui.isKeyPressed("KeyD")) {
-            this.graph.vehicle.turn(-5);
+            this.graph.vehicle.turnWheels(-0.3);
         }
 
         if (this.gui.isKeyPressed("KeyR")) {
@@ -217,7 +223,8 @@ export class MySceneGame extends CGFscene {
             this.setDefaultAppearance();
 
             // Displays the scene (MySceneGraph function).
-            this.graph.displayScene();
+            // this.graph.displayScene();
+            this.map.display();
             //this.graph.vehicle.display();
         }
 

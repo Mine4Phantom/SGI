@@ -8,13 +8,12 @@ export class MyWheels extends CGFobject {
         this.x = 0;
         this.y = 0;
         this.z = 0;
-        this.angleYY = 0;
+        this.direction = 0;
+        this.wheel_angle = 0;
         this.speed = 0;
-        this.propellerAng = 0;
 
         this.time = 0;
 
-        this.wheels = 
 
         this.initBuffers();
     }
@@ -28,9 +27,9 @@ export class MyWheels extends CGFobject {
 
     update(t){
 
-      this.x -= this.speed * Math.cos(this.angleYY*Math.PI/180);
-      this.z -= this.speed * Math.sin(this.angleYY*Math.PI/180);
-      this.time += 0.1*this.speed;
+      this.x -= this.speed * Math.cos(this.direction);
+      this.z += this.speed * Math.sin(this.direction);
+      this.time += 0.5*this.speed;
 
     }
 
@@ -39,21 +38,40 @@ export class MyWheels extends CGFobject {
     }
 
     reset(){
-        this.x = 0;
-        this.y = 0;
-        this.z = 0;
-        this.speed = 0;
-        this.angleYY = 0;
-        this.time = 0;
+      this.body = 0
+      this.x = 0;
+      this.y = 0;
+      this.z = 0;
+      this.direction = 0;
+      this.wheel_angle = 0;
+      this.speed = 0;
+
+      this.time = 0;
       }
 
     display() {
       
-      console.log(this.time*this.speed);
       this.scene.pushMatrix();
-      this.scene.translate(this.x, this.y, this.z);
-      this.scene.rotate(this.time, 1, 0, 0);
-      this.component['front_wheels'].display();
+      this.scene.translate(this.x-5, this.y+1, this.z+2);
+      this.scene.rotate(this.wheel_angle, 0, 1, 0); // Turn the wheels
+      this.scene.rotate(this.time, 0, 0, 1); // Spins wheels
+      this.scene.translate(5, -1, -2);
+      this.component['wheel3'].display();
+      this.scene.popMatrix();
+
+      this.scene.pushMatrix();
+      this.scene.translate(this.x-5, this.y+1, this.z-2);
+      this.scene.rotate(this.wheel_angle, 0, 1, 0); // Turn the wheels
+      this.scene.rotate(this.time, 0, 0, 1); // spins wheels
+      this.scene.translate(5, -1, 2);
+      this.component['wheel4'].display();
+      this.scene.popMatrix();
+
+      this.scene.pushMatrix();
+      this.scene.translate(this.x+5, this.y+1, this.z);
+      this.scene.rotate(this.time, 0, 0, 1); // spins back wheels
+      this.scene.translate(-5, -1, 0);
+      this.component['back_wheels'].display();
       this.scene.popMatrix();
       
     }

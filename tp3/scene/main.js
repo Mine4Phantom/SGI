@@ -5,6 +5,10 @@ import { MySceneGraph } from './MySceneGraph.js';
 import { MySceneMenu } from './MySceneMenu.js';
 import { MySVGReader } from './MySVGReader.js';
 
+var menu;
+var game;
+var filename;
+
 function getUrlVars() {
     var vars = {};
     var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,    
@@ -13,6 +17,20 @@ function getUrlVars() {
     });
     return vars;
 }	 
+
+export function changeSceneByName(sceneName){
+    switch(sceneName.toLowerCase()){
+        case "menu":
+                changeScene(menu["scene"],menu["interface"],menu["app"])
+                break;
+        case "game":
+                changeScene(game["scene"],game["interface"],game["app"])
+                new MySceneGraph(filename, game["scene"]);
+                break;
+        default:
+            console.log("CRASHHHHHHHHHHHHHHHH in changing scene")
+    }
+}
 
 function changeScene(myScene, myInterface, app){
     app.setScene(myScene);
@@ -28,26 +46,24 @@ function main() {
     var mySceneMenu = new MySceneMenu(myInterface);
     var mySceneGame = new MySceneGame(myInterface);
 
-    app.init();
-
-    changeScene(mySceneMenu,myInterface,app)
+    menu={
+        'scene':mySceneMenu,'interface':myInterface,'app':app
+    }
+    game={
+        'scene':mySceneGame,'interface':myInterface,'app':app
+    }
 
 	// get file name provided in URL, e.g. http://localhost/myproj/?file=myfile.xml 
 	// or use "demo.xml" as default (assumes files in subfolder "scenes", check MySceneGraph constructor) 
-	
-    var filename=getUrlVars()['file'] || "car.xml";
+    filename=getUrlVars()['file'] || "car.xml";
 
-    changeScene(mySceneGame,myInterface,app)
-	// create and load graph, and associate it to scene. 
-	// Check console for loading errors
-	var myGraph = new MySceneGraph(filename, mySceneGame);
-	
-    // SVG parser for map info
-    let svgParser = new MySVGReader('TestTrackMap.svg', mySceneGame);
+    //Parse SVG for map info
+    new MySVGReader('TestTrackMap.svg', mySceneGame);
 
-    changeScene(mySceneMenu,myInterface,app)
+    app.init();
 
-    //app.setScene(mySceneMenu);
+    changeSceneByName("Menu")
+
 	// start
     app.run();
 }

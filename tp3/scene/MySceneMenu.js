@@ -1,6 +1,6 @@
 import { CGFscene, CGFcamera, CGFappearance, CGFaxis, CGFtexture, CGFshader } from "../lib/CGF.js";
 import { MyQuad } from '../primitives/MyQuad.js';
-
+import { changeSceneByName } from './main.js';
 
 export class MySceneMenu extends CGFscene
 {
@@ -94,7 +94,11 @@ export class MySceneMenu extends CGFscene
 		if (this.gui.isKeyPressed("Enter")) {
 			this.selected = true
 			if(this.menuKey >= 1 && this.menuKey <= 4)
-				console.log("selected " + this.menuKey)
+				if(this.menuKey == 1)
+					changeSceneByName("Game")
+				else
+					console.log("Option not yet developed")
+
 		}
     }
 

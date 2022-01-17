@@ -1,11 +1,8 @@
 
 export class MyRoute  {
-    constructor(scene, move_tos, curves, lines, close_path ) {
+    constructor(scene, route_vertexes) {
         this.scene = scene;
-        this.move_tos = move_tos
-        this.curves = curves
-        this.lines = lines
-        this.close_path = close_path
+        this.route_vertexes = route_vertexes;
     }
 
     display() {

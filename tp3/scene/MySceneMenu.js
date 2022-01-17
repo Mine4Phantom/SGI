@@ -1,4 +1,4 @@
-import { CGFscene, CGFcamera, CGFappearance, CGFaxis, CGFtexture, CGFshader } from "../lib/CGF.js";
+import { CGFscene, CGFcamera, CGFappearance, CGFaxis, CGFtexture, CGFshader, CGFplane } from "../lib/CGF.js";
 import { MyQuad } from '../primitives/MyQuad.js';
 import { changeSceneByName } from './main.js';
 
@@ -15,6 +15,7 @@ export class MySceneMenu extends CGFscene
 		this.textShader = null;
 		this.menuKey = 0
 		this.selected = false
+		this.changeSceneName = null
 	}
 
 	init(application) {
@@ -23,13 +24,15 @@ export class MySceneMenu extends CGFscene
 		this.initCameras();
 
 		this.initLights();
-		this.setUpdatePeriod(100);
+		this.setUpdatePeriod(60);
 
 		this.gl.clearColor(0.1, 0.1, 0.1, 1.0);
 		this.gl.clearDepth(1000.0);
 		this.gl.enable(this.gl.DEPTH_TEST);
 		this.gl.enable(this.gl.CULL_FACE);
 		this.gl.depthFunc(this.gl.LEQUAL);
+
+		this.setPickEnabled(true);
 		
 		this.axis=new CGFaxis(this);
 		this.enableTextures(true);
@@ -75,6 +78,9 @@ export class MySceneMenu extends CGFscene
 
 	update(t) {
         this.checkKeys(t);
+		if(this.changeSceneName != null)
+			changeSceneByName(this.changeSceneName);
+		this.changeSceneName = null
     }
 
 	checkKeys(t) {
@@ -93,17 +99,42 @@ export class MySceneMenu extends CGFscene
 
 		if (this.gui.isKeyPressed("Enter")) {
 			this.selected = true
-			if(this.menuKey >= 1 && this.menuKey <= 4)
-				if(this.menuKey == 1)
-					changeSceneByName("Game")
-				else
-					console.log("Option not yet developed")
+			this.chooseOption(this.menuKey)
 
 		}
     }
 
+	chooseOption(optionNumber){
+		switch(optionNumber){
+			case 1: this.changeSceneName = "Game"; break;
+			case 2: console.log("Demo is not yet developed"); break;
+			case 3: console.log("Difficulty is not yet developed"); break;
+			case 4: console.log("Track is not yet developed"); break;
+			default: break;
+
+		}
+	}
+
+	checkPicking()
+	{
+		if (this.pickMode == false) {
+			if (this.pickResults != null && this.pickResults.length > 0) {
+				for (var i=0; i< this.pickResults.length; i++) {
+					var obj = this.pickResults[i][0];
+					if (obj)
+					{
+						var customId = this.pickResults[i][1];				
+						//console.log("Picked object: " + obj + ", with pick id " + customId);
+						this.chooseOption(customId)
+					}
+				}
+				this.pickResults.splice(0,this.pickResults.length);
+			}		
+		}
+	}
+
     //Based on oolite-font image given. it is present in textures folder
-    writeOnScreen(text){
+    writeOnScreen(text, textId){
 		text=text.toLowerCase()
 		var spacing = 1
         for (var index in text){
@@ -117,6 +148,7 @@ export class MySceneMenu extends CGFscene
 			if(charPos == undefined)
 				continue
 			this.activeShader.setUniformsValues({'charCoords': charPos});
+			this.registerForPick(textId, this.quad);
 			this.quad.display();
 
 			this.translate(spacing,0,0);
@@ -125,6 +157,11 @@ export class MySceneMenu extends CGFscene
 
 	display() 
 	{
+		this.checkPicking();
+
+		// this resets the picking buffer
+		this.clearPickRegistration();
+
 		// Clear image and depth buffer every time we update the scene
 		this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
 		this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
@@ -141,13 +178,17 @@ export class MySceneMenu extends CGFscene
 		this.lights[0].update();
 
 		// Draw axis
-		this.axis.display();	
+		//this.axis.display();	
 
-		// activate shader for rendering text characters
-		this.setActiveShaderSimple(this.textShader);
+
 
 		// Optional: disable depth test so that it is always in front (need to reenable in the end)
 		this.gl.disable(this.gl.DEPTH_TEST);
+
+		var customId = 0
+
+		// activate shader for rendering text characters
+		this.setActiveShaderSimple(this.textShader);
 
 		// activate texture containing the font
 		this.appearance.apply();
@@ -158,47 +199,52 @@ export class MySceneMenu extends CGFscene
 			this.loadIdentity();
 			// transform as needed to place on screen
 			this.translate(-5.4,4,-40);
-			this.writeOnScreen("Rocket Kart")
+			this.writeOnScreen("Rocket Kart", customId)
+			customId+=1
 		this.popMatrix();
 
 		this.pushMatrix();
 			this.loadIdentity();
 			this.translate(-9,-4,-60);
-			this.writeOnScreen("1 Start")
+			this.writeOnScreen("1 Start", customId)
 			if(this.menuKey == 1){
 				this.translate(-6,0,0);
-				this.writeOnScreen("*")
+				this.writeOnScreen("*", customId)
 			}
+			customId+=1
 		this.popMatrix();
 
 		this.pushMatrix();
 			this.loadIdentity();
 			this.translate(5,-4,-60);
-			this.writeOnScreen("2 Demo")
+			this.writeOnScreen("2 Demo", customId)
 			if(this.menuKey == 2){
 				this.translate(-5,0,0);
-				this.writeOnScreen("*")
+				this.writeOnScreen("*", customId)
 			}
+			customId+=1
 		this.popMatrix();
 
 		this.pushMatrix();
 			this.loadIdentity();
 			this.translate(-9,-7,-60);
-			this.writeOnScreen("3 Difficulty")
+			this.writeOnScreen("3 Difficulty", customId)
 			if(this.menuKey == 3){
 				this.translate(-11,0,0);
-				this.writeOnScreen("*")
+				this.writeOnScreen("*", customId)
 			}
+			customId+=1
 		this.popMatrix();
 
 		this.pushMatrix();
 			this.loadIdentity();
 			this.translate(5,-7,-60);
-			this.writeOnScreen("4 Track")
+			this.writeOnScreen("4 Track", customId)
 			if(this.menuKey == 4){
 				this.translate(-6,0,0);
-				this.writeOnScreen("*")
+				this.writeOnScreen("*", customId)
 			}
+			customId+=1
 		this.popMatrix();
 
 		// re-enable depth test 

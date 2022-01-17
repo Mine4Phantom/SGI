@@ -13,6 +13,8 @@ export class MySceneMenu extends CGFscene
 		this.appearance = null;
 		this.quad = null;
 		this.textShader = null;
+		this.menuKey = 0
+		this.selected = false
 	}
 
 	init(application) {
@@ -21,6 +23,7 @@ export class MySceneMenu extends CGFscene
 		this.initCameras();
 
 		this.initLights();
+		this.setUpdatePeriod(100);
 
 		this.gl.clearColor(0.1, 0.1, 0.1, 1.0);
 		this.gl.clearDepth(1000.0);
@@ -50,7 +53,7 @@ export class MySceneMenu extends CGFscene
 
 		//create dict for text
 		this.textDict = {
-			a:[1,4],b:[2,4],c:[3,4],d:[4,4],e:[5,4],f:[6,4],g:[7,4],h:[8,4],i:[9,4],j:[10,4],k:[11,4],l:[12,4],m:[13,4],n:[14,4],o:[15,4],p:[0,5],q:[1,5],r:[2,5],s:[3,5],t:[4,5],u:[5,5],v:[6,5],w:[7,5],x:[8,5],y:[9,5],z:[10,5]
+			a:[1,4],b:[2,4],c:[3,4],d:[4,4],e:[5,4],f:[6,4],g:[7,4],h:[8,4],i:[9,4],j:[10,4],k:[11,4],l:[12,4],m:[13,4],n:[14,4],o:[15,4],p:[0,5],q:[1,5],r:[2,5],s:[3,5],t:[4,5],u:[5,5],v:[6,5],w:[7,5],x:[8,5],y:[9,5],z:[10,5],'*':[10,2],"1":[1,3],"2":[2,3],"3":[3,3],"4":[4,3]
 		} 
 		
 
@@ -69,6 +72,31 @@ export class MySceneMenu extends CGFscene
 	initCameras = function () {
 		this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(20, 20, 100), vec3.fromValues(0, 0, 0));
 	};
+
+	update(t) {
+        this.checkKeys(t);
+    }
+
+	checkKeys(t) {
+        if (this.gui.isKeyPressed("Digit1")) {
+            this.menuKey = 1  
+        }
+        else if (this.gui.isKeyPressed("Digit2")) {
+            this.menuKey = 2  
+        }
+        else if (this.gui.isKeyPressed("Digit3")) {
+            this.menuKey = 3  
+        }
+        else if (this.gui.isKeyPressed("Digit4")) {
+            this.menuKey = 4  
+        }
+
+		if (this.gui.isKeyPressed("Enter")) {
+			this.selected = true
+			if(this.menuKey >= 1 && this.menuKey <= 4)
+				console.log("selected " + this.menuKey)
+		}
+    }
 
     //Based on oolite-font image given. it is present in textures folder
     writeOnScreen(text){
@@ -132,25 +160,41 @@ export class MySceneMenu extends CGFscene
 		this.pushMatrix();
 			this.loadIdentity();
 			this.translate(-9,-4,-60);
-			this.writeOnScreen("Start")
+			this.writeOnScreen("1 Start")
+			if(this.menuKey == 1){
+				this.translate(-6,0,0);
+				this.writeOnScreen("*")
+			}
 		this.popMatrix();
 
 		this.pushMatrix();
 			this.loadIdentity();
 			this.translate(5,-4,-60);
-			this.writeOnScreen("Demo")
+			this.writeOnScreen("2 Demo")
+			if(this.menuKey == 2){
+				this.translate(-5,0,0);
+				this.writeOnScreen("*")
+			}
 		this.popMatrix();
 
 		this.pushMatrix();
 			this.loadIdentity();
 			this.translate(-9,-7,-60);
-			this.writeOnScreen("Difficulty")
+			this.writeOnScreen("3 Difficulty")
+			if(this.menuKey == 3){
+				this.translate(-11,0,0);
+				this.writeOnScreen("*")
+			}
 		this.popMatrix();
 
 		this.pushMatrix();
 			this.loadIdentity();
 			this.translate(5,-7,-60);
-			this.writeOnScreen("Track")
+			this.writeOnScreen("4 Track")
+			if(this.menuKey == 4){
+				this.translate(-6,0,0);
+				this.writeOnScreen("*")
+			}
 		this.popMatrix();
 
 		// re-enable depth test 

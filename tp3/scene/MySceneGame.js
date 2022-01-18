@@ -161,8 +161,8 @@ export class MySceneGame extends CGFscene {
             }
         }
         if (this.gui.isKeyPressed("KeyW")) {
-            this.graph.vehicle.accelerate(0.15 * this.speedFactor);            
-            
+            this.graph.vehicle.accelerate(0.15 * this.speedFactor);
+
         }
         if (this.gui.isKeyPressed("KeyS")) {
             this.graph.vehicle.accelerate(-0.15 * this.speedFactor);
@@ -226,6 +226,10 @@ export class MySceneGame extends CGFscene {
             //this.graph.displayScene();
             this.map.display();
             this.graph.vehicle.display();
+            for (var i = 0; i < this.svgGraph.powerUps.length; i++) {
+                console.log(this.svgGraph.powerUps)
+                this.svgGraph.powerUps[i].display();
+            }
         }
 
         this.popMatrix();

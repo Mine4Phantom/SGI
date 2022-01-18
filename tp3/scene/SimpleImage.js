@@ -12,8 +12,8 @@ export class SimpleImage {
     onload() {
         this.loaded = true;
         this.context.drawImage(this.img, 0, 0)
-        this.width = this.img.naturalWidth;
-        this.height = this.img.naturalHeight;
+        this.width = this.img.width;
+        this.height = this.img.height;
     }
 
     getPixel(x, y) {

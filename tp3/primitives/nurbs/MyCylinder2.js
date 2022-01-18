@@ -7,7 +7,7 @@ import { MyPatch } from "./MyPatch.js";
 export class MyCylinder2 extends CGFobject {
     /**
      * @constructor                 Cylinder constructor
-     * @param {XMLscene} scene      Reference to the scene in which the cylinder will be dispayed
+     * @param {MySceneGame} scene      Reference to the scene in which the cylinder will be dispayed
      * @param {Number} baseRadius   Radius of the bottom base (z = 0)
      * @param {Number} topRadius    Radius of the top base (z = height)
      * @param {Number} height       Height of the cylinder

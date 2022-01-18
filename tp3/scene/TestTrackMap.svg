@@ -53,10 +53,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.3359375"
-     inkscape:cx="256"
+     inkscape:cx="207.7193"
      inkscape:cy="248.88889"
      inkscape:document-units="px"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
      showgrid="false"
      units="px"
@@ -95,32 +95,32 @@
      inkscape:label="PowerUps"
      style="display:inline">
     <ellipse
-       style="fill:#008000;stroke:#b3b3b3;stroke-width:0.104582;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
-       id="path852-7"
-       cx="115.88198"
-       cy="83.598961"
-       rx="2.9188855"
-       ry="3.0774355" />
-    <ellipse
-       style="display:inline;fill:#008000;stroke:#b3b3b3;stroke-width:0.104582;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
-       id="path852-7-3"
-       cx="82.578758"
-       cy="99.461708"
-       rx="2.9188855"
-       ry="3.0774355" />
-    <ellipse
-       style="display:inline;fill:#008000;stroke:#b3b3b3;stroke-width:0.104582;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
-       id="path852-7-3-5"
-       cx="27.723074"
-       cy="86.324692"
-       rx="2.9188855"
-       ry="3.0774355" />
-    <ellipse
        style="display:inline;fill:#008000;stroke:#b3b3b3;stroke-width:0.104582;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
        id="path852-7-3-6"
        cx="28.621069"
        cy="48.746346"
-       rx="2.9188855"
+       rx="3.0773687"
+       ry="3.0774355" />
+    <ellipse
+       style="display:inline;fill:#008000;stroke:#b3b3b3;stroke-width:0.104582;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
+       id="path852-7-3-6-3"
+       cx="27.932055"
+       cy="87.161537"
+       rx="3.0773687"
+       ry="3.0774355" />
+    <ellipse
+       style="display:inline;fill:#008000;stroke:#b3b3b3;stroke-width:0.104582;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
+       id="path852-7-3-6-7"
+       cx="82.191032"
+       cy="99.619492"
+       rx="3.0773687"
+       ry="3.0774355" />
+    <ellipse
+       style="display:inline;fill:#008000;stroke:#b3b3b3;stroke-width:0.104582;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
+       id="path852-7-3-6-5"
+       cx="115.12594"
+       cy="83.632812"
+       rx="3.0773687"
        ry="3.0774355" />
   </g>
   <g
@@ -130,24 +130,24 @@
      style="display:inline">
     <ellipse
        style="display:inline;fill:#ff0000;stroke:#b3b3b3;stroke-width:0.101699;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
-       id="path852-8-9-3-6"
-       cx="116.19096"
-       cy="65.328758"
-       rx="2.8479798"
-       ry="2.9825828" />
-    <ellipse
-       style="display:inline;fill:#ff0000;stroke:#b3b3b3;stroke-width:0.101699;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
-       id="path852-8-9-3"
-       cx="27.109459"
-       cy="100.34728"
-       rx="2.8479798"
-       ry="2.9825828" />
-    <ellipse
-       style="display:inline;fill:#ff0000;stroke:#b3b3b3;stroke-width:0.101699;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
        id="path852-8-9-3-7"
        cx="26.596121"
        cy="71.899681"
-       rx="2.8479798"
+       rx="2.9826479"
+       ry="2.9825828" />
+    <ellipse
+       style="display:inline;fill:#ff0000;stroke:#b3b3b3;stroke-width:0.101699;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
+       id="path852-8-9-3-7-3"
+       cx="26.948353"
+       cy="100.47723"
+       rx="2.9826479"
+       ry="2.9825828" />
+    <ellipse
+       style="display:inline;fill:#ff0000;stroke:#b3b3b3;stroke-width:0.101699;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
+       id="path852-8-9-3-7-5"
+       cx="115.6572"
+       cy="65.668266"
+       rx="2.9826479"
        ry="2.9825828" />
   </g>
   <g
@@ -167,7 +167,7 @@
      style="display:inline">
     <path
        style="fill:none;stroke:#ffff00;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 27.988281,47.941147 115.39115,48.123072 115.09309,99.654134 27.81659,99.643709 Z"
+       d="M 27.98828,47.941148 115.39115,48.123073 115.09309,99.654135 27.816589,99.64371 Z"
        id="path4572" />
   </g>
   <g

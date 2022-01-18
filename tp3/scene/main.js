@@ -1,8 +1,13 @@
 import { CGFapplication } from '../lib/CGF.js';
-import { XMLscene } from './XMLscene.js';
+import { MySceneGame } from './MySceneGame.js';
 import { MyInterface } from './MyInterface.js';
 import { MySceneGraph } from './MySceneGraph.js';
+import { MySceneMenu } from './MySceneMenu.js';
 import { MySVGReader } from './MySVGReader.js';
+
+var menu;
+var game;
+var filename;
 
 function getUrlVars() {
     var vars = {};
@@ -13,31 +18,51 @@ function getUrlVars() {
     return vars;
 }	 
 
+export function changeSceneByName(sceneName){
+    switch(sceneName.toLowerCase()){
+        case "menu":
+                changeScene(menu["scene"],menu["interface"],menu["app"])
+                break;
+        case "game":
+                changeScene(game["scene"],game["interface"],game["app"])
+                new MySceneGraph(filename, game["scene"]);
+                break;
+        default:
+            console.log("CRASHHHHHHHHHHHHHHHH in changing scene")
+    }
+}
+
+function changeScene(myScene, myInterface, app){
+    app.setScene(myScene);
+    app.setInterface(myInterface);
+    myInterface.setActiveCamera(myScene.camera);
+}
+
 function main() {
 
 	// Standard application, scene and interface setup
     var app = new CGFapplication(document.body);
     var myInterface = new MyInterface();
-    var myScene = new XMLscene(myInterface);
+    var mySceneMenu = new MySceneMenu(myInterface);
+    var mySceneGame = new MySceneGame(myInterface);
 
-    app.init();
-
-    app.setScene(myScene);
-    app.setInterface(myInterface);
-
-    myInterface.setActiveCamera(myScene.camera);
+    menu={
+        'scene':mySceneMenu,'interface':myInterface,'app':app
+    }
+    game={
+        'scene':mySceneGame,'interface':myInterface,'app':app
+    }
 
 	// get file name provided in URL, e.g. http://localhost/myproj/?file=myfile.xml 
 	// or use "demo.xml" as default (assumes files in subfolder "scenes", check MySceneGraph constructor) 
-	
-    var filename=getUrlVars()['file'] || "car.xml";
+    filename=getUrlVars()['file'] || "car.xml";
 
-	// create and load graph, and associate it to scene. 
-	// Check console for loading errors
-	var myGraph = new MySceneGraph(filename, myScene);
-	
-    // SVG parser for map info
-    let svgParser = new MySVGReader('TestTrackMap.svg', myScene);
+    //Parse SVG for map info
+    new MySVGReader('TestTrackMap.svg', mySceneGame);
+
+    app.init();
+
+    changeSceneByName("Menu")
 
 	// start
     app.run();

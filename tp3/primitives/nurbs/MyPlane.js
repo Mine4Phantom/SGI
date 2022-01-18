@@ -7,7 +7,7 @@ export class MyPlane extends CGFobject {
 
     /**
      * @constructor
-     * @param {XMLScene} scene 
+     * @param {MySceneGame} scene 
      * @param {Number} nDivisionsU  Number of divisions on the U Axis
      * @param {Number} nDivisionsV  Number of divisions on the V Axis
      */

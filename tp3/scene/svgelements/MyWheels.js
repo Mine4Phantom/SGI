@@ -26,10 +26,8 @@ export class MyWheels extends CGFobject {
     }
 
     update(t){
-
-      this.x -= this.speed * Math.cos(this.direction);
-      this.z += this.speed * Math.sin(this.direction);
-      this.time += 0.5*this.speed;
+      
+      this.time += 0.6*this.speed;
 
     }
 

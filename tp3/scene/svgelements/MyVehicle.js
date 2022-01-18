@@ -19,6 +19,7 @@ export class MyVehicle extends CGFobject {
 
         this.initBuffers();
     }
+
   
     updateBuffers(complexity){
       this.slices = 3 + Math.round(9 * complexity); 
@@ -27,19 +28,21 @@ export class MyVehicle extends CGFobject {
       this.initNormalVizBuffers();
     }
 
-    update(t){
+    update(t){ // TODO Add drag
 
       this.x -= this.speed * Math.cos(this.direction);
       this.z += this.speed * Math.sin(this.direction);
-      this.wheels.update(t);
+      this.wheels.x -= this.speed * Math.cos(this.direction);
+      this.wheels.z += this.speed * Math.sin(this.direction);
       this.wheels.wheel_angle = this.wheels.wheel_angle * 0.8
+      this.wheels.update(t);
       this.turn((this.wheels.wheel_angle)*0.2);
     }
 
-    turn(val){
+    turn(val){ // TODO Make this work while going backwards
       if(this.speed < 2){ // turns based on a cubic curve
         this.direction += val*(-1/2*(this.speed-2)**2+2);
-        this.wheels.direction += val*(-1/2*(this.speed-2)**2+2);
+        this.wheels.direction += val*(-1/2*(this.speed)-2**2+2);
       }else{ // turns based on a parabolic curve
         this.direction += val*((-1/10)*(this.speed-2)**2 + 2);
         this.wheels.direction += val*((-1/10)*(this.speed-2)**2 + 2);
@@ -58,7 +61,7 @@ export class MyVehicle extends CGFobject {
 
     accelerate(val){
       this.speed += (val - (0.025 * this.speed));
-      this.wheels.accelerate(val - (0.025 * this.speed));
+      this.wheels.speed += val - (0.025 * this.speed);
     }
 
     reset(){
@@ -74,21 +77,20 @@ export class MyVehicle extends CGFobject {
     }
 
     display() {
-      
+
       this.scene.pushMatrix();
       this.scene.translate(this.x, this.y, this.z);
       this.scene.rotate(this.direction, 0, 1, 0);
       this.component['body'].display();
       this.scene.popMatrix();
-
+      
       this.scene.pushMatrix();
       this.scene.translate(this.x, this.y, this.z);
       this.scene.rotate(this.direction, 0, 1, 0);
-      this.scene.translate(-this.x, this.y, -this.z);
+      this.scene.translate(-this.x, -this.y, -this.z);
       this.wheels.display();
       this.scene.popMatrix();
-
-      
+    
     }
     
     setFillMode() {

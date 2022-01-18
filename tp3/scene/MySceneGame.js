@@ -161,11 +161,11 @@ export class MySceneGame extends CGFscene {
             }
         }
         if (this.gui.isKeyPressed("KeyW")) {
-            this.graph.vehicle.accelerate(0.15 * this.speedFactor);            
+            this.graph.vehicle.accelerate(0.25 * this.speedFactor);            
             
         }
         if (this.gui.isKeyPressed("KeyS")) {
-            this.graph.vehicle.accelerate(-0.15 * this.speedFactor);
+            this.graph.vehicle.accelerate(-0.25 * this.speedFactor);
         }
         if (this.gui.isKeyPressed("KeyA")) {
             this.graph.vehicle.turnWheels(0.3);

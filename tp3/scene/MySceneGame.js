@@ -43,6 +43,11 @@ export class MySceneGame extends CGFscene {
 
         this.axis = new CGFaxis(this);
         this.setUpdatePeriod(100);
+        // Time in seconds for the race
+        this.time = 60
+        this.timeIsUp = false
+        // ticks
+        this.ticks = 0
 
         // Dictionary containing bool values to check if light is on or not
         this.lightsOn = {};
@@ -176,11 +181,20 @@ export class MySceneGame extends CGFscene {
 
         this.sceneInited = true;
     }
-
+ 
     update(t) {
+        if(this.escape == false && this.pause == false){
+            this.ticks+=1
+            if(this.ticks % 10 == 0)
+                if(this.time > 0)
+                    this.time-=1
+                else
+                    this.timeIsUp = true
+        }
+
         this.lastUpdate = t;
         this.checkKeys(t);
-        if (this.graph.vehicle != null && this.escape == false && this.pause == false)
+        if (this.graph.vehicle != null && this.escape == false && this.pause == false && this.timeIsUp == false)
             this.graph.vehicle.update(t);
         if(this.changeSceneName != null)
 			changeSceneByName(this.changeSceneName);
@@ -205,7 +219,7 @@ export class MySceneGame extends CGFscene {
             else
                 this.pause = false
         }
-        if(this.pause == true || this.escape == true)
+        if(this.pause == true || this.escape == true || this.timeIsUp == true)
             return
 
         if (this.gui.isKeyPressed("KeyM")) {
@@ -323,6 +337,24 @@ export class MySceneGame extends CGFscene {
                 this.translate(-28,-15,-40);
                 this.writeOnScreen(this.roundTo(this.graph.vehicle.speed*16,0) + "KM/H", customId, false)
             this.popMatrix();
+
+            this.pushMatrix();
+                // 	Reset transf. matrix to draw independent of camera
+                this.loadIdentity();
+                // transform as needed to place on screen
+                this.translate(-28,15,-40);
+                this.writeOnScreen("Time Left:" + this.time + "s", customId, false)
+            this.popMatrix();
+
+            if(this.timeIsUp){
+                this.pushMatrix();
+                    // 	Reset transf. matrix to draw independent of camera
+                    this.loadIdentity();
+                    // transform as needed to place on screen
+                    this.translate(-4,-5,-20);
+                    this.writeOnScreen("Time is UP", customId, false)
+                this.popMatrix();
+            }
 
             if(this.escape == true){
                 this.pushMatrix();

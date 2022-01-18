@@ -32,9 +32,15 @@ export function changeSceneByName(sceneName){
     }
 }
 
-function changeScene(myScene, myInterface, app){
+function initScenes(myScene, myInterface, app){
     app.setScene(myScene);
     app.setInterface(myInterface);
+    myInterface.setActiveCamera(myScene.camera);
+}
+
+function changeScene(myScene, myInterface, app){
+    app.scene = myScene
+    app.interface = myInterface
     myInterface.setActiveCamera(myScene.camera);
 }
 
@@ -43,11 +49,12 @@ function main() {
 	// Standard application, scene and interface setup
     var app = new CGFapplication(document.body);
     var myInterface = new MyInterface();
+    var myInterfaceMenu = new MyInterface();
     var mySceneMenu = new MySceneMenu(myInterface);
     var mySceneGame = new MySceneGame(myInterface);
 
     menu={
-        'scene':mySceneMenu,'interface':myInterface,'app':app
+        'scene':mySceneMenu,'interface':myInterfaceMenu,'app':app
     }
     game={
         'scene':mySceneGame,'interface':myInterface,'app':app
@@ -61,6 +68,9 @@ function main() {
     new MySVGReader('TestTrackMap.svg', mySceneGame);
 
     app.init();
+    initScenes(menu["scene"], myInterfaceMenu, app);
+    initScenes(game["scene"], myInterface, app);
+    new MySceneGraph(filename, game["scene"]);
 
     changeSceneByName("Menu")
 

@@ -102,9 +102,12 @@ export class MySceneGame extends CGFscene {
     initLights() {
         var i = 0;
         // Lights index.
-
+        var lightsFolder;
         // Lights folder in GUI
-        var lightsFolder = this.interface.gui.addFolder('Lights');
+        if(this.interface.gui.__folders["Lights"] == null)
+            lightsFolder = this.interface.gui.addFolder('Lights');
+        else
+            lightsFolder = this.interface.gui.__folders["Lights"]
 
         // Reads the lights from the scene graph.
         for (var key in this.graph.lights) {

@@ -39,8 +39,8 @@ function initScenes(myScene, myInterface, app){
 }
 
 function changeScene(myScene, myInterface, app){
-    app.scene = myScene
-    app.interface = myInterface
+    app.setScene(myScene);
+    app.setInterface(myInterface);
     myInterface.setActiveCamera(myScene.camera);
 }
 
@@ -48,16 +48,16 @@ function main() {
 
 	// Standard application, scene and interface setup
     var app = new CGFapplication(document.body);
-    var myInterface = new MyInterface();
+    var myInterfaceGame = new MyInterface();
     var myInterfaceMenu = new MyInterface();
-    var mySceneMenu = new MySceneMenu(myInterface);
-    var mySceneGame = new MySceneGame(myInterface);
+    var mySceneMenu = new MySceneMenu(myInterfaceMenu);
+    var mySceneGame = new MySceneGame(myInterfaceGame);
 
     menu={
         'scene':mySceneMenu,'interface':myInterfaceMenu,'app':app
     }
     game={
-        'scene':mySceneGame,'interface':myInterface,'app':app
+        'scene':mySceneGame,'interface':myInterfaceGame,'app':app
     }
 
 	// get file name provided in URL, e.g. http://localhost/myproj/?file=myfile.xml 
@@ -68,9 +68,9 @@ function main() {
     new MySVGReader('TestTrackMap.svg', mySceneGame);
 
     app.init();
-    initScenes(menu["scene"], myInterfaceMenu, app);
-    initScenes(game["scene"], myInterface, app);
-    new MySceneGraph(filename, game["scene"]);
+    //initScenes(menu["scene"], myInterfaceMenu, app);
+    //initScenes(game["scene"], myInterface, app);
+    //new MySceneGraph(filename, game["scene"]);
 
     changeSceneByName("Menu")
 

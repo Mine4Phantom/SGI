@@ -50,6 +50,10 @@ export class MySceneGame extends CGFscene {
         this.lastMPress = 0;
         this.speedFactor = 1;
 
+        // Aux vars for key control
+        this.escape = false
+        this.pause = false
+
         // MAP
         var trackMapPath = "./SimpleMapTexture.png";
         var terrainTexturePath = "./MapTexture.png";
@@ -178,6 +182,21 @@ export class MySceneGame extends CGFscene {
     }
 
     checkKeys(t) {
+        if (this.gui.isKeyPressed("Escape")) {
+            if(this.escape == false)
+                this.escape = true
+            else
+                this.escape = false
+        } 
+        else if (this.gui.isKeyPressed("Space")){
+            if(this.pause == false)
+                this.pause = true
+            else
+                this.pause = false
+        }
+        if(this.pause == true || this.escape == true)
+            return
+
         if (this.gui.isKeyPressed("KeyM")) {
             if (this.lastUpdate - this.lastMPress > 200) {
                 this.lastMPress = t;
@@ -264,6 +283,14 @@ export class MySceneGame extends CGFscene {
 
 
         if (this.sceneInited) {
+            // Draw axis
+            this.setDefaultAppearance();
+
+            // Displays the scene (MySceneGraph function).
+            //this.graph.displayScene();
+            this.map.display();
+            this.graph.vehicle.display();
+
 
             // Draw HUD
 		    this.setActiveShaderSimple(this.textShader);
@@ -277,17 +304,27 @@ export class MySceneGame extends CGFscene {
                 this.writeOnScreen("Rocket Kart")
             this.popMatrix();
 
+            if(this.escape == true){
+                this.pushMatrix();
+                // 	Reset transf. matrix to draw independent of camera
+                this.loadIdentity();
+                // transform as needed to place on screen
+                this.translate(-5.4,5,-40);
+                this.writeOnScreen("Do you want to Exit Game?")
+            this.popMatrix();
+            } 
+            else if(this.pause == true){
+                this.pushMatrix();
+                // 	Reset transf. matrix to draw independent of camera
+                this.loadIdentity();
+                // transform as needed to place on screen
+                this.translate(-5.4,0,-20);
+                this.writeOnScreen("Game Paused")
+            this.popMatrix();
+            }
+
             // reactivate default shader
 		    this.setActiveShaderSimple(this.defaultShader);
-
-
-            // Draw axis
-            this.setDefaultAppearance();
-
-            // Displays the scene (MySceneGraph function).
-            //this.graph.displayScene();
-            this.map.display();
-            this.graph.vehicle.display();
         }
 
         this.popMatrix();

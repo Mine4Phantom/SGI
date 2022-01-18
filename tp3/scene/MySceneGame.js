@@ -226,6 +226,10 @@ export class MySceneGame extends CGFscene {
             //this.graph.displayScene();
             this.map.display();
             this.graph.vehicle.display();
+            for (var i = 0; i < this.svgGraph.powerUps.length; i++) {
+                console.log(this.svgGraph.powerUps)
+                this.svgGraph.powerUps[i].display();
+            }
         }
 
         this.popMatrix();

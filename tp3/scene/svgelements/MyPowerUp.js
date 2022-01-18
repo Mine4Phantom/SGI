@@ -8,7 +8,7 @@ export class MyPowerUp {
     display() {
         this.scene.pushMatrix();
         this.scene.translate(this.center_x, 0, this.center_z);
-        this.scene.graph.components['PowerUp'].display;
+        this.scene.graph.components['power_up'].display();
         this.scene.popMatrix();
     }
 }

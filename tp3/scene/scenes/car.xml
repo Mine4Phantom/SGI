@@ -2,9 +2,9 @@
     <scene root="root" axis_length="8" />
 
     <views default="defaultCamera2">
-        <perspective id="defaultCamera2" near="0.1" far="500" angle="45">
-            <from x="100" y="100" z="100" />
-            <to x="0" y="0" z="0" />
+        <perspective id="defaultCamera2" near="0.1" far="750" angle="45">
+            <from x="356" y="100" z="356" />
+            <to x="256" y="0" z="256" />
         </perspective>
         <perspective id="defaultCamera3" near="0.1" far="500" angle="40">
             <from x="-10" y="10" z="10" />

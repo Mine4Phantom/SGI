@@ -12,12 +12,12 @@ export class SimpleImage {
     onload() {
         this.loaded = true;
         this.context.drawImage(this.img, 0, 0)
-        this.width = this.img.naturalWidth;
-        this.height = this.img.naturalHeight;
+        this.width = this.img.width;
+        this.height = this.img.height;
     }
 
     getPixel(x, y) {
-        return this.loaded ? this.context.getImageData(x, y) : null;
+        return this.loaded ? this.context.getImageData(x, y, 1, 1).data : null;
     }
 
     getWidth() {

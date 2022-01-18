@@ -215,11 +215,11 @@ export class MySceneGame extends CGFscene {
             }
         }
         if (this.gui.isKeyPressed("KeyW")) {
-            this.graph.vehicle.accelerate(0.15 * this.speedFactor);            
+            this.graph.vehicle.accelerate(0.25 * this.speedFactor);            
             
         }
         if (this.gui.isKeyPressed("KeyS")) {
-            this.graph.vehicle.accelerate(-0.15 * this.speedFactor);
+            this.graph.vehicle.accelerate(-0.25 * this.speedFactor);
         }
         if (this.gui.isKeyPressed("KeyA")) {
             this.graph.vehicle.turnWheels(0.3);
@@ -275,7 +275,7 @@ export class MySceneGame extends CGFscene {
 					if (obj)
 					{
 						var customId = this.pickResults[i][1];				
-						console.log("Picked object: " + obj + ", with pick id " + customId);
+						//console.log("Picked object: " + obj + ", with pick id " + customId);
 						this.chooseOption(customId)
 					}
 				}
@@ -383,6 +383,10 @@ export class MySceneGame extends CGFscene {
             // Display HUD
             this.displayHUD()
 
+            for (var i = 0; i < this.svgGraph.powerUps.length; i++) {
+                //console.log(this.svgGraph.powerUps)
+                this.svgGraph.powerUps[i].display();
+            }
         }
 
         this.popMatrix();

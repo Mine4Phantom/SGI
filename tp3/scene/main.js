@@ -11,32 +11,29 @@ var filename;
 
 function getUrlVars() {
     var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,    
-    function(m,key,value) {
-      vars[decodeURIComponent(key)] = decodeURIComponent(value);
-    });
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+        function (m, key, value) {
+            vars[decodeURIComponent(key)] = decodeURIComponent(value);
+        });
     return vars;
-}	 
+}
 
-export function changeSceneByName(sceneName){
-    switch(sceneName.toLowerCase()){
+export function changeSceneByName(sceneName) {
+    switch (sceneName.toLowerCase()) {
         case "menu":
-                changeScene(menu["scene"],menu["interface"],menu["app"])
-                break;
+            changeScene(menu["scene"], menu["interface"], menu["app"])
+            break;
         case "game":
-                changeScene(game["scene"],game["interface"],game["app"])
-                new MySceneGraph(filename, game["scene"]);
-                break;
+            changeScene(game["scene"], game["interface"], game["app"])
+            new MySceneGraph(filename, game["scene"]);
+            new MySVGReader('TestTrackMap.svg', game["scene"]);
+            break;
         default:
             console.log("CRASHHHHHHHHHHHHHHHH in changing scene")
     }
 }
 
-function initScenes(myScene, myInterface, app){
-    app.setScene(myScene);
-    app.setInterface(myInterface);
-    myInterface.setActiveCamera(myScene.camera);
-}
+
 
 function changeScene(myScene, myInterface, app){
     app.setScene(myScene);
@@ -46,7 +43,7 @@ function changeScene(myScene, myInterface, app){
 
 function main() {
 
-	// Standard application, scene and interface setup
+    // Standard application, scene and interface setup
     var app = new CGFapplication(document.body);
     var myInterfaceGame = new MyInterface();
     var myInterfaceMenu = new MyInterface();
@@ -60,12 +57,9 @@ function main() {
         'scene':mySceneGame,'interface':myInterfaceGame,'app':app
     }
 
-	// get file name provided in URL, e.g. http://localhost/myproj/?file=myfile.xml 
-	// or use "demo.xml" as default (assumes files in subfolder "scenes", check MySceneGraph constructor) 
-    filename=getUrlVars()['file'] || "car.xml";
-
-    //Parse SVG for map info
-    new MySVGReader('TestTrackMap.svg', mySceneGame);
+    // get file name provided in URL, e.g. http://localhost/myproj/?file=myfile.xml 
+    // or use "demo.xml" as default (assumes files in subfolder "scenes", check MySceneGraph constructor) 
+    filename = getUrlVars()['file'] || "car.xml";
 
     app.init();
     //initScenes(menu["scene"], myInterfaceMenu, app);
@@ -74,7 +68,7 @@ function main() {
 
     changeSceneByName("Menu")
 
-	// start
+    // start
     app.run();
 }
 

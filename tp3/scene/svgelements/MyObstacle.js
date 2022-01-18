@@ -8,7 +8,7 @@ export class MyObstacle  {
     display() {
         this.scene.pushMatrix();
         this.scene.translate(this.center_x, 0, this.center_z);
-        this.scene.graph.components['Obstacle'].display;
+        this.scene.graph.components['Obstacle'].display();
         this.scene.popMatrix();
     }
 }

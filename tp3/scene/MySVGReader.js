@@ -14,6 +14,8 @@ export class MySVGReader {
     constructor(filename, scene) {
         this.scene = scene;
 
+        scene.svgGraph = this;
+
         // File reading 
         this.reader = new CGFXMLreader();
 
@@ -142,7 +144,6 @@ export class MySVGReader {
 
         let path_info = d.split(' ');
         for (let i = 0; i < path_info.length; i++) {
-            // TODO
             switch (path_info[i]) {
                 case 'M':
                     i = this.getCoordsFromPath(path_vertexes, path_info, i)

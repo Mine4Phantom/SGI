@@ -29,7 +29,7 @@ export class MyVehicle extends CGFobject {
     }
 
     update(t){
-
+      console.log(this.scene.map.in_track([this.x,this.z]))
 
       // Car position
       this.x -= this.speed * Math.cos(this.direction);
@@ -53,17 +53,17 @@ export class MyVehicle extends CGFobject {
 
     turn(val){ // TODO Make this work while going backwards
       if(this.speed < -2){ // Going fast backwards
-        this.direction += val*((-1/10)*(Math.abs(this.speed)-2)**2 + 2);
-        this.wheels.direction += val*((-1/10)*(Math.abs(this.speed)-2)**2 + 2);
+        this.direction -= val*((-1/10)*(this.speed+2)**2 + 2);
+        this.wheels.direction -= val*((-1/10)*(this.speed+2)**2 + 2);
       }
-      if(this.speed < 0){ // Going slowly backwards
+      else if(this.speed < 0){ // Going slowly backwards
         this.direction += val*(-1/2*(this.speed-2)**2+2);
         this.wheels.direction += val*(-1/2*(this.speed)-2**2+2);
       }
       else if(this.speed < 2){ // turns based on a parabolic curve
         this.direction += val*(-1/2*(this.speed-2)**2+2);
         this.wheels.direction += val*(-1/2*(this.speed)-2**2+2);
-      }else{ // turns based on a parabolic curve
+      }else if (this.speed >= 2){ // turns based on a parabolic curve
         this.direction += val*((-1/10)*(this.speed-2)**2 + 2);
         this.wheels.direction += val*((-1/10)*(this.speed-2)**2 + 2);
       }

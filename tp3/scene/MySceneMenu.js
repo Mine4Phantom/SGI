@@ -54,7 +54,7 @@ export class MySceneMenu extends CGFscene
 		// set number of rows and columns in font texture
 		this.textShader.setUniformsValues({'dims': [16, 16]});
 
-		//create dict for text
+		// create dict for text
 		this.textDict = {
 			a:[1,4],b:[2,4],c:[3,4],d:[4,4],e:[5,4],f:[6,4],g:[7,4],h:[8,4],i:[9,4],j:[10,4],k:[11,4],l:[12,4],m:[13,4],n:[14,4],o:[15,4],p:[0,5],q:[1,5],r:[2,5],s:[3,5],t:[4,5],u:[5,5],v:[6,5],w:[7,5],x:[8,5],y:[9,5],z:[10,5],'*':[10,2],"1":[1,3],"2":[2,3],"3":[3,3],"4":[4,3]
 		} 

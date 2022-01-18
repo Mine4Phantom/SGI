@@ -81,7 +81,7 @@ export class MySceneGame extends CGFscene {
 
 		// create dict for text
 		this.textDict = {
-			a:[1,4],b:[2,4],c:[3,4],d:[4,4],e:[5,4],f:[6,4],g:[7,4],h:[8,4],i:[9,4],j:[10,4],k:[11,4],l:[12,4],m:[13,4],n:[14,4],o:[15,4],p:[0,5],q:[1,5],r:[2,5],s:[3,5],t:[4,5],u:[5,5],v:[6,5],w:[7,5],x:[8,5],y:[9,5],z:[10,5],'*':[10,2],"1":[1,3],"2":[2,3],"3":[3,3],"4":[4,3]
+			a:[1,4],b:[2,4],c:[3,4],d:[4,4],e:[5,4],f:[6,4],g:[7,4],h:[8,4],i:[9,4],j:[10,4],k:[11,4],l:[12,4],m:[13,4],n:[14,4],o:[15,4],p:[0,5],q:[1,5],r:[2,5],s:[3,5],t:[4,5],u:[5,5],v:[6,5],w:[7,5],x:[8,5],y:[9,5],z:[10,5],'*':[10,2],"0":[0,3],"1":[1,3],"2":[2,3],"3":[3,3],"4":[4,3],"5":[5,3],"6":[6,3],"7":[7,3],"8":[8,3],"9":[9,3],":":[10,3],".":[14,2],"-":[13,2],"/":[15,2]
 		} 
 
         // Picking
@@ -284,6 +284,24 @@ export class MySceneGame extends CGFscene {
 		}
 	}
 
+    roundTo(n, digits) {
+        var negative = false;
+        if (digits === undefined) {
+            digits = 0;
+        }
+        if (n < 0) {
+            negative = true;
+            n = n * -1;
+        }
+        var multiplicator = Math.pow(10, digits);
+        n = parseFloat((n * multiplicator).toFixed(11));
+        n = (Math.round(n) / multiplicator).toFixed(digits);
+        if (negative) {
+            n = (n * -1).toFixed(digits);
+        }
+        return n;
+    }
+
     displayHUD() {
 		    this.setActiveShaderSimple(this.textShader);
             this.textAppearance.apply()
@@ -296,6 +314,14 @@ export class MySceneGame extends CGFscene {
                 // transform as needed to place on screen
                 this.translate(-5.4,15.5,-40);
                 this.writeOnScreen("Rocket Kart", customId, false)
+            this.popMatrix();
+
+            this.pushMatrix();
+                // 	Reset transf. matrix to draw independent of camera
+                this.loadIdentity();
+                // transform as needed to place on screen
+                this.translate(-28,-15,-40);
+                this.writeOnScreen(this.roundTo(this.graph.vehicle.speed*16,0) + "KM/H", customId, false)
             this.popMatrix();
 
             if(this.escape == true){

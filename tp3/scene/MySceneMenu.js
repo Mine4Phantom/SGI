@@ -8,7 +8,6 @@ export class MySceneMenu extends CGFscene
     {
 		super();
         this.interface = myinterface;
-
 		this.texture = null;
 		this.appearance = null;
 		this.quad = null;

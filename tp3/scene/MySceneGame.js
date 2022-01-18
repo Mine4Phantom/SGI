@@ -98,8 +98,6 @@ export class MySceneGame extends CGFscene {
      */
     initCameras() {
         this.camera = new CGFcameraOrtho(0, 0, 0, 0, 0.1, 500, vec3.fromValues(35, 35, 35), vec3.fromValues(0, 0, 0), vec3.fromValues(0, 1, 0));
-
-
     }
     /**
      * Initializes the scene lights with the values read from the XML file.
@@ -441,10 +439,11 @@ export class MySceneGame extends CGFscene {
             // Display HUD
             this.displayHUD()
 
-            for (var i = 0; i < this.svgGraph.powerUps.length; i++) {
-                //console.log(this.svgGraph.powerUps)
+            for (var i = 0; i < this.svgGraph.powerUps.length; i++) 
                 this.svgGraph.powerUps[i].display();
-            }
+
+            for (var i = 0; i < this.svgGraph.obstacles.length; i++) 
+                this.svgGraph.obstacles[i].display();
         }
 
         this.popMatrix();

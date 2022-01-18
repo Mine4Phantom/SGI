@@ -32,9 +32,9 @@
 
 
     <lights>
-        <spot id="lamp1" enabled="0" angle="180" exponent="1">
-            <location x="-5" y="100" z="0" w="1" />
-            <target x="-5" y="0" z="0" />
+        <spot id="lamp1" enabled="1" angle="180" exponent="1">
+            <location x="256" y="100" z="256" w="1" />
+            <target x="256" y="0" z="256" />
             <ambient r="0.3" g="0.3" b="0.3" a="1.0" />
             <diffuse r="0.8" g="0.8" b="0.8" a="1.0" />
             <specular r="0.5" g="0.5" b="0.5" a="1.0" />
@@ -354,8 +354,8 @@
         <!-- Power Up -->
         <component id="power_up">
             <transformation>
-                <translate x="0.0" y="2.5" z="0.0" />
-                <scale x="5" y="5" z="5" />
+                <translate x="0.0" y="5" z="0.0" />
+                <scale x="3.5" y="3.5" z="3.5" />
             </transformation>
             <materials>
                 <material id="powerUpMaterial" />
@@ -369,7 +369,8 @@
         <!-- Obstacle -->
         <component id="obstacle">
             <transformation>
-                <translate x="1" y="1" z="1" />
+                <translate x="0.0" y="5" z="0.0" />
+                <scale x="3.5" y="3.5" z="3.5" />
             </transformation>
             <materials>
                 <material id="demoMaterial" />

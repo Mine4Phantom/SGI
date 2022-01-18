@@ -1,4 +1,4 @@
-import { CGFscene, CGFcamera, CGFappearance, CGFaxis, CGFtexture, CGFshader, CGFplane } from "../lib/CGF.js";
+import { CGFscene, CGFcamera, CGFappearance, CGFaxis, CGFtexture, CGFshader } from "../lib/CGF.js";
 import { MyQuad } from '../primitives/MyQuad.js';
 import { changeSceneByName } from './main.js';
 

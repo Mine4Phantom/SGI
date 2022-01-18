@@ -1,5 +1,6 @@
 import { CGFscene } from '../lib/CGF.js';
-import { CGFaxis, CGFcamera, CGFcameraOrtho } from '../lib/CGF.js';
+import { CGFaxis, CGFcamera, CGFcameraOrtho, CGFappearance, CGFshader, CGFtexture } from '../lib/CGF.js';
+import { MyQuad } from '../primitives/MyQuad.js';
 import { MyMap } from './MyMap.js';
 
 
@@ -204,7 +205,7 @@ export class MySceneGame extends CGFscene {
     }
 
     //Based on oolite-font image given. it is present in textures folder
-    writeOnScreen(text, textId){
+    writeOnScreen(text){
         text=text.toLowerCase()
         var spacing = 1
         for (var index in text){
@@ -218,7 +219,6 @@ export class MySceneGame extends CGFscene {
             if(charPos == undefined)
                 continue
             this.activeShader.setUniformsValues({'charCoords': charPos});
-            this.registerForPick(textId, this.quad);
             this.quad.display();
 
             this.translate(spacing,0,0);
@@ -273,9 +273,13 @@ export class MySceneGame extends CGFscene {
                 // 	Reset transf. matrix to draw independent of camera
                 this.loadIdentity();
                 // transform as needed to place on screen
-                this.translate(-5.4,4,-40);
-                this.writeOnScreen("Rocket Kart", customId)
+                this.translate(-5.4,15.5,-40);
+                this.writeOnScreen("Rocket Kart")
             this.popMatrix();
+
+            // reactivate default shader
+		    this.setActiveShaderSimple(this.defaultShader);
+
 
             // Draw axis
             this.setDefaultAppearance();
@@ -287,6 +291,11 @@ export class MySceneGame extends CGFscene {
         }
 
         this.popMatrix();
+
+        // re-enable depth test 
+		this.gl.enable(this.gl.DEPTH_TEST);
+
+
         // ---- END Background, camera and axis setup
     }
 }

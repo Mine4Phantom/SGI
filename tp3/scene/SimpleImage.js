@@ -17,7 +17,10 @@ export class SimpleImage {
     }
 
     getPixel(x, y) {
-        return this.loaded ? this.context.getImageData(x, y, 1, 1).data : null;
+        if (this.loaded)
+            return this.context.getImageData(x, y, 1, 1).data;
+        else
+            return null;
     }
 
     getWidth() {

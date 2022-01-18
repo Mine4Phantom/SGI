@@ -64,7 +64,7 @@ export class MySceneGame extends CGFscene {
         // MAP
         var trackMapPath = "./SimpleMapTexture.png";
         var terrainTexturePath = "./MapTexture.png";
-        this.map = new MyMap(this, trackMapPath, terrainTexturePath);
+        this.map = new MyMap(this, "./test.png", terrainTexturePath);
 
 		// TEXT
 		this.textAppearance = new CGFappearance(this);

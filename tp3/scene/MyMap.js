@@ -24,7 +24,9 @@ export class MyMap {
     }
 
     in_track(position) {
-        while((pixel_data = this.trackMap.getPixel(position[0] + 256, position[1] + 256)) != null)
+        var pixel_data;
+        while((pixel_data = this.trackMap.getPixel(position[0] + 256, position[1] + 256)) == null){}
+        
         return (pixel_data[0] + pixel_data[1] + pixel_data[2] === 0);
     }
 

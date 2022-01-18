@@ -28,22 +28,42 @@ export class MyVehicle extends CGFobject {
       this.initNormalVizBuffers();
     }
 
-    update(t){ // TODO Add drag
+    update(t){
+      console.log(this.scene.map.in_track([this.x,this.z]))
 
+      // Car position
       this.x -= this.speed * Math.cos(this.direction);
       this.z += this.speed * Math.sin(this.direction);
+
+      // Wheels position
       this.wheels.x -= this.speed * Math.cos(this.direction);
       this.wheels.z += this.speed * Math.sin(this.direction);
+
+      // Wheel Angle
       this.wheels.wheel_angle = this.wheels.wheel_angle * 0.8
       this.wheels.update(t);
+      
+      // Drag
+      this.speed = this.speed*0.98;
+      this.wheels.speed = this.speed*0.98;
+
+      // Turn car
       this.turn((this.wheels.wheel_angle)*0.2);
     }
 
     turn(val){ // TODO Make this work while going backwards
-      if(this.speed < 2){ // turns based on a cubic curve
+      if(this.speed < -2){ // Going fast backwards
+        this.direction -= val*((-1/10)*(this.speed+2)**2 + 2);
+        this.wheels.direction -= val*((-1/10)*(this.speed+2)**2 + 2);
+      }
+      else if(this.speed < 0){ // Going slowly backwards
         this.direction += val*(-1/2*(this.speed-2)**2+2);
         this.wheels.direction += val*(-1/2*(this.speed)-2**2+2);
-      }else{ // turns based on a parabolic curve
+      }
+      else if(this.speed < 2){ // turns based on a parabolic curve
+        this.direction += val*(-1/2*(this.speed-2)**2+2);
+        this.wheels.direction += val*(-1/2*(this.speed)-2**2+2);
+      }else if (this.speed >= 2){ // turns based on a parabolic curve
         this.direction += val*((-1/10)*(this.speed-2)**2 + 2);
         this.wheels.direction += val*((-1/10)*(this.speed-2)**2 + 2);
       }
@@ -60,8 +80,8 @@ export class MyVehicle extends CGFobject {
     }
 
     accelerate(val){
-      this.speed += (val - (0.025 * this.speed));
-      this.wheels.speed += val - (0.025 * this.speed);
+      this.speed += (val - (0.02 * this.speed));
+      this.wheels.speed += val - (0.02 * this.speed);
     }
 
     reset(){

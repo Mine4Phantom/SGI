@@ -2,7 +2,7 @@ export class SimpleImage {
 
     constructor(url) {
         this.loaded = false;
-        this.img = new Image();
+        this.img = new Image(512, 512);
         this.img.onload = this.onload.bind(this);
         this.img.src = url;
         this.canvas = document.createElement('canvas');
@@ -12,8 +12,8 @@ export class SimpleImage {
     onload() {
         this.loaded = true;
         this.context.drawImage(this.img, 0, 0)
-        this.width = this.img.naturalWidth;
-        this.height = this.img.naturalHeight;
+        this.width = this.img.width;
+        this.height = this.img.height;
     }
 
     getPixel(x, y) {

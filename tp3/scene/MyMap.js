@@ -12,8 +12,9 @@ export class MyMap {
      */
     constructor(scene, trackMapPath, terrainTexturePath) {
         this.scene = scene;
-        this.trackMap = new SimpleImage(trackMapPath);
+        this.trackMap = new SimpleImage(this.onTrackMapLoaded, trackMapPath);
         this.terrainTexture = new CGFtexture(scene, terrainTexturePath);
+
         this.mapPlane = new MyPlane(scene, 1, 1);
         this.material = new CGFappearance(this.scene);
         this.material.setAmbient(1, 1, 1, 1);
@@ -23,10 +24,19 @@ export class MyMap {
         this.material.setShininess(10);
     }
 
+    onTrackMapLoaded() {
+        console.log("   Track Map loaded!")
+    }
+
+    /**
+     * Check if vehicle is in track
+     * @param {vehicle position} position 
+     * @returns true if vehicle is in track and false otherwise (edge case: image not loaded yet -> returns true)
+     */
     in_track(position) {
-        var pixel_data;
-        while((pixel_data = this.trackMap.getPixel(position[0], position[1])) == null){} // while image not loaded
-        return (pixel_data[0] + pixel_data[1] + pixel_data[2] === 0);
+        var pixel_data = this.trackMap.getPixelData(position[0], position[1]);
+        // return rgb != 255, 255, 255
+        return this.trackMap.loaded ? (pixel_data[0] + pixel_data[1] + pixel_data[2] !== 765) : true;
     }
 
     display() {

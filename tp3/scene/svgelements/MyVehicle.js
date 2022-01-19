@@ -79,9 +79,18 @@ export class MyVehicle extends CGFobject {
     if (this.scene.map.in_track([this.x, this.z])) { }
     else { }
 
+    var oldX = this.x;
+    var oldZ = this.z;
+
     // Car position
     this.x -= this.speed * Math.cos(this.direction);
     this.z += this.speed * Math.sin(this.direction);
+
+    // change camera according to car movement 
+    this.scene.camera.position[0] = this.x + (100 * Math.cos(this.direction));
+    this.scene.camera.position[2] = this.z - (100 * Math.sin(this.direction));
+    this.scene.camera.target[0] = this.x;
+    this.scene.camera.target[2] = this.z;
 
     // Wheels position
     this.wheels.x -= this.speed * Math.cos(this.direction);
@@ -135,9 +144,22 @@ export class MyVehicle extends CGFobject {
   reset() {
     this.setPosition(this.start_position_x, this.start_position_y, this.start_position_z);
     this.setDirection(this.start_direction);
+
+    // camera
+    this.scene.camera.position[0] = this.x;
+    this.scene.camera.position[2] = this.z;
+    this.scene.camera.target[0] = this.x;
+    this.scene.camera.target[2] = this.z;
+
     this.speed = 0;
     this.wheels.reset();
     this.time = 0;
+  }
+
+  setPosition(x, y, z) {
+    this.x = x;
+    this.y = y;
+    this.z = z;
   }
 
   setStartPosition(x, y, z) {

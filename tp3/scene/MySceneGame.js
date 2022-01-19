@@ -3,6 +3,7 @@ import { CGFaxis, CGFcamera, CGFcameraOrtho, CGFappearance, CGFshader, CGFtextur
 import { MyQuad } from '../primitives/MyQuad.js';
 import { MyMap } from './MyMap.js';
 import { changeSceneByName } from './main.js';
+import { CGFcamera2 } from './camera/CGFcamera2.js';
 
 
 var DEGREE_TO_RAD = Math.PI / 180;
@@ -547,24 +548,24 @@ export class MySceneGame extends CGFscene {
 
             for (var i = 0; i < this.powerUps.length; i++) {
                 var power_up = this.powerUps[i];
-                if(this.vehicle.inRange(power_up)) { // Collision with power up
+                if (this.vehicle.inRange(power_up)) { // Collision with power up
                     this.powerUps.splice(i, 1);
                     this.powerUpActive = true
                     this.powerUpTimer = this.powerUpMaxTimer
                     i--;
                     continue;
-                } 
+                }
                 power_up.display();
             }
 
             for (var i = 0; i < this.obstacles.length; i++) {
                 var obstacle = this.obstacles[i];
-                if(this.vehicle.inRange(this.obstacles[i])) {// Collision with obstacle
+                if (this.vehicle.inRange(this.obstacles[i])) {// Collision with obstacle
                     this.obstacles.splice(i, 1);
                     // TODO
                     i--;
                     continue;
-                } 
+                }
                 obstacle.display();
             }
         }

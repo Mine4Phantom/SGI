@@ -25,7 +25,7 @@ export function changeSceneByName(sceneName) {
             var mySceneMenu = new MySceneMenu(myInterfaceMenu);
             changeScene(mySceneMenu, myInterfaceMenu, menu["app"])
             break;
-        case "game":
+        case "game": //Game settings reset when scene is changed
             var myInterfaceGame = new MyInterface();
             var mySceneGame = new MySceneGame(myInterfaceGame);
             game["scene"] = mySceneGame
@@ -33,7 +33,14 @@ export function changeSceneByName(sceneName) {
             new MySceneGraph(filename, mySceneGame);
             new MySVGReader('TestTrackMap.svg', mySceneGame);
             break;
-
+        case "demo": //To Do :Demo currently is the same as game
+            var myInterfaceGame = new MyInterface();
+            var mySceneGame = new MySceneGame(myInterfaceGame);
+            game["scene"] = mySceneGame
+            changeScene(mySceneGame, myInterfaceGame, game["app"])
+            new MySceneGraph(filename, mySceneGame);
+            new MySVGReader('TestTrackMap.svg', mySceneGame);
+            break;
         default: break;
     }
 }

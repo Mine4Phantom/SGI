@@ -129,7 +129,7 @@ export class MySceneMenu extends CGFscene
 		if(this.difficulty == false && this.track == false){
 			switch(optionNumber){
 				case 1: this.changeSceneName = "Game"; break;
-				case 2: console.log("Demo is not yet developed"); break;
+				case 2: this.changeSceneName = "Demo"; break;
 				case 3: this.difficulty = true; this.menuKey = 0; break;
 				case 4: this.track = true; this.menuKey = 0; break;
 				default: break;

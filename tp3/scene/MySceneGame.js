@@ -43,12 +43,17 @@ export class MySceneGame extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
 
         this.axis = new CGFaxis(this);
-        this.setUpdatePeriod(100);
+        this.setUpdatePeriod(100); // Do not change this value otherwise seconds will be miscounted
         // Time in seconds for the race
         this.timer = 60
         this.timeIsUp = false
         // ticks
         this.ticks = 0
+
+        // Power up logic
+        this.powerUpActive = false
+        this.powerUpMaxTimer = 10
+        this.powerUpTimer = this.powerUpMaxTimer
 
         // Dictionary containing bool values to check if light is on or not
         this.lightsOn = {};
@@ -62,6 +67,8 @@ export class MySceneGame extends CGFscene {
         this.escape = false
         this.pause = false
         this.menuOption = 0
+
+
 
         // MAP
         var trackMapPath = "./SimpleMapTexture.png";
@@ -185,17 +192,31 @@ export class MySceneGame extends CGFscene {
     update(t) {
         if(this.escape == false && this.pause == false){
             this.ticks+=1
-            if(this.ticks % 10 == 0)
+            // A second has passed
+            if(this.ticks % 10 == 0){
                 if(this.timer > 0)
                     this.timer-=1
                 else
                     this.timeIsUp = true
+                
+                if(this.powerUpActive){
+                    if(this.powerUpTimer > 0)
+                        this.powerUpTimer-=1
+                    else{
+                        this.powerUpActive = false
+                        this.powerUpTimer = this.powerUpMaxTimer
+                    }
+                }
+
+            }
         }
 
         this.lastUpdate = t;
         this.checkKeys(t);
-        if (this.graph.vehicle != null && this.escape == false && this.pause == false && this.timeIsUp == false)
+        if (this.graph.vehicle != null && this.escape == false && this.pause == false && this.timeIsUp == false){
             this.graph.vehicle.update(t);
+        }
+            
         if(this.changeSceneName != null)
 			changeSceneByName(this.changeSceneName);
 		this.changeSceneName = null
@@ -243,7 +264,10 @@ export class MySceneGame extends CGFscene {
             }
         }
         if (this.gui.isKeyPressed("KeyW")) {
-            this.graph.vehicle.accelerate(0.25 * this.speedFactor);            
+            if(this.powerUpActive)
+                this.graph.vehicle.accelerate(0.3 * this.speedFactor);        
+            else
+                this.graph.vehicle.accelerate(0.25 * this.speedFactor);        
             
         }
         if (this.gui.isKeyPressed("KeyS")) {
@@ -259,6 +283,10 @@ export class MySceneGame extends CGFscene {
 
         if (this.gui.isKeyPressed("KeyR")) {
             this.graph.vehicle.reset();
+        }
+
+        if (this.gui.isKeyPressed("KeyP")) { // TO Do remove once power up collection is working
+            this.powerUpActive = true 
         }
     }
 
@@ -330,20 +358,24 @@ export class MySceneGame extends CGFscene {
         return n;
     }
 
-    //To Do
+    //To Do change stuff it various difficultiues
     setSettings(difficulty, track){
         this.difficulty = difficulty
         this.track = track
 
         if(this.difficulty == 1){
             this.timer = 75
+            this.powerUpMaxTimer = 15
         }
         else if(this.difficulty == 2){
             this.timer = 60
+            this.powerUpMaxTimer = 10
         }
         else if(this.difficulty == 3){
             this.timer = 45
+            this.powerUpMaxTimer = 5
         }
+        this.powerUpTimer = this.powerUpMaxTimer
     }
 
     displayHUD() {
@@ -375,6 +407,16 @@ export class MySceneGame extends CGFscene {
                 this.translate(-28,15,-40);
                 this.writeOnScreen("Time Left:" + this.timer + "s", customId, false)
             this.popMatrix();
+
+            if(this.powerUpActive){
+                this.pushMatrix();
+                    // 	Reset transf. matrix to draw independent of camera
+                    this.loadIdentity();
+                    // transform as needed to place on screen
+                    this.translate(15,15,-40);
+                    this.writeOnScreen("SPEED UP:" + this.powerUpTimer + "s", customId, false)
+                this.popMatrix();
+            }
 
             if(this.timeIsUp){
                 this.pushMatrix();

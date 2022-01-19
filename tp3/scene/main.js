@@ -45,13 +45,18 @@ export function changeSceneByName(sceneName) {
     }
 }
 
-export function setGameSettings(difficulty, track){
-    game["scene"].setSettings(difficulty,track)
+export function setGameSettings(difficulty, track) {
+    game["scene"].setSettings(difficulty, track)
 }
 
 
 
-function changeScene(myScene, myInterface, app){
+function changeScene(myScene, myInterface, app) {
+
+    var UIs = document.getElementsByClassName('dg main a');
+    for (var i = 0; i < UIs.length; i++)
+        UIs[i].remove();
+
     app.setScene(myScene);
     app.setInterface(myInterface);
     myInterface.setActiveCamera(myScene.camera);
@@ -66,11 +71,11 @@ function main() {
     var mySceneMenu = new MySceneMenu(myInterfaceMenu);
     var mySceneGame = new MySceneGame(myInterfaceGame);
 
-    menu={
-        'scene':mySceneMenu,'interface':myInterfaceMenu,'app':app
+    menu = {
+        'scene': mySceneMenu, 'interface': myInterfaceMenu, 'app': app
     }
-    game={
-        'scene':mySceneGame,'interface':myInterfaceGame,'app':app
+    game = {
+        'scene': mySceneGame, 'interface': myInterfaceGame, 'app': app
     }
 
     // get file name provided in URL, e.g. http://localhost/myproj/?file=myfile.xml 

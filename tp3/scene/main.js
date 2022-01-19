@@ -21,12 +21,16 @@ function getUrlVars() {
 export function changeSceneByName(sceneName) {
     switch (sceneName.toLowerCase()) {
         case "menu":
-            changeScene(menu["scene"], menu["interface"], menu["app"])
+            var myInterfaceMenu = new MyInterface();
+            var mySceneMenu = new MySceneMenu(myInterfaceMenu);
+            changeScene(mySceneMenu, myInterfaceMenu, menu["app"])
             break;
         case "game":
-            changeScene(game["scene"], game["interface"], game["app"])
-            new MySceneGraph(filename, game["scene"]);
-            new MySVGReader('TestTrackMap.svg', game["scene"]);
+            var myInterfaceGame = new MyInterface();
+            var mySceneGame = new MySceneGame(myInterfaceGame);
+            changeScene(mySceneGame, myInterfaceGame, game["app"])
+            new MySceneGraph(filename, mySceneGame);
+            new MySVGReader('TestTrackMap.svg', mySceneGame);
             break;
 
         default:

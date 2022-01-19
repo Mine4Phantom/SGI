@@ -66,6 +66,16 @@ export class MySceneMenu extends CGFscene
 
 	};
 
+	reset(){
+		this.menuKey = 0
+		this.selected = false
+		this.changeSceneName = null
+		this.difficulty = false
+		this.track = false
+		this.difficultyOption = 2
+		this.trackOption = 1
+	}
+
 	initLights() {
 
 		if (this.lights.length > 0) {
@@ -116,12 +126,13 @@ export class MySceneMenu extends CGFscene
     }
 
 	chooseOption(optionNumber){
+		console.log(this.gui)
 		if(this.difficulty == false && this.track == false){
 			switch(optionNumber){
 				case 1: this.changeSceneName = "Game"; break;
 				case 2: console.log("Demo is not yet developed"); break;
-				case 3: this.difficulty = true; break;
-				case 4: this.track = true; break;
+				case 3: this.difficulty = true; this.menuKey = 0; break;
+				case 4: this.track = true; this.menuKey = 0; break;
 				default: break;
 	
 			}
@@ -337,7 +348,7 @@ export class MySceneMenu extends CGFscene
 				this.translate(-10,-8,-60);
 				this.writeOnScreen("1 Simple", customId)
 				if(this.menuKey == 1){
-					this.translate(-5,0,0);
+					this.translate(-7,0,0);
 					this.writeOnScreen("*", customId)
 				}
 				customId+=1
@@ -348,7 +359,7 @@ export class MySceneMenu extends CGFscene
 				this.translate(3,-8,-60);
 				this.writeOnScreen("2 Complex", customId)
 				if(this.menuKey == 2){
-					this.translate(-7,0,0);
+					this.translate(-8,0,0);
 					this.writeOnScreen("*", customId)
 				}
 			this.popMatrix();

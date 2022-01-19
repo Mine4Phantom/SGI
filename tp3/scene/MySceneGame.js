@@ -3,7 +3,6 @@ import { CGFaxis, CGFcamera, CGFcameraOrtho, CGFappearance, CGFshader, CGFtextur
 import { MyQuad } from '../primitives/MyQuad.js';
 import { MyMap } from './MyMap.js';
 import { changeSceneByName } from './main.js';
-import { CGFcamera2 } from './camera/CGFcamera2.js';
 
 
 var DEGREE_TO_RAD = Math.PI / 180;

@@ -551,13 +551,25 @@ export class MySceneGame extends CGFscene {
             this.displayHUD()
 
             for (var i = 0; i < this.powerUps.length; i++) {
-                if(this.vehicle.inRange(this.powerUps[i])) {} // Collision with power up
-                this.powerUps[i].display();
+                var power_up = this.powerUps[i];
+                if(this.vehicle.inRange(power_up)) { // Collision with power up
+                    this.powerUps.splice(i, 1);
+                    // TODO Add speed multiplier
+                    i--;
+                    continue;
+                } 
+                power_up.display();
             }
 
             for (var i = 0; i < this.obstacles.length; i++) {
-                if(this.vehicle.inRange(this.obstacles[i])) {} // Collision with obstacle
-                this.obstacles[i].display();
+                var obstacle = this.obstacles[i];
+                if(this.vehicle.inRange(this.obstacles[i])) {// Collision with obstacle
+                    this.obstacles.splice(i, 1);
+                    // TODO
+                    i--;
+                    continue;
+                } 
+                obstacle.display();
             }
         }
 

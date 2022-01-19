@@ -28,19 +28,17 @@ export function changeSceneByName(sceneName) {
         case "game":
             var myInterfaceGame = new MyInterface();
             var mySceneGame = new MySceneGame(myInterfaceGame);
+            game["scene"] = mySceneGame
             changeScene(mySceneGame, myInterfaceGame, game["app"])
             new MySceneGraph(filename, mySceneGame);
             new MySVGReader('TestTrackMap.svg', mySceneGame);
             break;
 
-        default:
-            console.log("CRASHHHHHHHHHHHHHHHH in changing scene")
+        default: break;
     }
 }
 
 export function setGameSettings(difficulty, track){
-    console.log(difficulty)
-    console.log(track)
     game["scene"].setSettings(difficulty,track)
 }
 

@@ -287,6 +287,7 @@ export class MySceneGame extends CGFscene {
 
         if (this.gui.isKeyPressed("KeyP")) { // TO Do remove once power up collection is working
             this.powerUpActive = true 
+            this.powerUpTimer = this.powerUpMaxTimer
         }
     }
 

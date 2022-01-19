@@ -29,6 +29,10 @@ export class MyMap {
         return (pixel_data[0] + pixel_data[1] + pixel_data[2] === 0);
     }
 
+    darkMode(){
+        this.material.setAmbient(0, 0, 0, 1);
+    }
+
     display() {
         this.scene.pushMatrix();
             this.scene.scale(512, 1, 512);

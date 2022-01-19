@@ -380,6 +380,7 @@ export class MySceneGame extends CGFscene {
         else if(this.difficulty == 3){
             this.maxTimer = 45
             this.powerUpMaxTimer = 5
+            this.map.darkMode()
         }
         this.timer = this.maxTimer
         this.powerUpTimer = this.powerUpMaxTimer
@@ -504,7 +505,7 @@ export class MySceneGame extends CGFscene {
         var i = 0;
         for (var key in this.lightsOn) {
             if (this.lightsOn.hasOwnProperty(key)) {
-                if (this.lightsOn[key]) {
+                if (this.lightsOn[key] && this.difficulty != 3) {
                     this.lights[i].setVisible(true);
                     this.lights[i].enable();
                 }

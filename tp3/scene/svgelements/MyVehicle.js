@@ -26,7 +26,7 @@ export class MyVehicle extends CGFobject {
 
 
       
-      this.scene.lights[7].setPosition(-6, 2, 0, 1);
+      this.scene.lights[7].setPosition(-6, 10, 0, 1);
 
       this.scene.lights[7].setAmbient(0, 0, 0, 0);
       this.scene.lights[7].setDiffuse(0.1, 0.1, 0.1, 0.5);
@@ -38,7 +38,7 @@ export class MyVehicle extends CGFobject {
       // spot
       this.scene.lights[7].setSpotCutOff(25);
       this.scene.lights[7].setSpotExponent(1000);
-      this.scene.lights[7].setSpotDirection(-10, -5, 0);
+      this.scene.lights[7].setSpotDirection(-10, -5.9, 0);
       
 
       this.scene.lights[7].setVisible(true);

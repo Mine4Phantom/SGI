@@ -31,7 +31,8 @@ export class MySceneGame extends CGFscene {
     init(application) {
         super.init(application);
 
-        this.sceneInited = false;
+        this.sxgLoaded = false;
+        this.svgLoaded = false
 
         this.initCameras();
 
@@ -74,6 +75,21 @@ export class MySceneGame extends CGFscene {
         var trackMapPath = "./SimpleMapTexture.png";
         var terrainTexturePath = "./MapTexture.png";
         this.map = new MyMap(this, trackMapPath, terrainTexturePath);
+
+        // POWER UPS
+        this.powerUps = [];
+
+        // OBSTACLE
+        this.obstacles = []
+
+        // START LINE
+        this.startLine = null;
+
+        // VEHICLE 
+        this.vehicle = null;
+
+        // ROUTES 
+        this.routes = [];
 
 		// TEXT
 		this.textAppearance = new CGFappearance(this);
@@ -186,7 +202,11 @@ export class MySceneGame extends CGFscene {
 
         this.interface.addViews();
 
-        this.sceneInited = true;
+        this.sxgLoaded = true;
+    }
+
+    onSVGLoaded() {
+        this.svgLoaded = true;
     }
  
     update(t) {
@@ -213,8 +233,8 @@ export class MySceneGame extends CGFscene {
 
         this.lastUpdate = t;
         this.checkKeys(t);
-        if (this.graph.vehicle != null && this.escape == false && this.pause == false && this.timeIsUp == false){
-            this.graph.vehicle.update(t);
+        if (this.vehicle != null && this.escape == false && this.pause == false && this.timeIsUp == false){
+            this.vehicle.update(t);
         }
             
         if(this.changeSceneName != null)
@@ -265,24 +285,24 @@ export class MySceneGame extends CGFscene {
         }
         if (this.gui.isKeyPressed("KeyW")) {
             if(this.powerUpActive)
-                this.graph.vehicle.accelerate(0.3 * this.speedFactor);        
+                this.vehicle.accelerate(0.3 * this.speedFactor);        
             else
-                this.graph.vehicle.accelerate(0.25 * this.speedFactor);        
+                this.vehicle.accelerate(0.25 * this.speedFactor);        
             
         }
         if (this.gui.isKeyPressed("KeyS")) {
-            this.graph.vehicle.accelerate(-0.25 * this.speedFactor);
+            this.vehicle.accelerate(-0.25 * this.speedFactor);
         }
         if (this.gui.isKeyPressed("KeyA")) {
-            this.graph.vehicle.turnWheels(0.3);
+            this.vehicle.turnWheels(0.3);
         }
 
         if (this.gui.isKeyPressed("KeyD")) {
-            this.graph.vehicle.turnWheels(-0.3);
+            this.vehicle.turnWheels(-0.3);
         }
 
         if (this.gui.isKeyPressed("KeyR")) {
-            this.graph.vehicle.reset();
+            this.vehicle.reset();
         }
 
         if (this.gui.isKeyPressed("KeyP")) { // TO Do remove once power up collection is working
@@ -398,7 +418,7 @@ export class MySceneGame extends CGFscene {
                 this.loadIdentity();
                 // transform as needed to place on screen
                 this.translate(-28,-15,-40);
-                this.writeOnScreen(this.roundTo(this.graph.vehicle.speed*16,0) + "KM/H", customId, false)
+                this.writeOnScreen(this.roundTo(this.vehicle.speed*16,0) + "KM/H", customId, false)
             this.popMatrix();
 
             this.pushMatrix();
@@ -513,23 +533,23 @@ export class MySceneGame extends CGFscene {
 
 
 
-        if (this.sceneInited) {
+        if (this.sxgLoaded && this.svgLoaded) {
             // Draw axis
             this.setDefaultAppearance();
 
             // Displays the scene (MySceneGraph function).
             //this.graph.displayScene();
             this.map.display();
-            this.graph.vehicle.display();
+            this.vehicle.display();
 
             // Display HUD
             this.displayHUD()
 
-            for (var i = 0; i < this.svgGraph.powerUps.length; i++) 
-                this.svgGraph.powerUps[i].display();
+            for (var i = 0; i < this.powerUps.length; i++) 
+                this.powerUps[i].display();
 
-            for (var i = 0; i < this.svgGraph.obstacles.length; i++) 
-                this.svgGraph.obstacles[i].display();
+            for (var i = 0; i < this.obstacles.length; i++) 
+                this.obstacles[i].display();
         }
 
         this.popMatrix();

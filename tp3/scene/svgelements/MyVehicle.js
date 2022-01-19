@@ -2,20 +2,24 @@ import { CGFobject } from "../../lib/CGF.js";
 import { MyWheels } from "./MyWheels.js";
 
 export class MyVehicle extends CGFobject {
-  constructor(scene, component) {
+  constructor(scene, start_direction, start_position) {
     super(scene);
-    this.component = component;
-    this.body = 0
-    this.x = 0;
-    this.y = 0;
-    this.z = 0;
-    this.direction = 0;
-    this.speed = 0;
 
+    // For reset
+    this.start_position_x = start_position[0];
+    this.start_position_y = start_position[1];
+    this.start_position_z = start_position[2];
+    this.start_direction = start_direction;
+
+    this.x = start_position[0];
+    this.y = start_position[1];
+    this.z = start_position[2];
+    this.direction = start_direction;
+    this.speed = 0;
 
     this.time = 0;
 
-    this.wheels = new MyWheels(scene, component);
+    this.wheels = new MyWheels(scene, this);
 
     this.initBuffers();
   }
@@ -86,12 +90,10 @@ export class MyVehicle extends CGFobject {
   }
 
   reset() {
-    this.wheels.reset();
-    this.body = 0;
-    this.setPosition(0, 0, 0);
-    this.direction = 0;
+    this.setPosition(this.start_position_x, this.start_position_y, this.start_position_z);
+    this.setDirection(this.start_direction);
     this.speed = 0;
-
+    this.wheels.reset();
     this.time = 0;
   }
 
@@ -101,12 +103,26 @@ export class MyVehicle extends CGFobject {
     this.z = z;
   }
 
+  setStartPosition(x, y, z) {
+    this.start_position_x = x;
+    this.start_position_y = y;
+    this.start_position_z = z;
+  }
+
+  setDirection(angle) {
+    this.direction = angle;
+  }
+
+  setStartDirection(angle) {
+    this.start_direction = angle;
+  }
+
   display() {
 
     this.scene.pushMatrix();
     this.scene.translate(this.x, this.y, this.z);
     this.scene.rotate(this.direction, 0, 1, 0);
-    this.component['body'].display();
+    this.scene.graph.components['car_body'].display();
     this.scene.popMatrix();
 
     this.scene.pushMatrix();

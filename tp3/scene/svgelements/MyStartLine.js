@@ -2,7 +2,7 @@ export class MyStartLine {
     /**
      * MyStartLine constructor
      * @param {scene} scene 
-     * @param {start line position} position 
+     * @param {start line position ([x,z])} position 
      * @param {angle in the xOz plane} orientation 
      */
     constructor(scene, position, orientation) {

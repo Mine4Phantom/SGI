@@ -1194,12 +1194,6 @@ export class MySceneGraph {
             // Create current node and then add info to it
             this.components[componentID] = new MyComponentNode(this, componentID);
 
-            // Specific components for racing game
-            if (componentID == 'car') 
-                this.vehicle = new MyVehicle(this.scene, this.components)
-
-
-
             // Material ID
             if (materialsIndex == -1)
                 return "material must be defined (node ID = " + componentID + ")";

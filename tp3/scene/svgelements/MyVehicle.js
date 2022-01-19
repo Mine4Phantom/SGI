@@ -30,13 +30,13 @@ export class MyVehicle extends CGFobject {
 
       this.scene.lights[7].setAmbient(0, 0, 0, 0);
       this.scene.lights[7].setDiffuse(0.1, 0.1, 0.1, 0.5);
-      this.scene.lights[7].setSpecular(0.0000001, 0.0000001, 0.0000001, 0.5);
+      this.scene.lights[7].setSpecular(0.0000001, 0.0000001, 0.0000001, 0.1);
       this.scene.lights[7].setConstantAttenuation(0.001);
       this.scene.lights[7].setLinearAttenuation(0.0000001);
       this.scene.lights[7].setQuadraticAttenuation(0);
 
       // spot
-      this.scene.lights[7].setSpotCutOff(45);
+      this.scene.lights[7].setSpotCutOff(25);
       this.scene.lights[7].setSpotExponent(1000);
       this.scene.lights[7].setSpotDirection(-10, -5, 0);
       

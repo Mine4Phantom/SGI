@@ -14,11 +14,11 @@ export class MyMap {
         this.scene = scene;
         this.trackMap = new SimpleImage(trackMapPath);
         this.terrainTexture = new CGFtexture(scene, terrainTexturePath);
-        this.mapPlane = new MyPlane(scene, 1, 1);
+        this.mapPlane = new MyPlane(scene, 100, 100);
         this.material = new CGFappearance(this.scene);
         this.material.setAmbient(1, 1, 1, 1);
         this.material.setDiffuse(1, 1, 1, 1);
-        this.material.setSpecular(0.6, 0.6, 0.6, 1);
+        this.material.setSpecular(0.1, 0.1, 0.1, 0.1);
         this.material.setEmission(0, 0, 0, 1);
         this.material.setShininess(100);
     }

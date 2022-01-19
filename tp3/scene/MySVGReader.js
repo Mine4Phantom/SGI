@@ -146,7 +146,10 @@ export class MySVGReader {
         for (let i = 0; i < path_info.length; i++) {
             switch (path_info[i]) {
                 case 'M':
-                    i = this.getCoordsFromPath(path_vertexes, path_info, i)
+                    i = this.getCoordsFromPath(path_vertexes, path_info, i, 'M');
+                    break;
+                case 'm':
+                    i = this.getCoordsFromPath(path_vertexes, path_info, i, 'm');
                     break;
                 case 'Z':
                 case 'z':
@@ -174,20 +177,27 @@ export class MySVGReader {
         }
     }
 
-    getCoordsFromPath(arrayToSave, path_info, i) {
+    getCoordsFromPath(arrayToSave, path_info, i, path_command) {
+
         for (i = i + 1; i < path_info.length; i++) {
+
             let coords = path_info[i].split(",")
-            if (!(this.isNumeric(coords[0]) && this.isNumeric(coords[1])))
-                break;
-            else {
+
+            if (this.isNumeric(coords[0]) && this.isNumeric(coords[1])) {
+
+                if (path_command == 'm' && arrayToSave.length != 0) {
+                    let lastCoord = arrayToSave[arrayToSave.length - 1];
+                    coords[0] = lastCoord[0] + coords[0];
+                    coords[1] = lastCoord[1] + coords[1];
+                }
+
                 arrayToSave.push(coords)
             }
+            else break;
         }
-        i = i - 1
-        return i
+
+        return i - 1;
     }
-
-
 
     isNumeric(str) {
         if (typeof str != "string") return false // we only process strings!  

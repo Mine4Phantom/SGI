@@ -1,5 +1,10 @@
 
 export class MyRoute  {
+    /**
+     * MyRoute constructor
+     * @param {scene} scene 
+     * @param {route path vertexes} route_vertexes 
+     */
     constructor(scene, route_vertexes) {
         this.scene = scene;
         this.route_vertexes = route_vertexes;

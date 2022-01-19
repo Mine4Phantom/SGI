@@ -17,6 +17,8 @@ export class MyInterface extends CGFinterface {
      * @param {CGFapplication} application
      */
     init(application) {
+        if(this.gui != null)
+            return
         super.init(application);
         // init GUI. For more information on the methods, check:
         //  http://workshop.chromeexperiments.com/examples/gui
@@ -54,7 +56,12 @@ export class MyInterface extends CGFinterface {
     }
 
     addViews() {
-        var group = this.gui.addFolder("Views");
+        var group;
+        if(this.gui.__folders["Views"] == null)
+            group = this.gui.addFolder('Views');
+        else
+            return
+
         const cameraArray = Object.keys(this.scene.graph.cameras);
         this.currentCamera = this.scene.graph.defaultView;
         group.add(this, 'currentCamera', cameraArray).name('Camera').onChange(val => this.scene.selectView(val));

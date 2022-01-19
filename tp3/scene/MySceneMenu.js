@@ -126,7 +126,6 @@ export class MySceneMenu extends CGFscene
     }
 
 	chooseOption(optionNumber){
-		console.log(this.gui)
 		if(this.difficulty == false && this.track == false){
 			switch(optionNumber){
 				case 1: this.changeSceneName = "Game"; break;

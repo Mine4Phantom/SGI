@@ -61,6 +61,7 @@ export class MySceneGame extends CGFscene {
         // Aux vars for key control
         this.escape = false
         this.pause = false
+        this.menuOption = 0
 
         // MAP
         var trackMapPath = "./SimpleMapTexture.png";
@@ -207,8 +208,10 @@ export class MySceneGame extends CGFscene {
 
     checkKeys(t) {
         if (this.gui.isKeyPressed("Escape")) {
-            if(this.escape == false)
+            if(this.escape == false){
                 this.escape = true
+                this.menuOption = 0
+            }
             else
                 this.escape = false
         } 
@@ -218,6 +221,18 @@ export class MySceneGame extends CGFscene {
             else
                 this.pause = false
         }
+        if(this.escape){
+            if(this.gui.isKeyPressed("Digit1")){
+                this.menuOption = 1
+            }
+            else if(this.gui.isKeyPressed("Digit2")){
+                this.menuOption = 2
+            }
+            if(this.gui.isKeyPressed("Enter")){
+                this.chooseOption(this.menuOption)
+            }
+        }
+
         if(this.pause == true || this.escape == true || this.timeIsUp == true)
             return
 
@@ -378,11 +393,22 @@ export class MySceneGame extends CGFscene {
                     // transform as needed to place on screen
                     this.translate(-10.4,4,-20);
                     this.writeOnScreen("Do you want to Exit Game?", customId, false)
-                    this.translate(-18,-4,0);
-                    this.writeOnScreen("YES", customId, true)
+                    this.translate(-20,-4,0);
+                    this.writeOnScreen("1 YES", customId, true)
+                    if(this.menuOption == 1){
+                        this.translate(-4,0,0);
+                        this.writeOnScreen("*", customId)
+                    }
                     customId+=1
-                    this.translate(5,0,0);
-                    this.writeOnScreen("NO", customId, true)
+                this.popMatrix();
+                this.pushMatrix();
+                    this.loadIdentity();
+                    this.translate(2,0,-20);
+                    this.writeOnScreen("2 NO", customId, true)
+                    if(this.menuOption == 2){
+                        this.translate(-3,0,0);
+                        this.writeOnScreen("*", customId)
+                    }
                     customId+=1
                     this.clearPickRegistration();
 

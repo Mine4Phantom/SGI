@@ -309,11 +309,6 @@ export class MySceneGame extends CGFscene {
             this.timer = this.maxTimer
             this.powerUpActive = false
         }
-
-        if (this.gui.isKeyPressed("KeyP")) { // TO Do remove once power up collection is working
-            this.powerUpActive = true
-            this.powerUpTimer = this.powerUpMaxTimer
-        }
     }
 
     //Based on oolite-font image given. it is present in textures folder
@@ -554,7 +549,8 @@ export class MySceneGame extends CGFscene {
                 var power_up = this.powerUps[i];
                 if(this.vehicle.inRange(power_up)) { // Collision with power up
                     this.powerUps.splice(i, 1);
-                    // TODO Add speed multiplier
+                    this.powerUpActive = true
+                    this.powerUpTimer = this.powerUpMaxTimer
                     i--;
                     continue;
                 } 

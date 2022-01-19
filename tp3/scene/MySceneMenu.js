@@ -108,6 +108,11 @@ export class MySceneMenu extends CGFscene
 			this.chooseOption(this.menuKey)
 
 		}
+/* 		else if(this.gui.isKeyPressed("Escape")){
+			this.difficulty = false
+			this.track = false
+			this.menuKey = 0  
+		} */
     }
 
 	chooseOption(optionNumber){
@@ -134,8 +139,8 @@ export class MySceneMenu extends CGFscene
 		else if(this.track == true){
 			this.difficulty = false
 			switch(optionNumber){
-				case 1: console.log("Track 1"); break;
-				case 2: console.log("Track 2"); break;
+				case 1: this.track = false; this.trackOption=1;this.menuKey = 0; break;
+				case 2: this.track = false; this.trackOption=2;this.menuKey = 0; break;
 				default: break;
 	
 			}
@@ -319,7 +324,34 @@ export class MySceneMenu extends CGFscene
 			this.popMatrix();
 		}
 		else if(this.track == true){
+			customId=0
+			this.pushMatrix();
+				this.loadIdentity();
+				this.translate(-2,-4,-60);
+				this.writeOnScreen("Track", customId)
+				customId+=1
+			this.popMatrix();
 
+			this.pushMatrix();
+				this.loadIdentity();
+				this.translate(-10,-8,-60);
+				this.writeOnScreen("1 Simple", customId)
+				if(this.menuKey == 1){
+					this.translate(-5,0,0);
+					this.writeOnScreen("*", customId)
+				}
+				customId+=1
+			this.popMatrix();
+
+			this.pushMatrix();
+				this.loadIdentity();
+				this.translate(3,-8,-60);
+				this.writeOnScreen("2 Complex", customId)
+				if(this.menuKey == 2){
+					this.translate(-7,0,0);
+					this.writeOnScreen("*", customId)
+				}
+			this.popMatrix();
 		}
 
 

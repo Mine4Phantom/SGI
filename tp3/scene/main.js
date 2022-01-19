@@ -28,12 +28,15 @@ export function changeSceneByName(sceneName) {
             new MySceneGraph(filename, game["scene"]);
             new MySVGReader('TestTrackMap.svg', game["scene"]);
             break;
+
         default:
             console.log("CRASHHHHHHHHHHHHHHHH in changing scene")
     }
 }
 
 export function setGameSettings(difficulty, track){
+    console.log(difficulty)
+    console.log(track)
     game["scene"].setSettings(difficulty,track)
 }
 

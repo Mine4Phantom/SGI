@@ -14,14 +14,13 @@ export class MyMap {
         this.scene = scene;
         this.trackMap = new SimpleImage(this.onTrackMapLoaded, trackMapPath);
         this.terrainTexture = new CGFtexture(scene, terrainTexturePath);
-
-        this.mapPlane = new MyPlane(scene, 1, 1);
+        this.mapPlane = new MyPlane(scene, 100, 100);
         this.material = new CGFappearance(this.scene);
         this.material.setAmbient(1, 1, 1, 1);
         this.material.setDiffuse(1, 1, 1, 1);
-        this.material.setSpecular(0, 0, 0, 1);
+        this.material.setSpecular(0.1, 0.1, 0.1, 0.1);
         this.material.setEmission(0, 0, 0, 1);
-        this.material.setShininess(10);
+        this.material.setShininess(100);
     }
 
     onTrackMapLoaded() {
@@ -37,6 +36,10 @@ export class MyMap {
         var pixel_data = this.trackMap.getPixelData(position[0], position[1]);
         // return rgb != 255, 255, 255
         return this.trackMap.loaded ? (pixel_data[0] + pixel_data[1] + pixel_data[2] !== 765) : true;
+    }
+
+    darkMode(){
+        this.material.setAmbient(0, 0, 0, 1);
     }
 
     display() {

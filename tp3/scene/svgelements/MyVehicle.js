@@ -17,13 +17,56 @@ export class MyVehicle extends CGFobject {
     this.direction = start_direction;
     this.speed = 0;
 
-    this.time = 0;
-
     this.wheels = new MyWheels(scene, this);
-
+    this.initLights();
     this.initBuffers();
   }
 
+
+  initLights() {
+    // Front Light
+    this.scene.lights[7].setPosition(-6, 10, 0, 1);
+
+    this.scene.lights[7].setAmbient(0, 0, 0, 0);
+    this.scene.lights[7].setDiffuse(0.1, 0.1, 0.1, 0.5);
+    this.scene.lights[7].setSpecular(0.0000001, 0.0000001, 0.0000001, 0.1);
+    this.scene.lights[7].setConstantAttenuation(0.001);
+    this.scene.lights[7].setLinearAttenuation(0.0000001);
+    this.scene.lights[7].setQuadraticAttenuation(0);
+
+    // spot
+    this.scene.lights[7].setSpotCutOff(25);
+    this.scene.lights[7].setSpotExponent(1000);
+    this.scene.lights[7].setSpotDirection(-10, -5.9, 0);
+
+    this.scene.lights[7].setVisible(true);
+    this.scene.lights[7].enable();
+
+
+    this.scene.lights[7].update();
+
+    // Back Lights
+    this.scene.lights[6].setPosition(6, 10, 0, 1);
+
+    this.scene.lights[6].setAmbient(0, 0, 0, 0);
+    this.scene.lights[6].setDiffuse(0.1, 0, 0, 0.5);
+    this.scene.lights[6].setSpecular(0.0000001, 0, 0, 0.1);
+    this.scene.lights[6].setConstantAttenuation(0.001);
+    this.scene.lights[6].setLinearAttenuation(0.0000001);
+    this.scene.lights[6].setQuadraticAttenuation(0);
+
+    // spot
+    this.scene.lights[6].setSpotCutOff(25);
+    this.scene.lights[6].setSpotExponent(1000);
+    this.scene.lights[6].setSpotDirection(10, -9.2, 0);
+
+    this.scene.lights[6].setVisible(true);
+    this.scene.lights[6].enable();
+
+
+    this.scene.lights[6].update();
+
+  }
 
   updateBuffers(complexity) {
     this.slices = 3 + Math.round(9 * complexity);
@@ -33,8 +76,8 @@ export class MyVehicle extends CGFobject {
   }
 
   update(t) {
-   if(this.scene.map.in_track([this.x, this.z])) {}
-   else {}
+    if (this.scene.map.in_track([this.x, this.z])) { }
+    else { }
 
     // Car position
     this.x -= this.speed * Math.cos(this.direction);
@@ -97,12 +140,6 @@ export class MyVehicle extends CGFobject {
     this.time = 0;
   }
 
-  setPosition(x, y, z) {
-    this.x = x;
-    this.y = y;
-    this.z = z;
-  }
-
   setStartPosition(x, y, z) {
     this.start_position_x = x;
     this.start_position_y = y;
@@ -122,6 +159,8 @@ export class MyVehicle extends CGFobject {
     this.scene.pushMatrix();
     this.scene.translate(this.x, this.y, this.z);
     this.scene.rotate(this.direction, 0, 1, 0);
+    this.scene.lights[7].update();
+    this.scene.lights[6].update();
     this.scene.graph.components['car_body'].display();
     this.scene.popMatrix();
 

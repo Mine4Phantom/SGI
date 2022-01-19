@@ -7,7 +7,7 @@
             <to x="256" y="0" z="256" />
         </perspective>
         <perspective id="defaultCamera3" near="0.1" far="500" angle="40">
-            <from x="-10" y="10" z="10" />
+            <from x="-20" y="20" z="20" />
             <to x="0" y="0" z="0" />
         </perspective>
 
@@ -77,8 +77,8 @@
         <material id="powerUpMaterial" shininess="10">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
             <ambient r="0.0" g="0.0" b="0.0" a="1.0" />
-            <diffuse r="0.0" g="0.6" b="0.0" a="1.0" />
-            <specular r="0.0" g="0.6" b="0.0" a="1.0" />
+            <diffuse r="0.005" g="0.3" b="0.0" a="1.0" />
+            <specular r="0.1" g="0.1" b="0.0" a="0.1" />
         </material>
 
         <material id="black_material" shininess="10">

@@ -46,7 +46,8 @@ export class MySceneGame extends CGFscene {
         this.axis = new CGFaxis(this);
         this.setUpdatePeriod(100); // Do not change this value otherwise seconds will be miscounted
         // Time in seconds for the race
-        this.timer = 60
+        this.maxTimer = 60
+        this.timer = this.maxTimer
         this.timeIsUp = false
         // ticks
         this.ticks = 0
@@ -137,6 +138,7 @@ export class MySceneGame extends CGFscene {
         else
             lightsFolder = this.interface.gui.__folders["Lights"]
 
+
         // Reads the lights from the scene graph.
         for (var key in this.graph.lights) {
             if (i >= 8)
@@ -206,6 +208,7 @@ export class MySceneGame extends CGFscene {
     }
 
     onSVGLoaded() {
+        this.vehicle.initLights()
         this.svgLoaded = true;
     }
  
@@ -303,6 +306,8 @@ export class MySceneGame extends CGFscene {
 
         if (this.gui.isKeyPressed("KeyR")) {
             this.vehicle.reset();
+            this.timer = this.maxTimer
+            this.powerUpActive = false
         }
 
         if (this.gui.isKeyPressed("KeyP")) { // TO Do remove once power up collection is working
@@ -385,17 +390,19 @@ export class MySceneGame extends CGFscene {
         this.track = track
 
         if(this.difficulty == 1){
-            this.timer = 75
+            this.maxTimer = 75
             this.powerUpMaxTimer = 15
         }
         else if(this.difficulty == 2){
-            this.timer = 60
+            this.maxTimer = 60
             this.powerUpMaxTimer = 10
         }
         else if(this.difficulty == 3){
-            this.timer = 45
+            this.maxTimer = 45
             this.powerUpMaxTimer = 5
+            this.map.darkMode()
         }
+        this.timer = this.maxTimer
         this.powerUpTimer = this.powerUpMaxTimer
     }
 
@@ -518,7 +525,7 @@ export class MySceneGame extends CGFscene {
         var i = 0;
         for (var key in this.lightsOn) {
             if (this.lightsOn.hasOwnProperty(key)) {
-                if (this.lightsOn[key]) {
+                if (this.lightsOn[key] && this.difficulty != 3) {
                     this.lights[i].setVisible(true);
                     this.lights[i].enable();
                 }

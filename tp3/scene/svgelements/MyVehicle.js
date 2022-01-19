@@ -5,6 +5,7 @@ export class MyVehicle extends CGFobject {
     constructor(scene, component) {
         super(scene);
         this.component = component;
+        this.interface = this.scene.interface
         this.body = 0
         this.x = 0;
         this.y = 0;
@@ -16,9 +17,43 @@ export class MyVehicle extends CGFobject {
         this.time = 0;
 
         this.wheels = new MyWheels(scene, component);
-
+        this.initLights()
         this.initBuffers();
     }
+
+    initLights() {
+
+
+
+      
+      this.scene.lights[7].setPosition(-6, 2, 0, 1);
+
+      this.scene.lights[7].setAmbient(0, 0, 0, 0);
+      this.scene.lights[7].setDiffuse(0.6, 0.6, 0.6, 0.5);
+      this.scene.lights[7].setSpecular(0.9, 0.9, 0.9, 0.5);
+      this.scene.lights[7].setConstantAttenuation(0);
+      this.scene.lights[7].setLinearAttenuation(0.00001);
+      this.scene.lights[7].setQuadraticAttenuation(0);
+
+      // spot
+      this.scene.lights[7].setSpotCutOff(45);
+      this.scene.lights[7].setSpotExponent(1000);
+      this.scene.lights[7].setSpotDirection(-10, -2, 0);
+      
+
+      this.scene.lights[7].setVisible(true);
+
+      this.scene.lights[7].enable();
+
+
+      this.scene.lights[7].update();
+
+
+
+
+
+
+  }
 
   
     updateBuffers(complexity){
@@ -98,9 +133,12 @@ export class MyVehicle extends CGFobject {
 
     display() {
 
+      
+
       this.scene.pushMatrix();
       this.scene.translate(this.x, this.y, this.z);
       this.scene.rotate(this.direction, 0, 1, 0);
+      this.scene.lights[7].update();
       this.component['body'].display();
       this.scene.popMatrix();
       

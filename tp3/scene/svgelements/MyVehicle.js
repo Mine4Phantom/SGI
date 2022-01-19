@@ -25,7 +25,7 @@ export class MyVehicle extends CGFobject {
 
 
 
-      
+      // Front Light
       this.scene.lights[7].setPosition(-6, 10, 0, 1);
 
       this.scene.lights[7].setAmbient(0, 0, 0, 0);
@@ -39,14 +39,37 @@ export class MyVehicle extends CGFobject {
       this.scene.lights[7].setSpotCutOff(25);
       this.scene.lights[7].setSpotExponent(1000);
       this.scene.lights[7].setSpotDirection(-10, -5.9, 0);
-      
 
       this.scene.lights[7].setVisible(true);
-
       this.scene.lights[7].enable();
 
 
       this.scene.lights[7].update();
+
+      // Back Lights
+      this.scene.lights[6].setPosition(6, 10, 0, 1);
+
+      this.scene.lights[6].setAmbient(0, 0, 0, 0);
+      this.scene.lights[6].setDiffuse(0.1, 0, 0, 0.5);
+      this.scene.lights[6].setSpecular(0.0000001, 0, 0, 0.1);
+      this.scene.lights[6].setConstantAttenuation(0.001);
+      this.scene.lights[6].setLinearAttenuation(0.0000001);
+      this.scene.lights[6].setQuadraticAttenuation(0);
+
+      // spot
+      this.scene.lights[6].setSpotCutOff(25);
+      this.scene.lights[6].setSpotExponent(1000);
+      this.scene.lights[6].setSpotDirection(10, -9.2, 0);
+
+      this.scene.lights[6].setVisible(true);
+      this.scene.lights[6].enable();
+
+
+      this.scene.lights[6].update();
+
+      
+
+
 
 
 
@@ -140,6 +163,7 @@ export class MyVehicle extends CGFobject {
       this.scene.translate(this.x, this.y, this.z);
       this.scene.rotate(this.direction, 0, 1, 0);
       this.scene.lights[7].update();
+      this.scene.lights[6].update();
       this.component['body'].display();
       this.scene.popMatrix();
       

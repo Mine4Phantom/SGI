@@ -20,6 +20,8 @@ export class MySceneGame extends CGFscene {
 
         this.interface = myinterface;
         this.changeSceneName = null
+        this.difficulty = null
+        this.track = null
     }
 
     /**
@@ -34,7 +36,6 @@ export class MySceneGame extends CGFscene {
         this.initCameras();
 
         this.enableTextures(true);
-        this.setUpdatePeriod(3);
 
         this.gl.clearDepth(100.0);
         this.gl.enable(this.gl.DEPTH_TEST);
@@ -44,7 +45,7 @@ export class MySceneGame extends CGFscene {
         this.axis = new CGFaxis(this);
         this.setUpdatePeriod(100);
         // Time in seconds for the race
-        this.time = 60
+        this.timer = 60
         this.timeIsUp = false
         // ticks
         this.ticks = 0
@@ -184,8 +185,8 @@ export class MySceneGame extends CGFscene {
         if(this.escape == false && this.pause == false){
             this.ticks+=1
             if(this.ticks % 10 == 0)
-                if(this.time > 0)
-                    this.time-=1
+                if(this.timer > 0)
+                    this.timer-=1
                 else
                     this.timeIsUp = true
         }
@@ -314,6 +315,22 @@ export class MySceneGame extends CGFscene {
         return n;
     }
 
+    //To Do
+    setSettings(difficulty, track){
+        this.difficulty = difficulty
+        this.track = track
+
+        if(this.difficulty == 1){
+            this.timer = 75
+        }
+        else if(this.difficulty == 2){
+            this.timer = 60
+        }
+        else if(this.difficulty == 3){
+            this.timer = 45
+        }
+    }
+
     displayHUD() {
 		    this.setActiveShaderSimple(this.textShader);
             this.textAppearance.apply()
@@ -341,7 +358,7 @@ export class MySceneGame extends CGFscene {
                 this.loadIdentity();
                 // transform as needed to place on screen
                 this.translate(-28,15,-40);
-                this.writeOnScreen("Time Left:" + this.time + "s", customId, false)
+                this.writeOnScreen("Time Left:" + this.timer + "s", customId, false)
             this.popMatrix();
 
             if(this.timeIsUp){

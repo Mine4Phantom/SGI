@@ -1,6 +1,7 @@
 import { CGFscene, CGFcamera, CGFappearance, CGFaxis, CGFtexture, CGFshader } from "../lib/CGF.js";
 import { MyQuad } from '../primitives/MyQuad.js';
 import { changeSceneByName } from './main.js';
+import { setGameSettings } from './main.js';
 
 export class MySceneMenu extends CGFscene
 {
@@ -15,6 +16,10 @@ export class MySceneMenu extends CGFscene
 		this.menuKey = 0
 		this.selected = false
 		this.changeSceneName = null
+		this.difficulty = false
+		this.track = false
+		this.difficultyOption = 2
+		this.trackOption = 1
 	}
 
 	init(application) {
@@ -77,8 +82,10 @@ export class MySceneMenu extends CGFscene
 
 	update(t) {
         this.checkKeys(t);
-		if(this.changeSceneName != null)
+		if(this.changeSceneName != null){
 			changeSceneByName(this.changeSceneName);
+			setGameSettings(this.difficultyOption,this.trackOption)
+		}
 		this.changeSceneName = null
     }
 
@@ -104,14 +111,37 @@ export class MySceneMenu extends CGFscene
     }
 
 	chooseOption(optionNumber){
-		switch(optionNumber){
-			case 1: this.changeSceneName = "Game"; break;
-			case 2: console.log("Demo is not yet developed"); break;
-			case 3: console.log("Difficulty is not yet developed"); break;
-			case 4: console.log("Track is not yet developed"); break;
-			default: break;
-
+		if(this.difficulty == false && this.track == false){
+			switch(optionNumber){
+				case 1: this.changeSceneName = "Game"; break;
+				case 2: console.log("Demo is not yet developed"); break;
+				case 3: this.difficulty = true; break;
+				case 4: this.track = true; break;
+				default: break;
+	
+			}
 		}
+		else if(this.difficulty == true){
+			this.track = false
+			switch(optionNumber){
+				case 1: this.difficulty = false; this.difficultyOption=1;this.menuKey = 0; break;
+				case 2: this.difficulty = false; this.difficultyOption=2;this.menuKey = 0; break;
+				case 3: this.difficulty = false; this.difficultyOption=3;this.menuKey = 0; break;
+				default: break;
+	
+			}
+		}
+		else if(this.track == true){
+			this.difficulty = false
+			switch(optionNumber){
+				case 1: console.log("Track 1"); break;
+				case 2: console.log("Track 2"); break;
+				default: break;
+	
+			}
+		}
+			
+
 	}
 
 	checkPicking()
@@ -202,49 +232,97 @@ export class MySceneMenu extends CGFscene
 			customId+=1
 		this.popMatrix();
 
-		this.pushMatrix();
-			this.loadIdentity();
-			this.translate(-9,-4,-60);
-			this.writeOnScreen("1 Start", customId)
-			if(this.menuKey == 1){
-				this.translate(-6,0,0);
-				this.writeOnScreen("*", customId)
-			}
-			customId+=1
-		this.popMatrix();
+		if(this.difficulty == false && this.track == false){
+			this.pushMatrix();
+				this.loadIdentity();
+				this.translate(-9,-4,-60);
+				this.writeOnScreen("1 Start", customId)
+				if(this.menuKey == 1){
+					this.translate(-6,0,0);
+					this.writeOnScreen("*", customId)
+				}
+				customId+=1
+			this.popMatrix();
 
-		this.pushMatrix();
-			this.loadIdentity();
-			this.translate(5,-4,-60);
-			this.writeOnScreen("2 Demo", customId)
-			if(this.menuKey == 2){
-				this.translate(-5,0,0);
-				this.writeOnScreen("*", customId)
-			}
-			customId+=1
-		this.popMatrix();
+			this.pushMatrix();
+				this.loadIdentity();
+				this.translate(5,-4,-60);
+				this.writeOnScreen("2 Demo", customId)
+				if(this.menuKey == 2){
+					this.translate(-5,0,0);
+					this.writeOnScreen("*", customId)
+				}
+				customId+=1
+			this.popMatrix();
 
-		this.pushMatrix();
-			this.loadIdentity();
-			this.translate(-9,-7,-60);
-			this.writeOnScreen("3 Difficulty", customId)
-			if(this.menuKey == 3){
-				this.translate(-11,0,0);
-				this.writeOnScreen("*", customId)
-			}
-			customId+=1
-		this.popMatrix();
+			this.pushMatrix();
+				this.loadIdentity();
+				this.translate(-9,-7,-60);
+				this.writeOnScreen("3 Difficulty", customId)
+				if(this.menuKey == 3){
+					this.translate(-11,0,0);
+					this.writeOnScreen("*", customId)
+				}
+				customId+=1
+			this.popMatrix();
 
-		this.pushMatrix();
-			this.loadIdentity();
-			this.translate(5,-7,-60);
-			this.writeOnScreen("4 Track", customId)
-			if(this.menuKey == 4){
-				this.translate(-6,0,0);
-				this.writeOnScreen("*", customId)
-			}
-			customId+=1
-		this.popMatrix();
+			this.pushMatrix();
+				this.loadIdentity();
+				this.translate(5,-7,-60);
+				this.writeOnScreen("4 Track", customId)
+				if(this.menuKey == 4){
+					this.translate(-6,0,0);
+					this.writeOnScreen("*", customId)
+				}
+				customId+=1
+			this.popMatrix();
+		}
+		else if(this.difficulty == true){
+			customId=0
+			this.pushMatrix();
+				this.loadIdentity();
+				this.translate(-6,-4,-60);
+				this.writeOnScreen("Difficulty", customId)
+				customId+=1
+			this.popMatrix();
+
+			this.pushMatrix();
+				this.loadIdentity();
+				this.translate(-18,-8,-60);
+				this.writeOnScreen("1 Easy", customId)
+				if(this.menuKey == 1){
+					this.translate(-5,0,0);
+					this.writeOnScreen("*", customId)
+				}
+				customId+=1
+			this.popMatrix();
+
+			this.pushMatrix();
+				this.loadIdentity();
+				this.translate(-6,-8,-60);
+				this.writeOnScreen("2 Medium", customId)
+				if(this.menuKey == 2){
+					this.translate(-7,0,0);
+					this.writeOnScreen("*", customId)
+				}
+				customId+=1
+			this.popMatrix();
+
+			this.pushMatrix();
+				this.loadIdentity();
+				this.translate(6,-8,-60);
+				this.writeOnScreen("3 Hard", customId)
+				if(this.menuKey == 3){
+					this.translate(-5,0,0);
+					this.writeOnScreen("*", customId)
+				}
+			this.popMatrix();
+		}
+		else if(this.track == true){
+
+		}
+
+
 
 		// re-enable depth test 
 		this.gl.enable(this.gl.DEPTH_TEST);

@@ -33,6 +33,10 @@ export function changeSceneByName(sceneName) {
     }
 }
 
+export function setGameSettings(difficulty, track){
+    game["scene"].setSettings(difficulty,track)
+}
+
 
 
 function changeScene(myScene, myInterface, app){

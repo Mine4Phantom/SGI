@@ -40,7 +40,7 @@ export class MyWheels extends CGFobject {
     display() {
       
       this.scene.pushMatrix();
-      this.scene.translate(this.vehicle.x-5, this.vehicle.y+1, this.vehicle.z+2);
+      this.scene.translate(this.vehicle.x-5, this.vehicle.y+1.2, this.vehicle.z+2);
       this.scene.rotate(this.wheel_angle, 0, 1, 0); // Turn the wheels
       this.scene.rotate(this.time, 0, 0, 1); // Spins wheels
       this.scene.translate(5, -1, -2);
@@ -48,7 +48,7 @@ export class MyWheels extends CGFobject {
       this.scene.popMatrix();
 
       this.scene.pushMatrix();
-      this.scene.translate(this.vehicle.x-5, this.vehicle.y+1, this.vehicle.z-2);
+      this.scene.translate(this.vehicle.x-5, this.vehicle.y+1.2, this.vehicle.z-2);
       this.scene.rotate(this.wheel_angle, 0, 1, 0); // Turn the wheels
       this.scene.rotate(this.time, 0, 0, 1); // spins wheels
       this.scene.translate(5, -1, 2);
@@ -56,7 +56,7 @@ export class MyWheels extends CGFobject {
       this.scene.popMatrix();
 
       this.scene.pushMatrix();
-      this.scene.translate(this.vehicle.x+5, this.vehicle.y+1, this.vehicle.z);
+      this.scene.translate(this.vehicle.x+5, this.vehicle.y+1.2, this.vehicle.z);
       this.scene.rotate(this.time, 0, 0, 1); // spins back wheels
       this.scene.translate(-5, -1, 0);
       this.scene.graph.components['back_wheels'].display();

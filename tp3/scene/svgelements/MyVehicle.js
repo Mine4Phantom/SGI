@@ -84,10 +84,10 @@ export class MyVehicle extends CGFobject {
     this.z += this.speed * Math.sin(this.direction);
 
     // change camera according to car movement 
-    //this.scene.camera.position[0] = this.x + (70 * Math.cos(this.direction));
-    //this.scene.camera.position[2] = this.z - (70 * Math.sin(this.direction));
-    //this.scene.camera.target[0] = this.x;
-    //this.scene.camera.target[2] = this.z;
+    this.scene.camera.position[0] = this.x + (70 * Math.cos(this.direction));
+    this.scene.camera.position[2] = this.z - (70 * Math.sin(this.direction));
+    this.scene.camera.target[0] = this.x;
+    this.scene.camera.target[2] = this.z;
 
     // Wheels position
     this.wheels.x -= this.speed * Math.cos(this.direction);
@@ -143,17 +143,14 @@ export class MyVehicle extends CGFobject {
     this.setDirection(this.start_direction);
 
     // camera
-    this.scene.camera.position[0] = 30;
-    this.scene.camera.position[2] = 30;
-    this.scene.camera.target[0] = 0;
-    this.scene.camera.target[2] = 0;
+    this.scene.camera.position[0] = this.x;
+    this.scene.camera.position[2] = this.z;
+    this.scene.camera.target[0] = this.x;
+    this.scene.camera.target[2] = this.z;
 
     this.speed = 0;
     this.wheels.reset();
     this.time = 0;
-    this.x = 0;
-    this.y = 0;
-    this.z = 0;
   }
 
   setPosition(x, y, z) {
@@ -163,9 +160,9 @@ export class MyVehicle extends CGFobject {
   }
 
   setStartPosition(x, y, z) {
-    this.start_position_x = 0;
-    this.start_position_y = 0;
-    this.start_position_z = 0;
+    this.start_position_x = x;
+    this.start_position_y = y;
+    this.start_position_z = z;
   }
 
   setDirection(angle) {

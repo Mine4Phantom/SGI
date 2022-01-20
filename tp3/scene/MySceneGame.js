@@ -31,7 +31,8 @@ export class MySceneGame extends CGFscene {
     init(application) {
         super.init(application);
 
-        this.sceneInited = false;
+        this.sxgLoaded = false;
+        this.svgLoaded = false
 
         this.initCameras();
 
@@ -76,28 +77,43 @@ export class MySceneGame extends CGFscene {
         var terrainTexturePath = "./MapTexture.png";
         this.map = new MyMap(this, trackMapPath, terrainTexturePath);
 
-		// TEXT
-		this.textAppearance = new CGFappearance(this);
+        // POWER UPS
+        this.powerUps = [];
 
-		// font texture: 16 x 16 characters
-		// http://jens.ayton.se/oolite/files/font-tests/rgba/oolite-font.png
-		this.fontTexture = new CGFtexture(this, "../textures/oolite-font.trans.png");
-		this.textAppearance.setTexture(this.fontTexture);
+        // OBSTACLE
+        this.obstacles = []
 
-		// plane where texture character will be rendered
-		this.quad=new MyQuad(this);
-		
-		// instatiate text shader (used to simplify access via row/column coordinates)
-		// check the two files to see how it is done
-		this.textShader=new CGFshader(this.gl, "../shaders/font.vert", "../shaders/font.frag");
+        // START LINE
+        this.startLine = null;
 
-		// set number of rows and columns in font texture
-		this.textShader.setUniformsValues({'dims': [16, 16]});
+        // VEHICLE 
+        this.vehicle = null;
 
-		// create dict for text
-		this.textDict = {
-			a:[1,4],b:[2,4],c:[3,4],d:[4,4],e:[5,4],f:[6,4],g:[7,4],h:[8,4],i:[9,4],j:[10,4],k:[11,4],l:[12,4],m:[13,4],n:[14,4],o:[15,4],p:[0,5],q:[1,5],r:[2,5],s:[3,5],t:[4,5],u:[5,5],v:[6,5],w:[7,5],x:[8,5],y:[9,5],z:[10,5],'*':[10,2],"0":[0,3],"1":[1,3],"2":[2,3],"3":[3,3],"4":[4,3],"5":[5,3],"6":[6,3],"7":[7,3],"8":[8,3],"9":[9,3],":":[10,3],".":[14,2],"-":[13,2],"/":[15,2]
-		} 
+        // ROUTES 
+        this.routes = [];
+
+        // TEXT
+        this.textAppearance = new CGFappearance(this);
+
+        // font texture: 16 x 16 characters
+        // http://jens.ayton.se/oolite/files/font-tests/rgba/oolite-font.png
+        this.fontTexture = new CGFtexture(this, "../textures/oolite-font.trans.png");
+        this.textAppearance.setTexture(this.fontTexture);
+
+        // plane where texture character will be rendered
+        this.quad = new MyQuad(this);
+
+        // instatiate text shader (used to simplify access via row/column coordinates)
+        // check the two files to see how it is done
+        this.textShader = new CGFshader(this.gl, "../shaders/font.vert", "../shaders/font.frag");
+
+        // set number of rows and columns in font texture
+        this.textShader.setUniformsValues({ 'dims': [16, 16] });
+
+        // create dict for text
+        this.textDict = {
+            a: [1, 4], b: [2, 4], c: [3, 4], d: [4, 4], e: [5, 4], f: [6, 4], g: [7, 4], h: [8, 4], i: [9, 4], j: [10, 4], k: [11, 4], l: [12, 4], m: [13, 4], n: [14, 4], o: [15, 4], p: [0, 5], q: [1, 5], r: [2, 5], s: [3, 5], t: [4, 5], u: [5, 5], v: [6, 5], w: [7, 5], x: [8, 5], y: [9, 5], z: [10, 5], '*': [10, 2], "0": [0, 3], "1": [1, 3], "2": [2, 3], "3": [3, 3], "4": [4, 3], "5": [5, 3], "6": [6, 3], "7": [7, 3], "8": [8, 3], "9": [9, 3], ":": [10, 3], ".": [14, 2], "-": [13, 2], "/": [15, 2]
+        }
 
         // Picking
         this.setPickEnabled(true);
@@ -117,7 +133,7 @@ export class MySceneGame extends CGFscene {
         // Lights index.
         var lightsFolder;
         // Lights folder in GUI
-        if(this.interface.gui.__folders["Lights"] == null)
+        if (this.interface.gui.__folders["Lights"] == null)
             lightsFolder = this.interface.gui.addFolder('Lights');
         else
             lightsFolder = this.interface.gui.__folders["Lights"]
@@ -185,27 +201,31 @@ export class MySceneGame extends CGFscene {
         this.setGlobalAmbientLight(this.graph.ambient[0], this.graph.ambient[1], this.graph.ambient[2], this.graph.ambient[3]);
 
         this.initLights();
-        this.graph.vehicle.initLights()
 
         this.interface.addViews();
 
-        this.sceneInited = true;
+        this.sxgLoaded = true;
     }
- 
+
+    onSVGLoaded() {
+        this.vehicle.initLights()
+        this.svgLoaded = true;
+    }
+
     update(t) {
-        if(this.escape == false && this.pause == false){
-            this.ticks+=1
+        if (this.escape == false && this.pause == false) {
+            this.ticks += 1
             // A second has passed
-            if(this.ticks % 10 == 0){
-                if(this.timer > 0)
-                    this.timer-=1
+            if (this.ticks % 10 == 0) {
+                if (this.timer > 0)
+                    this.timer -= 1
                 else
                     this.timeIsUp = true
-                
-                if(this.powerUpActive){
-                    if(this.powerUpTimer > 0)
-                        this.powerUpTimer-=1
-                    else{
+
+                if (this.powerUpActive) {
+                    if (this.powerUpTimer > 0)
+                        this.powerUpTimer -= 1
+                    else {
                         this.powerUpActive = false
                         this.powerUpTimer = this.powerUpMaxTimer
                     }
@@ -216,13 +236,13 @@ export class MySceneGame extends CGFscene {
 
         this.lastUpdate = t;
         this.checkKeys(t);
-        if (this.graph.vehicle != null && this.escape == false && this.pause == false && this.timeIsUp == false){
-            this.graph.vehicle.update(t);
+        if (this.vehicle != null && this.escape == false && this.pause == false && this.timeIsUp == false) {
+            this.vehicle.update(t);
         }
-            
-        if(this.changeSceneName != null)
-			changeSceneByName(this.changeSceneName);
-		this.changeSceneName = null
+
+        if (this.changeSceneName != null)
+            changeSceneByName(this.changeSceneName);
+        this.changeSceneName = null
     }
 
     selectView(viewId) {
@@ -232,34 +252,45 @@ export class MySceneGame extends CGFscene {
 
     checkKeys(t) {
         if (this.gui.isKeyPressed("Escape")) {
-            if(this.escape == false){
+            if (this.escape == false) {
                 this.escape = true
                 this.menuOption = 0
             }
             else
                 this.escape = false
-        } 
-        else if (this.gui.isKeyPressed("Space")){
-            if(this.pause == false)
+        }
+        else if (this.gui.isKeyPressed("Space")) {
+            if (this.pause == false)
                 this.pause = true
             else
                 this.pause = false
         }
-        if(this.escape){
-            if(this.gui.isKeyPressed("Digit1")){
+        if (this.escape) {
+            if (this.gui.isKeyPressed("Digit1")) {
                 this.menuOption = 1
             }
-            else if(this.gui.isKeyPressed("Digit2")){
+            else if (this.gui.isKeyPressed("Digit2")) {
                 this.menuOption = 2
             }
-            if(this.gui.isKeyPressed("Enter")){
+            if (this.gui.isKeyPressed("Enter")) {
                 this.chooseOption(this.menuOption)
             }
         }
 
-        if(this.pause == true || this.escape == true || this.timeIsUp == true)
+        if (this.pause == true || this.escape == true)
             return
 
+        if (this.gui.isKeyPressed("KeyR")) {
+            this.vehicle.reset();
+            this.timer = this.maxTimer
+            if(this.timeIsUp)
+                this.timeIsUp = false;
+            this.powerUpActive = false
+        }
+
+        if(this.timeIsUp)
+            return;
+            
         if (this.gui.isKeyPressed("KeyM")) {
             if (this.lastUpdate - this.lastMPress > 200) {
                 this.lastMPress = t;
@@ -267,84 +298,71 @@ export class MySceneGame extends CGFscene {
             }
         }
         if (this.gui.isKeyPressed("KeyW")) {
-            if(this.powerUpActive)
-                this.graph.vehicle.accelerate(0.3 * this.speedFactor);        
+            if (this.powerUpActive)
+                this.vehicle.accelerate(0.3 * this.speedFactor);
             else
-                this.graph.vehicle.accelerate(0.25 * this.speedFactor);        
-            
+                this.vehicle.accelerate(0.25 * this.speedFactor);
+
         }
         if (this.gui.isKeyPressed("KeyS")) {
-            this.graph.vehicle.accelerate(-0.25 * this.speedFactor);
+            this.vehicle.accelerate(-0.25 * this.speedFactor);
         }
         if (this.gui.isKeyPressed("KeyA")) {
-            this.graph.vehicle.turnWheels(0.3);
+            this.vehicle.turnWheels(0.3);
         }
 
         if (this.gui.isKeyPressed("KeyD")) {
-            this.graph.vehicle.turnWheels(-0.3);
-        }
-
-        if (this.gui.isKeyPressed("KeyR")) {
-            this.graph.vehicle.reset();
-            this.timer = this.maxTimer
-            this.powerUpActive = false
-        }
-
-        if (this.gui.isKeyPressed("KeyP")) { // TO Do remove once power up collection is working
-            this.powerUpActive = true 
-            this.powerUpTimer = this.powerUpMaxTimer
+            this.vehicle.turnWheels(-0.3);
         }
     }
 
     //Based on oolite-font image given. it is present in textures folder
-    writeOnScreen(text, textId, pickable){
-        text=text.toLowerCase()
+    writeOnScreen(text, textId, pickable) {
+        text = text.toLowerCase()
         var spacing = 1
-        if(pickable)
+        if (pickable)
             this.registerForPick(textId, this.quad);
-        for (var index in text){
+        for (var index in text) {
             var char = text[index]
-            if(char == ' '){
-                this.translate(spacing,0,0);
+            if (char == ' ') {
+                this.translate(spacing, 0, 0);
                 continue
             }
 
             var charPos = this.textDict[text[index]]
-            if(charPos == undefined)
+            if (charPos == undefined)
                 continue
-            this.activeShader.setUniformsValues({'charCoords': charPos});
+            this.activeShader.setUniformsValues({ 'charCoords': charPos });
             this.quad.display();
 
-            this.translate(spacing,0,0);
+            this.translate(spacing, 0, 0);
         }
     }
 
-	chooseOption(optionNumber){
-		switch(optionNumber){
-			case 1: this.changeSceneName = "Menu"; break;
-			case 2: this.escape = false; break;
-			default: break;
+    chooseOption(optionNumber) {
+        switch (optionNumber) {
+            case 1: this.changeSceneName = "Menu"; break;
+            case 2: this.escape = false; break;
+            default: break;
 
-		}
-	}
+        }
+    }
 
-	checkPicking()
-	{
-		if (this.pickMode == false) {
-			if (this.pickResults != null && this.pickResults.length > 0) {
-				for (var i=0; i< this.pickResults.length; i++) {
-					var obj = this.pickResults[i][0];
-					if (obj)
-					{
-						var customId = this.pickResults[i][1];				
-						//console.log("Picked object: " + obj + ", with pick id " + customId);
-						this.chooseOption(customId)
-					}
-				}
-				this.pickResults.splice(0,this.pickResults.length);
-			}		
-		}
-	}
+    checkPicking() {
+        if (this.pickMode == false) {
+            if (this.pickResults != null && this.pickResults.length > 0) {
+                for (var i = 0; i < this.pickResults.length; i++) {
+                    var obj = this.pickResults[i][0];
+                    if (obj) {
+                        var customId = this.pickResults[i][1];
+                        //console.log("Picked object: " + obj + ", with pick id " + customId);
+                        this.chooseOption(customId)
+                    }
+                }
+                this.pickResults.splice(0, this.pickResults.length);
+            }
+        }
+    }
 
     roundTo(n, digits) {
         var negative = false;
@@ -365,19 +383,19 @@ export class MySceneGame extends CGFscene {
     }
 
     //To Do change stuff it various difficultiues
-    setSettings(difficulty, track){
+    setSettings(difficulty, track) {
         this.difficulty = difficulty
         this.track = track
 
-        if(this.difficulty == 1){
+        if (this.difficulty == 1) {
             this.maxTimer = 75
             this.powerUpMaxTimer = 15
         }
-        else if(this.difficulty == 2){
+        else if (this.difficulty == 2) {
             this.maxTimer = 60
             this.powerUpMaxTimer = 10
         }
-        else if(this.difficulty == 3){
+        else if (this.difficulty == 3) {
             this.maxTimer = 45
             this.powerUpMaxTimer = 5
             this.map.darkMode()
@@ -387,95 +405,95 @@ export class MySceneGame extends CGFscene {
     }
 
     displayHUD() {
-		    this.setActiveShaderSimple(this.textShader);
-            this.textAppearance.apply()
+        this.setActiveShaderSimple(this.textShader);
+        this.textAppearance.apply()
 
-            var customId = 1
-            
+        var customId = 1
+
+        this.pushMatrix();
+        // 	Reset transf. matrix to draw independent of camera
+        this.loadIdentity();
+        // transform as needed to place on screen
+        this.translate(-5.4, 15.5, -40);
+        this.writeOnScreen("Rocket Kart", customId, false)
+        this.popMatrix();
+
+        this.pushMatrix();
+        // 	Reset transf. matrix to draw independent of camera
+        this.loadIdentity();
+        // transform as needed to place on screen
+        this.translate(-28, -15, -40);
+        this.writeOnScreen(this.roundTo(this.vehicle.speed * 16, 0) + "KM/H", customId, false)
+        this.popMatrix();
+
+        this.pushMatrix();
+        // 	Reset transf. matrix to draw independent of camera
+        this.loadIdentity();
+        // transform as needed to place on screen
+        this.translate(-28, 15, -40);
+        this.writeOnScreen("Time Left:" + this.timer + "s", customId, false)
+        this.popMatrix();
+
+        if (this.powerUpActive) {
             this.pushMatrix();
-                // 	Reset transf. matrix to draw independent of camera
-                this.loadIdentity();
-                // transform as needed to place on screen
-                this.translate(-5.4,15.5,-40);
-                this.writeOnScreen("Rocket Kart", customId, false)
+            // 	Reset transf. matrix to draw independent of camera
+            this.loadIdentity();
+            // transform as needed to place on screen
+            this.translate(15, 15, -40);
+            this.writeOnScreen("SPEED UP:" + this.powerUpTimer + "s", customId, false)
             this.popMatrix();
+        }
 
+        if (this.timeIsUp) {
             this.pushMatrix();
-                // 	Reset transf. matrix to draw independent of camera
-                this.loadIdentity();
-                // transform as needed to place on screen
-                this.translate(-28,-15,-40);
-                this.writeOnScreen(this.roundTo(this.graph.vehicle.speed*16,0) + "KM/H", customId, false)
+            // 	Reset transf. matrix to draw independent of camera
+            this.loadIdentity();
+            // transform as needed to place on screen
+            this.translate(-4, -5, -20);
+            this.writeOnScreen("Time is UP", customId, false)
             this.popMatrix();
+        }
 
+        if (this.escape == true) {
             this.pushMatrix();
-                // 	Reset transf. matrix to draw independent of camera
-                this.loadIdentity();
-                // transform as needed to place on screen
-                this.translate(-28,15,-40);
-                this.writeOnScreen("Time Left:" + this.timer + "s", customId, false)
+            // 	Reset transf. matrix to draw independent of camera
+            this.loadIdentity();
+            // transform as needed to place on screen
+            this.translate(-10.4, 4, -20);
+            this.writeOnScreen("Do you want to Exit Game?", customId, false)
+            this.translate(-20, -4, 0);
+            this.writeOnScreen("1 YES", customId, true)
+            if (this.menuOption == 1) {
+                this.translate(-4, 0, 0);
+                this.writeOnScreen("*", customId)
+            }
+            customId += 1
             this.popMatrix();
-
-            if(this.powerUpActive){
-                this.pushMatrix();
-                    // 	Reset transf. matrix to draw independent of camera
-                    this.loadIdentity();
-                    // transform as needed to place on screen
-                    this.translate(15,15,-40);
-                    this.writeOnScreen("SPEED UP:" + this.powerUpTimer + "s", customId, false)
-                this.popMatrix();
+            this.pushMatrix();
+            this.loadIdentity();
+            this.translate(2, 0, -20);
+            this.writeOnScreen("2 NO", customId, true)
+            if (this.menuOption == 2) {
+                this.translate(-3, 0, 0);
+                this.writeOnScreen("*", customId)
             }
+            customId += 1
+            this.clearPickRegistration();
 
-            if(this.timeIsUp){
-                this.pushMatrix();
-                    // 	Reset transf. matrix to draw independent of camera
-                    this.loadIdentity();
-                    // transform as needed to place on screen
-                    this.translate(-4,-5,-20);
-                    this.writeOnScreen("Time is UP", customId, false)
-                this.popMatrix();
-            }
+            this.popMatrix();
+        }
+        else if (this.pause == true) {
+            this.pushMatrix();
+            // 	Reset transf. matrix to draw independent of camera
+            this.loadIdentity();
+            // transform as needed to place on screen
+            this.translate(-5.4, 0, -20);
+            this.writeOnScreen("Game Paused", customId, false)
+            this.popMatrix();
+        }
 
-            if(this.escape == true){
-                this.pushMatrix();
-                    // 	Reset transf. matrix to draw independent of camera
-                    this.loadIdentity();
-                    // transform as needed to place on screen
-                    this.translate(-10.4,4,-20);
-                    this.writeOnScreen("Do you want to Exit Game?", customId, false)
-                    this.translate(-20,-4,0);
-                    this.writeOnScreen("1 YES", customId, true)
-                    if(this.menuOption == 1){
-                        this.translate(-4,0,0);
-                        this.writeOnScreen("*", customId)
-                    }
-                    customId+=1
-                this.popMatrix();
-                this.pushMatrix();
-                    this.loadIdentity();
-                    this.translate(2,0,-20);
-                    this.writeOnScreen("2 NO", customId, true)
-                    if(this.menuOption == 2){
-                        this.translate(-3,0,0);
-                        this.writeOnScreen("*", customId)
-                    }
-                    customId+=1
-                    this.clearPickRegistration();
-
-                this.popMatrix();
-            } 
-            else if(this.pause == true){
-                this.pushMatrix();
-                    // 	Reset transf. matrix to draw independent of camera
-                    this.loadIdentity();
-                    // transform as needed to place on screen
-                    this.translate(-5.4,0,-20);
-                    this.writeOnScreen("Game Paused", customId, false)
-                this.popMatrix();
-            }
-
-            // reactivate default shader
-		    this.setActiveShaderSimple(this.defaultShader);
+        // reactivate default shader
+        this.setActiveShaderSimple(this.defaultShader);
     }
 
     /**
@@ -484,7 +502,7 @@ export class MySceneGame extends CGFscene {
     display() {
         this.checkPicking();
         // this resets the picking buffer
-		this.clearPickRegistration();
+        this.clearPickRegistration();
 
         // ---- BEGIN Background, camera and axis setup
 
@@ -520,29 +538,46 @@ export class MySceneGame extends CGFscene {
 
 
 
-        if (this.sceneInited) {
+        if (this.sxgLoaded && this.svgLoaded) {
             // Draw axis
             this.setDefaultAppearance();
 
             // Displays the scene (MySceneGraph function).
             //this.graph.displayScene();
             this.map.display();
-            this.graph.vehicle.display();
+            this.vehicle.display();
 
             // Display HUD
             this.displayHUD()
 
-            for (var i = 0; i < this.svgGraph.powerUps.length; i++) 
-                this.svgGraph.powerUps[i].display();
+            for (var i = 0; i < this.powerUps.length; i++) {
+                var power_up = this.powerUps[i];
+                if (this.vehicle.inRange(power_up)) { // Collision with power up
+                    this.powerUps.splice(i, 1);
+                    this.powerUpActive = true
+                    this.powerUpTimer = this.powerUpMaxTimer
+                    i--;
+                    continue;
+                }
+                power_up.display();
+            }
 
-            for (var i = 0; i < this.svgGraph.obstacles.length; i++) 
-                this.svgGraph.obstacles[i].display();
+            for (var i = 0; i < this.obstacles.length; i++) {
+                var obstacle = this.obstacles[i];
+                if (this.vehicle.inRange(this.obstacles[i])) {// Collision with obstacle
+                    this.obstacles.splice(i, 1);
+                    // TODO
+                    i--;
+                    continue;
+                }
+                obstacle.display();
+            }
         }
 
         this.popMatrix();
 
         // re-enable depth test 
-		this.gl.enable(this.gl.DEPTH_TEST);
+        this.gl.enable(this.gl.DEPTH_TEST);
 
 
         // ---- END Background, camera and axis setup

@@ -2,6 +2,8 @@ import { CGFXMLreader } from '../lib/CGF.js';
 import { MyObstacle } from './svgelements/MyObstacle.js';
 import { MyPowerUp } from './svgelements/MyPowerUp.js';
 import { MyRoute } from './svgelements/MyRoute.js';
+import { MyStartLine } from './svgelements/MyStartLine.js';
+import { MyVehicle } from './svgelements/MyVehicle.js';
 
 
 /**
@@ -14,16 +16,11 @@ export class MySVGReader {
     constructor(filename, scene) {
         this.scene = scene;
 
-        scene.svgGraph = this;
-
         // File reading 
         this.reader = new CGFXMLreader();
 
-        this.powerUps = [];
-        this.obstacles = [];
-        this.track = null
-        this.start = null
-        this.routes = []
+        this.track = null;
+        this.routes = [];
 
         /*
          * Read the contents of the xml file, and refer to this class for loading and error handlers.
@@ -47,6 +44,8 @@ export class MySVGReader {
             this.onXMLError(error);
             return;
         }
+
+        this.scene.onSVGLoaded();
     }
 
     /**
@@ -120,10 +119,10 @@ export class MySVGReader {
         // Create objects according to the layer name
         switch (layerName) {
             case "PowerUps":
-                this.powerUps.push(new MyPowerUp(this.scene, cx, cy));
+                this.scene.powerUps.push(new MyPowerUp(this.scene, cx, cy));
                 break;
             case "Obstacles":
-                this.obstacles.push(new MyObstacle(this.scene, cx, cy));
+                this.scene.obstacles.push(new MyObstacle(this.scene, cx, cy));
                 break;
         }
     }
@@ -167,12 +166,17 @@ export class MySVGReader {
                 this.track = (new MyRoute(this.scene, path_vertexes));
                 break;
             case "Start":
-                this.start = (new MyRoute(this.scene, path_vertexes));
+                let orientation_vector = [path_vertexes[1][0] - path_vertexes[0][0] , path_vertexes[1][1] - path_vertexes[0][1]];
+                let angle = Math.atan(orientation_vector[1] / orientation_vector[0]);
+
+                this.scene.vehicle = new MyVehicle(this.scene, angle + Math.PI, [path_vertexes[0][0], 0, path_vertexes[0][1]]) //angle + PI because the vehicle starts oriented to the negative side of the x axis
+
+                this.scene.startLine = (new MyStartLine(this.scene, path_vertexes[0]));
                 break;
             case "Routes":
                 if (!close_path)
                     return "Route path must be closed!";
-                this.routes.push(new MyRoute(this.scene, path_vertexes));
+                this.scene.routes.push(new MyRoute(this.scene, path_vertexes));
                 break;
         }
     }
@@ -182,8 +186,9 @@ export class MySVGReader {
         for (i = i + 1; i < path_info.length; i++) {
 
             let coords = path_info[i].split(",")
-
+            
             if (this.isNumeric(coords[0]) && this.isNumeric(coords[1])) {
+                coords = coords.map(Number)
 
                 if (path_command == 'm' && arrayToSave.length != 0) {
                     let lastCoord = arrayToSave[arrayToSave.length - 1];
@@ -195,7 +200,6 @@ export class MySVGReader {
             }
             else break;
         }
-
         return i - 1;
     }
 

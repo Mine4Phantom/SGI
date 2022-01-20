@@ -233,11 +233,16 @@ export class MySceneGame extends CGFscene {
     }
 
     update(t) {
-        //if (this.vehicle.inRange(this.startLine)){
+        if(this.vehicle == null)
+            return
+
+        if (this.vehicle.inRange(this.startLine)){
             //this.lap += 1
             if(this.lap > this.maxLap)
                 this.hasWon = true
-        //}
+        }
+
+
         if (this.escape == false && this.pause == false && this.hasWon == false) {
             this.ticks += 1
             // A second has passed
@@ -335,7 +340,7 @@ export class MySceneGame extends CGFscene {
         }
         if (this.gui.isKeyPressed("KeyW")) {
             if (this.powerUpActive)
-                this.vehicle.accelerate(0.3 * this.speedFactor);
+                this.vehicle.accelerate(0.32 * this.speedFactor);
             else
                 this.vehicle.accelerate(0.25 * this.speedFactor);
 

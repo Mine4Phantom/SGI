@@ -39,7 +39,7 @@ export class MyVehicle extends CGFobject {
     this.scene.lights[7].setSpotExponent(1000);
     this.scene.lights[7].setSpotDirection(-10, -5.9, 0);
 
-    this.scene.lights[7].setVisible(true);
+    this.scene.lights[7].setVisible(false);
     this.scene.lights[7].enable();
 
 
@@ -60,7 +60,7 @@ export class MyVehicle extends CGFobject {
     this.scene.lights[6].setSpotExponent(1000);
     this.scene.lights[6].setSpotDirection(10, -9.2, 0);
 
-    this.scene.lights[6].setVisible(true);
+    this.scene.lights[6].setVisible(false);
     this.scene.lights[6].enable();
 
 
@@ -77,7 +77,7 @@ export class MyVehicle extends CGFobject {
 
   update(t) {
     // Speed factor (60% when car out of track)
-    this.scene.speedFactor = this.scene.map.in_track([this.x, this.z]) ? 1 : 0.6;
+    this.scene.speedFactor = this.scene.map.in_track([this.x, this.z]) ? 1 : 0.45;
 
     // Car position
     var new_x = this.x - this.speed * Math.cos(this.direction);

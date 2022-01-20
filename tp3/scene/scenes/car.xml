@@ -240,6 +240,20 @@
             </children>
         </component>
 
+        <!-- Start Line -->
+        <component id="start_line">
+            <transformation>
+                <scale x="1" y="1" z="1" />
+            </transformation>
+            <materials>
+                <material id="gray_material" />
+            </materials>
+            <texture id="none" />
+            <children>
+                <primitiveref id="cube" />
+            </children>
+        </component>
+
         <!-- Car -->
 
         <component id="back_wheels">

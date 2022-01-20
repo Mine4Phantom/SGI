@@ -53,9 +53,14 @@ export class MySceneGame extends CGFscene {
         this.ticks = 0
 
         // Power up logic
-        this.powerUpActive = false
+        this.powerUpActive = false // Only one variable because only one power up has a duration to it (acceleration)
         this.powerUpMaxTimer = 10
         this.powerUpTimer = this.powerUpMaxTimer
+
+        // Obstacle logic 
+        this.obstacleActive = false;
+        this.obstacleMaxTimer = 10
+        this.obstacleTimer = this.obstacleMaxTimer
 
         // Dictionary containing bool values to check if light is on or not
         this.lightsOn = {};
@@ -85,6 +90,11 @@ export class MySceneGame extends CGFscene {
 
         // OBSTACLE
         this.obstacles = []
+        // Obstacle types
+        this.obstacleType = {
+            TIME_PENALTY: 1,
+            CONTR_INV: 2
+        }
 
         // START LINE
         this.startLine = null;
@@ -236,6 +246,14 @@ export class MySceneGame extends CGFscene {
                     }
                 }
 
+                if(this.obstacleActive) {
+                    if(this.obstacleTimer > 0) 
+                        this.obstacleTimer -= 1;
+                    else {
+                        this.obstacleActive = false;
+                        this.obstacleTimer = this.obstacleMaxTimer;
+                    }
+                }
             }
         }
 
@@ -285,14 +303,15 @@ export class MySceneGame extends CGFscene {
         if (this.pause == true || this.escape == true)
             return
 
-        if (this.gui.isKeyPressed("KeyR")) { 
+        if (this.gui.isKeyPressed("KeyR")) {
             this.vehicle.reset();
             this.powerUps = [...this.powerUpsStart];
             this.obstacles = [...this.obstaclesStart];
             this.timer = this.maxTimer
             if (this.timeIsUp)
                 this.timeIsUp = false;
-            this.powerUpActive = false
+            this.powerUpActive = false;
+            this.obstacleActive = false;
         }
 
         if (this.timeIsUp)
@@ -315,11 +334,17 @@ export class MySceneGame extends CGFscene {
             this.vehicle.accelerate(-0.25 * this.speedFactor);
         }
         if (this.gui.isKeyPressed("KeyA")) {
-            this.vehicle.turnWheels(0.3);
+            if (this.obstacleActive)
+                this.vehicle.turnWheels(-0.3);
+            else
+                this.vehicle.turnWheels(0.3);
         }
 
         if (this.gui.isKeyPressed("KeyD")) {
-            this.vehicle.turnWheels(-0.3);
+            if (this.obstacleActive)
+                this.vehicle.turnWheels(0.3)
+            else
+                this.vehicle.turnWheels(-0.3);
         }
     }
 
@@ -411,6 +436,9 @@ export class MySceneGame extends CGFscene {
         this.powerUpTimer = this.powerUpMaxTimer
     }
 
+    /**
+     * Displays the head up display
+     */
     displayHUD() {
         this.setActiveShaderSimple(this.textShader);
         this.textAppearance.apply()
@@ -450,6 +478,16 @@ export class MySceneGame extends CGFscene {
             this.writeOnScreen("SPEED UP:" + this.powerUpTimer + "s", customId, false)
             this.popMatrix();
         }
+
+        if(this.obstacleActive) {
+            this.pushMatrix();
+            this.loadIdentity();
+            if(this.powerUpActive) this.translate(11, 13, -40);
+            else this.translate(11, 15, -40);
+            this.writeOnScreen("A/D INVERTED:" + this.obstacleTimer + "s", customId, false);
+            this.popMatrix();
+        }
+        
 
         if (this.timeIsUp) {
             this.pushMatrix();
@@ -503,29 +541,66 @@ export class MySceneGame extends CGFscene {
         this.setActiveShaderSimple(this.defaultShader);
     }
 
+    /**
+     * Displays the power ups read in the svg
+     */
     displayPowerUps() {
         for (var i = 0; i < this.powerUps.length; i++) {
             var power_up = this.powerUps[i];
             if (this.vehicle.inRange(power_up)) { // Collision with power up
                 // Remove power up from list
                 this.powerUps.splice(i, 1);
-                
+
                 // Apply power up
                 if (power_up.get_type() == this.pUpType.ACC_MULT) { // 200% accelaration 
                     this.powerUpActive = true
                     this.powerUpTimer = this.powerUpMaxTimer
                 }
                 else if (power_up.get_type() == this.pUpType.BONUS_TIME) // Time Bonus
-                    if(this.difficulty == 1)
+                    if (this.difficulty == 1)
                         this.timer += 10;
                     else if (this.difficulty == 2)
                         this.timer += 7;
-                    else if (this.difficulty == 3) 
+                    else if (this.difficulty == 3)
                         this.timer += 5;
                 i--;
                 continue;
             }
             power_up.display();
+        }
+    }
+
+    /**
+     * Displays the obstacles read in the svg
+     */
+    displayObstacles() {
+        for (var i = 0; i < this.obstacles.length; i++) {
+            var obstacle = this.obstacles[i];
+            if (this.vehicle.inRange(this.obstacles[i])) {  // Collision with obstacle
+                // Remove obstacle from list
+                this.obstacles.splice(i, 1);
+
+                // Obstacle collision event
+                if (obstacle.get_type() == this.obstacleType.TIME_PENALTY) { // Time deduction
+                    var timer_after_penalty = this.timer;
+                    if (this.difficulty == 1)
+                        timer_after_penalty -= 5;
+                    else if (this.difficulty == 2)
+                        timer_after_penalty -= 7;
+                    else if (this.difficulty == 3)
+                        timer_after_penalty -= 10
+
+                    this.timer = timer_after_penalty < 0 ? 0 : timer_after_penalty;
+                }
+                else if (obstacle.get_type() == this.obstacleType.CONTR_INV) {  // Controls A/D inversion
+                    this.obstacleActive = true;
+                    this.obstacleTimer = this.obstacleMaxTimer;
+                }
+
+                i--;
+                continue;
+            }
+            obstacle.display();
         }
     }
 
@@ -585,17 +660,9 @@ export class MySceneGame extends CGFscene {
 
             // Display Power Ups
             this.displayPowerUps();
-            
-            for (var i = 0; i < this.obstacles.length; i++) {
-                var obstacle = this.obstacles[i];
-                if (this.vehicle.inRange(this.obstacles[i])) {// Collision with obstacle
-                    this.obstacles.splice(i, 1);
-                    // TODO
-                    i--;
-                    continue;
-                }
-                obstacle.display();
-            }
+
+            // Display Obstacles
+            this.displayObstacles();
         }
 
         this.popMatrix();

@@ -4,6 +4,7 @@ export class MyPowerUp {
      * @param {scene} scene 
      * @param {power up x coordinate} center_x 
      * @param {power up z coordinate} center_z 
+     * @param {power up type} type
      */ 
     constructor(scene, center_x, center_z, type) {
         this.scene = scene;

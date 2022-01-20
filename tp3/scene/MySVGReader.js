@@ -119,7 +119,7 @@ export class MySVGReader {
         // Create objects according to the layer name
         switch (layerName) {
             case "PowerUps":
-                this.scene.powerUps.push(new MyPowerUp(this.scene, cx, cy, this.scene.pUpType.ACC_MULT));
+                this.scene.powerUps.push(new MyPowerUp(this.scene, cx, cy, this.scene.pUpType.BONUS_TIME));
                 break;
             case "Obstacles":
                 this.scene.obstacles.push(new MyObstacle(this.scene, cx, cy));

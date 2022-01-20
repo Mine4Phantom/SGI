@@ -516,8 +516,12 @@ export class MySceneGame extends CGFscene {
                     this.powerUpTimer = this.powerUpMaxTimer
                 }
                 else if (power_up.get_type() == this.pUpType.BONUS_TIME) // Time Bonus
-                    this.timer += 10;
-
+                    if(this.difficulty == 1)
+                        this.timer += 10;
+                    else if (this.difficulty == 2)
+                        this.timer += 7;
+                    else if (this.difficulty == 3) 
+                        this.timer += 5;
                 i--;
                 continue;
             }

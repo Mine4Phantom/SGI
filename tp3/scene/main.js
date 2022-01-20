@@ -60,6 +60,7 @@ function changeScene(myScene, myInterface, app) {
     app.setScene(myScene);
     app.setInterface(myInterface);
     myInterface.setActiveCamera(myScene.camera);
+    myInterface.gui.close();
 }
 
 function main() {

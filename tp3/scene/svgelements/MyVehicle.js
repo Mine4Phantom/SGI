@@ -112,8 +112,8 @@ export class MyVehicle extends CGFobject {
 
     turn(val){ // TODO Make this work while going backwards
       if(this.speed < -2){ // Going fast backwards
-        this.direction -= val*((-1/10)*(this.speed+2)**2 + 2);
-        this.wheels.direction -= val*((-1/10)*(this.speed+2)**2 + 2);
+        this.direction -= val*((-1/20)*(this.speed+2)**2 + 2);
+        this.wheels.direction -= val*((-1/20)*(this.speed+2)**2 + 2);
       }
       else if(this.speed < 0){ // Going slowly backwards
         this.direction += val*(-1/2*(this.speed-2)**2+2);
@@ -123,8 +123,8 @@ export class MyVehicle extends CGFobject {
         this.direction += val*(-1/2*(this.speed-2)**2+2);
         this.wheels.direction += val*(-1/2*(this.speed)-2**2+2);
       }else if (this.speed >= 2){ // turns based on a parabolic curve
-        this.direction += val*((-1/10)*(this.speed-2)**2 + 2);
-        this.wheels.direction += val*((-1/10)*(this.speed-2)**2 + 2);
+        this.direction += val*((-1/20)*(this.speed-2)**2 + 2);
+        this.wheels.direction += val*((-1/20)*(this.speed-2)**2 + 2);
       }
     }
 

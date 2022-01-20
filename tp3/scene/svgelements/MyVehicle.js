@@ -76,12 +76,12 @@ export class MyVehicle extends CGFobject {
   }
 
   update(t) {
-    if (this.scene.map.in_track([this.x, this.z])) { }
-    else { }
+    // Speed factor (60% when car out of track)
+    var speed_factor = this.scene.map.in_track([this.x, this.z]) ? 1 : 0.6; 
 
     // Car position
-    this.x -= this.speed * Math.cos(this.direction);
-    this.z += this.speed * Math.sin(this.direction);
+    this.x -= this.speed * Math.cos(this.direction) * speed_factor;
+    this.z += this.speed * Math.sin(this.direction) * speed_factor;
 
     // change camera according to car movement 
     this.scene.camera.position[0] = this.x + (70 * Math.cos(this.direction));

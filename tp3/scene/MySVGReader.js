@@ -118,11 +118,17 @@ export class MySVGReader {
 
         // Create objects according to the layer name
         switch (layerName) {
-            case "PowerUps":
+            case "PowerUpsSpeed":
                 this.scene.powerUps.push(new MyPowerUp(this.scene, cx, cy, this.scene.pUpType.ACC_MULT));
                 break;
-            case "Obstacles":
+            case "PowerUpsTime":
+                this.scene.powerUps.push(new MyPowerUp(this.scene, cx, cy, this.scene.pUpType.BONUS_TIME));
+                break;
+            case "ObstaclesInvCont":
                 this.scene.obstacles.push(new MyObstacle(this.scene, cx, cy, this.scene.obstacleType.CONTR_INV));
+                break;
+            case "ObstaclesTime":
+                this.scene.obstacles.push(new MyObstacle(this.scene, cx, cy, this.scene.obstacleType.TIME_PENALTY));
                 break;
         }
     }
@@ -166,7 +172,7 @@ export class MySVGReader {
                 this.track = (new MyRoute(this.scene, path_vertexes));
                 break;
             case "Start":
-                let orientation_vector = [path_vertexes[1][0] - path_vertexes[0][0] , path_vertexes[1][1] - path_vertexes[0][1]];
+                let orientation_vector = [path_vertexes[1][0] - path_vertexes[0][0], path_vertexes[1][1] - path_vertexes[0][1]];
                 let angle = Math.atan(orientation_vector[1] / orientation_vector[0]);
 
                 this.scene.vehicle = new MyVehicle(this.scene, angle + Math.PI, [path_vertexes[0][0], 0, path_vertexes[0][1]]) //angle + PI because the vehicle starts oriented to the negative side of the x axis
@@ -186,7 +192,7 @@ export class MySVGReader {
         for (i = i + 1; i < path_info.length; i++) {
 
             let coords = path_info[i].split(",")
-            
+
             if (this.isNumeric(coords[0]) && this.isNumeric(coords[1])) {
                 coords = coords.map(Number)
 

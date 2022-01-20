@@ -53,10 +53,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.93128817"
-     inkscape:cx="231.39991"
+     inkscape:cx="257.17067"
      inkscape:cy="249.6542"
      inkscape:document-units="px"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer8"
      inkscape:document-rotation="0"
      showgrid="false"
      units="px"
@@ -85,7 +85,8 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Track"
-     style="display:inline">
+     style="display:inline"
+     sodipodi:insensitive="true">
     <path
        id="path836"
        style="fill:none;stroke:#b3b3b3;stroke-width:30.6336;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -95,8 +96,9 @@
   <g
      inkscape:groupmode="layer"
      id="layer3"
-     inkscape:label="PowerUps"
-     style="display:inline">
+     inkscape:label="PowerUpsTime"
+     style="display:inline"
+     sodipodi:insensitive="true">
     <ellipse
        style="display:inline;fill:#008000;stroke:#b3b3b3;stroke-width:0.345958;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
        id="path852-7-3-6"
@@ -111,23 +113,30 @@
        cy="274.08823"
        rx="10.591736"
        ry="9.7844038" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer7"
+     inkscape:label="PowerUpsSpeed"
+     style="display:inline"
+     sodipodi:insensitive="true">
     <ellipse
        style="display:inline;fill:#008000;stroke:#b3b3b3;stroke-width:0.345958;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
-       id="path852-7-3-6-7"
-       cx="290.50024"
-       cy="313.69708"
+       id="path852-7-3-6-5"
+       cx="405.8894"
+       cy="280.25696"
        rx="10.591736"
        ry="9.7844038" />
     <ellipse
        style="display:inline;fill:#008000;stroke:#b3b3b3;stroke-width:0.345958;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
-       id="path852-7-3-6-5"
-       cx="403.85614"
-       cy="262.86896"
+       id="path852-7-3-6-7-6"
+       cx="241.00952"
+       cy="313.17065"
        rx="10.591736"
        ry="9.7844038" />
   </g>
   <g
-     inkscape:label="Obstacles"
+     inkscape:label="ObstaclesTime"
      inkscape:groupmode="layer"
      id="layer1"
      style="display:inline">
@@ -140,13 +149,6 @@
        ry="9.48283" />
     <ellipse
        style="display:inline;fill:#ff0000;stroke:#b3b3b3;stroke-width:0.336422;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
-       id="path852-8-9-3-7-3"
-       cx="100.36519"
-       cy="316.42419"
-       rx="10.265724"
-       ry="9.48283" />
-    <ellipse
-       style="display:inline;fill:#ff0000;stroke:#b3b3b3;stroke-width:0.336422;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
        id="path852-8-9-3-7-5"
        cx="405.68475"
        cy="205.75249"
@@ -155,9 +157,23 @@
   </g>
   <g
      inkscape:groupmode="layer"
+     id="layer8"
+     inkscape:label="ObstaclesInvCont"
+     style="display:inline">
+    <ellipse
+       style="display:inline;fill:#ff0000;stroke:#b3b3b3;stroke-width:0.336422;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
+       id="path852-8-9-3-7-3"
+       cx="100.41177"
+       cy="316.38251"
+       rx="10.265724"
+       ry="9.48283" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
      id="layer4"
      inkscape:label="Start"
-     style="display:inline">
+     style="display:inline"
+     sodipodi:insensitive="true">
     <path
        style="fill:#00ffff;stroke:#000000;stroke-width:2.24551;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Lend)"
        d="m 233.15683,148.83405 42.70684,2.60749"
@@ -167,7 +183,8 @@
      inkscape:groupmode="layer"
      id="layer5"
      inkscape:label="Routes"
-     style="display:inline">
+     style="display:inline"
+     sodipodi:insensitive="true">
     <path
        style="fill:none;stroke:#ffff00;stroke-width:0.875243px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 103.94445,149.39086 300.82458,0.5784 -1.02587,163.83794 -300.38968,-0.0331 z"
@@ -177,5 +194,6 @@
      inkscape:groupmode="layer"
      id="layer6"
      inkscape:label="F1"
-     style="display:inline" />
+     style="display:inline"
+     sodipodi:insensitive="true" />
 </svg>

@@ -118,11 +118,11 @@ export class MySceneMenu extends CGFscene
 			this.chooseOption(this.menuKey)
 
 		}
-/* 		else if(this.gui.isKeyPressed("Escape")){
+ 		else if(this.gui.isKeyPressed("Escape")){
 			this.difficulty = false
 			this.track = false
 			this.menuKey = 0  
-		} */
+		} 
     }
 
 	chooseOption(optionNumber){

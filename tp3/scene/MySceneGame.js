@@ -98,6 +98,11 @@ export class MySceneGame extends CGFscene {
 
         // START LINE
         this.startLine = null;
+        this.maxLap = 3
+        this.lap = 0
+
+        // WIN
+        this.hasWon = false
 
         // VEHICLE 
         this.vehicle = null;
@@ -228,7 +233,12 @@ export class MySceneGame extends CGFscene {
     }
 
     update(t) {
-        if (this.escape == false && this.pause == false) {
+        //if (this.vehicle.inRange(this.startLine)){
+            //this.lap += 1
+            if(this.lap > this.maxLap)
+                this.hasWon = true
+        //}
+        if (this.escape == false && this.pause == false && this.hasWon == false) {
             this.ticks += 1
             // A second has passed
             if (this.ticks % 10 == 0) {
@@ -259,7 +269,7 @@ export class MySceneGame extends CGFscene {
 
         this.lastUpdate = t;
         this.checkKeys(t);
-        if (this.vehicle != null && this.escape == false && this.pause == false && this.timeIsUp == false) {
+        if (this.vehicle != null && this.escape == false && this.pause == false && this.timeIsUp == false && this.hasWon == false) {
             this.vehicle.update(t);
         }
 
@@ -469,6 +479,14 @@ export class MySceneGame extends CGFscene {
         this.writeOnScreen("Time Left:" + this.timer + "s", customId, false)
         this.popMatrix();
 
+        this.pushMatrix();
+        // 	Reset transf. matrix to draw independent of camera
+        this.loadIdentity();
+        // transform as needed to place on screen
+        this.translate(-28, 13, -40);
+        this.writeOnScreen("Lap:" + this.lap + "/" + this.maxLap, customId, false)
+        this.popMatrix();
+
         if (this.powerUpActive) {
             this.pushMatrix();
             // 	Reset transf. matrix to draw independent of camera
@@ -494,9 +512,38 @@ export class MySceneGame extends CGFscene {
             // 	Reset transf. matrix to draw independent of camera
             this.loadIdentity();
             // transform as needed to place on screen
-            this.translate(-4, -5, -20);
+            this.translate(-4, -3, -20);
             this.writeOnScreen("Time is UP", customId, false)
             this.popMatrix();
+            if(this.escape == false && this.pause == false){
+                this.pushMatrix();
+                // 	Reset transf. matrix to draw independent of camera
+                this.loadIdentity();
+                // transform as needed to place on screen
+                this.translate(-9, -5, -20);
+                this.writeOnScreen("Press R to restart", customId, false)
+                this.popMatrix();
+            }
+
+        }
+
+        if (this.hasWon) {
+            this.pushMatrix();
+            // 	Reset transf. matrix to draw independent of camera
+            this.loadIdentity();
+            // transform as needed to place on screen
+            this.translate(-6, -3, -20);
+            this.writeOnScreen("You have Won", customId, false)
+            this.popMatrix();
+            if(this.escape == false && this.pause == false){
+                this.pushMatrix();
+                // 	Reset transf. matrix to draw independent of camera
+                this.loadIdentity();
+                // transform as needed to place on screen
+                this.translate(-9, -5, -20);
+                this.writeOnScreen("Press R to restart", customId, false)
+                this.popMatrix();
+            }
         }
 
         if (this.escape == true) {

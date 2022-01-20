@@ -77,11 +77,11 @@ export class MyVehicle extends CGFobject {
 
   update(t) {
     // Speed factor (60% when car out of track)
-    var speed_factor = this.scene.map.in_track([this.x, this.z]) ? 1 : 0.6;
+    this.scene.speedFactor = this.scene.map.in_track([this.x, this.z]) ? 1 : 0.6;
 
     // Car position
-    var new_x = this.x - this.speed * Math.cos(this.direction) * speed_factor;
-    var new_z = this.z + this.speed * Math.sin(this.direction) * speed_factor;
+    var new_x = this.x - this.speed * Math.cos(this.direction);
+    var new_z = this.z + this.speed * Math.sin(this.direction);
     if (new_x >= 4 && new_x < 508)
       this.x = new_x;
     if (new_z >= 4 && new_z < 508)

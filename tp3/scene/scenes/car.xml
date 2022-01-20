@@ -139,8 +139,11 @@
         <primitive id="cylinder">
             <cylinder height="1" topRadius="1" bottomRadius="1" stacks="10" slices="50" />
         </primitive>
-        <primitive id="cylinder2">
-            <cylinder2 height="1" topRadius="1" bottomRadius="1" stacks="10" slices="50" />
+        <primitive id="cylinder_body_front">
+            <cylinder height="1" topRadius="2" bottomRadius="0.9" stacks="10" slices="50" />
+        </primitive>
+        <primitive id="cylinder_body_back">
+            <cylinder height="1" topRadius="2" bottomRadius="1.25" stacks="10" slices="50" />
         </primitive>
         <primitive id="circle">
             <circle radius="0.5" slices="50" />
@@ -269,7 +272,8 @@
         <!-- Wheels -->
         <component id="wheel1">
             <transformation>
-                <translate x="5" y="0" z="2.5" />
+                <translate x="5" y="0.2" z="2.5" />
+                <scale x="1.2" y="1.2" z="1.2" />
             </transformation>
             <materials>
                 <material id="wheel_material" />
@@ -283,7 +287,8 @@
         <!-- Wheels -->
         <component id="wheel2">
             <transformation>
-                <translate x="5" y="0" z="-2.5" />
+                <translate x="5" y="0.2" z="-2.5" />
+                <scale x="1.2" y="1.2" z="1.2" />
             </transformation>
             <materials>
                 <material id="wheel_material" />
@@ -297,7 +302,8 @@
         <!-- Wheels -->
         <component id="wheel3">
             <transformation>
-                <translate x="-5" y="1" z="2" />
+                <translate x="-5" y="1.2" z="2" />
+                <scale x="1.2" y="1.2" z="1.2" />
             </transformation>
             <materials>
                 <material id="wheel_material" />
@@ -311,7 +317,8 @@
         <!-- Wheels -->
         <component id="wheel4">
             <transformation>
-                <translate x="-5" y="1" z="-3" />
+                <translate x="-5" y="1.2" z="-3" />
+                <scale x="1.2" y="1.2" z="1.2" />
             </transformation>
             <materials>
                 <material id="wheel_material" />
@@ -326,7 +333,98 @@
         <component id="car_body">
             <transformation>
                 <translate x="0" y="2" z="0" />
-                <scale x="9" y="1" z="4" />
+                <scale x="1" y="1" z="1" />
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <componentref id="body_front" />
+                <componentref id="body_back" />
+                <!--<componentref id="body_left" />
+                <componentref id="body_right" />-->
+                <componentref id="body_spoiler" />
+            </children>
+        </component>
+
+        <component id="body_front">
+            <transformation>
+                <translate x="-5.5" y="-0.2" z="0" />
+                <rotate axis="y" angle="90" />
+                <scale x="0.8" y="0.8" z="8.5" />
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="cylinder_body_front" />
+            </children>
+        </component>
+
+        <component id="body_back">
+            <transformation>
+                <translate x="5.5" y="-0.2" z="0" />
+                <rotate axis="y" angle="-90" />
+                <scale x="0.8" y="0.8" z="2.5" />
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="cylinder_body_back" />
+            </children>
+        </component>
+
+        <component id="body_left">
+            <transformation>
+                <translate x="0" y="2" z="0" />
+                <scale x="1" y="1" z="1" />
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="cylinder_body_front" />
+            </children>
+        </component>
+
+        <component id="body_right">
+            <transformation>
+                <translate x="0" y="2" z="0" />
+                <scale x="1" y="1" z="1" />
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="cylinder_body_front" />
+            </children>
+        </component>
+
+        <component id="body_spoiler">
+            <transformation>
+                <translate x="5" y="1.4" z="0" />
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <componentref id="spoiler_top" />
+                <componentref id="spoiler_support1" />
+                <componentref id="spoiler_support2" />
+            </children>
+        </component>
+
+        <component id="spoiler_top">
+            <transformation>
+                <rotate axis="z" angle="7" />
+                <scale x="1" y="0.15" z="4" />
             </transformation>
             <materials>
                 <material id="demoMaterial" />
@@ -336,6 +434,32 @@
                 <componentref id="cube" />
             </children>
         </component>
+
+        <component id="spoiler_support1">
+            <transformation>
+                
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="cylinder" />
+            </children>
+        </component>
+
+        <component id="spoiler_support2">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="cylinder" />
+            </children>
+        </component>
+
 
         <!-- Power Up -->
         <component id="power_up">

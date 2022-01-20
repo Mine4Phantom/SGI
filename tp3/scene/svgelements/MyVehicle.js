@@ -84,8 +84,8 @@ export class MyVehicle extends CGFobject {
     this.z += this.speed * Math.sin(this.direction);
 
     // change camera according to car movement 
-    this.scene.camera.position[0] = this.x + (100 * Math.cos(this.direction));
-    this.scene.camera.position[2] = this.z - (100 * Math.sin(this.direction));
+    this.scene.camera.position[0] = this.x + (70 * Math.cos(this.direction));
+    this.scene.camera.position[2] = this.z - (70 * Math.sin(this.direction));
     this.scene.camera.target[0] = this.x;
     this.scene.camera.target[2] = this.z;
 

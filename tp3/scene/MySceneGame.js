@@ -277,9 +277,20 @@ export class MySceneGame extends CGFscene {
             }
         }
 
-        if (this.pause == true || this.escape == true || this.timeIsUp == true)
+        if (this.pause == true || this.escape == true)
             return
 
+        if (this.gui.isKeyPressed("KeyR")) {
+            this.vehicle.reset();
+            this.timer = this.maxTimer
+            if(this.timeIsUp)
+                this.timeIsUp = false;
+            this.powerUpActive = false
+        }
+
+        if(this.timeIsUp)
+            return;
+            
         if (this.gui.isKeyPressed("KeyM")) {
             if (this.lastUpdate - this.lastMPress > 200) {
                 this.lastMPress = t;
@@ -302,12 +313,6 @@ export class MySceneGame extends CGFscene {
 
         if (this.gui.isKeyPressed("KeyD")) {
             this.vehicle.turnWheels(-0.3);
-        }
-
-        if (this.gui.isKeyPressed("KeyR")) {
-            this.vehicle.reset();
-            this.timer = this.maxTimer
-            this.powerUpActive = false
         }
     }
 

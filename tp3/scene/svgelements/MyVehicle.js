@@ -79,9 +79,6 @@ export class MyVehicle extends CGFobject {
     if (this.scene.map.in_track([this.x, this.z])) { }
     else { }
 
-    var oldX = this.x;
-    var oldZ = this.z;
-
     // Car position
     this.x -= this.speed * Math.cos(this.direction);
     this.z += this.speed * Math.sin(this.direction);

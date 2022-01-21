@@ -1,11 +1,11 @@
-import { CGFappearance, CGFtexture } from "../lib/CGF.js";
+import { CGFappearance, CGFtexture } from "../../lib/CGF.js";
 import { MyPlane } from "../primitives/nurbs/MyPlane.js";
 import { SimpleImage } from "./SimpleImage.js";
 
 export class MyMap {
 
     /**
-     * Constructor for map
+     * Constructor for images
      * @param {scene} scene 
      * @param {path to trackMap image} trackMapPath 
      * @param {path to terrain texture image} terrainTexturePath 

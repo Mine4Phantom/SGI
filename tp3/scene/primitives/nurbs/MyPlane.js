@@ -1,4 +1,4 @@
-import { CGFnurbsObject, CGFnurbsSurface, CGFobject } from "../../lib/CGF.js";
+import { CGFnurbsObject, CGFnurbsSurface, CGFobject } from "../../../lib/CGF.js";
 
 /**
  * MyPlane is a class that represents a plane through NURBS. It is equivalent to a Patch with U and V degree of 1

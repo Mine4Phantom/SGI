@@ -1,7 +1,7 @@
-import { CGFscene, CGFcamera, CGFappearance, CGFaxis, CGFtexture, CGFshader } from "../lib/CGF.js";
+import { CGFscene, CGFcamera, CGFappearance, CGFaxis, CGFtexture, CGFshader } from "../../lib/CGF.js";
 import { MyQuad } from '../primitives/MyQuad.js';
-import { changeSceneByName } from './main.js';
-import { setGameSettings } from './main.js';
+import { changeSceneByName } from '../main.js';
+import { setGameSettings } from '../main.js';
 
 export class MySceneMenu extends CGFscene
 {
@@ -46,7 +46,7 @@ export class MySceneMenu extends CGFscene
 
 		// font texture: 16 x 16 characters
 		// http://jens.ayton.se/oolite/files/font-tests/rgba/oolite-font.png
-		this.fontTexture = new CGFtexture(this, "../textures/oolite-font.trans.png");
+		this.fontTexture = new CGFtexture(this, "../font_textures/oolite-font.trans.png");
 		this.appearance.setTexture(this.fontTexture);
 
 		// plane where texture character will be rendered

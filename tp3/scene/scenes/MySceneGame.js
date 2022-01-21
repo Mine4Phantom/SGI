@@ -1,9 +1,9 @@
-import { CGFscene } from '../lib/CGF.js';
-import { CGFaxis, CGFcamera, CGFcameraOrtho, CGFappearance, CGFshader, CGFtexture } from '../lib/CGF.js';
+import { CGFscene } from '../../lib/CGF.js';
+import { CGFaxis, CGFcamera, CGFcameraOrtho, CGFappearance, CGFshader, CGFtexture } from '../../lib/CGF.js';
 import { MyQuad } from '../primitives/MyQuad.js';
-import { MyMap } from './MyMap.js';
-import { changeSceneByName } from './main.js';
-import { hasWon } from './main.js';
+import { MyMap } from '../tracks/MyMap.js';
+import { changeSceneByName } from '../main.js';
+import { hasWon } from '../main.js';
 
 
 var DEGREE_TO_RAD = Math.PI / 180;
@@ -119,7 +119,7 @@ export class MySceneGame extends CGFscene {
 
         // font texture: 16 x 16 characters
         // http://jens.ayton.se/oolite/files/font-tests/rgba/oolite-font.png
-        this.fontTexture = new CGFtexture(this, "../textures/oolite-font.trans.png");
+        this.fontTexture = new CGFtexture(this, "../font_textures/oolite-font.trans.png");
         this.textAppearance.setTexture(this.fontTexture);
 
         // plane where texture character will be rendered
@@ -508,12 +508,12 @@ export class MySceneGame extends CGFscene {
         this.track = track
 
         if (this.track == 1) {
-            var trackMapPath = "./SimpleMapTexture.png";
-            var terrainTexturePath = "./MapTexture.png";
+            var trackMapPath = "./tracks/textures/SimpleMapTexture.png";
+            var terrainTexturePath = "./tracks/textures/MapTexture.png";
             this.map = new MyMap(this, trackMapPath, terrainTexturePath);
         } else if (this.track == 2) {
-            var trackMapPath = "./ComplexSimpleMapTex.png";
-            var terrainTexturePath = "./ComplexMapTex.png";
+            var trackMapPath = "./tracks/textures/ComplexSimpleMapTex.png";
+            var terrainTexturePath = "./tracks/textures/ComplexMapTex.png";
             this.map = new MyMap(this, trackMapPath, terrainTexturePath);
         }
 

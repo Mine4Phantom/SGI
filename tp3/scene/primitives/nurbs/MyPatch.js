@@ -1,4 +1,4 @@
-import { CGFnurbsObject, CGFnurbsSurface, CGFobject } from "../../lib/CGF.js";
+import { CGFnurbsObject, CGFnurbsSurface, CGFobject } from "../../../lib/CGF.js";
 
 /**
  * MyPatch represents a NURBS surface that is constructed from a given set of control points.

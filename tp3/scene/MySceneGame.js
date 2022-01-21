@@ -476,6 +476,16 @@ export class MySceneGame extends CGFscene {
         this.difficulty = difficulty
         this.track = track
 
+        if(this.track == 1){
+            var trackMapPath = "./SimpleMapTex.png";
+            var terrainTexturePath = "./MapTexture.png";
+            this.map = new MyMap(this, trackMapPath, terrainTexturePath);
+        } else if(this.track == 2) {
+            var trackMapPath = "./ComplexSimpleMapTex.png";
+            var terrainTexturePath = "./ComplexMapTex.png";
+            this.map = new MyMap(this, trackMapPath, terrainTexturePath);
+        }
+
         if (this.difficulty == 1) {
             this.maxTimer = 75
             this.powerUpMaxTimer = 15

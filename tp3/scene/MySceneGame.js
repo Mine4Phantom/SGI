@@ -19,10 +19,11 @@ export class MySceneGame extends CGFscene {
         super();
 
         this.interface = myinterface;
-        this.changeSceneName = null
-        this.difficulty = null
-        this.track = null
-        this.demo = demo
+        this.changeSceneName = null;
+        this.difficulty = null;
+        this.track = null;
+        this.defaultView = null;
+        this.demo = demo;
     }
 
     /**
@@ -212,7 +213,8 @@ export class MySceneGame extends CGFscene {
     onGraphLoaded() {
         this.axis = new CGFaxis(this, this.graph.referenceLength);
 
-        this.camera = this.graph.cameras[this.graph.defaultView];
+        this.defaultView = this.demo ? 'Fixed Car View' : this.graph.defaultView;
+        this.camera = this.graph.cameras[this.defaultView];
         this.interface.setActiveCamera(this.camera);
 
         this.gl.clearColor(this.graph.background[0], this.graph.background[1], this.graph.background[2], this.graph.background[3]);
@@ -309,7 +311,6 @@ export class MySceneGame extends CGFscene {
     }
 
     selectView(viewId) {
-        console.log(viewId);
         this.camera = this.graph.cameras[viewId];
         this.interface.setActiveCamera(this.camera);
     }
@@ -540,7 +541,10 @@ export class MySceneGame extends CGFscene {
         // 	Reset transf. matrix to draw independent of camera
         this.loadIdentity();
         // transform as needed to place on screen
-        this.translate(-28, -15, -40);
+        if(this.camera == this.graph.cameras['First Person'])
+            this.translate(-28, 3.5, -40);
+        else
+            this.translate(-28, -15, -40);
         this.writeOnScreen(this.roundTo(this.vehicle.speed * 16, 0) + "KM/H", customId, false)
         this.popMatrix();
 

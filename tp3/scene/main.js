@@ -79,8 +79,8 @@ function main() {
     var myInterfaceMenu = new MyInterface();
     var myInterfaceDemo = new MyInterface();
     var mySceneMenu = new MySceneMenu(myInterfaceMenu);
-    var mySceneGame = new MySceneGame(myInterfaceGame);
-    var mySceneDemo = new MySceneGame(myInterfaceDemo);
+    var mySceneGame = new MySceneGame(myInterfaceGame, false);
+    var mySceneDemo = new MySceneGame(myInterfaceDemo, true);
 
     menu = {
         'scene': mySceneMenu, 'interface': myInterfaceMenu, 'app': app

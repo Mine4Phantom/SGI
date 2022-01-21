@@ -309,6 +309,7 @@ export class MySceneGame extends CGFscene {
     }
 
     selectView(viewId) {
+        console.log(viewId);
         this.camera = this.graph.cameras[viewId];
         this.interface.setActiveCamera(this.camera);
     }

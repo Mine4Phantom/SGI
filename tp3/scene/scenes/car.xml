@@ -79,6 +79,7 @@
         <texture id="wheelsTexture" file="wheels.jpg" />
         <texture id="checkeredTexture" file="checkered.jpg" />
         <texture id="itemTexture" file="item.jpg" />
+        <texture id="f1BodyFront" file="f1texture.jpg" />
         <texture id="racingCarTexture" file="metal.jpg" />
         <texture id="racingCarWingTexture" file="textmetal.jpg" />
     </textures>
@@ -208,62 +209,7 @@
         <primitive id="plane">
             <plane npartsU="50" npartsV="50" />
         </primitive>
-        <primitive id="vase">
-            <patch npointsU="4" npointsV="7" npartsU="50" npartsV="50">
-
-                <controlpoint xx="0.2" yy="1.0" zz="0" />
-                <controlpoint xx="0.3" yy="0.7" zz="0" />
-                <controlpoint xx="0.3" yy="0.45" zz="0" />
-                <controlpoint xx="0.3" yy="0.15" zz="0" />
-                <controlpoint xx="0.3" yy="-0.15" zz="0" />
-                <controlpoint xx="0.3" yy="-0.550" zz="0" />
-                <controlpoint xx="0.3" yy="-0.9" zz="0" />
-
-                <controlpoint xx="0.2" yy="1.0" zz="0.25" />
-                <controlpoint xx="0.2" yy="0.6" zz="0.35" />
-                <controlpoint xx="0.2" yy="0.25" zz="0.5" />
-                <controlpoint xx="0.2" yy="0.0" zz="1.15" />
-                <controlpoint xx="0.2" yy="-0.2" zz="0.5" />
-                <controlpoint xx="0.2" yy="-0.6" zz="-0.4" />
-                <controlpoint xx="0.3" yy="-0.9" zz="0.6" />
-
-                <controlpoint xx="-0.2" yy="1.0" zz="0.25" />
-                <controlpoint xx="-0.2" yy="0.6" zz="0.35" />
-                <controlpoint xx="-0.2" yy="0.25" zz="0.5" />
-                <controlpoint xx="-0.2" yy="0" zz="1.14" />
-                <controlpoint xx="-0.2" yy="-0.2" zz="0.5" />
-                <controlpoint xx="-0.2" yy="-0.6" zz="-0.4" />
-                <controlpoint xx="-0.3" yy="-0.9" zz="0.6" />
-
-                <controlpoint xx="-0.2" yy="1" zz="0" />
-                <controlpoint xx="-0.3" yy="0.7" zz="0" />
-                <controlpoint xx="-0.3" yy="0.45" zz="0" />
-                <controlpoint xx="-0.3" yy="0.15" zz="0" />
-                <controlpoint xx="-0.3" yy="-0.15" zz="0" />
-                <controlpoint xx="-0.3" yy="-0.550" zz="0" />
-                <controlpoint xx="-0.3" yy="-0.9" zz="0" />
-
-            </patch>
-        </primitive>
-        <primitive id="couch_side_curve">
-            <patch npointsU="2" npointsV="6" npartsU="50" npartsV="50">
-
-                <controlpoint xx="-9" yy="-4" zz="0" />
-                <controlpoint xx="-10" yy="10" zz="0" />
-                <controlpoint xx="-1.5" yy="8" zz="0" />
-                <controlpoint xx="5" yy="1" zz="0" />
-                <controlpoint xx="-7" yy="7.5" zz="0" />
-                <controlpoint xx="-4" yy="-4" zz="0" />
-
-                <controlpoint xx="-9" yy="-4" zz="4" />
-                <controlpoint xx="-10" yy="10" zz="4" />
-                <controlpoint xx="-1.5" yy="8" zz="4" />
-                <controlpoint xx="5" yy="1" zz="4" />
-                <controlpoint xx="-7" yy="7.5" zz="4" />
-                <controlpoint xx="-4" yy="-4" zz="4" />
-
-            </patch>
-        </primitive>
+     
     </primitives>
 
     <components>

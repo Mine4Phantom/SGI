@@ -369,7 +369,7 @@ export class MySceneGame extends CGFscene {
         if (this.pause == true || this.escape == true)
             return
 
-        if (this.gui.isKeyPressed("KeyR") && !this.demo) {
+        if (this.gui.isKeyPressed("KeyR")) {
             this.vehicle.reset();
             this.powerUps = [...this.powerUpsStart];
             this.obstacles = [...this.obstaclesStart];
@@ -533,6 +533,15 @@ export class MySceneGame extends CGFscene {
         this.textAppearance.apply()
 
         var customId = 1
+
+        this.pushMatrix();
+        // 	Reset transf. matrix to draw independent of camera
+        this.loadIdentity();
+        // transform as needed to place on screen
+        this.translate(-28, 13, -40);
+        this.writeOnScreen("Lap:" + this.lap + "/" + this.maxLap, customId, false)
+        this.popMatrix();
+
         if (!this.demo) {
             this.pushMatrix();
             // 	Reset transf. matrix to draw independent of camera
@@ -559,14 +568,6 @@ export class MySceneGame extends CGFscene {
             // transform as needed to place on screen
             this.translate(-28, 15, -40);
             this.writeOnScreen("Time Left:" + this.timer + "s", customId, false)
-            this.popMatrix();
-
-            this.pushMatrix();
-            // 	Reset transf. matrix to draw independent of camera
-            this.loadIdentity();
-            // transform as needed to place on screen
-            this.translate(-28, 13, -40);
-            this.writeOnScreen("Lap:" + this.lap + "/" + this.maxLap, customId, false)
             this.popMatrix();
 
             if (this.powerUpActive) {

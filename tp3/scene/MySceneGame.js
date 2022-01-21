@@ -243,6 +243,7 @@ export class MySceneGame extends CGFscene {
 
         if (this.isLapDone()){
             this.lap += 1
+            this.timer+=10
             this.onLine = true
             if(this.lap >= this.maxLap)
                 this.hasWon = true
@@ -487,15 +488,24 @@ export class MySceneGame extends CGFscene {
         }
 
         if (this.difficulty == 1) {
-            this.maxTimer = 75
+            if(this.track == 2)
+                this.maxTimer = 400
+            else
+                this.maxTimer = 90
             this.powerUpMaxTimer = 15
         }
         else if (this.difficulty == 2) {
-            this.maxTimer = 60
+            if(this.track == 2)
+                this.maxTimer = 250
+            else
+                this.maxTimer = 70
             this.powerUpMaxTimer = 10
         }
         else if (this.difficulty == 3) {
-            this.maxTimer = 45
+            if(this.track == 2)
+                this.maxTimer = 160
+            else
+                this.maxTimer = 45
             this.powerUpMaxTimer = 5
             this.map.darkMode()
         }

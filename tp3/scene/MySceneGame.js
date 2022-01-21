@@ -706,6 +706,7 @@ export class MySceneGame extends CGFscene {
             //this.graph.displayScene();
             this.map.display();
             this.vehicle.display();
+            this.startLine.display()
 
             // Display HUD
             this.displayHUD()

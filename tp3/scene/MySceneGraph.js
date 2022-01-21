@@ -1441,6 +1441,5 @@ export class MySceneGraph {
         
         this.components[this.idRoot].display();
         this.vehicle.display();
-        this.startLine.display()
     }
 }

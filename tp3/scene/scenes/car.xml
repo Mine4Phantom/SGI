@@ -380,19 +380,35 @@
             </materials>
             <texture id="none"/>
             <children>
-<!--                 <componentref id="body_front" />
+                 <componentref id="body_front" />
                 <componentref id="body_back" />
-                <!-<componentref id="body_left" />
-                <componentref id="body_right" />->
+                <!--<componentref id="body_left" />
+                <componentref id="body_right" />-->
                 <componentref id="body_spoiler" />
-                <componentref id="body_suspension" /> -->
-                <componentref id="body_front_bumper" />
+                <componentref id="body_suspension" />
+                <!--<componentref id="body_front_bumper" />-->
+                <componentref id="body_front_bumper_round" />
             </children>
         </component>
 
+        <component id="body_front_bumper_round">
+            <transformation>
+                <translate x="-5.49" y="-0.2" z="0" />
+                <scale x="0.4" y="0.721" z="0.721" />
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="sphere" />
+            </children>
+        </component>
+
+
         <component id="body_front_bumper">
             <transformation>
-                <translate x="-5" y="-0.2" z="0" />
+                <translate x="-5" y="-0.8" z="0" />
             </transformation>
             <materials>
                 <material id="demoMaterial" />
@@ -437,7 +453,7 @@
 
         <component id="side_wing_front">
             <transformation>
-                <scale x="1" y="0.2" z="6" />
+                <scale x="1" y="0.2" z="7" />
             </transformation>
             <materials>
                 <material id="inherit" />
@@ -450,8 +466,8 @@
 
         <component id="side_wing_left">
             <transformation>
-                <translate x="-1" y="0" z="3" />
-                <scale x="2" y="0.7" z="0.1" />
+                <translate x="-0.07" y="0.25" z="3.48" />
+                <scale x="1.1" y="0.7" z="0.1" />
             </transformation>
             <materials>
                 <material id="inherit" />
@@ -462,9 +478,10 @@
             </children>
         </component>
 
-        <component id="side_wing_right2">
+        <component id="side_wing_right">
             <transformation>
-                <scale x="1" y="0.2" z="6" />
+                <translate x="-0.07" y="0.25" z="-3.48" />
+                <scale x="1.1" y="0.7" z="0.1" />
             </transformation>
             <materials>
                 <material id="inherit" />
@@ -474,6 +491,48 @@
                 <componentref id="cube" />
             </children>
         </component>
+
+        <component id="triangle_paralelipedo">
+            <transformation>
+                <translate x="1" y="5" z="1" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <componentref id="triangle_paralelipedo_faceUp" />
+                <componentref id="triangle_paralelipedo_faceDown" />
+            </children>
+        </component>
+
+        <component id="triangle_paralelipedo_faceUp">
+            <transformation>
+                <scale x="5" y="5" z="5" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="triangle" />
+            </children>
+        </component>
+
+        <component id="triangle_paralelipedo_faceDown">
+            <transformation>
+                <scale x="5" y="5" z="5" />
+                <rotate axis="y" angle="180"/>
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="triangle" />
+            </children>
+        </component>
+
 
         <component id="body_front">
             <transformation>

@@ -44,7 +44,7 @@ export class MyVehicle extends CGFobject {
 
     this.scene.lights[7].setVisible(false);
     this.scene.lights[7].enable();
-  
+
 
     this.scene.lights[7].update();
 
@@ -78,7 +78,7 @@ export class MyVehicle extends CGFobject {
     this.initNormalVizBuffers();
   }
 
-  initRoutes(){
+  initRoutes() {
     this.routes = this.scene.routes[0].route_vertexes
   }
 
@@ -88,36 +88,36 @@ export class MyVehicle extends CGFobject {
     var directionVector
 
     //update the key every 5 seconds
-    if (this.scene.ticks != null && this.scene.ticks % 10 == 0){
+    if (this.scene.ticks != null && this.scene.ticks % 10 == 0) {
       this.key = (this.key + 1) % (this.routes.length)
     }
-    
+
     // update direction based on vector
-    if (this.key == this.routes.length-1){
+    if (this.key == this.routes.length - 1) {
 
       directionVector = this.subtractVector(this.routes[this.key], this.routes[0])
       this.direction = -Math.atan2(directionVector[1], directionVector[0])
 
-    } else if (this.routes[0] != null){
-      directionVector = this.subtractVector(this.routes[this.key], this.routes[this.key+1])
+    } else if (this.routes[0] != null) {
+      directionVector = this.subtractVector(this.routes[this.key], this.routes[this.key + 1])
       this.direction = -Math.atan2(directionVector[1], directionVector[0])
     }
 
     // update speed based on vector length
-    if (this.key == this.routes.length - 1){
-      this.speed = this.vectorDistance(this.routes[this.key], this.routes[0])/10
+    if (this.key == this.routes.length - 1) {
+      this.speed = this.vectorDistance(this.routes[this.key], this.routes[0]) / 10
       this.wheels.speed = this.speed
-    }else {
-      this.speed = this.vectorDistance(this.routes[this.key], this.routes[this.key+1])/10
+    } else {
+      this.speed = this.vectorDistance(this.routes[this.key], this.routes[this.key + 1]) / 10
       this.wheels.speed = this.speed
     }
 
-    
+
     // Wheels position and rotation
     this.wheels.x -= this.speed * Math.cos(this.direction);
     this.wheels.z += this.speed * Math.sin(this.direction);
     this.wheels.update(t);
-    
+
 
     // Car position
     var new_x = this.x - this.speed * Math.cos(this.direction);
@@ -128,6 +128,7 @@ export class MyVehicle extends CGFobject {
       this.z = new_z;
 
     // change camera according to car movement 
+
     this.scene.camera.position[0] = this.x + (70 * Math.cos(this.direction));
     this.scene.camera.position[2] = this.z - (70 * Math.sin(this.direction));
     this.scene.camera.target[0] = this.x;
@@ -135,12 +136,12 @@ export class MyVehicle extends CGFobject {
 
   }
 
-  subtractVector(vector1, vector2){
-    return [vector1[0]-vector2[0],vector1[1]-vector2[1]]
+  subtractVector(vector1, vector2) {
+    return [vector1[0] - vector2[0], vector1[1] - vector2[1]]
   }
 
-  vectorDistance(vector1, vector2){
-    return Math.sqrt((vector2[0]-vector1[0])**2 + (vector2[1]-vector1[1])**2)
+  vectorDistance(vector1, vector2) {
+    return Math.sqrt((vector2[0] - vector1[0]) ** 2 + (vector2[1] - vector1[1]) ** 2)
   }
 
   update(t) {
@@ -156,10 +157,18 @@ export class MyVehicle extends CGFobject {
       this.z = new_z;
 
     // change camera according to car movement 
-    this.scene.camera.position[0] = this.x + (70 * Math.cos(this.direction));
-    this.scene.camera.position[2] = this.z - (70 * Math.sin(this.direction));
-    this.scene.camera.target[0] = this.x;
-    this.scene.camera.target[2] = this.z;
+    if (this.scene.graph.cameras['Third Person'] == this.scene.camera) {
+      this.scene.camera.position[0] = this.x + (70 * Math.cos(this.direction));
+      this.scene.camera.position[2] = this.z - (70 * Math.sin(this.direction));
+      this.scene.camera.target[0] = this.x;
+      this.scene.camera.target[2] = this.z;
+    }
+    else if (this.scene.graph.cameras['First Person'] == this.scene.camera) {
+      this.scene.camera.position[0] = this.x;
+      this.scene.camera.position[2] = this.z
+      this.scene.camera.target[0] = this.x - (25 * Math.cos(this.direction));
+      this.scene.camera.target[2] = this.z + (25 * Math.sin(this.direction));
+    }
 
     // Wheels position
     this.wheels.x -= this.speed * Math.cos(this.direction);
@@ -195,8 +204,8 @@ export class MyVehicle extends CGFobject {
       this.wheels.direction += val * ((-1 / 10) * (this.speed - 2) ** 2 + 2);
     }
     else if (this.speed >= 5.4) { // turns constantly to make speed up playable
-      this.direction += val*0.8;
-      this.wheels.direction += val*0.8;
+      this.direction += val * 0.8;
+      this.wheels.direction += val * 0.8;
     }
   }
 

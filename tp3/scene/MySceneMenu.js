@@ -275,6 +275,15 @@ export class MySceneMenu extends CGFscene
 				this.loadIdentity();
 				this.translate(-9,-7,-60);
 				this.writeOnScreen("3 Difficulty", customId)
+				this.pushMatrix()
+				this.translate(-8.7,-2,-5);
+				if(this.difficultyOption == 1)
+					this.writeOnScreen("Easy", customId)
+				else if(this.difficultyOption == 2)
+					this.writeOnScreen("Medium", customId)
+				else if(this.difficultyOption == 3)
+					this.writeOnScreen("Hard", customId)
+				this.popMatrix()
 				if(this.menuKey == 3){
 					this.translate(-11,0,0);
 					this.writeOnScreen("*", customId)
@@ -286,6 +295,13 @@ export class MySceneMenu extends CGFscene
 				this.loadIdentity();
 				this.translate(5,-7,-60);
 				this.writeOnScreen("4 Track", customId)
+				this.pushMatrix()
+				this.translate(-5,-2,-5);
+				if(this.trackOption == 1)
+					this.writeOnScreen("Simple", customId)
+				else if(this.trackOption == 2)
+					this.writeOnScreen("Complex", customId)
+				this.popMatrix()
 				if(this.menuKey == 4){
 					this.translate(-6,0,0);
 					this.writeOnScreen("*", customId)

@@ -80,7 +80,7 @@ export class MySceneGame extends CGFscene {
         this.escape = false
         this.pause = false
         this.menuOption = 0
-        
+
         // POWER UPS
         this.powerUps = [];
         // Power up types 
@@ -528,98 +528,98 @@ export class MySceneGame extends CGFscene {
         this.textAppearance.apply()
 
         var customId = 1
-
-        this.pushMatrix();
-        // 	Reset transf. matrix to draw independent of camera
-        this.loadIdentity();
-        // transform as needed to place on screen
-        this.translate(-5.4, 15.5, -40);
-        this.writeOnScreen("Rocket Kart", customId, false)
-        this.popMatrix();
-
-        this.pushMatrix();
-        // 	Reset transf. matrix to draw independent of camera
-        this.loadIdentity();
-        // transform as needed to place on screen
-        if(this.camera == this.graph.cameras['First Person'])
-            this.translate(-28, 3.5, -40);
-        else
-            this.translate(-28, -15, -40);
-        this.writeOnScreen(this.roundTo(this.vehicle.speed * 16, 0) + "KM/H", customId, false)
-        this.popMatrix();
-
-        this.pushMatrix();
-        // 	Reset transf. matrix to draw independent of camera
-        this.loadIdentity();
-        // transform as needed to place on screen
-        this.translate(-28, 15, -40);
-        this.writeOnScreen("Time Left:" + this.timer + "s", customId, false)
-        this.popMatrix();
-
-        this.pushMatrix();
-        // 	Reset transf. matrix to draw independent of camera
-        this.loadIdentity();
-        // transform as needed to place on screen
-        this.translate(-28, 13, -40);
-        this.writeOnScreen("Lap:" + this.lap + "/" + this.maxLap, customId, false)
-        this.popMatrix();
-
-        if (this.powerUpActive) {
+        if (!this.demo) {
             this.pushMatrix();
             // 	Reset transf. matrix to draw independent of camera
             this.loadIdentity();
             // transform as needed to place on screen
-            this.translate(15, 15, -40);
-            this.writeOnScreen("SPEED UP:" + this.powerUpTimer + "s", customId, false)
+            this.translate(-5.4, 15.5, -40);
+            this.writeOnScreen("Rocket Kart", customId, false)
             this.popMatrix();
-        }
 
-        if (this.obstacleActive) {
-            this.pushMatrix();
-            this.loadIdentity();
-            if (this.powerUpActive) this.translate(11, 13, -40);
-            else this.translate(11, 15, -40);
-            this.writeOnScreen("A/D INVERTED:" + this.obstacleTimer + "s", customId, false);
-            this.popMatrix();
-        }
-
-        if (this.timePenalty) {
-            this.pushMatrix();
-            this.loadIdentity();
-            this.translate(-28, 11, -40);
-            this.writeOnScreen("Time Penalty", customId, false);
-            this.popMatrix();
-        }
-
-        if (this.timeBonus) {
-            this.pushMatrix();
-            this.loadIdentity();
-            this.translate(-28, 11, -40);
-            this.writeOnScreen("Time Bonus", customId, false);
-            this.popMatrix();
-        }
-
-
-        if (this.timeIsUp) {
             this.pushMatrix();
             // 	Reset transf. matrix to draw independent of camera
             this.loadIdentity();
             // transform as needed to place on screen
-            this.translate(-4, -3, -20);
-            this.writeOnScreen("Time is UP", customId, false)
+            if (this.camera == this.graph.cameras['First Person'])
+                this.translate(-28, 3.5, -40);
+            else
+                this.translate(-28, -15, -40);
+            this.writeOnScreen(this.roundTo(this.vehicle.speed * 16, 0) + "KM/H", customId, false)
             this.popMatrix();
-            if (this.escape == false && this.pause == false) {
+
+            this.pushMatrix();
+            // 	Reset transf. matrix to draw independent of camera
+            this.loadIdentity();
+            // transform as needed to place on screen
+            this.translate(-28, 15, -40);
+            this.writeOnScreen("Time Left:" + this.timer + "s", customId, false)
+            this.popMatrix();
+
+            this.pushMatrix();
+            // 	Reset transf. matrix to draw independent of camera
+            this.loadIdentity();
+            // transform as needed to place on screen
+            this.translate(-28, 13, -40);
+            this.writeOnScreen("Lap:" + this.lap + "/" + this.maxLap, customId, false)
+            this.popMatrix();
+
+            if (this.powerUpActive) {
                 this.pushMatrix();
                 // 	Reset transf. matrix to draw independent of camera
                 this.loadIdentity();
                 // transform as needed to place on screen
-                this.translate(-9, -5, -20);
-                this.writeOnScreen("Press R to restart", customId, false)
+                this.translate(15, 15, -40);
+                this.writeOnScreen("SPEED UP:" + this.powerUpTimer + "s", customId, false)
                 this.popMatrix();
             }
 
-        }
+            if (this.obstacleActive) {
+                this.pushMatrix();
+                this.loadIdentity();
+                if (this.powerUpActive) this.translate(11, 13, -40);
+                else this.translate(11, 15, -40);
+                this.writeOnScreen("A/D INVERTED:" + this.obstacleTimer + "s", customId, false);
+                this.popMatrix();
+            }
 
+            if (this.timePenalty) {
+                this.pushMatrix();
+                this.loadIdentity();
+                this.translate(-28, 11, -40);
+                this.writeOnScreen("Time Penalty", customId, false);
+                this.popMatrix();
+            }
+
+            if (this.timeBonus) {
+                this.pushMatrix();
+                this.loadIdentity();
+                this.translate(-28, 11, -40);
+                this.writeOnScreen("Time Bonus", customId, false);
+                this.popMatrix();
+            }
+
+
+            if (this.timeIsUp) {
+                this.pushMatrix();
+                // 	Reset transf. matrix to draw independent of camera
+                this.loadIdentity();
+                // transform as needed to place on screen
+                this.translate(-4, -3, -20);
+                this.writeOnScreen("Time is UP", customId, false)
+                this.popMatrix();
+                if (this.escape == false && this.pause == false) {
+                    this.pushMatrix();
+                    // 	Reset transf. matrix to draw independent of camera
+                    this.loadIdentity();
+                    // transform as needed to place on screen
+                    this.translate(-9, -5, -20);
+                    this.writeOnScreen("Press R to restart", customId, false)
+                    this.popMatrix();
+                }
+
+            }
+        }
         if (this.hasWon) {
             this.pushMatrix();
             // 	Reset transf. matrix to draw independent of camera
@@ -803,14 +803,16 @@ export class MySceneGame extends CGFscene {
             this.vehicle.display();
             this.startLine.display()
 
-            // Display HUD
-            this.displayHUD()
+            // Display HUD (Some elements stay out for the demo)
+            this.displayHUD();
 
-            // Display Power Ups
-            this.displayPowerUps();
+            if (!this.demo) {
+                // Display Power Ups
+                this.displayPowerUps();
 
-            // Display Obstacles
-            this.displayObstacles();
+                // Display Obstacles
+                this.displayObstacles();
+            }
         }
 
         this.popMatrix();

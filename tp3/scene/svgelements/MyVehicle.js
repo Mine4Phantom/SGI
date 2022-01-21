@@ -181,6 +181,11 @@ export class MyVehicle extends CGFobject {
     return Math.abs(this.x - object.center_x) < 8 && Math.abs(this.z - object.center_z) < 8;
   }
 
+  // For the start line
+  inBigRange(object) {
+    return Math.abs(this.x - object.center_x) < 8 && Math.abs(this.z - object.center_z) < 20;
+  }
+
   display() {
 
     this.scene.pushMatrix();

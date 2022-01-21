@@ -100,6 +100,7 @@ export class MySceneGame extends CGFscene {
         this.startLine = null;
         this.maxLap = 3
         this.lap = 0
+        this.onLine = true // on contact with the start line
 
         // WIN
         this.hasWon = false
@@ -236,8 +237,8 @@ export class MySceneGame extends CGFscene {
         if(this.vehicle == null)
             return
 
-        if (this.vehicle.inRange(this.startLine)){
-            //this.lap += 1
+        if (this.isLapDone()){
+            this.lap += 1
             if(this.lap > this.maxLap)
                 this.hasWon = true
         }
@@ -288,6 +289,27 @@ export class MySceneGame extends CGFscene {
         this.interface.setActiveCamera(this.camera);
     }
 
+    isLapDone(){
+        console.log("OnLine ",this.onLine)
+        console.log("Range ",this.vehicle.inBigRange(this.startLine))
+        if(this.onLine){
+            if (this.vehicle.inBigRange(this.startLine)){
+                return false //vehicle has not moved from start line
+            } else {
+                this.onLine = false
+                return false
+            }
+        } else {
+            if (this.vehicle.inBigRange(this.startLine)){
+                this.onLine = false
+                return true
+            } else {
+                return false
+            }
+        }
+
+    }
+
     checkKeys(t) {
         if (this.gui.isKeyPressed("Escape")) {
             if (this.escape == false) {
@@ -327,9 +349,12 @@ export class MySceneGame extends CGFscene {
                 this.timeIsUp = false;
             this.powerUpActive = false;
             this.obstacleActive = false;
+            this.hasWon = false
+            this.onLine = true
+            this.lap = 0
         }
 
-        if (this.timeIsUp)
+        if (this.timeIsUp || this.hasWon)
             return;
 
         if (this.gui.isKeyPressed("KeyM")) {

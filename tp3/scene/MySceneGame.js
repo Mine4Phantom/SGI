@@ -15,13 +15,14 @@ export class MySceneGame extends CGFscene {
      * @constructor
      * @param {MyInterface} myinterface 
      */
-    constructor(myinterface) {
+    constructor(myinterface, demo) {
         super();
 
         this.interface = myinterface;
         this.changeSceneName = null
         this.difficulty = null
         this.track = null
+        this.demo = demo
     }
 
     /**
@@ -231,7 +232,8 @@ export class MySceneGame extends CGFscene {
     }
 
     onSVGLoaded() {
-        this.vehicle.initLights()
+        this.vehicle.initLights();
+        this.vehicle.initRoutes();
         this.powerUpsStart = [...this.powerUps];  // Keep power ups list for reset
         this.obstaclesStart = [...this.obstacles];  // Keep obstacles list for reset
         this.svgLoaded = true;
@@ -295,10 +297,16 @@ export class MySceneGame extends CGFscene {
 
         this.lastUpdate = t;
         this.checkKeys(t);
-        if (this.vehicle != null && this.escape == false && this.pause == false && this.timeIsUp == false && this.hasWon == false) {
-            this.vehicle.update(t);
+        if (this.demo){
+            if (this.vehicle != null && this.escape == false && this.pause == false && this.timeIsUp == false && this.hasWon == false) {
+                this.vehicle.updateDemo(t);
+            }
         }
-
+        else{
+            if (this.vehicle != null && this.escape == false && this.pause == false && this.timeIsUp == false && this.hasWon == false) {
+                this.vehicle.update(t);
+            }
+        }
         if (this.changeSceneName != null)
             changeSceneByName(this.changeSceneName);
         this.changeSceneName = null
@@ -358,7 +366,7 @@ export class MySceneGame extends CGFscene {
         if (this.pause == true || this.escape == true)
             return
 
-        if (this.gui.isKeyPressed("KeyR")) {
+        if (this.gui.isKeyPressed("KeyR") && !this.demo) {
             this.vehicle.reset();
             this.powerUps = [...this.powerUpsStart];
             this.obstacles = [...this.obstaclesStart];
@@ -375,30 +383,30 @@ export class MySceneGame extends CGFscene {
         if (this.timeIsUp || this.hasWon)
             return;
 
-        if (this.gui.isKeyPressed("KeyM")) {
+        if (this.gui.isKeyPressed("KeyM") && !this.demo) {
             if (this.lastUpdate - this.lastMPress > 200) {
                 this.lastMPress = t;
                 this.graph.currentMaterialIndex++;
             }
         }
-        if (this.gui.isKeyPressed("KeyW")) {
+        if (this.gui.isKeyPressed("KeyW") && !this.demo) {
             if (this.powerUpActive)
                 this.vehicle.accelerate(0.32 * this.speedFactor);
             else
                 this.vehicle.accelerate(0.25 * this.speedFactor);
 
         }
-        if (this.gui.isKeyPressed("KeyS")) {
+        if (this.gui.isKeyPressed("KeyS") && !this.demo) {
             this.vehicle.accelerate(-0.25 * this.speedFactor);
         }
-        if (this.gui.isKeyPressed("KeyA")) {
+        if (this.gui.isKeyPressed("KeyA") && !this.demo) {
             if (this.obstacleActive)
                 this.vehicle.turnWheels(-0.3);
             else
                 this.vehicle.turnWheels(0.3);
         }
 
-        if (this.gui.isKeyPressed("KeyD")) {
+        if (this.gui.isKeyPressed("KeyD") && !this.demo) {
             if (this.obstacleActive)
                 this.vehicle.turnWheels(0.3)
             else

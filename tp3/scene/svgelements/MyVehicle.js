@@ -17,9 +17,12 @@ export class MyVehicle extends CGFobject {
     this.direction = start_direction;
     this.speed = 0;
 
+    this.routes = null;
+    this.key = 0;
     this.wheels = new MyWheels(scene, this);
     this.initLights();
     this.initBuffers();
+
   }
 
 
@@ -41,7 +44,7 @@ export class MyVehicle extends CGFobject {
 
     this.scene.lights[7].setVisible(false);
     this.scene.lights[7].enable();
-
+  
 
     this.scene.lights[7].update();
 
@@ -73,6 +76,24 @@ export class MyVehicle extends CGFobject {
 
     this.initBuffers();
     this.initNormalVizBuffers();
+  }
+
+  initRoutes(){
+    this.routes = this.scene.routes[0].route_vertexes
+  }
+
+  updateDemo(t) {
+    // update direction based on vector
+    console.log([this.routes[1][0] - this.routes[0][0], this.routes[1][1] - this.routes[0][1]])
+    // update speed based on length
+    console.log(this.scene.ticks);
+
+    // change camera according to car movement 
+    this.scene.camera.position[0] = this.x + (70 * Math.cos(this.direction));
+    this.scene.camera.position[2] = this.z - (70 * Math.sin(this.direction));
+    this.scene.camera.target[0] = this.x;
+    this.scene.camera.target[2] = this.z;
+
   }
 
   update(t) {

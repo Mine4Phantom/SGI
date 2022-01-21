@@ -7,6 +7,7 @@ import { MySVGReader } from './MySVGReader.js';
 
 var menu;
 var game;
+var demo;
 var filename;
 
 function getUrlVars() {
@@ -27,19 +28,19 @@ export function changeSceneByName(sceneName) {
             break;
         case "game": //Game settings reset when scene is changed
             var myInterfaceGame = new MyInterface();
-            var mySceneGame = new MySceneGame(myInterfaceGame);
+            var mySceneGame = new MySceneGame(myInterfaceGame, false); // false for normal play
             game["scene"] = mySceneGame
             changeScene(mySceneGame, myInterfaceGame, game["app"])
             new MySceneGraph(filename, mySceneGame);
             new MySVGReader('TestTrackMap.svg', mySceneGame);
             break;
         case "demo": //To Do :Demo currently is the same as game
-            var myInterfaceGame = new MyInterface();
-            var mySceneGame = new MySceneGame(myInterfaceGame);
-            game["scene"] = mySceneGame
-            changeScene(mySceneGame, myInterfaceGame, game["app"])
-            new MySceneGraph(filename, mySceneGame);
-            new MySVGReader('TestTrackMap.svg', mySceneGame);
+            var myInterfaceDemo = new MyInterface();
+            var mySceneDemo = new MySceneGame(myInterfaceDemo, true); // true for demo
+            demo["scene"] = mySceneDemo
+            changeScene(mySceneDemo, myInterfaceDemo, demo["app"])
+            new MySceneGraph(filename, mySceneDemo);
+            new MySVGReader('TestTrackMap.svg', mySceneDemo);
             break;
         default: break;
     }
@@ -69,14 +70,19 @@ function main() {
     var app = new CGFapplication(document.body);
     var myInterfaceGame = new MyInterface();
     var myInterfaceMenu = new MyInterface();
+    var myInterfaceDemo = new MyInterface();
     var mySceneMenu = new MySceneMenu(myInterfaceMenu);
     var mySceneGame = new MySceneGame(myInterfaceGame);
+    var mySceneDemo = new MySceneGame(myInterfaceDemo);
 
     menu = {
         'scene': mySceneMenu, 'interface': myInterfaceMenu, 'app': app
     }
     game = {
         'scene': mySceneGame, 'interface': myInterfaceGame, 'app': app
+    }
+    demo = {
+        'scene': mySceneDemo, 'interface': myInterfaceDemo, 'app': app
     }
 
     // get file name provided in URL, e.g. http://localhost/myproj/?file=myfile.xml 

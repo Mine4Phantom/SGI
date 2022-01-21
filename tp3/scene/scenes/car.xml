@@ -370,21 +370,47 @@
                 <componentref id="body_right" />-->
                 <componentref id="body_spoiler" />
                 <componentref id="body_suspension" />
-                <componentref id="body_front_bumper" />
+                <!--<componentref id="body_front_bumper" />-->
             </children>
         </component>
 
         <component id="body_front_bumper">
             <transformation>
-                <translate x="-5.49" y="-0.2" z="0" />
-                <scale x="0.4" y="0.721" z="0.721" />
+                <translate x="-1.6" y="-0.2" z="0" />
             </transformation>
             <materials>
                 <material id="demoMaterial" />
             </materials>
             <texture id="none"/>
             <children>
-                <primitiveref id="sphere" />
+                <componentref id="body_front_bumper_connecting_part" />
+                <!--<componentref id="body_front_bumper_wing" />-->
+            </children>
+        </component>
+
+        <component id="body_front_bumper_connecting_part">
+            <transformation>
+                <scale x="10" y="0.2" z="1.5" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <componentref id="cube" />
+            </children>
+        </component>
+
+        <component id="body_front_bumper_wing">
+            <transformation>
+                <scale x="1" y="1" z="6" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <componentref id="cube" />
             </children>
         </component>
 

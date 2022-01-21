@@ -88,33 +88,36 @@ export class MyVehicle extends CGFobject {
     var directionVector
 
     //update the key every 5 seconds
-    if (this.scene.ticks != null && this.scene.ticks % 50 == 0){
-      this.key = this.key % this.routes.length + 1
+    if (this.scene.ticks != null && this.scene.ticks % 10 == 0){
+      this.key = (this.key + 1) % (this.routes.length)
     }
     
     // update direction based on vector
-    if (this.key == this.routes.length){
+    if (this.key == this.routes.length-1){
 
-      directionVector = this.subtractVector(this.routes[0], this.routes[this.key-1])
+      directionVector = this.subtractVector(this.routes[this.key], this.routes[0])
       this.direction = -Math.atan2(directionVector[1], directionVector[0])
 
-    }else if (this.routes[0] != null){
-
+    } else if (this.routes[0] != null){
       directionVector = this.subtractVector(this.routes[this.key], this.routes[this.key+1])
       this.direction = -Math.atan2(directionVector[1], directionVector[0])
     }
 
     // update speed based on vector length
-    if (this.key == this.routes.length){
-      this.speed = this.vectorDistance(this.routes[this.key-1], this.routes[0])/50
+    if (this.key == this.routes.length - 1){
+      this.speed = this.vectorDistance(this.routes[this.key], this.routes[0])/10
+      this.wheels.speed = this.speed
     }else {
-      this.speed = this.vectorDistance(this.routes[this.key], this.routes[this.key+1])/50
+      this.speed = this.vectorDistance(this.routes[this.key], this.routes[this.key+1])/10
+      this.wheels.speed = this.speed
     }
 
-
-    // Wheels position
+    
+    // Wheels position and rotation
     this.wheels.x -= this.speed * Math.cos(this.direction);
     this.wheels.z += this.speed * Math.sin(this.direction);
+    this.wheels.update(t);
+    
 
     // Car position
     var new_x = this.x - this.speed * Math.cos(this.direction);

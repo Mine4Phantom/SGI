@@ -52,17 +52,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.93128817"
-     inkscape:cx="-25.233865"
-     inkscape:cy="236.76882"
+     inkscape:zoom="1.8625763"
+     inkscape:cx="150.06096"
+     inkscape:cy="109.25727"
      inkscape:document-units="px"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer5"
      inkscape:document-rotation="0"
      showgrid="false"
      units="px"
      inkscape:window-width="1920"
      inkscape:window-height="1017"
-     inkscape:window-x="1912"
+     inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
      showguides="false"
@@ -89,16 +89,17 @@
      style="display:inline"
      sodipodi:insensitive="true">
     <path
-       style="fill:none;stroke:#000000;stroke-width:30.634;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="display:inline;fill:none;stroke:#000000;stroke-width:30.634;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="M 43.543858,48.847833 225.95957,44.007018 239.54454,80.450643 179.78516,174.63168 295.37482,139.35097 346.25842,46.070118 389.39988,92.87312 420.65246,389.75214 237.97885,334.33616 47.679267,441.14347 70.238984,312.74266 154.35373,275.4611 253.34467,276.61352 251.92615,232.16261 44.964715,230.02819 Z"
        id="path2953"
-       sodipodi:nodetypes="cccccccccccccccc" />
+       sodipodi:nodetypes="cccccccccccccccc"
+       sodipodi:insensitive="true" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="PowerUpsTime"
-     style="display:inline"
+     style="display:none"
      sodipodi:insensitive="true">
     <ellipse
        style="display:inline;fill:#008000;stroke:#b3b3b3;stroke-width:0.345958;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
@@ -133,7 +134,7 @@
      inkscape:groupmode="layer"
      id="layer7"
      inkscape:label="PowerUpsSpeed"
-     style="display:inline"
+     style="display:none"
      sodipodi:insensitive="true">
     <ellipse
        style="display:inline;fill:#008000;stroke:#b3b3b3;stroke-width:0.345958;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
@@ -161,7 +162,7 @@
      inkscape:label="ObstaclesTime"
      inkscape:groupmode="layer"
      id="layer1"
-     style="display:inline"
+     style="display:none"
      sodipodi:insensitive="true">
     <ellipse
        style="display:inline;fill:#ff0000;stroke:#b3b3b3;stroke-width:0.336422;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
@@ -217,7 +218,7 @@
      inkscape:groupmode="layer"
      id="layer8"
      inkscape:label="ObstaclesInvCont"
-     style="display:inline"
+     style="display:none"
      sodipodi:insensitive="true">
     <ellipse
        style="display:inline;fill:#ff0000;stroke:#b3b3b3;stroke-width:0.336422;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
@@ -238,22 +239,22 @@
      inkscape:groupmode="layer"
      id="layer4"
      inkscape:label="Start"
-     style="display:inline">
+     style="display:inline"
+     sodipodi:insensitive="true">
     <path
-       style="fill:#00ffff;stroke:#5e2911;stroke-width:2.24551;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Lend)"
+       style="display:inline;fill:#00ffff;stroke:#5e2911;stroke-width:2.24551;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Lend)"
        d="M 118.28278,231.62663 160.98962,234.23412"
-       id="path970" />
+       id="path970"
+       sodipodi:insensitive="true" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer5"
      inkscape:label="Routes"
-     style="display:inline"
-     sodipodi:insensitive="true">
+     style="display:inline">
     <path
-       style="fill:none;stroke:#e0fd00;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 43.543858,48.847833 225.95957,44.007018 239.54454,80.450643 179.78516,174.63168 295.37482,139.35097 346.25842,46.070118 389.39988,92.87312 420.65246,389.75214 237.97885,334.33616 47.679267,441.14347 70.238984,312.74266 154.35373,275.4611 253.34467,276.61352 251.92615,232.16261 44.964715,230.02819 Z"
-       id="path5279"
-       sodipodi:nodetypes="cccccccccccccccc" />
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 118.28278,231.62663 169.12059,227.37323 227.91012,224.68878 245.35907,227.64168 256.63378,242.13773 257.17067,264.41869 242.13773,278.37785 194.086,280.79386 134.49113,285.62588 77.312267,305.75928 57.178864,339.5834 45.367268,405.35251 45.904159,424.41213 58.789537,433.27083 87.244746,427.36503 150.8663,376.8973 228.44701,336.36205 289.38411,340.92562 387.09823,384.14533 409.11075,385.756 424.41213,371.25995 420.92235,314.08109 406.69474,190.32777 396.22537,102.81458 373.67596,63.084663 357.03235,53.152184 339.31495,56.105083 323.47667,75.43315 306.83306,124.55865 275.96184,150.06096 210.46117,169.12059 193.01222,165.0939 190.32777,151.13475 200.79714,126.43777 233.01058,95.834998 239.54454,80.450643 237.8426,57.715755 207.23983,41.877478 147.9134,39.193024 68.45357,41.609033 48.320167,52.346848 33.018781,93.41899 32.750336,146.03428 34.897899,209.65584 49.662394,235.15815 75.43315,237.57416 Z"
+       id="path1101" />
   </g>
 </svg>

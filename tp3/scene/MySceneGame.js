@@ -19,9 +19,10 @@ export class MySceneGame extends CGFscene {
         super();
 
         this.interface = myinterface;
-        this.changeSceneName = null
-        this.difficulty = null
-        this.track = null
+        this.changeSceneName = null;
+        this.difficulty = null;
+        this.track = null;
+        this.defaultView = null;
         this.demo = demo;
     }
 
@@ -212,7 +213,8 @@ export class MySceneGame extends CGFscene {
     onGraphLoaded() {
         this.axis = new CGFaxis(this, this.graph.referenceLength);
 
-        this.camera = this.demo ? this.graph.cameras['Fixed Car View'] : this.graph.cameras[this.graph.defaultView];
+        this.defaultView = this.demo ? 'Fixed Car View' : this.graph.defaultView;
+        this.camera = this.graph.cameras[this.defaultView];
         this.interface.setActiveCamera(this.camera);
 
         this.gl.clearColor(this.graph.background[0], this.graph.background[1], this.graph.background[2], this.graph.background[3]);
@@ -309,7 +311,6 @@ export class MySceneGame extends CGFscene {
     }
 
     selectView(viewId) {
-        console.log(viewId);
         this.camera = this.graph.cameras[viewId];
         this.interface.setActiveCamera(this.camera);
     }

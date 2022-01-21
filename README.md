@@ -40,15 +40,44 @@ Overall we believe we achieved all goals required and that we managed to produce
 
 
 
-### 2 - Specific objects
-* TV and Furniture
+### 2 - Game
+* Game
 
-![tv](/uploads/2a6e02c4bf0e0fc9c52c2beade2844f8/tv.png)
+![game_base](/uploads/d881f9432413b8fad880d2f2c5ed4311/game_base.png)
 
-* Vase
 
-![vase](/uploads/6e4fb68d88cde13bdf7f4d457dccda76/vase.png)
+![game_base2](/uploads/3fa2947128402de9b8c55e6fc6003204/game_base2.png)
 
-* Lamp
+* Exit
 
-![lamp](/uploads/ce51841f907c420a2075f5dc03fe9872/lamp.png)
+![game_exit](/uploads/e589f58161dc7ad298d41acb284d8587/game_exit.png)
+
+* First Person
+
+![game_first_person](/uploads/3e0bd18b1dcf7999628d5e9e9240e3b5/game_first_person.png)
+
+* Obstacles
+
+![game_obstacle](/uploads/33c832ea2b8e3481733f819f6e857f77/game_obstacle.png)
+
+* Power Ups
+
+![game_power_up](/uploads/e252cfceec58349de64a4cbe6a41b06b/game_power_up.png)
+
+* Exit
+
+![game_exit](/uploads/e589f58161dc7ad298d41acb284d8587/game_exit.png)
+
+* Simple Track
+
+![track_simple](/uploads/207039ed1748dc3d17b10dfe965ce3cf/track_simple.png)
+
+* Complex Track
+
+![track_complex](/uploads/0f477f3396da7e86b5e838d897e89a19/track_complex.png)
+
+* Dark Mode (Hard Difficulty)
+
+![dark_mode](/uploads/3eaf376d8e4e90b0fcc4a55cd8cc7d28/dark_mode.png)
+
+![dark_mode_first_person](/uploads/fa004ba16779a5e7a6bb2ee448d2ac0c/dark_mode_first_person.png)

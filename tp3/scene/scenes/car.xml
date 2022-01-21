@@ -64,6 +64,7 @@
     <textures>
         <texture id="demoTexture" file="rocks.jpg" /> <!-- Do not delete, needed for 'none' texture -->
         <texture id="wheelsTexture" file="wheels.jpg" />
+        <texture id="checkeredTexture" file="checkered.jpg" />
     </textures>
 
     <materials>
@@ -248,9 +249,9 @@
             <materials>
                 <material id="gray_material" />
             </materials>
-            <texture id="none" />
+            <texture id="checkeredTexture" length_s="1" length_t="1"/>
             <children>
-                <primitiveref id="cube" />
+                <componentref id="cube" />
             </children>
         </component>
 

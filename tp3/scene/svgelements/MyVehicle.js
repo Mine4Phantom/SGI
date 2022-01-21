@@ -87,7 +87,7 @@ export class MyVehicle extends CGFobject {
     var directionVector;
 
     //update the key every 5 seconds
-    if (this.scene.ticks != null && this.scene.ticks % 4 == 0){
+    if (this.scene.ticks != null && this.scene.ticks % 1 == 0){
       this.key = (this.key + 1) % (this.routes.length)
     }
 
@@ -104,10 +104,10 @@ export class MyVehicle extends CGFobject {
 
     // update speed based on vector length
     if (this.key == this.routes.length - 1){
-      this.speed = this.vectorDistance(this.routes[this.key], this.routes[0]) / 4
+      this.speed = this.vectorDistance(this.routes[this.key], this.routes[0])
       this.wheels.speed = this.speed
     }else {
-      this.speed = this.vectorDistance(this.routes[this.key], this.routes[this.key+1]) / 4
+      this.speed = this.vectorDistance(this.routes[this.key], this.routes[this.key+1])
       this.wheels.speed = this.speed
     }
 

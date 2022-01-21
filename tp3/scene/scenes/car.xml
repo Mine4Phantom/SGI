@@ -194,6 +194,9 @@
         <primitive id="cylinder">
             <cylinder height="1" topRadius="1" bottomRadius="1" stacks="10" slices="50" />
         </primitive>
+        <primitive id="tube">
+            <tube height="1" topRadius="1" bottomRadius="1" stacks="10" slices="50" />
+        </primitive>
         <primitive id="cylinder_body_front">
             <cylinder height="1" topRadius="2" bottomRadius="0.9" stacks="10" slices="50" />
         </primitive>
@@ -260,7 +263,7 @@
                 <translate x="0" y="1" z="-0.5" />
             </transformation>
             <materials>
-                <material id="wheel_material" />
+                <material id="black_material" />
             </materials>
             <texture id="wheelsTexture" length_s="1" length_t="5"/>
             <children>
@@ -274,7 +277,7 @@
                 <translate x="0" y="1" z="-0.5" />
             </transformation>
             <materials>
-                <material id="wheel_material" />
+                <material id="black_material" />
             </materials>
             <texture id="wheelsTexture" length_s="1" length_t="1"/>
             <children>
@@ -284,17 +287,71 @@
         </component>
 
         <!-- Wheels -->
-        <component id="wheel1">
+        <component id="wheel">
             <transformation>
-                <translate x="5" y="0" z="2.5" />
-                <scale x="1.2" y="1.2" z="1.2" />
+            </transformation>
+            <materials>
+                <material id="black_material" />
+            </materials>
+            <texture id="wheelsTexture" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="tire" />
+                <componentref id="outside_wheel" />
+                <componentref id="inside_wheel" />
+            </children>
+        </component>
+
+        <component id="tire">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="black_material" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="tube" />
+            </children>
+        </component>
+
+        <component id="outside_wheel">
+            <transformation>
+                <translate x="0" y="0" z="1" />
+                <scale x="2" y="2" z="2" />
             </transformation>
             <materials>
                 <material id="wheel_material" />
             </materials>
             <texture id="wheelsTexture" length_s="1" length_t="1"/>
             <children>
-                <primitiveref id="cylinder" />
+                <primitiveref id="circle" />
+            </children>
+        </component>
+
+        <component id="inside_wheel">
+            <transformation>
+                <rotate axis="y" angle="180" />
+                <scale x="2" y="2" z="2" />
+            </transformation>
+            <materials>
+                <material id="wheel_material" />
+            </materials>
+            <texture id="wheelsTexture" length_s="1" length_t="1"/>
+            <children>
+                <primitiveref id="circle" />
+            </children>
+        </component>
+
+        <component id="wheel1">
+            <transformation>
+                <translate x="5" y="0" z="2.5" />
+                <scale x="1.2" y="1.2" z="1.2" />
+            </transformation>
+            <materials>
+                <material id="black_material" />
+            </materials>
+            <texture id="wheelsTexture" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="wheel"/>
             </children>
         </component>
 
@@ -305,11 +362,11 @@
                 <scale x="1.2" y="1.2" z="1.2" />
             </transformation>
             <materials>
-                <material id="wheel_material" />
+                <material id="black_material" />
             </materials>
             <texture id="wheelsTexture" length_s="1" length_t="1"/>
             <children>
-                <primitiveref id="cylinder" />
+                <componentref id="wheel"/>
             </children>
         </component>
 
@@ -320,11 +377,11 @@
                 <scale x="1.2" y="1.2" z="1.2" />
             </transformation>
             <materials>
-                <material id="wheel_material" />
+                <material id="black_material" />
             </materials>
             <texture id="wheelsTexture" length_s="1" length_t="1"/>
             <children>
-                <primitiveref id="cylinder" />
+                <componentref id="wheel"/>
             </children>
         </component>
 
@@ -335,11 +392,11 @@
                 <scale x="1.2" y="1.2" z="1.2" />
             </transformation>
             <materials>
-                <material id="wheel_material" />
+                <material id="black_material" />
             </materials>
             <texture id="wheelsTexture" length_s="1" length_t="1"/>
             <children>
-                <primitiveref id="cylinder" />
+                <componentref id="wheel"/>
             </children>
         </component>
 

@@ -79,6 +79,8 @@
         <texture id="wheelsTexture" file="wheels.jpg" />
         <texture id="checkeredTexture" file="checkered.jpg" />
         <texture id="itemTexture" file="item.jpg" />
+        <texture id="racingCarTexture" file="metal.jpg" />
+        <texture id="racingCarWingTexture" file="textmetal.jpg" />
     </textures>
 
     <materials>
@@ -88,6 +90,21 @@
             <diffuse r="0.6" g="0.0" b="0.0" a="1.0" />
             <specular r="0.6" g="0.0" b="0.0" a="1.0" />
         </material>
+
+        <material id="carMaterial" shininess="100">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.3" g="0.3" b="0.3" a="1.0" />
+            <diffuse r="0.3" g="0.3" b="0.3" a="1.0" />
+            <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+        </material>
+
+        <material id="carWingMaterial" shininess="1000">
+            <emission r="0" g="0" b="0" a="1.0" />
+            <ambient r="0.9" g="0.9" b="0.9" a="1.0" />
+            <diffuse r="0.9" g="0.9" b="0.9" a="1.0" />
+            <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+        </material>
+
 
         <material id="powerUpMaterial" shininess="10">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
@@ -380,9 +397,9 @@
                 <scale x="1" y="1" z="1" />
             </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="carMaterial" />
             </materials>
-            <texture id="none"/>
+            <texture id="racingCarTexture" length_s="1" length_t="1"/>
             <children>
                  <componentref id="body_front" />
                 <componentref id="body_back" />
@@ -401,9 +418,9 @@
                 <scale x="0.4" y="0.721" z="0.721" />
             </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="inherit" />
             </materials>
-            <texture id="none"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="sphere" />
             </children>
@@ -545,9 +562,9 @@
                 <scale x="0.8" y="0.8" z="8.5" />
             </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="inherit" />
             </materials>
-            <texture id="none"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="cylinder_body_front" />
             </children>
@@ -560,9 +577,9 @@
                 <scale x="0.8" y="0.8" z="2.5" />
             </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="inherit" />
             </materials>
-            <texture id="none"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="cylinder_body_back" />
             </children>
@@ -715,9 +732,9 @@
                 <translate x="5" y="1.4" z="0" />
             </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="carWingMaterial" />
             </materials>
-            <texture id="none"/>
+            <texture id="racingCarWingTexture" length_s="1" length_t="1"/>
             <children>
                 <componentref id="spoiler_top" />
                 <componentref id="spoiler_support1" />
@@ -731,9 +748,9 @@
                 <scale x="1" y="0.15" z="4" />
             </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="inherit" />
             </materials>
-            <texture id="none"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="cube" />
             </children>
@@ -746,9 +763,9 @@
                 <scale x="0.15" y="0.15" z="0.75" />
             </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="inherit" />
             </materials>
-            <texture id="none"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="cylinder" />
             </children>
@@ -761,9 +778,9 @@
                 <scale x="0.15" y="0.15" z="0.75" />
             </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="inherit" />
             </materials>
-            <texture id="none"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="cylinder" />
             </children>

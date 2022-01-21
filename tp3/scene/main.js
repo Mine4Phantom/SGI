@@ -9,6 +9,7 @@ var menu;
 var game;
 var demo;
 var filename;
+var won = false;
 
 function getUrlVars() {
     var vars = {};
@@ -32,6 +33,8 @@ export function changeSceneByName(sceneName) {
             game["scene"] = mySceneGame
             changeScene(mySceneGame, myInterfaceGame, game["app"])
             new MySceneGraph(filename, mySceneGame);
+            if(won)
+                mySceneGame.graph.currentMaterialIndex=1
             break;
         case "demo": //To Do :Demo currently is the same as game
             var myInterfaceDemo = new MyInterface();
@@ -57,6 +60,13 @@ export function setGameSettings(difficulty, track) {
     }
 }
 
+export function hasWon(){
+    var first = false
+    if(won == false)
+        first = true
+    won = true
+    return first
+}
 
 
 function changeScene(myScene, myInterface, app) {

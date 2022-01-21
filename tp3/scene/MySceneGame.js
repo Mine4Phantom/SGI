@@ -3,6 +3,7 @@ import { CGFaxis, CGFcamera, CGFcameraOrtho, CGFappearance, CGFshader, CGFtextur
 import { MyQuad } from '../primitives/MyQuad.js';
 import { MyMap } from './MyMap.js';
 import { changeSceneByName } from './main.js';
+import { hasWon } from './main.js';
 
 
 var DEGREE_TO_RAD = Math.PI / 180;
@@ -105,6 +106,7 @@ export class MySceneGame extends CGFscene {
 
         // WIN
         this.hasWon = false
+        this.firstWin = false
 
         // VEHICLE 
         this.vehicle = null;
@@ -244,8 +246,11 @@ export class MySceneGame extends CGFscene {
             this.lap += 1
             this.timer += 10
             this.onLine = true
-            if (this.lap >= this.maxLap)
+            if (this.lap >= this.maxLap){
                 this.hasWon = true
+                this.firstWin = hasWon()
+                this.graph.currentMaterialIndex=1
+            }
         }
 
 
@@ -627,13 +632,17 @@ export class MySceneGame extends CGFscene {
             // transform as needed to place on screen
             this.translate(-6, -3, -20);
             this.writeOnScreen("You have Won", customId, false)
+            if(this.firstWin){
+                this.translate(-14, -1, 0);
+                this.writeOnScreen("Unlocked Gold Skin", customId, false)
+            }
             this.popMatrix();
             if (this.escape == false && this.pause == false) {
                 this.pushMatrix();
                 // 	Reset transf. matrix to draw independent of camera
                 this.loadIdentity();
                 // transform as needed to place on screen
-                this.translate(-9, -5, -20);
+                this.translate(-9, -6, -20);
                 this.writeOnScreen("Press R to restart", customId, false)
                 this.popMatrix();
             }

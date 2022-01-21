@@ -177,7 +177,7 @@ export class MySVGReader {
 
                 this.scene.vehicle = new MyVehicle(this.scene, angle + Math.PI, [path_vertexes[0][0], 0, path_vertexes[0][1]]) //angle + PI because the vehicle starts oriented to the negative side of the x axis
 
-                this.scene.startLine = (new MyStartLine(this.scene, path_vertexes[0]));
+                this.scene.startLine = new MyStartLine(this.scene, path_vertexes[0]);
                 break;
             case "Routes":
                 if (!close_path)

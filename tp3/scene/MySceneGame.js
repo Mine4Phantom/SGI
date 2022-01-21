@@ -76,8 +76,8 @@ export class MySceneGame extends CGFscene {
         this.menuOption = 0
 
         // MAP
-        var trackMapPath = "./SimpleMapTexture.png";
-        var terrainTexturePath = "./MapTexture.png";
+        var trackMapPath = "./ComplexSimpleMapTex.png";
+        var terrainTexturePath = "./ComplexMapTex.png";
         this.map = new MyMap(this, trackMapPath, terrainTexturePath);
 
         // POWER UPS

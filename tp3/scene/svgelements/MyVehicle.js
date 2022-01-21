@@ -84,7 +84,7 @@ export class MyVehicle extends CGFobject {
 
 
   updateDemo(t) {
-    var directionVector
+    var directionVector;
 
     //update the key every 5 seconds
     if (this.scene.ticks != null && this.scene.ticks % 4 == 0){
@@ -126,23 +126,7 @@ export class MyVehicle extends CGFobject {
     if (new_z >= 4 && new_z < 508)
       this.z = new_z;
 
-    // change camera according to car movement 
-    if (this.scene.graph.cameras['Third Person'] == this.scene.camera) {
-      this.scene.camera.position[0] = this.x + (70 * Math.cos(this.direction));
-      this.scene.camera.position[2] = this.z - (70 * Math.sin(this.direction));
-      this.scene.camera.target[0] = this.x;
-      this.scene.camera.target[2] = this.z;
-    }
-    else if (this.scene.graph.cameras['First Person'] == this.scene.camera) {
-      this.scene.camera.position[0] = this.x;
-      this.scene.camera.position[2] = this.z
-      this.scene.camera.target[0] = this.x - (25 * Math.cos(this.direction));
-      this.scene.camera.target[2] = this.z + (25 * Math.sin(this.direction));
-    }
-    else if (this.scene.graph.cameras['Fixed Car View']) {
-      this.scene.camera.target[0] = this.x;
-      this.scene.camera.target[2] = this.z;
-    }
+    this.updateCameraPositions();
 
   }
 
@@ -166,7 +150,28 @@ export class MyVehicle extends CGFobject {
     if (new_z >= 4 && new_z < 508)
       this.z = new_z;
 
-    // change camera according to car movement 
+    this.updateCameraPositions();
+
+    // Wheels position
+    this.wheels.x -= this.speed * Math.cos(this.direction);
+    this.wheels.z += this.speed * Math.sin(this.direction);
+
+    // Wheel Angle
+    this.wheels.wheel_angle = this.wheels.wheel_angle * 0.8
+    this.wheels.update(t);
+
+    // Drag
+    this.speed = this.speed * 0.98;
+    this.wheels.speed = this.speed * 0.98;
+
+    // Turn car
+    this.turn((this.wheels.wheel_angle) * 0.2);
+  }
+
+  /**
+   * Updates camera positions according to car movement
+   */
+  updateCameraPositions() {
     if (this.scene.graph.cameras['Third Person'] == this.scene.camera) {
       this.scene.camera.position[0] = this.x + (70 * Math.cos(this.direction));
       this.scene.camera.position[2] = this.z - (70 * Math.sin(this.direction));
@@ -183,21 +188,6 @@ export class MyVehicle extends CGFobject {
       this.scene.camera.target[0] = this.x;
       this.scene.camera.target[2] = this.z;
     }
-
-    // Wheels position
-    this.wheels.x -= this.speed * Math.cos(this.direction);
-    this.wheels.z += this.speed * Math.sin(this.direction);
-
-    // Wheel Angle
-    this.wheels.wheel_angle = this.wheels.wheel_angle * 0.8
-    this.wheels.update(t);
-
-    // Drag
-    this.speed = this.speed * 0.98;
-    this.wheels.speed = this.speed * 0.98;
-
-    // Turn car
-    this.turn((this.wheels.wheel_angle) * 0.2);
   }
 
   turn(val) {

@@ -80,6 +80,8 @@
         <texture id="checkeredTexture" file="checkered.jpg" />
         <texture id="itemTexture" file="item.jpg" />
         <texture id="f1BodyFront" file="f1texture.jpg" />
+        <texture id="racingCarTexture" file="metal.jpg" />
+        <texture id="racingCarWingTexture" file="textmetal.jpg" />
     </textures>
 
     <materials>
@@ -89,6 +91,21 @@
             <diffuse r="0.6" g="0.0" b="0.0" a="1.0" />
             <specular r="0.6" g="0.0" b="0.0" a="1.0" />
         </material>
+
+        <material id="carMaterial" shininess="100">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.3" g="0.3" b="0.3" a="1.0" />
+            <diffuse r="0.3" g="0.3" b="0.3" a="1.0" />
+            <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+        </material>
+
+        <material id="carWingMaterial" shininess="1000">
+            <emission r="0" g="0" b="0" a="1.0" />
+            <ambient r="0.9" g="0.9" b="0.9" a="1.0" />
+            <diffuse r="0.9" g="0.9" b="0.9" a="1.0" />
+            <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+        </material>
+
 
         <material id="powerUpMaterial" shininess="10">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
@@ -326,23 +343,39 @@
                 <scale x="1" y="1" z="1" />
             </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="carMaterial" />
             </materials>
-            <texture id="none"/>
+            <texture id="racingCarTexture" length_s="1" length_t="1"/>
             <children>
-                <componentref id="body_front" />
+                 <componentref id="body_front" />
                 <componentref id="body_back" />
                 <!--<componentref id="body_left" />
                 <componentref id="body_right" />-->
                 <componentref id="body_spoiler" />
                 <componentref id="body_suspension" />
                 <!--<componentref id="body_front_bumper" />-->
+                <componentref id="body_front_bumper_round" />
             </children>
         </component>
 
+        <component id="body_front_bumper_round">
+            <transformation>
+                <translate x="-5.49" y="-0.2" z="0" />
+                <scale x="0.4" y="0.721" z="0.721" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="inherit"/>
+            <children>
+                <primitiveref id="sphere" />
+            </children>
+        </component>
+
+
         <component id="body_front_bumper">
             <transformation>
-                <translate x="-1.6" y="-0.2" z="0" />
+                <translate x="-5" y="-0.8" z="0" />
             </transformation>
             <materials>
                 <material id="demoMaterial" />
@@ -350,13 +383,14 @@
             <texture id="none"/>
             <children>
                 <componentref id="body_front_bumper_connecting_part" />
-                <!--<componentref id="body_front_bumper_wing" />-->
+                <componentref id="body_front_bumper_wing" />
             </children>
         </component>
 
         <component id="body_front_bumper_connecting_part">
             <transformation>
-                <scale x="10" y="0.2" z="1.5" />
+                <scale x="3" y="0.2" z="1.5" />
+                <translate x="-0.5" y="0" z="0" />
             </transformation>
             <materials>
                 <material id="inherit" />
@@ -369,7 +403,24 @@
 
         <component id="body_front_bumper_wing">
             <transformation>
-                <scale x="1" y="1" z="6" />
+                <translate x="-2.5" y="0" z="0" />
+                
+                
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <componentref id="side_wing_front" />
+                <componentref id="side_wing_left" />
+                <componentref id="side_wing_right" />
+            </children>
+        </component>
+
+        <component id="side_wing_front">
+            <transformation>
+                <scale x="1" y="0.2" z="7" />
             </transformation>
             <materials>
                 <material id="inherit" />
@@ -380,6 +431,76 @@
             </children>
         </component>
 
+        <component id="side_wing_left">
+            <transformation>
+                <translate x="-0.07" y="0.25" z="3.48" />
+                <scale x="1.1" y="0.7" z="0.1" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <componentref id="cube" />
+            </children>
+        </component>
+
+        <component id="side_wing_right">
+            <transformation>
+                <translate x="-0.07" y="0.25" z="-3.48" />
+                <scale x="1.1" y="0.7" z="0.1" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <componentref id="cube" />
+            </children>
+        </component>
+
+        <component id="triangle_paralelipedo">
+            <transformation>
+                <translate x="1" y="5" z="1" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <componentref id="triangle_paralelipedo_faceUp" />
+                <componentref id="triangle_paralelipedo_faceDown" />
+            </children>
+        </component>
+
+        <component id="triangle_paralelipedo_faceUp">
+            <transformation>
+                <scale x="5" y="5" z="5" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="triangle" />
+            </children>
+        </component>
+
+        <component id="triangle_paralelipedo_faceDown">
+            <transformation>
+                <scale x="5" y="5" z="5" />
+                <rotate axis="y" angle="180"/>
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="triangle" />
+            </children>
+        </component>
+
+
         <component id="body_front">
             <transformation>
                 <translate x="-5.5" y="-0.2" z="0" />
@@ -387,9 +508,9 @@
                 <scale x="0.8" y="0.8" z="8.5" />
             </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="inherit" />
             </materials>
-            <texture id="none"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="cylinder_body_front" />
             </children>
@@ -402,9 +523,9 @@
                 <scale x="0.8" y="0.8" z="2.5" />
             </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="inherit" />
             </materials>
-            <texture id="none"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="cylinder_body_back" />
             </children>
@@ -557,9 +678,9 @@
                 <translate x="5" y="1.4" z="0" />
             </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="carWingMaterial" />
             </materials>
-            <texture id="none"/>
+            <texture id="racingCarWingTexture" length_s="1" length_t="1"/>
             <children>
                 <componentref id="spoiler_top" />
                 <componentref id="spoiler_support1" />
@@ -573,9 +694,9 @@
                 <scale x="1" y="0.15" z="4" />
             </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="inherit" />
             </materials>
-            <texture id="none"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="cube" />
             </children>
@@ -588,9 +709,9 @@
                 <scale x="0.15" y="0.15" z="0.75" />
             </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="inherit" />
             </materials>
-            <texture id="none"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="cylinder" />
             </children>
@@ -603,9 +724,9 @@
                 <scale x="0.15" y="0.15" z="0.75" />
             </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="inherit" />
             </materials>
-            <texture id="none"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="cylinder" />
             </children>

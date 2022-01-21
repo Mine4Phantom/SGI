@@ -63,7 +63,7 @@ export class MyInterface extends CGFinterface {
             return
 
         const cameraArray = Object.keys(this.scene.graph.cameras);
-        this.currentCamera = this.scene.graph.defaultView;
+        this.currentCamera = this.scene.defaultView;
         group.add(this, 'currentCamera', cameraArray).name('Camera').onChange(val => this.scene.selectView(val));
     }
 }

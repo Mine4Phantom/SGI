@@ -79,7 +79,6 @@
         <texture id="wheelsTexture" file="wheels.jpg" />
         <texture id="checkeredTexture" file="checkered.jpg" />
         <texture id="itemTexture" file="item.jpg" />
-        <texture id="f1BodyFront" file="f1texture.jpg" />
         <texture id="racingCarTexture" file="metal.jpg" />
         <texture id="racingCarWingTexture" file="textmetal.jpg" />
     </textures>

@@ -1,28 +1,20 @@
 <sxg>
     <scene root="root" axis_length="8" />
 
-    <views default="defaultCamera2">
-        <perspective id="defaultCamera2" near="0.1" far="750" angle="45">
-            <from x="356" y="30" z="356" />
+    <views default="Third Person">
+        <perspective id="Third Person" near="0.1" far="750" angle="45">
+            <from x="0" y="30" z="0" />
+            <to x="0" y="0" z="0" />
+        </perspective>
+        <perspective id="First Person" near="0.1" far="750" angle="45">
+            <from x="0" y="5" z="0" />
+            <to x="0" y="0" z="0" />
+        </perspective>
+
+        <perspective id="Scene View" near="0.1" far="750" angle="45">
+            <from x="450" y="50" z="400" />
             <to x="256" y="0" z="256" />
         </perspective>
-        <perspective id="defaultCamera3" near="0.1" far="500" angle="40">
-            <from x="-20" y="20" z="20" />
-            <to x="0" y="0" z="0" />
-        </perspective>
-
-        <ortho id="orthoSide" near="0.1" far="500" left="-50.0" right="50.0" top="30" bottom="-30">
-            <from x="30" y="5" z="0" />
-            <to x="0" y="0" z="0" />
-            <up x="0" y="1" z="0" />
-        </ortho>
-
-        <ortho id="orthoFront" near="0.1" far="500" left="-35.0" right="35.0" top="40" bottom="-6">
-            <from x="0" y="5" z="30" />
-            <to x="0" y="0" z="0" />
-            <up x="0" y="0.1" z="-1" />
-        </ortho>
-
     </views>
 
     <ambient>
@@ -42,7 +34,7 @@
         </spot>
 
         <spot id="lamp2" enabled="0" angle="180" exponent="1">
-            <location x="256" y="100" z="256" w="1" />
+            <location x="512" y="25" z="256" w="1" />
             <target x="256" y="0" z="256" />
             <ambient r="1" g="1" b="1" a="1.0" />
             <diffuse r="1" g="1" b="1" a="1.0" />
@@ -51,7 +43,7 @@
         </spot>
 
         <spot id="lamp3" enabled="0" angle="180" exponent="1">
-            <location x="256" y="100" z="256" w="1" />
+            <location x="0" y="25" z="256" w="1" />
             <target x="256" y="0" z="256" />
             <ambient r="1" g="1" b="1" a="1.0" />
             <diffuse r="1" g="1" b="1" a="1.0" />
@@ -59,6 +51,23 @@
             <attenuation constant="0.2" linear="0.03" quadratic="0" />
         </spot>
 
+        <spot id="lamp4" enabled="0" angle="180" exponent="1">
+            <location x="256" y="25" z="512" w="1" />
+            <target x="256" y="0" z="256" />
+            <ambient r="1" g="1" b="1" a="1.0" />
+            <diffuse r="1" g="1" b="1" a="1.0" />
+            <specular r="1" g="1" b="1" a="1.0" />
+            <attenuation constant="0.2" linear="0.03" quadratic="0" />
+        </spot>
+
+        <spot id="lamp5" enabled="0" angle="180" exponent="1">
+            <location x="256" y="25" z="0" w="1" />
+            <target x="256" y="0" z="256" />
+            <ambient r="1" g="1" b="1" a="1.0" />
+            <diffuse r="1" g="1" b="1" a="1.0" />
+            <specular r="1" g="1" b="1" a="1.0" />
+            <attenuation constant="0.2" linear="0.03" quadratic="0" />
+        </spot>
     </lights>
 
     <textures>
@@ -79,8 +88,22 @@
         <material id="powerUpMaterial" shininess="10">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
             <ambient r="0.0" g="0.0" b="0.0" a="1.0" />
-            <diffuse r="0.3" g="0.3" b="0.0" a="1.0" />
+            <diffuse r="0.6" g="0.6" b="0.0" a="1.0" />
             <specular r="0.1" g="0.1" b="0.0" a="0.1" />
+        </material>
+
+        <material id="obstacleMaterial" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.0" g="0.0" b="0.0" a="1.0" />
+            <diffuse r="0.6" g="0.0" b="0.0" a="1.0" />
+            <specular r="0.1" g="0" b="0" a="0.1" />
+        </material>
+
+        <material id="white_material" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.0" g="0.0" b="0.0" a="1.0" />
+            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+            <specular r="0.0" g="0.0" b="0.0" a="1.0" />
         </material>
 
         <material id="black_material" shininess="10">
@@ -248,7 +271,7 @@
                 <scale x="1" y="1" z="1" />
             </transformation>
             <materials>
-                <material id="gray_material" />
+                <material id="white_material" />
             </materials>
             <texture id="checkeredTexture" length_s="1" length_t="1"/>
             <children>
@@ -363,21 +386,47 @@
                 <componentref id="body_right" />-->
                 <componentref id="body_spoiler" />
                 <componentref id="body_suspension" />
-                <componentref id="body_front_bumper" />
+                <!--<componentref id="body_front_bumper" />-->
             </children>
         </component>
 
         <component id="body_front_bumper">
             <transformation>
-                <translate x="-5.49" y="-0.2" z="0" />
-                <scale x="0.4" y="0.721" z="0.721" />
+                <translate x="-1.6" y="-0.2" z="0" />
             </transformation>
             <materials>
                 <material id="demoMaterial" />
             </materials>
             <texture id="none"/>
             <children>
-                <primitiveref id="sphere" />
+                <componentref id="body_front_bumper_connecting_part" />
+                <!--<componentref id="body_front_bumper_wing" />-->
+            </children>
+        </component>
+
+        <component id="body_front_bumper_connecting_part">
+            <transformation>
+                <scale x="10" y="0.2" z="1.5" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <componentref id="cube" />
+            </children>
+        </component>
+
+        <component id="body_front_bumper_wing">
+            <transformation>
+                <scale x="1" y="1" z="6" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <componentref id="cube" />
             </children>
         </component>
 
@@ -635,7 +684,7 @@
                 <scale x="3.5" y="3.5" z="3.5" />
             </transformation>
             <materials>
-                <material id="powerUpMaterial" />
+                <material id="obstacleMaterial" />
             </materials>
             <texture id="itemTexture" length_s="1" length_t="1"/>
             <children>

@@ -20,6 +20,7 @@ export class MySceneMenu extends CGFscene
 		this.track = false
 		this.difficultyOption = 2
 		this.trackOption = 1
+		this.help = false
 	}
 
 	init(application) {
@@ -60,7 +61,7 @@ export class MySceneMenu extends CGFscene
 
 		// create dict for text
 		this.textDict = {
-			a:[1,4],b:[2,4],c:[3,4],d:[4,4],e:[5,4],f:[6,4],g:[7,4],h:[8,4],i:[9,4],j:[10,4],k:[11,4],l:[12,4],m:[13,4],n:[14,4],o:[15,4],p:[0,5],q:[1,5],r:[2,5],s:[3,5],t:[4,5],u:[5,5],v:[6,5],w:[7,5],x:[8,5],y:[9,5],z:[10,5],'*':[10,2],"1":[1,3],"2":[2,3],"3":[3,3],"4":[4,3]
+			a:[1,4],b:[2,4],c:[3,4],d:[4,4],e:[5,4],f:[6,4],g:[7,4],h:[8,4],i:[9,4],j:[10,4],k:[11,4],l:[12,4],m:[13,4],n:[14,4],o:[15,4],p:[0,5],q:[1,5],r:[2,5],s:[3,5],t:[4,5],u:[5,5],v:[6,5],w:[7,5],x:[8,5],y:[9,5],z:[10,5],'*':[10,2],"0":[0,3],"1":[1,3],"2":[2,3],"3":[3,3],"4":[4,3],"5":[5,3],"6":[6,3],"7":[7,3]
 		} 
 		
 
@@ -71,6 +72,7 @@ export class MySceneMenu extends CGFscene
 		this.selected = false
 		this.changeSceneName = null
 		this.difficulty = false
+		this.help = false
 		this.track = false
 		this.difficultyOption = 2
 		this.trackOption = 1
@@ -113,6 +115,9 @@ export class MySceneMenu extends CGFscene
         else if (this.gui.isKeyPressed("Digit4")) {
             this.menuKey = 4  
         }
+		else if (this.gui.isKeyPressed("Digit5")) {
+            this.menuKey = 5  
+        }
 
 		if (this.gui.isKeyPressed("Enter")) {
 			this.selected = true
@@ -121,18 +126,20 @@ export class MySceneMenu extends CGFscene
 		}
  		else if(this.gui.isKeyPressed("Escape")){
 			this.difficulty = false
+			this.help = false
 			this.track = false
 			this.menuKey = 0  
 		} 
     }
 
 	chooseOption(optionNumber){
-		if(this.difficulty == false && this.track == false){
+		if(this.difficulty == false && this.track == false && this.help == false){
 			switch(optionNumber){
 				case 1: this.changeSceneName = "Game"; break;
 				case 2: this.changeSceneName = "Demo"; this.trackOption = 2; break;
 				case 3: this.difficulty = true; this.menuKey = 0; break;
 				case 4: this.track = true; this.menuKey = 0; break;
+				case 5: this.help = true; this.menuKey = 0; break;
 				default: break;
 	
 			}
@@ -248,7 +255,7 @@ export class MySceneMenu extends CGFscene
 			customId+=1
 		this.popMatrix();
 
-		if(this.difficulty == false && this.track == false){
+		if(this.difficulty == false && this.track == false && this.help == false){
 			this.pushMatrix();
 				this.loadIdentity();
 				this.translate(-9,-4,-60);
@@ -275,6 +282,15 @@ export class MySceneMenu extends CGFscene
 				this.loadIdentity();
 				this.translate(-9,-7,-60);
 				this.writeOnScreen("3 Difficulty", customId)
+				this.pushMatrix()
+				this.translate(-8.7,-2,-5);
+				if(this.difficultyOption == 1)
+					this.writeOnScreen("Easy", customId)
+				else if(this.difficultyOption == 2)
+					this.writeOnScreen("Medium", customId)
+				else if(this.difficultyOption == 3)
+					this.writeOnScreen("Hard", customId)
+				this.popMatrix()
 				if(this.menuKey == 3){
 					this.translate(-11,0,0);
 					this.writeOnScreen("*", customId)
@@ -286,8 +302,26 @@ export class MySceneMenu extends CGFscene
 				this.loadIdentity();
 				this.translate(5,-7,-60);
 				this.writeOnScreen("4 Track", customId)
+				this.pushMatrix()
+				this.translate(-5,-2,-5);
+				if(this.trackOption == 1)
+					this.writeOnScreen("Simple", customId)
+				else if(this.trackOption == 2)
+					this.writeOnScreen("Complex", customId)
+				this.popMatrix()
 				if(this.menuKey == 4){
 					this.translate(-6,0,0);
+					this.writeOnScreen("*", customId)
+				}
+				customId+=1
+			this.popMatrix();
+
+			this.pushMatrix();
+				this.loadIdentity();
+				this.translate(-1,-11,-60);
+				this.writeOnScreen("5 Help", customId)
+				if(this.menuKey == 5){
+					this.translate(-5,0,0);
 					this.writeOnScreen("*", customId)
 				}
 				customId+=1
@@ -362,6 +396,50 @@ export class MySceneMenu extends CGFscene
 					this.translate(-8,0,0);
 					this.writeOnScreen("*", customId)
 				}
+			this.popMatrix();
+		}
+		else if(this.help == true){
+			customId=0
+			this.pushMatrix();
+				this.loadIdentity();
+				this.translate(-5,3,-60);
+				this.writeOnScreen("HELP GUIDE", customId)
+			this.popMatrix();
+
+			this.pushMatrix();
+				this.loadIdentity();
+				this.translate(-20,1,-80);
+				this.writeOnScreen("1. Use WASD to control car", customId)
+			this.popMatrix();
+			this.pushMatrix();
+				this.loadIdentity();
+				this.translate(-20,-1,-80);
+				this.writeOnScreen("2. Power Ups are Yellow", customId)
+			this.popMatrix();
+			this.pushMatrix();
+				this.loadIdentity();
+				this.translate(-20,-3,-80);
+				this.writeOnScreen("3. Power Ups give speed boost or extra time", customId)
+			this.popMatrix();
+			this.pushMatrix();
+				this.loadIdentity();
+				this.translate(-20,-5,-80);
+				this.writeOnScreen("4. Obstacles are Red", customId)
+			this.popMatrix();
+			this.pushMatrix();
+				this.loadIdentity();
+				this.translate(-20,-7,-80);
+				this.writeOnScreen("5. Obstacles switch AD Keys or subtract time", customId)
+			this.popMatrix();
+			this.pushMatrix();
+				this.loadIdentity();
+				this.translate(-20,-9,-80);
+				this.writeOnScreen("6. Avoid Going Off Track it slows the car", customId)
+			this.popMatrix();
+			this.pushMatrix();
+				this.loadIdentity();
+				this.translate(-20,-11,-80);
+				this.writeOnScreen("7. Each Lap Done increases 10 seconds on timer", customId)
 			this.popMatrix();
 		}
 

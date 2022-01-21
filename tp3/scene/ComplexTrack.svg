@@ -56,7 +56,7 @@
      inkscape:cx="195.96512"
      inkscape:cy="236.76882"
      inkscape:document-units="px"
-     inkscape:current-layer="layer5"
+     inkscape:current-layer="layer4"
      inkscape:document-rotation="0"
      showgrid="false"
      units="px"
@@ -86,7 +86,8 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Track"
-     style="display:inline">
+     style="display:inline"
+     sodipodi:insensitive="true">
     <path
        style="fill:none;stroke:#000000;stroke-width:30.634;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="M 43.543858,48.847833 225.95957,44.007018 239.54454,80.450643 179.78516,174.63168 295.37482,139.35097 346.25842,46.070118 389.39988,92.87312 420.65246,389.75214 237.97885,334.33616 47.679267,441.14347 70.238984,312.74266 154.35373,275.4611 253.34467,276.61352 251.92615,232.16261 44.964715,230.02819 Z"
@@ -237,18 +238,18 @@
      inkscape:groupmode="layer"
      id="layer4"
      inkscape:label="Start"
-     style="display:inline"
-     sodipodi:insensitive="true">
+     style="display:inline">
     <path
        style="fill:#00ffff;stroke:#5e2911;stroke-width:2.24551;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Lend)"
-       d="m 115.05492,226.9817 42.70684,2.60749"
+       d="M 118.28278,231.62663 160.98962,234.23412"
        id="path970" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer5"
      inkscape:label="Routes"
-     style="display:inline">
+     style="display:inline"
+     sodipodi:insensitive="true">
     <path
        style="fill:none;stroke:#e0fd00;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="M 43.543858,48.847833 225.95957,44.007018 239.54454,80.450643 179.78516,174.63168 295.37482,139.35097 346.25842,46.070118 389.39988,92.87312 420.65246,389.75214 237.97885,334.33616 47.679267,441.14347 70.238984,312.74266 154.35373,275.4611 253.34467,276.61352 251.92615,232.16261 44.964715,230.02819 Z"

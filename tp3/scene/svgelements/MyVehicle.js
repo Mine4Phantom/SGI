@@ -139,7 +139,7 @@ export class MyVehicle extends CGFobject {
       this.scene.camera.target[0] = this.x - (25 * Math.cos(this.direction));
       this.scene.camera.target[2] = this.z + (25 * Math.sin(this.direction));
     }
-    else if (this.scene.graph.cameras['Aerial Car View']) {
+    else if (this.scene.graph.cameras['Fixed Car View']) {
       this.scene.camera.target[0] = this.x;
       this.scene.camera.target[2] = this.z;
     }

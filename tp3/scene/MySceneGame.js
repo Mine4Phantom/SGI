@@ -239,7 +239,8 @@ export class MySceneGame extends CGFscene {
 
         if (this.isLapDone()){
             this.lap += 1
-            if(this.lap > this.maxLap)
+            this.onLine = true
+            if(this.lap >= this.maxLap)
                 this.hasWon = true
         }
 
@@ -290,8 +291,6 @@ export class MySceneGame extends CGFscene {
     }
 
     isLapDone(){
-        console.log("OnLine ",this.onLine)
-        console.log("Range ",this.vehicle.inBigRange(this.startLine))
         if(this.onLine){
             if (this.vehicle.inBigRange(this.startLine)){
                 return false //vehicle has not moved from start line
@@ -427,7 +426,6 @@ export class MySceneGame extends CGFscene {
                     var obj = this.pickResults[i][0];
                     if (obj) {
                         var customId = this.pickResults[i][1];
-                        //console.log("Picked object: " + obj + ", with pick id " + customId);
                         this.chooseOption(customId)
                     }
                 }

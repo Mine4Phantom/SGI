@@ -31,7 +31,7 @@ export function changeSceneByName(sceneName) {
             game["scene"] = mySceneGame
             changeScene(mySceneGame, myInterfaceGame, game["app"])
             new MySceneGraph(filename, mySceneGame);
-            new MySVGReader('TestTrackMap.svg', mySceneGame);
+            new MySVGReader('ComplexTrack.svg', mySceneGame);
             break;
         case "demo": //To Do :Demo currently is the same as game
             var myInterfaceGame = new MyInterface();
@@ -39,7 +39,7 @@ export function changeSceneByName(sceneName) {
             game["scene"] = mySceneGame
             changeScene(mySceneGame, myInterfaceGame, game["app"])
             new MySceneGraph(filename, mySceneGame);
-            new MySVGReader('TestTrackMap.svg', mySceneGame);
+            new MySVGReader('ComplexTrack.svg', mySceneGame);
             break;
         default: break;
     }

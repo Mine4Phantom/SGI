@@ -56,11 +56,15 @@ export class MySceneGame extends CGFscene {
         this.powerUpActive = false // Only one variable because only one power up has a duration to it (acceleration)
         this.powerUpMaxTimer = 10
         this.powerUpTimer = this.powerUpMaxTimer
+        this.timeBonus = false
+        this.timeBonusTicks = 0
 
         // Obstacle logic 
         this.obstacleActive = false;
         this.obstacleMaxTimer = 10
         this.obstacleTimer = this.obstacleMaxTimer
+        this.timePenalty = false
+        this.timePenaltyTicks = 0
 
         // Dictionary containing bool values to check if light is on or not
         this.lightsOn = {};
@@ -269,6 +273,21 @@ export class MySceneGame extends CGFscene {
                     else {
                         this.obstacleActive = false;
                         this.obstacleTimer = this.obstacleMaxTimer;
+                    }
+                }
+                if(this.timePenalty){
+                    this.timePenaltyTicks+=1
+                    if(this.timePenaltyTicks >= 3){
+                        this.timePenaltyTicks = 0
+                        this.timePenalty = false
+                    }
+                }
+
+                if(this.timeBonus){
+                    this.timeBonusTicks+=1
+                    if(this.timeBonusTicks >= 3){
+                        this.timeBonusTicks = 0
+                        this.timeBonus = false
                     }
                 }
             }
@@ -533,6 +552,22 @@ export class MySceneGame extends CGFscene {
             this.writeOnScreen("A/D INVERTED:" + this.obstacleTimer + "s", customId, false);
             this.popMatrix();
         }
+
+        if(this.timePenalty){
+            this.pushMatrix();
+            this.loadIdentity();
+            this.translate(-28, 11, -40);
+            this.writeOnScreen("Time Penalty", customId, false);
+            this.popMatrix();
+        }
+
+        if(this.timeBonus){
+            this.pushMatrix();
+            this.loadIdentity();
+            this.translate(-28, 11, -40);
+            this.writeOnScreen("Time Bonus", customId, false);
+            this.popMatrix();
+        }
         
 
         if (this.timeIsUp) {
@@ -631,13 +666,17 @@ export class MySceneGame extends CGFscene {
                     this.powerUpActive = true
                     this.powerUpTimer = this.powerUpMaxTimer
                 }
-                else if (power_up.get_type() == this.pUpType.BONUS_TIME) // Time Bonus
+                else if (power_up.get_type() == this.pUpType.BONUS_TIME){
+                    this.timeBonus = true // Time Bonus
+                    this.timePenalty = false
+                    this.timePenaltyTicks = 0
                     if (this.difficulty == 1)
                         this.timer += 10;
                     else if (this.difficulty == 2)
                         this.timer += 7;
                     else if (this.difficulty == 3)
                         this.timer += 5;
+                }
                 i--;
                 continue;
             }
@@ -657,6 +696,9 @@ export class MySceneGame extends CGFscene {
 
                 // Obstacle collision event
                 if (obstacle.get_type() == this.obstacleType.TIME_PENALTY) { // Time deduction
+                    this.timePenalty = true
+                    this.timeBonus = false
+                    this.timeBonusTicks = 0
                     var timer_after_penalty = this.timer;
                     if (this.difficulty == 1)
                         timer_after_penalty -= 5;

@@ -77,7 +77,7 @@ export class MyVehicle extends CGFobject {
 
   update(t) {
     // Speed factor (60% when car out of track)
-    this.scene.speedFactor = this.scene.map.in_track([this.x, this.z]) ? 1 : 0.45;
+    this.scene.speedFactor = this.scene.map.in_track([this.x, this.z]) ? 1 : 0.25;
 
     // Car position
     var new_x = this.x - this.speed * Math.cos(this.direction);
@@ -184,6 +184,11 @@ export class MyVehicle extends CGFobject {
 
   inRange(object) {
     return Math.abs(this.x - object.center_x) < 8 && Math.abs(this.z - object.center_z) < 8;
+  }
+
+  // For the start line
+  inBigRange(object) {
+    return Math.abs(this.x - object.center_x) < 8 && Math.abs(this.z - object.center_z) < 20;
   }
 
   display() {

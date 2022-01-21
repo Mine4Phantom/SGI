@@ -56,11 +56,15 @@ export class MySceneGame extends CGFscene {
         this.powerUpActive = false // Only one variable because only one power up has a duration to it (acceleration)
         this.powerUpMaxTimer = 10
         this.powerUpTimer = this.powerUpMaxTimer
+        this.timeBonus = false
+        this.timeBonusTicks = 0
 
         // Obstacle logic 
         this.obstacleActive = false;
         this.obstacleMaxTimer = 10
         this.obstacleTimer = this.obstacleMaxTimer
+        this.timePenalty = false
+        this.timePenaltyTicks = 0
 
         // Dictionary containing bool values to check if light is on or not
         this.lightsOn = {};
@@ -100,6 +104,7 @@ export class MySceneGame extends CGFscene {
         this.startLine = null;
         this.maxLap = 3
         this.lap = 0
+        this.onLine = true // on contact with the start line
 
         // WIN
         this.hasWon = false
@@ -236,9 +241,10 @@ export class MySceneGame extends CGFscene {
         if(this.vehicle == null)
             return
 
-        if (this.vehicle.inRange(this.startLine)){
-            //this.lap += 1
-            if(this.lap > this.maxLap)
+        if (this.isLapDone()){
+            this.lap += 1
+            this.onLine = true
+            if(this.lap >= this.maxLap)
                 this.hasWon = true
         }
 
@@ -269,6 +275,21 @@ export class MySceneGame extends CGFscene {
                         this.obstacleTimer = this.obstacleMaxTimer;
                     }
                 }
+                if(this.timePenalty){
+                    this.timePenaltyTicks+=1
+                    if(this.timePenaltyTicks >= 3){
+                        this.timePenaltyTicks = 0
+                        this.timePenalty = false
+                    }
+                }
+
+                if(this.timeBonus){
+                    this.timeBonusTicks+=1
+                    if(this.timeBonusTicks >= 3){
+                        this.timeBonusTicks = 0
+                        this.timeBonus = false
+                    }
+                }
             }
         }
 
@@ -286,6 +307,25 @@ export class MySceneGame extends CGFscene {
     selectView(viewId) {
         this.camera = this.graph.cameras[viewId];
         this.interface.setActiveCamera(this.camera);
+    }
+
+    isLapDone(){
+        if(this.onLine){
+            if (this.vehicle.inBigRange(this.startLine)){
+                return false //vehicle has not moved from start line
+            } else {
+                this.onLine = false
+                return false
+            }
+        } else {
+            if (this.vehicle.inBigRange(this.startLine)){
+                this.onLine = false
+                return true
+            } else {
+                return false
+            }
+        }
+
     }
 
     checkKeys(t) {
@@ -327,9 +367,12 @@ export class MySceneGame extends CGFscene {
                 this.timeIsUp = false;
             this.powerUpActive = false;
             this.obstacleActive = false;
+            this.hasWon = false
+            this.onLine = true
+            this.lap = 0
         }
 
-        if (this.timeIsUp)
+        if (this.timeIsUp || this.hasWon)
             return;
 
         if (this.gui.isKeyPressed("KeyM")) {
@@ -402,7 +445,6 @@ export class MySceneGame extends CGFscene {
                     var obj = this.pickResults[i][0];
                     if (obj) {
                         var customId = this.pickResults[i][1];
-                        //console.log("Picked object: " + obj + ", with pick id " + customId);
                         this.chooseOption(customId)
                     }
                 }
@@ -510,6 +552,22 @@ export class MySceneGame extends CGFscene {
             this.writeOnScreen("A/D INVERTED:" + this.obstacleTimer + "s", customId, false);
             this.popMatrix();
         }
+
+        if(this.timePenalty){
+            this.pushMatrix();
+            this.loadIdentity();
+            this.translate(-28, 11, -40);
+            this.writeOnScreen("Time Penalty", customId, false);
+            this.popMatrix();
+        }
+
+        if(this.timeBonus){
+            this.pushMatrix();
+            this.loadIdentity();
+            this.translate(-28, 11, -40);
+            this.writeOnScreen("Time Bonus", customId, false);
+            this.popMatrix();
+        }
         
 
         if (this.timeIsUp) {
@@ -608,13 +666,17 @@ export class MySceneGame extends CGFscene {
                     this.powerUpActive = true
                     this.powerUpTimer = this.powerUpMaxTimer
                 }
-                else if (power_up.get_type() == this.pUpType.BONUS_TIME) // Time Bonus
+                else if (power_up.get_type() == this.pUpType.BONUS_TIME){
+                    this.timeBonus = true // Time Bonus
+                    this.timePenalty = false
+                    this.timePenaltyTicks = 0
                     if (this.difficulty == 1)
                         this.timer += 10;
                     else if (this.difficulty == 2)
                         this.timer += 7;
                     else if (this.difficulty == 3)
                         this.timer += 5;
+                }
                 i--;
                 continue;
             }
@@ -634,6 +696,9 @@ export class MySceneGame extends CGFscene {
 
                 // Obstacle collision event
                 if (obstacle.get_type() == this.obstacleType.TIME_PENALTY) { // Time deduction
+                    this.timePenalty = true
+                    this.timeBonus = false
+                    this.timeBonusTicks = 0
                     var timer_after_penalty = this.timer;
                     if (this.difficulty == 1)
                         timer_after_penalty -= 5;
@@ -706,6 +771,7 @@ export class MySceneGame extends CGFscene {
             //this.graph.displayScene();
             this.map.display();
             this.vehicle.display();
+            this.startLine.display()
 
             // Display HUD
             this.displayHUD()

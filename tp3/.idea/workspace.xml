@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="cdf44541-7a59-4aa3-ae51-f11c834da119" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/primitives/MyCircle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/primitives/MyCylinder.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/primitives/MyQuad.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/primitives/MyRectangle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/primitives/MySphere.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/primitives/MyTriangle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/primitives/MyTube.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/primitives/nurbs/MyCylinder2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/primitives/nurbs/MyPatch.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/primitives/nurbs/MyPlane.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/ComplexMapTex.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/ComplexSimpleMapTex.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/ComplexTrack.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/MapTexture.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/MyComponentNode.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/MyMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/scene/tracks/MyMap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/MyPrimitiveNode.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/MySVGReader.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/MySceneGame.js" beforeDir="false" afterPath="$PROJECT_DIR$/scene/scenes/MySceneGame.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/MySceneGraph.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/MySceneMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/scene/scenes/MySceneMenu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/SimpleImage.js" beforeDir="false" afterPath="$PROJECT_DIR$/scene/tracks/SimpleImage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/SimpleMapTexture.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/SimpleTrack.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/scene/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/scenes/car.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/scenes/images/bank.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/scenes/images/carnumber.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/scenes/images/checkered.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/scenes/images/couch_fabric.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/scenes/images/door.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/scenes/images/f1texture.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/scenes/images/flag_texture.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/scenes/images/item.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/scenes/images/leaves.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/scenes/images/metal.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/scenes/images/modern_bricks.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/scenes/images/racingTexture.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/scenes/images/rocks.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/scenes/images/rug.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/scenes/images/stripes_vase.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/scenes/images/table_texture.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/scenes/images/textmetal.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/scenes/images/trunk-image.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/scenes/images/vidral.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/scenes/images/wheels.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/scenes/images/window.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/scenes/images/wood_floor.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/svgelements/MyObstacle.js" beforeDir="false" afterPath="$PROJECT_DIR$/scene/svg_elements/MyObstacle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/svgelements/MyPowerUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/scene/svg_elements/MyPowerUp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/svgelements/MyRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/scene/svg_elements/MyRoute.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/svgelements/MyStartLine.js" beforeDir="false" afterPath="$PROJECT_DIR$/scene/svg_elements/MyStartLine.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/svgelements/MyVehicle.js" beforeDir="false" afterPath="$PROJECT_DIR$/scene/svg_elements/MyVehicle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene/svgelements/MyWheels.js" beforeDir="false" afterPath="$PROJECT_DIR$/scene/svg_elements/MyWheels.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/textures/oolite-font.png" beforeDir="false" afterPath="$PROJECT_DIR$/font_textures/oolite-font.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/textures/oolite-font.trans.png" beforeDir="false" afterPath="$PROJECT_DIR$/font_textures/oolite-font.trans.png" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="241hIhvESFQG2imJC9TxFWhi4bj" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="cf.first.check.clang-format" value="false" />
+    <property name="cidr.known.project.marker" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/scene/map" />
+      <recent name="$PROJECT_DIR$/scene/tracks" />
+      <recent name="$PROJECT_DIR$/scene/scenes" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cdf44541-7a59-4aa3-ae51-f11c834da119" name="Changes" comment="" />
+      <created>1642803922581</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1642803922581</updated>
+      <workItem from="1642803925180" duration="1064000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

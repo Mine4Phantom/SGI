@@ -1,7 +1,7 @@
-import { CGFscene, CGFcamera, CGFappearance, CGFaxis, CGFtexture, CGFshader } from "../lib/CGF.js";
+import { CGFscene, CGFcamera, CGFappearance, CGFaxis, CGFtexture, CGFshader } from "../../lib/CGF.js";
 import { MyQuad } from '../primitives/MyQuad.js';
-import { changeSceneByName } from './main.js';
-import { setGameSettings } from './main.js';
+import { changeSceneByName } from '../main.js';
+import { setGameSettings } from '../main.js';
 
 export class MySceneMenu extends CGFscene
 {
@@ -46,7 +46,7 @@ export class MySceneMenu extends CGFscene
 
 		// font texture: 16 x 16 characters
 		// http://jens.ayton.se/oolite/files/font-tests/rgba/oolite-font.png
-		this.fontTexture = new CGFtexture(this, "../textures/oolite-font.trans.png");
+		this.fontTexture = new CGFtexture(this, "../font_textures/oolite-font.trans.png");
 		this.appearance.setTexture(this.fontTexture);
 
 		// plane where texture character will be rendered
@@ -92,6 +92,7 @@ export class MySceneMenu extends CGFscene
 		this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(20, 20, 100), vec3.fromValues(0, 0, 0));
 	};
 
+	// Each time its called it checks if any keys were pressed and changes scene if such was requested
 	update(t) {
         this.checkKeys(t);
 		if(this.changeSceneName != null){
@@ -102,6 +103,7 @@ export class MySceneMenu extends CGFscene
 		this.changeSceneName = null
     }
 
+	// Processes keys pressed
 	checkKeys(t) {
         if (this.gui.isKeyPressed("Digit1")) {
             this.menuKey = 1  
@@ -132,6 +134,7 @@ export class MySceneMenu extends CGFscene
 		} 
     }
 
+	/* Chooses option based on pressed keys or mouse click, depending on the menu state acts differently */
 	chooseOption(optionNumber){
 		if(this.difficulty == false && this.track == false && this.help == false){
 			switch(optionNumber){
@@ -167,6 +170,7 @@ export class MySceneMenu extends CGFscene
 
 	}
 
+	/* Checks if any of the pick objects were picked and if so calls chooseOption function */
 	checkPicking()
 	{
 		if (this.pickMode == false) {
@@ -176,7 +180,6 @@ export class MySceneMenu extends CGFscene
 					if (obj)
 					{
 						var customId = this.pickResults[i][1];				
-						//console.log("Picked object: " + obj + ", with pick id " + customId);
 						this.chooseOption(customId)
 					}
 				}
@@ -185,7 +188,11 @@ export class MySceneMenu extends CGFscene
 		}
 	}
 
-    //Based on oolite-font image given. it is present in textures folder
+    /*
+	Based on oolite-font image given. it is present in textures folder
+	Uses the dictionary created in init to process the text parameter and for each of its characters uses the shader in the respective position to draw the character
+	Also registers for picking using textId, which should be passed as zero if no picking is desired
+	*/
     writeOnScreen(text, textId){
 		text=text.toLowerCase()
 		var spacing = 1
@@ -206,6 +213,211 @@ export class MySceneMenu extends CGFscene
 			this.translate(spacing,0,0);
 		}
     }
+
+	/*
+	Displays Base Options
+	Difficulty is Medium by default
+	Track is Simple by default
+	*/
+	displayBaseOptions(customId){
+		this.pushMatrix();
+		this.loadIdentity();
+		this.translate(-9,-4,-60);
+		this.writeOnScreen("1 Start", customId)
+		if(this.menuKey == 1){
+			this.translate(-6,0,0);
+			this.writeOnScreen("*", customId)
+		}
+		customId+=1
+	this.popMatrix();
+
+	this.pushMatrix();
+		this.loadIdentity();
+		this.translate(5,-4,-60);
+		this.writeOnScreen("2 Demo", customId)
+		if(this.menuKey == 2){
+			this.translate(-5,0,0);
+			this.writeOnScreen("*", customId)
+		}
+		customId+=1
+	this.popMatrix();
+
+	this.pushMatrix();
+		this.loadIdentity();
+		this.translate(-9,-7,-60);
+		this.writeOnScreen("3 Difficulty", customId)
+		this.pushMatrix()
+		this.translate(-8.7,-2,-5);
+		if(this.difficultyOption == 1)
+			this.writeOnScreen("Easy", customId)
+		else if(this.difficultyOption == 2)
+			this.writeOnScreen("Medium", customId)
+		else if(this.difficultyOption == 3)
+			this.writeOnScreen("Hard", customId)
+		this.popMatrix()
+		if(this.menuKey == 3){
+			this.translate(-11,0,0);
+			this.writeOnScreen("*", customId)
+		}
+		customId+=1
+	this.popMatrix();
+
+	this.pushMatrix();
+		this.loadIdentity();
+		this.translate(5,-7,-60);
+		this.writeOnScreen("4 Track", customId)
+		this.pushMatrix()
+		this.translate(-5,-2,-5);
+		if(this.trackOption == 1)
+			this.writeOnScreen("Simple", customId)
+		else if(this.trackOption == 2)
+			this.writeOnScreen("Complex", customId)
+		this.popMatrix()
+		if(this.menuKey == 4){
+			this.translate(-6,0,0);
+			this.writeOnScreen("*", customId)
+		}
+		customId+=1
+	this.popMatrix();
+
+	this.pushMatrix();
+		this.loadIdentity();
+		this.translate(-1,-11,-60);
+		this.writeOnScreen("5 Help", customId)
+		if(this.menuKey == 5){
+			this.translate(-5,0,0);
+			this.writeOnScreen("*", customId)
+		}
+		customId+=1
+	this.popMatrix();
+	}
+
+	/*
+	Displays Difficulty Options: Easy Medium Hard
+	*/
+	displayDifficultyOptions(customId){
+		customId=0
+		this.pushMatrix();
+			this.loadIdentity();
+			this.translate(-6,-4,-60);
+			this.writeOnScreen("Difficulty", customId)
+			customId+=1
+		this.popMatrix();
+
+		this.pushMatrix();
+			this.loadIdentity();
+			this.translate(-18,-8,-60);
+			this.writeOnScreen("1 Easy", customId)
+			if(this.menuKey == 1){
+				this.translate(-5,0,0);
+				this.writeOnScreen("*", customId)
+			}
+			customId+=1
+		this.popMatrix();
+
+		this.pushMatrix();
+			this.loadIdentity();
+			this.translate(-6,-8,-60);
+			this.writeOnScreen("2 Medium", customId)
+			if(this.menuKey == 2){
+				this.translate(-7,0,0);
+				this.writeOnScreen("*", customId)
+			}
+			customId+=1
+		this.popMatrix();
+
+		this.pushMatrix();
+			this.loadIdentity();
+			this.translate(6,-8,-60);
+			this.writeOnScreen("3 Hard", customId)
+			if(this.menuKey == 3){
+				this.translate(-5,0,0);
+				this.writeOnScreen("*", customId)
+			}
+		this.popMatrix();
+	}
+
+	/*
+	Displays Track Options: Simple Complex
+	*/
+	displayTrackOptions(customId){
+		customId=0
+		this.pushMatrix();
+			this.loadIdentity();
+			this.translate(-2,-4,-60);
+			this.writeOnScreen("Track", customId)
+			customId+=1
+		this.popMatrix();
+
+		this.pushMatrix();
+			this.loadIdentity();
+			this.translate(-10,-8,-60);
+			this.writeOnScreen("1 Simple", customId)
+			if(this.menuKey == 1){
+				this.translate(-7,0,0);
+				this.writeOnScreen("*", customId)
+			}
+			customId+=1
+		this.popMatrix();
+
+		this.pushMatrix();
+			this.loadIdentity();
+			this.translate(3,-8,-60);
+			this.writeOnScreen("2 Complex", customId)
+			if(this.menuKey == 2){
+				this.translate(-8,0,0);
+				this.writeOnScreen("*", customId)
+			}
+		this.popMatrix();
+	}
+	
+	/*
+	Displays Help Guide
+	*/
+	displayHelpGuide(customId){
+		customId=0
+		this.pushMatrix();
+			this.loadIdentity();
+			this.translate(-5,3,-60);
+			this.writeOnScreen("HELP GUIDE", customId)
+		this.popMatrix();
+
+		this.pushMatrix();
+			this.loadIdentity();
+			this.translate(-20,1,-80);
+			this.writeOnScreen("1. Use WASD to control car", customId)
+		this.popMatrix();
+		this.pushMatrix();
+			this.loadIdentity();
+			this.translate(-20,-1,-80);
+			this.writeOnScreen("2. Power Ups are Yellow", customId)
+		this.popMatrix();
+		this.pushMatrix();
+			this.loadIdentity();
+			this.translate(-20,-3,-80);
+			this.writeOnScreen("3. Power Ups give speed boost or extra time", customId)
+		this.popMatrix();
+		this.pushMatrix();
+			this.loadIdentity();
+			this.translate(-20,-5,-80);
+			this.writeOnScreen("4. Obstacles are Red", customId)
+		this.popMatrix();
+		this.pushMatrix();
+			this.loadIdentity();
+			this.translate(-20,-7,-80);
+			this.writeOnScreen("5. Obstacles switch AD Keys or subtract time", customId)
+		this.popMatrix();
+		this.pushMatrix();
+			this.loadIdentity();
+			this.translate(-20,-9,-80);
+			this.writeOnScreen("6. Avoid Going Off Track it slows the car", customId)
+		this.popMatrix();
+		this.pushMatrix();
+			this.loadIdentity();
+			this.translate(-20,-11,-80);
+			this.writeOnScreen("7. Each Lap Done increases 10 seconds on timer", customId)
+		this.popMatrix();
+	}
 
 	display() 
 	{
@@ -255,194 +467,14 @@ export class MySceneMenu extends CGFscene
 			customId+=1
 		this.popMatrix();
 
-		if(this.difficulty == false && this.track == false && this.help == false){
-			this.pushMatrix();
-				this.loadIdentity();
-				this.translate(-9,-4,-60);
-				this.writeOnScreen("1 Start", customId)
-				if(this.menuKey == 1){
-					this.translate(-6,0,0);
-					this.writeOnScreen("*", customId)
-				}
-				customId+=1
-			this.popMatrix();
-
-			this.pushMatrix();
-				this.loadIdentity();
-				this.translate(5,-4,-60);
-				this.writeOnScreen("2 Demo", customId)
-				if(this.menuKey == 2){
-					this.translate(-5,0,0);
-					this.writeOnScreen("*", customId)
-				}
-				customId+=1
-			this.popMatrix();
-
-			this.pushMatrix();
-				this.loadIdentity();
-				this.translate(-9,-7,-60);
-				this.writeOnScreen("3 Difficulty", customId)
-				this.pushMatrix()
-				this.translate(-8.7,-2,-5);
-				if(this.difficultyOption == 1)
-					this.writeOnScreen("Easy", customId)
-				else if(this.difficultyOption == 2)
-					this.writeOnScreen("Medium", customId)
-				else if(this.difficultyOption == 3)
-					this.writeOnScreen("Hard", customId)
-				this.popMatrix()
-				if(this.menuKey == 3){
-					this.translate(-11,0,0);
-					this.writeOnScreen("*", customId)
-				}
-				customId+=1
-			this.popMatrix();
-
-			this.pushMatrix();
-				this.loadIdentity();
-				this.translate(5,-7,-60);
-				this.writeOnScreen("4 Track", customId)
-				this.pushMatrix()
-				this.translate(-5,-2,-5);
-				if(this.trackOption == 1)
-					this.writeOnScreen("Simple", customId)
-				else if(this.trackOption == 2)
-					this.writeOnScreen("Complex", customId)
-				this.popMatrix()
-				if(this.menuKey == 4){
-					this.translate(-6,0,0);
-					this.writeOnScreen("*", customId)
-				}
-				customId+=1
-			this.popMatrix();
-
-			this.pushMatrix();
-				this.loadIdentity();
-				this.translate(-1,-11,-60);
-				this.writeOnScreen("5 Help", customId)
-				if(this.menuKey == 5){
-					this.translate(-5,0,0);
-					this.writeOnScreen("*", customId)
-				}
-				customId+=1
-			this.popMatrix();
-		}
-		else if(this.difficulty == true){
-			customId=0
-			this.pushMatrix();
-				this.loadIdentity();
-				this.translate(-6,-4,-60);
-				this.writeOnScreen("Difficulty", customId)
-				customId+=1
-			this.popMatrix();
-
-			this.pushMatrix();
-				this.loadIdentity();
-				this.translate(-18,-8,-60);
-				this.writeOnScreen("1 Easy", customId)
-				if(this.menuKey == 1){
-					this.translate(-5,0,0);
-					this.writeOnScreen("*", customId)
-				}
-				customId+=1
-			this.popMatrix();
-
-			this.pushMatrix();
-				this.loadIdentity();
-				this.translate(-6,-8,-60);
-				this.writeOnScreen("2 Medium", customId)
-				if(this.menuKey == 2){
-					this.translate(-7,0,0);
-					this.writeOnScreen("*", customId)
-				}
-				customId+=1
-			this.popMatrix();
-
-			this.pushMatrix();
-				this.loadIdentity();
-				this.translate(6,-8,-60);
-				this.writeOnScreen("3 Hard", customId)
-				if(this.menuKey == 3){
-					this.translate(-5,0,0);
-					this.writeOnScreen("*", customId)
-				}
-			this.popMatrix();
-		}
-		else if(this.track == true){
-			customId=0
-			this.pushMatrix();
-				this.loadIdentity();
-				this.translate(-2,-4,-60);
-				this.writeOnScreen("Track", customId)
-				customId+=1
-			this.popMatrix();
-
-			this.pushMatrix();
-				this.loadIdentity();
-				this.translate(-10,-8,-60);
-				this.writeOnScreen("1 Simple", customId)
-				if(this.menuKey == 1){
-					this.translate(-7,0,0);
-					this.writeOnScreen("*", customId)
-				}
-				customId+=1
-			this.popMatrix();
-
-			this.pushMatrix();
-				this.loadIdentity();
-				this.translate(3,-8,-60);
-				this.writeOnScreen("2 Complex", customId)
-				if(this.menuKey == 2){
-					this.translate(-8,0,0);
-					this.writeOnScreen("*", customId)
-				}
-			this.popMatrix();
-		}
-		else if(this.help == true){
-			customId=0
-			this.pushMatrix();
-				this.loadIdentity();
-				this.translate(-5,3,-60);
-				this.writeOnScreen("HELP GUIDE", customId)
-			this.popMatrix();
-
-			this.pushMatrix();
-				this.loadIdentity();
-				this.translate(-20,1,-80);
-				this.writeOnScreen("1. Use WASD to control car", customId)
-			this.popMatrix();
-			this.pushMatrix();
-				this.loadIdentity();
-				this.translate(-20,-1,-80);
-				this.writeOnScreen("2. Power Ups are Yellow", customId)
-			this.popMatrix();
-			this.pushMatrix();
-				this.loadIdentity();
-				this.translate(-20,-3,-80);
-				this.writeOnScreen("3. Power Ups give speed boost or extra time", customId)
-			this.popMatrix();
-			this.pushMatrix();
-				this.loadIdentity();
-				this.translate(-20,-5,-80);
-				this.writeOnScreen("4. Obstacles are Red", customId)
-			this.popMatrix();
-			this.pushMatrix();
-				this.loadIdentity();
-				this.translate(-20,-7,-80);
-				this.writeOnScreen("5. Obstacles switch AD Keys or subtract time", customId)
-			this.popMatrix();
-			this.pushMatrix();
-				this.loadIdentity();
-				this.translate(-20,-9,-80);
-				this.writeOnScreen("6. Avoid Going Off Track it slows the car", customId)
-			this.popMatrix();
-			this.pushMatrix();
-				this.loadIdentity();
-				this.translate(-20,-11,-80);
-				this.writeOnScreen("7. Each Lap Done increases 10 seconds on timer", customId)
-			this.popMatrix();
-		}
-
+		if(this.difficulty == false && this.track == false && this.help == false)
+			this.displayBaseOptions(customId)
+		else if(this.difficulty == true)
+			this.displayDifficultyOptions(customId)
+		else if(this.track == true)
+			this.displayTrackOptions(customId)
+		else if(this.help == true)
+			this.displayHelpGuide(customId)
 
 
 		// re-enable depth test 

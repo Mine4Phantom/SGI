@@ -1,8 +1,8 @@
-import { CGFXMLreader } from '../lib/CGF.js';
-import { CGFtexture } from '../lib/CGF.js';
-import { CGFappearance } from '../lib/CGF.js';
-import { CGFcamera } from '../lib/CGF.js';
-import { CGFcameraOrtho } from '../lib/CGF.js';
+import { CGFXMLreader } from '../../lib/CGF.js';
+import { CGFtexture } from '../../lib/CGF.js';
+import { CGFappearance } from '../../lib/CGF.js';
+import { CGFcamera } from '../../lib/CGF.js';
+import { CGFcameraOrtho } from '../../lib/CGF.js';
 import { MyRectangle } from '../primitives/MyRectangle.js';
 import { MyTriangle } from '../primitives/MyTriangle.js';
 import { MyCylinder } from '../primitives/MyCylinder.js';
@@ -13,7 +13,6 @@ import { MyPrimitiveNode } from './MyPrimitiveNode.js';
 import { MyPatch } from '../primitives/nurbs/MyPatch.js';
 import { MyPlane } from '../primitives/nurbs/MyPlane.js';
 import { MyCylinder2 } from '../primitives/nurbs/MyCylinder2.js';
-import { MyVehicle } from './svgelements/MyVehicle.js';
 import { MyTube } from '../primitives/MyTube.js';
 
 var DEGREE_TO_RAD = Math.PI / 180;
@@ -63,7 +62,7 @@ export class MySceneGraph {
          * After the file is read, the reader calls onXMLReady on this object.
          * If any error occurs, the reader calls onXMLError on this object, with an error message
          */
-        this.reader.open('scenes/' + sceneFilename, this);
+        this.reader.open('./sxg/' + sceneFilename, this);
     }
 
     /*
@@ -183,14 +182,14 @@ export class MySceneGraph {
             if ((error = this.parseLights(nodes[index])) != null)
                 return error;
         }
-        // <textures>
+        // <font_textures>
         if ((index = nodeNames.indexOf("textures")) == -1)
-            return "tag <textures> missing";
+            return "tag <font_textures> missing";
         else {
             if (index != TEXTURES_INDEX)
-                this.onXMLMinorError("tag <textures> out of order");
+                this.onXMLMinorError("tag <font_textures> out of order");
 
-            //Parse textures block
+            //Parse font_textures block
             if ((error = this.parseTextures(nodes[index])) != null)
                 return error;
         }
@@ -580,12 +579,12 @@ export class MySceneGraph {
     }
 
     /**
-     * Parses the <textures> block. 
-     * @param {textures block element} texturesNode
+     * Parses the <font_textures> block.
+     * @param {font_textures block element} texturesNode
      */
     parseTextures(texturesNode) {
 
-        //For each texture in textures block, check ID and file URL
+        //For each texture in font_textures block, check ID and file URL
 
         this.textures = [];
 
@@ -609,7 +608,7 @@ export class MySceneGraph {
                 if (filepath == null)
                     return "unable to parse texture file path for ID = " + textureID;
 
-                var texture = new CGFtexture(this.scene, "./scenes/images/" + filepath);
+                var texture = new CGFtexture(this.scene, "./sxg/images/" + filepath);
 
                 this.textures[textureID] = texture;
                 oneTextureDefined = true;
@@ -619,9 +618,9 @@ export class MySceneGraph {
         }
 
         if (!oneTextureDefined)
-            return "at least one texture must be defined in the textures block";
+            return "at least one texture must be defined in the font_textures block";
 
-        this.log("Parsed textures");
+        this.log("Parsed font_textures");
 
         return null;
     }

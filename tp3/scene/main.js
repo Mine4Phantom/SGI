@@ -1,9 +1,9 @@
 import { CGFapplication, dat } from '../lib/CGF.js';
-import { MySceneGame } from './MySceneGame.js';
+import { MySceneGame } from './scenes/MySceneGame.js';
 import { MyInterface } from './MyInterface.js';
-import { MySceneGraph } from './MySceneGraph.js';
-import { MySceneMenu } from './MySceneMenu.js';
-import { MySVGReader } from './MySVGReader.js';
+import { MySceneGraph } from './sxg_parser/MySceneGraph.js';
+import { MySceneMenu } from './scenes/MySceneMenu.js';
+import { MySVGReader } from './svg_elements/MySVGReader.js';
 
 var menu;
 var game;
@@ -20,6 +20,7 @@ function getUrlVars() {
     return vars;
 }
 
+// Receives a String with the name of the scene to change into
 export function changeSceneByName(sceneName) {
     switch (sceneName.toLowerCase()) {
         case "menu":
@@ -33,10 +34,10 @@ export function changeSceneByName(sceneName) {
             game["scene"] = mySceneGame
             changeScene(mySceneGame, myInterfaceGame, game["app"])
             new MySceneGraph(filename, mySceneGame);
-            if(won)
+            if(won) // Change skin of car to gold
                 mySceneGame.graph.currentMaterialIndex=1
             break;
-        case "demo": //To Do :Demo currently is the same as game
+        case "demo":
             var myInterfaceDemo = new MyInterface();
             var mySceneDemo = new MySceneGame(myInterfaceDemo, true); // true for demo
             demo["scene"] = mySceneDemo
@@ -49,9 +50,9 @@ export function changeSceneByName(sceneName) {
     }
 }
 
+// Sets difficulty and track for game since for the demo these are constant and calls the respective SVG Reader
 export function setGameSettings(difficulty, track) {
     game["scene"].setSettings(difficulty, track);
-    //demo["scene"].setSettings(difficulty, track);
     if (track == 1) { 
         new MySVGReader('SimpleTrack.svg', game["scene"]); 
     }
@@ -60,6 +61,7 @@ export function setGameSettings(difficulty, track) {
     }
 }
 
+// Returns true if first time winning, changes won to true
 export function hasWon(){
     var first = false
     if(won == false)
@@ -68,7 +70,8 @@ export function hasWon(){
     return first
 }
 
-
+// Changes scene by setting it, and the interface and the camera.
+// Eliminates old UI controls box since it creates a new one due to the way the library is constructed
 function changeScene(myScene, myInterface, app) {
 
     var UIs = document.getElementsByClassName('dg main a');
@@ -81,6 +84,8 @@ function changeScene(myScene, myInterface, app) {
     myInterface.gui.close();
 }
 
+// Initializes all required scenes and interfaces and stores them in a struct
+// Presents the menu scene first
 function main() {
 
     // Standard application, scene and interface setup

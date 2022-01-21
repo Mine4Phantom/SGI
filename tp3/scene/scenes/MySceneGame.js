@@ -1,9 +1,9 @@
-import { CGFscene } from '../lib/CGF.js';
-import { CGFaxis, CGFcamera, CGFcameraOrtho, CGFappearance, CGFshader, CGFtexture } from '../lib/CGF.js';
+import { CGFscene } from '../../lib/CGF.js';
+import { CGFaxis, CGFcamera, CGFcameraOrtho, CGFappearance, CGFshader, CGFtexture } from '../../lib/CGF.js';
 import { MyQuad } from '../primitives/MyQuad.js';
-import { MyMap } from './MyMap.js';
-import { changeSceneByName } from './main.js';
-import { hasWon } from './main.js';
+import { MyMap } from '../tracks/MyMap.js';
+import { changeSceneByName } from '../main.js';
+import { hasWon } from '../main.js';
 
 
 var DEGREE_TO_RAD = Math.PI / 180;
@@ -119,7 +119,7 @@ export class MySceneGame extends CGFscene {
 
         // font texture: 16 x 16 characters
         // http://jens.ayton.se/oolite/files/font-tests/rgba/oolite-font.png
-        this.fontTexture = new CGFtexture(this, "../textures/oolite-font.trans.png");
+        this.fontTexture = new CGFtexture(this, "../font_textures/oolite-font.trans.png");
         this.textAppearance.setTexture(this.fontTexture);
 
         // plane where texture character will be rendered
@@ -230,6 +230,10 @@ export class MySceneGame extends CGFscene {
         this.sxgLoaded = true;
     }
 
+    /*
+    Saves powerUps and obstacles when svg loads
+    Initializes vehicle lights
+    */
     onSVGLoaded() {
         this.vehicle.initLights();
         this.vehicle.initRoutes();
@@ -239,7 +243,7 @@ export class MySceneGame extends CGFscene {
     }
 
     update(t) {
-        if (this.vehicle == null)
+        if (this.vehicle == null) // If vehicle is not yet initialized return
             return
 
         if (this.isLapDone()) {
@@ -254,7 +258,7 @@ export class MySceneGame extends CGFscene {
         }
 
 
-        if (this.escape == false && this.pause == false && this.hasWon == false) {
+        if (this.escape == false && this.pause == false && this.hasWon == false) { // If game is in a playable state (not paused), update stuff
             this.ticks += 1
             // A second has passed
             if (this.ticks % 10 == 0) {
@@ -266,7 +270,7 @@ export class MySceneGame extends CGFscene {
                 if (this.powerUpActive) {
                     if (this.powerUpTimer > 0)
                         this.powerUpTimer -= 1
-                    else {
+                    else { // if power up timer hits 0 it is deactivated and the timer is also restarted for the next time it is active
                         this.powerUpActive = false
                         this.powerUpTimer = this.powerUpMaxTimer
                     }
@@ -299,15 +303,15 @@ export class MySceneGame extends CGFscene {
         }
 
         this.lastUpdate = t;
-        this.checkKeys(t);
+        this.checkKeys(t); // Process keys
         if (this.demo) {
             if (this.vehicle != null && this.escape == false && this.pause == false && this.timeIsUp == false && this.hasWon == false) {
-                this.vehicle.updateDemo(t);
+                this.vehicle.updateDemo(t); // Update vehicle position based on demo
             }
         }
         else {
             if (this.vehicle != null && this.escape == false && this.pause == false && this.timeIsUp == false && this.hasWon == false) {
-                this.vehicle.update(t);
+                this.vehicle.update(t); // Update vehicle position
             }
         }
         if (this.changeSceneName != null)
@@ -320,6 +324,7 @@ export class MySceneGame extends CGFscene {
         this.interface.setActiveCamera(this.camera);
     }
 
+    // If lap is done returns true
     isLapDone() {
         if (this.onLine) {
             if (this.vehicle.inBigRange(this.startLine)) {
@@ -339,6 +344,10 @@ export class MySceneGame extends CGFscene {
 
     }
 
+    /* 
+    Processes Keys
+    WASD for car control, Esc to exit, space to pause, R to restart
+    */
     checkKeys(t) {
         if (this.gui.isKeyPressed("Escape")) {
             if (this.escape == false) {
@@ -365,7 +374,7 @@ export class MySceneGame extends CGFscene {
                 this.chooseOption(this.menuOption)
             }
         }
-
+        // If game is in a paused state that does not allow restart by R key
         if (this.pause == true || this.escape == true)
             return
 
@@ -384,16 +393,11 @@ export class MySceneGame extends CGFscene {
             this.timeBonus = false;
             this.timePenalty = false;
         }
-
+        // If game is in a paused state which allows restart by R key
         if (this.timeIsUp || this.hasWon)
             return;
 
-        if (this.gui.isKeyPressed("KeyM") && !this.demo) {
-            if (this.lastUpdate - this.lastMPress > 200) {
-                this.lastMPress = t;
-                this.graph.currentMaterialIndex++;
-            }
-        }
+
         if (this.gui.isKeyPressed("KeyW") && !this.demo) {
             if (this.powerUpActive)
                 this.vehicle.accelerate(0.32 * this.speedFactor);
@@ -419,7 +423,11 @@ export class MySceneGame extends CGFscene {
         }
     }
 
-    //Based on oolite-font image given. it is present in textures folder
+    /*
+	Based on oolite-font image given. it is present in textures folder
+	Uses the dictionary created in init to process the text parameter and for each of its characters uses the shader in the respective position to draw the character
+	Also registers for picking using textId, which should be passed as zero if no picking is desired
+	*/
     writeOnScreen(text, textId, pickable) {
         text = text.toLowerCase()
         var spacing = 1
@@ -442,6 +450,9 @@ export class MySceneGame extends CGFscene {
         }
     }
 
+    /*
+	Chooses option based on option number
+	*/
     chooseOption(optionNumber) {
         switch (optionNumber) {
             case 1: this.changeSceneName = "Menu"; break;
@@ -451,6 +462,7 @@ export class MySceneGame extends CGFscene {
         }
     }
 
+	/* Checks if any of the pick objects were picked and if so calls chooseOption function */
     checkPicking() {
         if (this.pickMode == false) {
             if (this.pickResults != null && this.pickResults.length > 0) {
@@ -466,6 +478,9 @@ export class MySceneGame extends CGFscene {
         }
     }
 
+    /*
+    Rounds number to a certain number of digits
+    */
     roundTo(n, digits) {
         var negative = false;
         if (digits === undefined) {
@@ -484,18 +499,21 @@ export class MySceneGame extends CGFscene {
         return n;
     }
 
-    //To Do change stuff it various difficultiues
+    /*
+    Set settings passed by parameter
+    Based on these settings loads the respective map and adjusts difficulty based variables: maxTimer, powerUpMaxTimer or even activates Dark Mode
+    */
     setSettings(difficulty, track) {
         this.difficulty = difficulty
         this.track = track
 
         if (this.track == 1) {
-            var trackMapPath = "./SimpleMapTexture.png";
-            var terrainTexturePath = "./MapTexture.png";
+            var trackMapPath = "./tracks/textures/SimpleMapTexture.png";
+            var terrainTexturePath = "./tracks/textures/MapTexture.png";
             this.map = new MyMap(this, trackMapPath, terrainTexturePath);
         } else if (this.track == 2) {
-            var trackMapPath = "./ComplexSimpleMapTex.png";
-            var terrainTexturePath = "./ComplexMapTex.png";
+            var trackMapPath = "./tracks/textures/ComplexSimpleMapTex.png";
+            var terrainTexturePath = "./tracks/textures/ComplexMapTex.png";
             this.map = new MyMap(this, trackMapPath, terrainTexturePath);
         }
 
@@ -519,14 +537,103 @@ export class MySceneGame extends CGFscene {
             else
                 this.maxTimer = 45
             this.powerUpMaxTimer = 5
-            this.map.darkMode()
+            this.map.darkMode() // Makes the scene total darkness
         }
         this.timer = this.maxTimer
         this.powerUpTimer = this.powerUpMaxTimer
     }
 
+    /*
+    Displays Game related HUD with speed, time left and power up related stuff
+    */
+    displayGameHUD(customId){
+        this.pushMatrix();
+        // 	Reset transf. matrix to draw independent of camera
+        this.loadIdentity();
+        // transform as needed to place on screen
+        this.translate(-5.4, 15.5, -40);
+        this.writeOnScreen("Rocket Kart", customId, false)
+        this.popMatrix();
+
+        this.pushMatrix();
+        // 	Reset transf. matrix to draw independent of camera
+        this.loadIdentity();
+        // transform as needed to place on screen
+        if (this.camera == this.graph.cameras['First Person'])
+            this.translate(-28, 3.5, -40);
+        else
+            this.translate(-28, -15, -40);
+        this.writeOnScreen(this.roundTo(this.vehicle.speed * 16, 0) + "KM/H", customId, false)
+        this.popMatrix();
+
+        this.pushMatrix();
+        // 	Reset transf. matrix to draw independent of camera
+        this.loadIdentity();
+        // transform as needed to place on screen
+        this.translate(-28, 15, -40);
+        this.writeOnScreen("Time Left:" + this.timer + "s", customId, false)
+        this.popMatrix();
+
+        if (this.powerUpActive) {
+            this.pushMatrix();
+            // 	Reset transf. matrix to draw independent of camera
+            this.loadIdentity();
+            // transform as needed to place on screen
+            this.translate(15, 15, -40);
+            this.writeOnScreen("SPEED UP:" + this.powerUpTimer + "s", customId, false)
+            this.popMatrix();
+        }
+
+        if (this.obstacleActive) {
+            this.pushMatrix();
+            this.loadIdentity();
+            if (this.powerUpActive) this.translate(11, 13, -40);
+            else this.translate(11, 15, -40);
+            this.writeOnScreen("A/D INVERTED:" + this.obstacleTimer + "s", customId, false);
+            this.popMatrix();
+        }
+
+        if (this.timePenalty) {
+            this.pushMatrix();
+            this.loadIdentity();
+            this.translate(-28, 11, -40);
+            this.writeOnScreen("Time Penalty", customId, false);
+            this.popMatrix();
+        }
+
+        if (this.timeBonus) {
+            this.pushMatrix();
+            this.loadIdentity();
+            this.translate(-28, 11, -40);
+            this.writeOnScreen("Time Bonus", customId, false);
+            this.popMatrix();
+        }
+
+
+        if (this.timeIsUp) {
+            this.pushMatrix();
+            // 	Reset transf. matrix to draw independent of camera
+            this.loadIdentity();
+            // transform as needed to place on screen
+            this.translate(-4, -3, -20);
+            this.writeOnScreen("Time is UP", customId, false)
+            this.popMatrix();
+            if (this.escape == false && this.pause == false) {
+                this.pushMatrix();
+                // 	Reset transf. matrix to draw independent of camera
+                this.loadIdentity();
+                // transform as needed to place on screen
+                this.translate(-9, -5, -20);
+                this.writeOnScreen("Press R to restart", customId, false)
+                this.popMatrix();
+            }
+
+        }
+    }
+
     /**
-     * Displays the head up display
+     * Displays the head up display, it is different depending on whether its game or demo
+     * It also varies if certain game states are active like pause or escape
      */
     displayHUD() {
         this.setActiveShaderSimple(this.textShader);
@@ -542,90 +649,8 @@ export class MySceneGame extends CGFscene {
         this.writeOnScreen("Lap:" + this.lap + "/" + this.maxLap, customId, false)
         this.popMatrix();
 
-        if (!this.demo) {
-            this.pushMatrix();
-            // 	Reset transf. matrix to draw independent of camera
-            this.loadIdentity();
-            // transform as needed to place on screen
-            this.translate(-5.4, 15.5, -40);
-            this.writeOnScreen("Rocket Kart", customId, false)
-            this.popMatrix();
-
-            this.pushMatrix();
-            // 	Reset transf. matrix to draw independent of camera
-            this.loadIdentity();
-            // transform as needed to place on screen
-            if (this.camera == this.graph.cameras['First Person'])
-                this.translate(-28, 3.5, -40);
-            else
-                this.translate(-28, -15, -40);
-            this.writeOnScreen(this.roundTo(this.vehicle.speed * 16, 0) + "KM/H", customId, false)
-            this.popMatrix();
-
-            this.pushMatrix();
-            // 	Reset transf. matrix to draw independent of camera
-            this.loadIdentity();
-            // transform as needed to place on screen
-            this.translate(-28, 15, -40);
-            this.writeOnScreen("Time Left:" + this.timer + "s", customId, false)
-            this.popMatrix();
-
-            if (this.powerUpActive) {
-                this.pushMatrix();
-                // 	Reset transf. matrix to draw independent of camera
-                this.loadIdentity();
-                // transform as needed to place on screen
-                this.translate(15, 15, -40);
-                this.writeOnScreen("SPEED UP:" + this.powerUpTimer + "s", customId, false)
-                this.popMatrix();
-            }
-
-            if (this.obstacleActive) {
-                this.pushMatrix();
-                this.loadIdentity();
-                if (this.powerUpActive) this.translate(11, 13, -40);
-                else this.translate(11, 15, -40);
-                this.writeOnScreen("A/D INVERTED:" + this.obstacleTimer + "s", customId, false);
-                this.popMatrix();
-            }
-
-            if (this.timePenalty) {
-                this.pushMatrix();
-                this.loadIdentity();
-                this.translate(-28, 11, -40);
-                this.writeOnScreen("Time Penalty", customId, false);
-                this.popMatrix();
-            }
-
-            if (this.timeBonus) {
-                this.pushMatrix();
-                this.loadIdentity();
-                this.translate(-28, 11, -40);
-                this.writeOnScreen("Time Bonus", customId, false);
-                this.popMatrix();
-            }
-
-
-            if (this.timeIsUp) {
-                this.pushMatrix();
-                // 	Reset transf. matrix to draw independent of camera
-                this.loadIdentity();
-                // transform as needed to place on screen
-                this.translate(-4, -3, -20);
-                this.writeOnScreen("Time is UP", customId, false)
-                this.popMatrix();
-                if (this.escape == false && this.pause == false) {
-                    this.pushMatrix();
-                    // 	Reset transf. matrix to draw independent of camera
-                    this.loadIdentity();
-                    // transform as needed to place on screen
-                    this.translate(-9, -5, -20);
-                    this.writeOnScreen("Press R to restart", customId, false)
-                    this.popMatrix();
-                }
-
-            }
-        }
+        if (!this.demo)
+            this.displayGameHUD(customId)
         if (this.hasWon) {
             this.pushMatrix();
             // 	Reset transf. matrix to draw independent of camera

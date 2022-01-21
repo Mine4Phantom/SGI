@@ -47,10 +47,12 @@ export function changeSceneByName(sceneName) {
 
 export function setGameSettings(difficulty, track) {
     game["scene"].setSettings(difficulty, track)
-    if(track == 1)
-        new MySVGReader('SimpleTrack.svg', game["scene"]);
-    else if(track == 2)
-        new MySVGReader('ComplexTrack.svg', game["scene"]);
+    if (track == 1) { 
+        new MySVGReader('SimpleTrack.svg', game["scene"]); 
+    }
+    else if (track == 2) { 
+        new MySVGReader('ComplexTrack.svg', game["scene"]); 
+    }
 }
 
 

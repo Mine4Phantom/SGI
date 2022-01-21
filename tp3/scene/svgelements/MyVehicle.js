@@ -87,7 +87,7 @@ export class MyVehicle extends CGFobject {
     var directionVector;
 
     //update the key every 5 seconds
-    if (this.scene.ticks != null && this.scene.ticks % 1 == 0){
+    if (this.scene.ticks != null){
       this.key = (this.key + 1) % (this.routes.length)
     }
 
@@ -232,12 +232,7 @@ export class MyVehicle extends CGFobject {
     this.setPosition(this.start_position_x, this.start_position_y, this.start_position_z);
     this.setDirection(this.start_direction);
 
-    // camera
-    this.scene.camera.position[0] = this.x;
-    this.scene.camera.position[2] = this.z;
-    this.scene.camera.target[0] = this.x;
-    this.scene.camera.target[2] = this.z;
-
+    this.key = 0;
     this.speed = 0;
     this.wheels.reset();
     this.time = 0;

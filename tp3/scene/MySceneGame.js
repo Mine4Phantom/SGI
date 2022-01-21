@@ -364,7 +364,7 @@ export class MySceneGame extends CGFscene {
         if (this.pause == true || this.escape == true)
             return
 
-        if (this.gui.isKeyPressed("KeyR") && !this.demo) {
+        if (this.gui.isKeyPressed("KeyR")) {
             this.vehicle.reset();
             this.powerUps = [...this.powerUpsStart];
             this.obstacles = [...this.obstaclesStart];

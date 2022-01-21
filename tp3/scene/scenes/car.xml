@@ -15,6 +15,10 @@
             <from x="450" y="50" z="400" />
             <to x="256" y="0" z="256" />
         </perspective>
+        <perspective id="Fixed Car View" near="0.1" far="750" angle="45">
+            <from x="256" y="30" z="256" />
+            <to x="0" y="0" z="0" />
+        </perspective>
     </views>
 
     <ambient>

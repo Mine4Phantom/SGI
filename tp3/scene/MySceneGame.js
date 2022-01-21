@@ -540,7 +540,10 @@ export class MySceneGame extends CGFscene {
         // 	Reset transf. matrix to draw independent of camera
         this.loadIdentity();
         // transform as needed to place on screen
-        this.translate(-28, -15, -40);
+        if(this.camera == this.graph.cameras['First Person'])
+            this.translate(-28, 3.5, -40);
+        else
+            this.translate(-28, -15, -40);
         this.writeOnScreen(this.roundTo(this.vehicle.speed * 16, 0) + "KM/H", customId, false)
         this.popMatrix();
 

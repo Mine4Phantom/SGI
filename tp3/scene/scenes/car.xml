@@ -65,6 +65,7 @@
         <texture id="demoTexture" file="rocks.jpg" /> <!-- Do not delete, needed for 'none' texture -->
         <texture id="wheelsTexture" file="wheels.jpg" />
         <texture id="checkeredTexture" file="checkered.jpg" />
+        <texture id="itemTexture" file="item.jpg" />
     </textures>
 
     <materials>
@@ -78,7 +79,7 @@
         <material id="powerUpMaterial" shininess="10">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
             <ambient r="0.0" g="0.0" b="0.0" a="1.0" />
-            <diffuse r="0.005" g="0.3" b="0.0" a="1.0" />
+            <diffuse r="0.3" g="0.3" b="0.0" a="1.0" />
             <specular r="0.1" g="0.1" b="0.0" a="0.1" />
         </material>
 
@@ -621,9 +622,9 @@
             <materials>
                 <material id="powerUpMaterial" />
             </materials>
-            <texture id="none" />
+            <texture id="itemTexture" length_s="1" length_t="1"/>
             <children>
-                <primitiveref id="sphere" />
+                <componentref id="cube" />
             </children>
         </component>
 
@@ -634,9 +635,9 @@
                 <scale x="3.5" y="3.5" z="3.5" />
             </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="powerUpMaterial" />
             </materials>
-            <texture id="none" />
+            <texture id="itemTexture" length_s="1" length_t="1"/>
             <children>
                 <componentref id="cube" />
             </children>

@@ -88,8 +88,9 @@ export class MySVGReader {
                         return error;
                     break;
                 case 'path':
-                    if ((error = this.parsePath(children[i], layerName)) != null)
-                        return error;
+                    if (layerName != "Track")
+                        if ((error = this.parsePath(children[i], layerName)) != null)
+                            return error;
                     break;
                 default:
             }
@@ -166,11 +167,6 @@ export class MySVGReader {
         }
 
         switch (layerName) {
-            case "Track":
-                if (!close_path)
-                    return "Track path must be closed!";
-                this.track = (new MyRoute(this.scene, path_vertexes));
-                break;
             case "Start":
                 let orientation_vector = [path_vertexes[1][0] - path_vertexes[0][0], path_vertexes[1][1] - path_vertexes[0][1]];
                 let angle = Math.atan(orientation_vector[1] / orientation_vector[0]);

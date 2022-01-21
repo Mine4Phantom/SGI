@@ -1,9 +1,9 @@
-import { CGFXMLreader } from '../lib/CGF.js';
-import { MyObstacle } from './svgelements/MyObstacle.js';
-import { MyPowerUp } from './svgelements/MyPowerUp.js';
-import { MyRoute } from './svgelements/MyRoute.js';
-import { MyStartLine } from './svgelements/MyStartLine.js';
-import { MyVehicle } from './svgelements/MyVehicle.js';
+import { CGFXMLreader } from '../../lib/CGF.js';
+import { MyObstacle } from './MyObstacle.js';
+import { MyPowerUp } from './MyPowerUp.js';
+import { MyRoute } from './MyRoute.js';
+import { MyStartLine } from './MyStartLine.js';
+import { MyVehicle } from './MyVehicle.js';
 
 
 /**
@@ -27,7 +27,7 @@ export class MySVGReader {
          * After the file is read, the reader calls onXMLReady on this object.
          * If any error occurs, the reader calls onXMLError on this object, with an error message
          */
-        this.reader.open(filename, this);
+        this.reader.open("./tracks/svgs/" + filename, this);
     }
 
     /*

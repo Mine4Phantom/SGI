@@ -1,9 +1,9 @@
 import { CGFapplication, dat } from '../lib/CGF.js';
-import { MySceneGame } from './MySceneGame.js';
+import { MySceneGame } from './scenes/MySceneGame.js';
 import { MyInterface } from './MyInterface.js';
-import { MySceneGraph } from './MySceneGraph.js';
-import { MySceneMenu } from './MySceneMenu.js';
-import { MySVGReader } from './MySVGReader.js';
+import { MySceneGraph } from './sxg_parser/MySceneGraph.js';
+import { MySceneMenu } from './scenes/MySceneMenu.js';
+import { MySVGReader } from './svg_elements/MySVGReader.js';
 
 var menu;
 var game;

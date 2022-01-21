@@ -1,4 +1,4 @@
-import { CGFobject } from '../lib/CGF.js';
+import { CGFobject } from '../../lib/CGF.js';
 import { MyTube} from './MyTube.js'
 import { MyCircle} from './MyCircle.js'
 

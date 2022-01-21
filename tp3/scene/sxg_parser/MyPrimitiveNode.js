@@ -3,7 +3,7 @@
  * @constructor
  **/
 
- import { CGFobject } from "../lib/CGF.js";
+ import { CGFobject } from "../../lib/CGF.js";
 
 
  export class MyPrimitiveNode extends CGFobject {

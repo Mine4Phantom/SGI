@@ -82,11 +82,47 @@ export class MyVehicle extends CGFobject {
     this.routes = this.scene.routes[0].route_vertexes
   }
 
+
   updateDemo(t) {
+
+    var directionVector
+
+    //update the key every 5 seconds
+    if (this.scene.ticks != null && this.scene.ticks % 50 == 0){
+      this.key = this.key % this.routes.length + 1
+    }
+    
     // update direction based on vector
-    console.log([this.routes[1][0] - this.routes[0][0], this.routes[1][1] - this.routes[0][1]])
-    // update speed based on length
-    console.log(this.scene.ticks);
+    if (this.key == this.routes.length){
+
+      directionVector = this.subtractVector(this.routes[0], this.routes[this.key-1])
+      this.direction = -Math.atan2(directionVector[1], directionVector[0])
+
+    }else if (this.routes[0] != null){
+
+      directionVector = this.subtractVector(this.routes[this.key], this.routes[this.key+1])
+      this.direction = -Math.atan2(directionVector[1], directionVector[0])
+    }
+
+    // update speed based on vector length
+    if (this.key == this.routes.length){
+      this.speed = this.vectorDistance(this.routes[this.key-1], this.routes[0])/50
+    }else {
+      this.speed = this.vectorDistance(this.routes[this.key], this.routes[this.key+1])/50
+    }
+
+
+    // Wheels position
+    this.wheels.x -= this.speed * Math.cos(this.direction);
+    this.wheels.z += this.speed * Math.sin(this.direction);
+
+    // Car position
+    var new_x = this.x - this.speed * Math.cos(this.direction);
+    var new_z = this.z + this.speed * Math.sin(this.direction);
+    if (new_x >= 4 && new_x < 508)
+      this.x = new_x;
+    if (new_z >= 4 && new_z < 508)
+      this.z = new_z;
 
     // change camera according to car movement 
     this.scene.camera.position[0] = this.x + (70 * Math.cos(this.direction));
@@ -94,6 +130,14 @@ export class MyVehicle extends CGFobject {
     this.scene.camera.target[0] = this.x;
     this.scene.camera.target[2] = this.z;
 
+  }
+
+  subtractVector(vector1, vector2){
+    return [vector1[0]-vector2[0],vector1[1]-vector2[1]]
+  }
+
+  vectorDistance(vector1, vector2){
+    return Math.sqrt((vector2[0]-vector1[0])**2 + (vector2[1]-vector1[1])**2)
   }
 
   update(t) {

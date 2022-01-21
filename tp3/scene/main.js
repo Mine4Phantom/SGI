@@ -39,6 +39,7 @@ export function changeSceneByName(sceneName) {
             demo["scene"] = mySceneDemo
             changeScene(mySceneDemo, myInterfaceDemo, demo["app"])
             new MySceneGraph(filename, mySceneDemo);
+            demo["scene"].setSettings(2, 2)
             new MySVGReader('ComplexTrack.svg', mySceneDemo);
             break;
         default: break;
@@ -46,11 +47,14 @@ export function changeSceneByName(sceneName) {
 }
 
 export function setGameSettings(difficulty, track) {
-    game["scene"].setSettings(difficulty, track)
-    if(track == 1)
-        new MySVGReader('SimpleTrack.svg', game["scene"]);
-    else if(track == 2)
-        new MySVGReader('ComplexTrack.svg', game["scene"]);
+    game["scene"].setSettings(difficulty, track);
+    //demo["scene"].setSettings(difficulty, track);
+    if (track == 1) { 
+        new MySVGReader('SimpleTrack.svg', game["scene"]); 
+    }
+    else if (track == 2) { 
+        new MySVGReader('ComplexTrack.svg', game["scene"]); 
+    }
 }
 
 

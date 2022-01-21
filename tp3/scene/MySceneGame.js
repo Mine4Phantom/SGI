@@ -79,12 +79,7 @@ export class MySceneGame extends CGFscene {
         this.escape = false
         this.pause = false
         this.menuOption = 0
-
-        // MAP
-        var trackMapPath = "./ComplexSimpleMapTex.png";
-        var terrainTexturePath = "./ComplexMapTex.png";
-        this.map = new MyMap(this, trackMapPath, terrainTexturePath);
-
+        
         // POWER UPS
         this.powerUps = [];
         // Power up types 
@@ -240,14 +235,14 @@ export class MySceneGame extends CGFscene {
     }
 
     update(t) {
-        if(this.vehicle == null)
+        if (this.vehicle == null)
             return
 
-        if (this.isLapDone()){
+        if (this.isLapDone()) {
             this.lap += 1
-            this.timer+=10
+            this.timer += 10
             this.onLine = true
-            if(this.lap >= this.maxLap)
+            if (this.lap >= this.maxLap)
                 this.hasWon = true
         }
 
@@ -270,25 +265,25 @@ export class MySceneGame extends CGFscene {
                     }
                 }
 
-                if(this.obstacleActive) {
-                    if(this.obstacleTimer > 0) 
+                if (this.obstacleActive) {
+                    if (this.obstacleTimer > 0)
                         this.obstacleTimer -= 1;
                     else {
                         this.obstacleActive = false;
                         this.obstacleTimer = this.obstacleMaxTimer;
                     }
                 }
-                if(this.timePenalty){
-                    this.timePenaltyTicks+=1
-                    if(this.timePenaltyTicks >= 3){
+                if (this.timePenalty) {
+                    this.timePenaltyTicks += 1
+                    if (this.timePenaltyTicks >= 3) {
                         this.timePenaltyTicks = 0
                         this.timePenalty = false
                     }
                 }
 
-                if(this.timeBonus){
-                    this.timeBonusTicks+=1
-                    if(this.timeBonusTicks >= 3){
+                if (this.timeBonus) {
+                    this.timeBonusTicks += 1
+                    if (this.timeBonusTicks >= 3) {
                         this.timeBonusTicks = 0
                         this.timeBonus = false
                     }
@@ -298,12 +293,12 @@ export class MySceneGame extends CGFscene {
 
         this.lastUpdate = t;
         this.checkKeys(t);
-        if (this.demo){
+        if (this.demo) {
             if (this.vehicle != null && this.escape == false && this.pause == false && this.timeIsUp == false && this.hasWon == false) {
                 this.vehicle.updateDemo(t);
             }
         }
-        else{
+        else {
             if (this.vehicle != null && this.escape == false && this.pause == false && this.timeIsUp == false && this.hasWon == false) {
                 this.vehicle.update(t);
             }
@@ -318,16 +313,16 @@ export class MySceneGame extends CGFscene {
         this.interface.setActiveCamera(this.camera);
     }
 
-    isLapDone(){
-        if(this.onLine){
-            if (this.vehicle.inBigRange(this.startLine)){
+    isLapDone() {
+        if (this.onLine) {
+            if (this.vehicle.inBigRange(this.startLine)) {
                 return false //vehicle has not moved from start line
             } else {
                 this.onLine = false
                 return false
             }
         } else {
-            if (this.vehicle.inBigRange(this.startLine)){
+            if (this.vehicle.inBigRange(this.startLine)) {
                 this.onLine = false
                 return true
             } else {
@@ -379,6 +374,8 @@ export class MySceneGame extends CGFscene {
             this.hasWon = false
             this.onLine = true
             this.lap = 0
+            this.timeBonus = false;
+            this.timePenalty = false;
         }
 
         if (this.timeIsUp || this.hasWon)
@@ -485,32 +482,32 @@ export class MySceneGame extends CGFscene {
         this.difficulty = difficulty
         this.track = track
 
-        if(this.track == 1){
-            var trackMapPath = "./SimpleMapTex.png";
+        if (this.track == 1) {
+            var trackMapPath = "./SimpleMapTexture.png";
             var terrainTexturePath = "./MapTexture.png";
             this.map = new MyMap(this, trackMapPath, terrainTexturePath);
-        } else if(this.track == 2) {
+        } else if (this.track == 2) {
             var trackMapPath = "./ComplexSimpleMapTex.png";
             var terrainTexturePath = "./ComplexMapTex.png";
             this.map = new MyMap(this, trackMapPath, terrainTexturePath);
         }
 
         if (this.difficulty == 1) {
-            if(this.track == 2)
+            if (this.track == 2)
                 this.maxTimer = 400
             else
                 this.maxTimer = 90
             this.powerUpMaxTimer = 15
         }
         else if (this.difficulty == 2) {
-            if(this.track == 2)
+            if (this.track == 2)
                 this.maxTimer = 250
             else
                 this.maxTimer = 70
             this.powerUpMaxTimer = 10
         }
         else if (this.difficulty == 3) {
-            if(this.track == 2)
+            if (this.track == 2)
                 this.maxTimer = 160
             else
                 this.maxTimer = 45
@@ -572,16 +569,16 @@ export class MySceneGame extends CGFscene {
             this.popMatrix();
         }
 
-        if(this.obstacleActive) {
+        if (this.obstacleActive) {
             this.pushMatrix();
             this.loadIdentity();
-            if(this.powerUpActive) this.translate(11, 13, -40);
+            if (this.powerUpActive) this.translate(11, 13, -40);
             else this.translate(11, 15, -40);
             this.writeOnScreen("A/D INVERTED:" + this.obstacleTimer + "s", customId, false);
             this.popMatrix();
         }
 
-        if(this.timePenalty){
+        if (this.timePenalty) {
             this.pushMatrix();
             this.loadIdentity();
             this.translate(-28, 11, -40);
@@ -589,14 +586,14 @@ export class MySceneGame extends CGFscene {
             this.popMatrix();
         }
 
-        if(this.timeBonus){
+        if (this.timeBonus) {
             this.pushMatrix();
             this.loadIdentity();
             this.translate(-28, 11, -40);
             this.writeOnScreen("Time Bonus", customId, false);
             this.popMatrix();
         }
-        
+
 
         if (this.timeIsUp) {
             this.pushMatrix();
@@ -606,7 +603,7 @@ export class MySceneGame extends CGFscene {
             this.translate(-4, -3, -20);
             this.writeOnScreen("Time is UP", customId, false)
             this.popMatrix();
-            if(this.escape == false && this.pause == false){
+            if (this.escape == false && this.pause == false) {
                 this.pushMatrix();
                 // 	Reset transf. matrix to draw independent of camera
                 this.loadIdentity();
@@ -626,7 +623,7 @@ export class MySceneGame extends CGFscene {
             this.translate(-6, -3, -20);
             this.writeOnScreen("You have Won", customId, false)
             this.popMatrix();
-            if(this.escape == false && this.pause == false){
+            if (this.escape == false && this.pause == false) {
                 this.pushMatrix();
                 // 	Reset transf. matrix to draw independent of camera
                 this.loadIdentity();
@@ -694,7 +691,7 @@ export class MySceneGame extends CGFscene {
                     this.powerUpActive = true
                     this.powerUpTimer = this.powerUpMaxTimer
                 }
-                else if (power_up.get_type() == this.pUpType.BONUS_TIME){
+                else if (power_up.get_type() == this.pUpType.BONUS_TIME) {
                     this.timeBonus = true // Time Bonus
                     this.timePenalty = false
                     this.timePenaltyTicks = 0

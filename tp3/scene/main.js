@@ -39,6 +39,7 @@ export function changeSceneByName(sceneName) {
             demo["scene"] = mySceneDemo
             changeScene(mySceneDemo, myInterfaceDemo, demo["app"])
             new MySceneGraph(filename, mySceneDemo);
+            demo["scene"].setSettings(2, 2)
             new MySVGReader('ComplexTrack.svg', mySceneDemo);
             break;
         default: break;

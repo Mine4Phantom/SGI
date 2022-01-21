@@ -22,7 +22,7 @@ export class MySceneGame extends CGFscene {
         this.changeSceneName = null
         this.difficulty = null
         this.track = null
-        this.demo = demo
+        this.demo = demo;
     }
 
     /**
@@ -212,7 +212,7 @@ export class MySceneGame extends CGFscene {
     onGraphLoaded() {
         this.axis = new CGFaxis(this, this.graph.referenceLength);
 
-        this.camera = this.graph.cameras[this.graph.defaultView];
+        this.camera = this.demo ? this.graph.cameras['Fixed Car View'] : this.graph.cameras[this.graph.defaultView];
         this.interface.setActiveCamera(this.camera);
 
         this.gl.clearColor(this.graph.background[0], this.graph.background[1], this.graph.background[2], this.graph.background[3]);

@@ -86,7 +86,7 @@ export class MyVehicle extends CGFobject {
   updateDemo(t) {
     var directionVector;
 
-    //update the key every 5 seconds
+    //update the key every tick
     if (this.scene.ticks != null){
       this.key = (this.key + 1) % (this.routes.length)
     }
